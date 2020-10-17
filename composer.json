@@ -1,0 +1,17 @@
+{
+    "name": "guedel/al",
+    "description": "Library of Php Abstract Language",
+	"version": "0.1",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guedel",
+            "email": "guedel87@live.fr"
+        }
+    ],
+	"autoload": {
+		"psr-4": { "guedel\\AL\\": "src/" } 
+	},
+    "require": {}
+}
