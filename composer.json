@@ -11,8 +11,16 @@
             "email": "guedel87@live.fr"
         }
     ],
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/guedel/Stream"
+      }
+    ],
 	"autoload": {
 		"psr-4": { "guedel\\AL\\": "src/" } 
 	},
-    "require": {}
+    "require": {
+        "guedel/stream": "dev-master"
+    }
 }

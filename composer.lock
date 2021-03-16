@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a02387f1b4274ac59a7e8b9c467d766f",
+    "packages": [
+        {
+            "name": "guedel/stream",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guedel/Stream.git",
+                "reference": "c2ba713aae1a7e2ff0d89318f64f71b628fc4a49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guedel/Stream/zipball/c2ba713aae1a7e2ff0d89318f64f71b628fc4a49",
+                "reference": "c2ba713aae1a7e2ff0d89318f64f71b628fc4a49",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Guedel\\Stream\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guedel",
+                    "email": "guedel87@live.fr"
+                }
+            ],
+            "description": "Library of stream classes",
+            "support": {
+                "source": "https://github.com/guedel/Stream/tree/master",
+                "issues": "https://github.com/guedel/Stream/issues"
+            },
+            "time": "2021-03-13T09:59:21+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "guedel/stream": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}
