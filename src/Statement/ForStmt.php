@@ -23,9 +23,9 @@
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    * THE SOFTWARE.
    */
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
-  use guedel\AL\Expression\Expression;
+  use Guedel\AL\Expression\Expression;
 
   /**
    * FOR $varname FROM $initial TO $final [STEP $increment]
@@ -53,7 +53,7 @@
       $this->statement = $statement;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_for_stmt($this);
     }

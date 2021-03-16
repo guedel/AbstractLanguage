@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Runtime;
+  namespace Guedel\AL\Runtime;
 
   /**
    * Traduction des éléments du langage

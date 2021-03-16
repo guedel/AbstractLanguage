@@ -24,9 +24,9 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Runtime;
+  namespace Guedel\AL\Runtime;
 
-  use guedel\AL\Expression\Valuable;
+  use Guedel\AL\Expression\Valuable;
   /**
    * Description of Visitor
    *
@@ -35,38 +35,38 @@
   interface Visitor
   {
     // Declarations
-    public function declare_module(\guedel\AL\Declaration\Module $decl);
-    public function declare_variable(\guedel\AL\Declaration\VariableDecl $decl);
-    public function declare_function(\guedel\AL\Declaration\FunctionDecl $decl);
-    public function declare_procedure(\guedel\AL\Declaration\ProcedureDecl $decl);
-    public function declare_type(\guedel\AL\Declaration\TypeDecl $decl);
-    public function declare_parameter(\guedel\AL\Declaration\Parameter $decl);
+    public function declare_module(\Guedel\AL\Declaration\Module $decl);
+    public function declare_variable(\Guedel\AL\Declaration\VariableDecl $decl);
+    public function declare_function(\Guedel\AL\Declaration\FunctionDecl $decl);
+    public function declare_procedure(\Guedel\AL\Declaration\ProcedureDecl $decl);
+    public function declare_type(\Guedel\AL\Declaration\TypeDecl $decl);
+    public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl);
 
     // Statements
-    public function visit_assign_stmt(\guedel\AL\Statement\AssignStmt $stmt);
-    public function visit_return_stmt(\guedel\AL\Statement\ReturnStmt $stmt);
-    public function visit_for_stmt(\guedel\AL\Statement\ForStmt $stmt);
-    public function visit_for_each_stmt(\guedel\AL\Statement\ForEachStmt $stmt);
-    public function visit_if_then_stmt(\guedel\AL\Statement\IfThenStmt $stmt);
-    public function visit_while_stmt(\guedel\AL\Statement\WhileStmt $stmt);
-    public function visit_procedure_call(\guedel\AL\Statement\ProcedureCall $proc);
-    public function visit_statement_list(\guedel\AL\Statement\StatementList $stmt);
+    public function visit_assign_stmt(\Guedel\AL\Statement\AssignStmt $stmt);
+    public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt);
+    public function visit_for_stmt(\Guedel\AL\Statement\ForStmt $stmt);
+    public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt);
+    public function visit_if_then_stmt(\Guedel\AL\Statement\IfThenStmt $stmt);
+    public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt);
+    public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc);
+    public function visit_statement_list(\Guedel\AL\Statement\StatementList $stmt);
 
     // Expressions
-    public function eval_value(\guedel\AL\Expression\Value $value);
-    public function eval_variable(\guedel\AL\Expression\Variable $variable);
-    public function eval_function_call(\guedel\AL\Expression\FunctionCall $fn);
-    public function eval_binary_expression(\guedel\AL\Expression\BinaryExpression $exp);
-    public function eval_unary_expression(\guedel\AL\Expression\UnaryExpression $exp);
+    public function eval_value(\Guedel\AL\Expression\Value $value);
+    public function eval_variable(\Guedel\AL\Expression\Variable $variable);
+    public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn);
+    public function eval_binary_expression(\Guedel\AL\Expression\BinaryExpression $exp);
+    public function eval_unary_expression(\Guedel\AL\Expression\UnaryExpression $exp);
 
     // Type definition
-    public function visit_string(\guedel\AL\Datatype\StringOfChars $type);
-    public function visit_any(\guedel\AL\Datatype\Any $type);
-    public function visit_typename(\guedel\AL\Datatype\TypeName $type);
-    public function visit_arrayof(\guedel\AL\Datatype\ArrayOf $type);
-    public function visit_structure(\guedel\AL\Datatype\Structure $type);
-    public function visit_class(\guedel\AL\Datatype\ClassType $type);
-    public function visit_reference(\guedel\AL\Datatype\Reference $type);
-    public function visit_enumeration(\guedel\AL\Datatype\Enumeration $type);
-    public function visit_number(\guedel\AL\Datatype\Number $type);
+    public function visit_string(\Guedel\AL\Datatype\StringOfChars $type);
+    public function visit_any(\Guedel\AL\Datatype\Any $type);
+    public function visit_typename(\Guedel\AL\Datatype\TypeName $type);
+    public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type);
+    public function visit_structure(\Guedel\AL\Datatype\Structure $type);
+    public function visit_class(\Guedel\AL\Datatype\ClassType $type);
+    public function visit_reference(\Guedel\AL\Datatype\Reference $type);
+    public function visit_enumeration(\Guedel\AL\Datatype\Enumeration $type);
+    public function visit_number(\Guedel\AL\Datatype\Number $type);
   }

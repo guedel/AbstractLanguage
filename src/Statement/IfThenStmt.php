@@ -23,9 +23,9 @@
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    * THE SOFTWARE.
    */
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
-  use guedel\AL\Expression\Valuable;
+  use Guedel\AL\Expression\Valuable;
 
   /**
    * Description of IfThenStmt
@@ -45,7 +45,7 @@
       $this->elsepart = $elsepart;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_if_then_stmt($this);
     }

@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-   namespace guedel\AL\Declaration;
+   namespace Guedel\AL\Declaration;
 
    /**
    * Description of ProcedureDecl
@@ -47,14 +47,14 @@
     {
       parent::__construct($name);
       $this->parameters = $parameters;
-      if ($body instanceof \guedel\AL\Statement\StatementList) {
+      if ($body instanceof \Guedel\AL\Statement\StatementList) {
         $this->body = $body;
       } else {
-        $this->body = new \guedel\AL\Statement\StatementList($body);
+        $this->body = new \Guedel\AL\Statement\StatementList($body);
       }
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->declare_procedure($this);
     }
@@ -64,7 +64,7 @@
       return $this->parameters;
     }
 
-    public function get_body(): \guedel\AL\Statement\StatementList
+    public function get_body(): \Guedel\AL\Statement\StatementList
     {
       return $this->body;
     }

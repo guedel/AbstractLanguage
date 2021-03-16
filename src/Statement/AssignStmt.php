@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
   /**
    * Description of AssignStmt
@@ -36,13 +36,13 @@
     private $varname;
     private $expression;
 
-    public function __construct(string $varname, \guedel\AL\Expression\Valuable $expression)
+    public function __construct(string $varname, \Guedel\AL\Expression\Valuable $expression)
     {
       $this->varname = $varname;
       $this->expression = $expression;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_assign_stmt($this);
     }
@@ -52,7 +52,7 @@
       return $this->varname;
     }
 
-    public function get_expression(): \guedel\AL\Expression\Valuable
+    public function get_expression(): \Guedel\AL\Expression\Valuable
     {
       return $this->expression;
     }

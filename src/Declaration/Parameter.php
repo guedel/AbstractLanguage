@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
 
   /**
    * Description of Parameter
@@ -40,7 +40,7 @@
 
     private $direction;
 
-    public function __construct(string $name, string $direction, \guedel\AL\Datatype\Type $type = null)
+    public function __construct(string $name, string $direction, \Guedel\AL\Datatype\Type $type = null)
     {
       parent::__construct($name, $type);
       $this->direction = $direction;
@@ -51,7 +51,7 @@
       return $this->direction;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->declare_parameter($this);
     }

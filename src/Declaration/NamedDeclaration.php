@@ -23,13 +23,13 @@
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    * THE SOFTWARE.
    */
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
   /**
    * Description of NamedDeclaration
    *
    * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
    */
-  abstract class NamedDeclaration implements \guedel\AL\Statement\Statement
+  abstract class NamedDeclaration implements \Guedel\AL\Statement\Statement
   {
     private $name;
 

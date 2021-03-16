@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Datatype;
+  namespace Guedel\AL\Datatype;
 
   /**
    * Description of ClassType
@@ -45,13 +45,13 @@
       return $this->methods;
     }
 
-    public function _meth_(\guedel\AL\Declaration\ProcedureDecl $method): ClassType
+    public function _meth_(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
     {
       $this->methods[$method->get_name()] = $method;
       return $this;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_class($this);
     }

@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
   /**
    * FOR EACH $varname IN $collection
@@ -37,7 +37,7 @@
     private $collection;
     private $statement;
 
-    public function __construct(string $varname, \guedel\AL\Expression\Expression $collection, \guedel\AL\Statement\Statement $stmt = null)
+    public function __construct(string $varname, \Guedel\AL\Expression\Expression $collection, \Guedel\AL\Statement\Statement $stmt = null)
     {
       $this->varname = $varname;
       $this->collection = $collection;
@@ -49,7 +49,7 @@
       return $this->varname;
     }
 
-    public function get_collection(): \guedel\AL\Expression\Expression
+    public function get_collection(): \Guedel\AL\Expression\Expression
     {
       return $this->collection;
     }
@@ -59,7 +59,7 @@
       return $this->statement;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_for_each_stmt($this);
     }

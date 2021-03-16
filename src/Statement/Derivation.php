@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace guedel\AL\Statement;
+namespace Guedel\AL\Statement;
 
 /**
  * Description of Derivation

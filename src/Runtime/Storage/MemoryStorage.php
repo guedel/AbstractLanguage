@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Runtime\Storage;
+  namespace Guedel\AL\Runtime\Storage;
 
   /**
    * Description of newPHPClass

@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Expression;
+  namespace Guedel\AL\Expression;
 
   /**
    * Description of BinaryExpression

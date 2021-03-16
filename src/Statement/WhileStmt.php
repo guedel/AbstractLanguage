@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
   /**
    * Description of WhileStmt
@@ -36,18 +36,18 @@
     private $test;
     private $statement;
 
-    public function __construct(\guedel\AL\Expression\Valuable $test, Statement $block)
+    public function __construct(\Guedel\AL\Expression\Valuable $test, Statement $block)
     {
       $this->test = $test;
       $this->statement = $block;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_while_stmt($this);
     }
 
-    public function get_test(): \guedel\AL\Expression\Valuable
+    public function get_test(): \Guedel\AL\Expression\Valuable
     {
       return $this->test;
     }

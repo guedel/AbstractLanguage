@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
   /**
    * Description of Function
    *
@@ -35,18 +35,18 @@
     private $returntype;
 
 
-    public function __construct(string $name, \guedel\AL\Datatype\Type $returntype, ParametersList $arguments, \guedel\AL\Statement\Statement $body)
+    public function __construct(string $name, \Guedel\AL\Datatype\Type $returntype, ParametersList $arguments, \Guedel\AL\Statement\Statement $body)
     {
       parent::__construct($name, $arguments, $body);
       $this->returntype = $returntype;
     }
 
-    public function get_returntype() : \guedel\AL\Datatype\Type
+    public function get_returntype() : \Guedel\AL\Datatype\Type
     {
       return $this->returntype;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->declare_function($this);
     }

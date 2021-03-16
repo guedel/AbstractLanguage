@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
 
   /**
    * Description of ParemetersList

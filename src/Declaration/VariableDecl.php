@@ -23,7 +23,7 @@
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    * THE SOFTWARE.
    */
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
 
   /**
    * Description of VariableDecl
@@ -34,18 +34,18 @@
   {
     private $type;
 
-    public function __construct($name, \guedel\AL\Datatype\Type $type)
+    public function __construct($name, \Guedel\AL\Datatype\Type $type)
     {
       parent::__construct($name);
       $this->type = $type;
    }
 
-    public function get_type(): \guedel\AL\Datatype\Type
+    public function get_type(): \Guedel\AL\Datatype\Type
     {
       return $this->type;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->declare_variable($this);
     }

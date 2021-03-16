@@ -24,13 +24,13 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL;
+  namespace Guedel\AL;
 
   use Datatype\Type;
-  use guedel\AL\Expression\Expression;
-  use guedel\AL\Expression\BinaryExpression;
-  use guedel\AL\Expression\Valuable;
-  use guedel\AL\Expression\Value;
+  use Guedel\AL\Expression\Expression;
+  use Guedel\AL\Expression\BinaryExpression;
+  use Guedel\AL\Expression\Valuable;
+  use Guedel\AL\Expression\Value;
 
 
   /**

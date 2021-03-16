@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Datatype;
+  namespace Guedel\AL\Datatype;
   /**
    * Description of Structure
    *
@@ -46,16 +46,16 @@
 
     /**
      * Add attribute
-     * @param \guedel\AL\Declaration\VariableDecl $attr
-     * @return \guedel\AL\Datatype\Structure
+     * @param \Guedel\AL\Declaration\VariableDecl $attr
+     * @return \Guedel\AL\Datatype\Structure
      */
-    public function _attr_(\guedel\AL\Declaration\VariableDecl $attr): Structure
+    public function _attr_(\Guedel\AL\Declaration\VariableDecl $attr): Structure
     {
       $this->attributes[$attr->get_name()] = $attr;
       return $this;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_structure($this);
     }

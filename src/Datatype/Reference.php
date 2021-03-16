@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Datatype;
+  namespace Guedel\AL\Datatype;
 
   /**
    * Description of Reference
@@ -45,7 +45,7 @@
       return $this->type;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_reference($this);
     }

@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Datatype;
+  namespace Guedel\AL\Datatype;
 
   /**
    * Type construit

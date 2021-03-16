@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Datatype;
+  namespace Guedel\AL\Datatype;
 
   /**
    * Permet de stocker des entiers supérieurs à 64 bits.

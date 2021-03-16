@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
   /**
    * Description of Statement
@@ -33,5 +33,5 @@
    */
   interface Statement
   {
-    public function accept(\guedel\AL\Runtime\Visitor $visitor);
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor);
   }

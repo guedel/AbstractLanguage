@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Runtime;
+  namespace Guedel\AL\Runtime;
 
   /**
    * Description of BasicWriterVisitor
@@ -40,7 +40,7 @@
     private $writer;
     private $translator;
 
-    public function __construct(\guedel\Stream\CodeWriter $writer, \guedel\AL\Runtime\Translator $translator = null)
+    public function __construct(\Guedel\Stream\CodeWriter $writer, \Guedel\AL\Runtime\Translator $translator = null)
     {
       $this->writer = $writer;
       if ($translator === null) {
@@ -50,12 +50,12 @@
       }
     }
 
-    public function walk(\guedel\AL\Statement\Statement $grammar)
+    public function walk(\Guedel\AL\Statement\Statement $grammar)
     {
       $grammar->accept($this);
     }
 
-    public function declare_function(\guedel\AL\Declaration\FunctionDecl $decl)
+    public function declare_function(\Guedel\AL\Declaration\FunctionDecl $decl)
     {
       $this->writer->out('FONCTION ' . $decl->get_name() . '(');
       $first = true;
@@ -79,7 +79,7 @@
       $this->writer->nl();
     }
 
-    public function declare_module(\guedel\AL\Declaration\Module $decl)
+    public function declare_module(\Guedel\AL\Declaration\Module $decl)
     {
       $this->writer->outln('MODULE ' . $decl->get_name());
       $this->writer->indent();
@@ -90,14 +90,14 @@
       $this->writer->outln('FIN MODULE');
     }
 
-    public function declare_parameter(\guedel\AL\Declaration\Parameter $decl)
+    public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)
     {
       $this->writer->out($decl->get_direction() . ' ');
       $this->writer->out($decl->get_name());
       $this->writer->out(': ' . $decl->get_type());
     }
 
-    public function declare_procedure(\guedel\AL\Declaration\ProcedureDecl $decl)
+    public function declare_procedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
     {
       $this->writer->out('PROCEDURE ' . $decl->get_name() . '(');
       $first = true;
@@ -119,7 +119,7 @@
 
     }
 
-    public function declare_type(\guedel\AL\Declaration\TypeDecl $decl)
+    public function declare_type(\Guedel\AL\Declaration\TypeDecl $decl)
     {
       $this->writer->out('TYPE ' . $decl->get_name());
       $this->writer->out(': ');
@@ -127,18 +127,18 @@
       $this->writer->nl();
     }
 
-    public function declare_variable(\guedel\AL\Declaration\VariableDecl $decl)
+    public function declare_variable(\Guedel\AL\Declaration\VariableDecl $decl)
     {
       $this->writer->out('VAR' . $decl->get_name());
       $this->writer->outln(': ' . $decl->get_type());
     }
 
-    public function eval_binary_expression(\guedel\AL\Expression\BinaryExpression $exp)
+    public function eval_binary_expression(\Guedel\AL\Expression\BinaryExpression $exp)
     {
 
     }
 
-    public function eval_function_call(\guedel\AL\Expression\FunctionCall $fn)
+    public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn)
     {
       $this->writer->out($fn->get_name() . '(');
       $first = true;
@@ -154,25 +154,25 @@
       $this->writer->out(')');
     }
 
-    public function eval_unary_expression(\guedel\AL\Expression\UnaryExpression $exp)
+    public function eval_unary_expression(\Guedel\AL\Expression\UnaryExpression $exp)
     {
       $op = '';
       switch ($exp->get_operator())
       {
-        case \guedel\AL\Expression\UnaryExpression::OP_ADD:
+        case \Guedel\AL\Expression\UnaryExpression::OP_ADD:
           $op = '';
           break;
-        case \guedel\AL\Expression\UnaryExpression::OP_SUB:
+        case \Guedel\AL\Expression\UnaryExpression::OP_SUB:
           $op = '-';
           break;
-        case \guedel\AL\Expression\UnaryExpression::OP_NOT:
+        case \Guedel\AL\Expression\UnaryExpression::OP_NOT:
           $op = 'NON ';
       }
       $this->writer->out($op);
       $exp->get_operand()->evaluate($this);
     }
 
-    public function eval_value(\guedel\AL\Expression\Value $value)
+    public function eval_value(\Guedel\AL\Expression\Value $value)
     {
       $v = $value->get_value();
       if (is_bool($v)) {
@@ -184,19 +184,19 @@
       }
     }
 
-    public function eval_variable(\guedel\AL\Expression\Variable $variable)
+    public function eval_variable(\Guedel\AL\Expression\Variable $variable)
     {
       $this->writer->out($variable->get_varname());
     }
 
-    public function visit_assign_stmt(\guedel\AL\Statement\AssignStmt $stmt)
+    public function visit_assign_stmt(\Guedel\AL\Statement\AssignStmt $stmt)
     {
       $this->writer->out($stmt->get_variable_name() . ' <- ' );
       $stmt->get_expression()->evaluate($this);
       $this->writer->nl;
     }
 
-    public function visit_for_each_stmt(\guedel\AL\Statement\ForEachStmt $stmt)
+    public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
     {
       $this->out('POUR ' . $stmt->get_varname() . ' DANS ');
       $stmt->get_collection()->evaluate($this);
@@ -207,7 +207,7 @@
       $this->writer->outln('FIN POUR');
     }
 
-    public function visit_for_stmt(\guedel\AL\Statement\ForStmt $stmt)
+    public function visit_for_stmt(\Guedel\AL\Statement\ForStmt $stmt)
     {
       $this->out('POUR ' . $stmt->get_varname() . ' DE ');
       $stmt->get_initial()->evaluate($this);
@@ -222,7 +222,7 @@
       $this->writer->outln('FIN POUR');
     }
 
-    public function visit_if_then_stmt(\guedel\AL\Statement\IfThenStmt $stmt)
+    public function visit_if_then_stmt(\Guedel\AL\Statement\IfThenStmt $stmt)
     {
       $this->writer->out('SI ');
       $stmt->get_iftest()->evaluate($this);
@@ -241,7 +241,7 @@
 
     }
 
-    public function visit_procedure_call(\guedel\AL\Statement\ProcedureCall $proc)
+    public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc)
     {
       $this->writer->out($proc->get_name() . ' ');
       $first = true;
@@ -257,7 +257,7 @@
       $this->writer->nl;
     }
 
-    public function visit_return_stmt(\guedel\AL\Statement\ReturnStmt $stmt)
+    public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
     {
       $this->writer->out('RETOURNE');
       $list = $stmt->get_expressions();
@@ -276,14 +276,14 @@
       $this->writer->nl();
     }
 
-    public function visit_statement_list(\guedel\AL\Statement\StatementList $stmt)
+    public function visit_statement_list(\Guedel\AL\Statement\StatementList $stmt)
     {
       foreach($stmt->getIterator() as $stmt) {
         $stmt->accept($this);
       }
     }
 
-    public function visit_while_stmt(\guedel\AL\Statement\WhileStmt $stmt)
+    public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt)
     {
       $this->writer->out('TANT QUE ');
       $stmt->get_test()->evaluate($this);
@@ -294,12 +294,12 @@
       $this->writer->outln('FIN TANT QUE');
     }
 
-    public function visit_any(\guedel\AL\Datatype\Any $type)
+    public function visit_any(\Guedel\AL\Datatype\Any $type)
     {
       $this->writer->out('QUELCONQUE');
     }
 
-    public function visit_arrayof(\guedel\AL\Datatype\ArrayOf $type)
+    public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type)
     {
       $this->writer->out('TABLEAU');
       $lowerbound = $type->get_lowerbound();
@@ -323,7 +323,7 @@
       }
     }
 
-    public function visit_enumeration(\guedel\AL\Datatype\Enumeration $type)
+    public function visit_enumeration(\Guedel\AL\Datatype\Enumeration $type)
     {
       $this->writer->out('{');
       $first = true;
@@ -338,13 +338,13 @@
       }
     }
 
-    public function visit_reference(\guedel\AL\Datatype\Reference $type)
+    public function visit_reference(\Guedel\AL\Datatype\Reference $type)
     {
       $this->writer->out('REF DE ' );
       $type->get_type()->accept($this);
     }
 
-    public function visit_string(\guedel\AL\Datatype\StringOfChars $type)
+    public function visit_string(\Guedel\AL\Datatype\StringOfChars $type)
     {
       $len = $type->get_length();
       $this->writer->out('CHAINE');
@@ -353,7 +353,7 @@
       }
     }
 
-    public function visit_structure(\guedel\AL\Datatype\Structure $type)
+    public function visit_structure(\Guedel\AL\Datatype\Structure $type)
     {
       $this->writer->outln('STRUCT');
       $this->writer->indent();
@@ -364,17 +364,17 @@
       $this->writer->outln('FIN STRUCT');
     }
 
-    public function visit_typename(\guedel\AL\Datatype\TypeName $type)
+    public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
     {
       $this->writer->out($type->get_name());
     }
 
-    public function visit_number(\guedel\AL\Datatype\Number $type)
+    public function visit_number(\Guedel\AL\Datatype\Number $type)
     {
       $this->writer->out('NOMBRE('. $type->get_length() . ', ' . $type->get_precision());
     }
 
-    public function visit_class(\guedel\AL\Datatype\ClassType $type)
+    public function visit_class(\Guedel\AL\Datatype\ClassType $type)
     {
       $this->writer
           ->outln('CLASSE')

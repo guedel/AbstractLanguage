@@ -24,9 +24,9 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
 
-  use guedel\AL\Datatype\Type;
+  use Guedel\AL\Datatype\Type;
   /**
    * Description of TypeDecl
    *
@@ -47,7 +47,7 @@
       return $this->definition;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->declare_type($this);
     }

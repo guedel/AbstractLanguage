@@ -24,9 +24,9 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
-  use guedel\AL\Expression\ExpressionList;
+  use Guedel\AL\Expression\ExpressionList;
   /**
    * Description of ProcedureCall
    *
@@ -37,13 +37,13 @@
     private $name;
     private $parameters;
 
-    public function __construct(string $name, \guedel\AL\Expression\Valuable ... $parameters)
+    public function __construct(string $name, \Guedel\AL\Expression\Valuable ... $parameters)
     {
       $this->name = $name;
       $this->parameters = new ExpressionList( ... $parameters);
     }
     //put your code here
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_procedure_call($this);
     }

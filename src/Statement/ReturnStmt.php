@@ -23,7 +23,7 @@
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
    * THE SOFTWARE.
    */
-  namespace guedel\AL\Statement;
+  namespace Guedel\AL\Statement;
 
   /**
    * Description of ReturnStmt
@@ -36,16 +36,16 @@
 
     public function __construct(Valuable ... $expressions)
     {
-      $this->expressions = new \guedel\AL\Expression\ExpressionList(... $expressions);
+      $this->expressions = new \Guedel\AL\Expression\ExpressionList(... $expressions);
     }
 
-    public function get_expressions(): \guedel\AL\Expression\ExpressionList
+    public function get_expressions(): \Guedel\AL\Expression\ExpressionList
     {
       return $this->expressions;
     }
 
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
       $visitor->visit_return_stmt($this);
     }

@@ -24,7 +24,7 @@
    * THE SOFTWARE.
    */
 
-  namespace guedel\AL\Declaration;
+  namespace Guedel\AL\Declaration;
 
   /**
    * Description of Module
@@ -35,7 +35,7 @@
   {
     private $statements;
 
-    public function __construct($name, \guedel\AL\Statement\Statement ... $statements)
+    public function __construct($name, \Guedel\AL\Statement\Statement ... $statements)
     {
       parent::__construct($name);
       $this->statements = $statements;
@@ -46,7 +46,7 @@
       return $this->statements;
     }
 
-    public function accept(\guedel\AL\Runtime\Visitor $visitor)
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
 
     }
