@@ -59,7 +59,7 @@
 
     public function declare_function(\Guedel\AL\Declaration\FunctionDecl $decl)
     {
-      $this->writer->out('FONCTION ' . $decl->get_name() . '(');
+      $this->writer->out($this->t('FUNCTION') . ' ' . $decl->get_name() . '(');
       $first = true;
       foreach ($decl->get_parameters() as $parameter) {
         if ($first) {
@@ -77,19 +77,19 @@
 
       $decl->get_body()->accept($this);
       $this->writer->unindent();
-      $this->writer->writeln('FIN FONCTION');
+      $this->writer->writeln($this->t('END') . ' ' . $this->t('FUNCTION'));
       $this->writer->nl();
     }
 
     public function declare_module(\Guedel\AL\Declaration\Module $decl)
     {
-      $this->writer->outln('MODULE ' . $decl->get_name());
+      $this->writer->outln($this->t('MODULE') . ' ' . $decl->get_name());
       $this->writer->indent();
       foreach($decl->get_statements() as $statement) {
         $statement->accept($this);
       }
       $this->writer->unindent();
-      $this->writer->outln('FIN MODULE');
+      $this->writer->outln($this->ft('%s %s', 'END', 'MODULE'));
     }
 
     public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)
@@ -101,7 +101,7 @@
 
     public function declare_procedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
     {
-      $this->writer->out('PROCEDURE ' . $decl->get_name() . '(');
+      $this->writer->out($this->t('PROCEDURE') . ' ' . $decl->get_name() . '(');
       $first = true;
       foreach ($decl->get_parameters() as $parameter) {
         if ($first) {
@@ -116,14 +116,14 @@
 
       $decl->get_body()->accept($this);
       $this->writer->unindent();
-      $this->writer->outln('FIN PROCEDURE');
+      $this->writer->outln($this->ft('%s %s', 'END', 'PROCEDURE'));
       $this->writer->nl();
 
     }
 
     public function declare_type(\Guedel\AL\Declaration\TypeDecl $decl)
     {
-      $this->writer->out('TYPE ' . $decl->get_name());
+      $this->writer->out($this->t('TYPE') . ' ' . $decl->get_name());
       $this->writer->out(': ');
       $decl->get_definition()->accept($this);
       $this->writer->nl();
@@ -131,7 +131,7 @@
 
     public function declare_variable(\Guedel\AL\Declaration\VariableDecl $decl)
     {
-      $this->writer->out('VAR' . $decl->get_name());
+      $this->writer->out($this->t('VAR') . ' ' . $decl->get_name());
       $this->writer->outln(': ' . $decl->get_type());
     }
 
@@ -168,7 +168,7 @@
           $op = '-';
           break;
         case \Guedel\AL\Expression\UnaryExpression::OP_NOT:
-          $op = 'NON ';
+          $op = $this->t('NOT') . ' ';
       }
       $this->writer->out($op);
       $exp->get_operand()->evaluate($this);
@@ -178,7 +178,7 @@
     {
       $v = $value->get_value();
       if (is_bool($v)) {
-        $this->writer->out($v ? 'VRAI' : 'FAUX');
+        $this->writer->out($v ? $this->t('TRUE') : $this->t('FALSE'));
       } elseif (is_string($v)) {
         $this->writer->out('"' . $v . '"');
       } else {
@@ -200,7 +200,7 @@
 
     public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
     {
-      $this->out('POUR ' . $stmt->get_varname() . ' DANS ');
+      $this->writer->out(sprintf('%s %s %s ', $this->t('FOR'), $stmt->get_varname(), $this->t('IN') ));
       $stmt->get_collection()->evaluate($this);
       $this->writer->nl();
       $this->writer->indent();
@@ -211,34 +211,34 @@
 
     public function visit_for_stmt(\Guedel\AL\Statement\ForStmt $stmt)
     {
-      $this->out('POUR ' . $stmt->get_varname() . ' DE ');
+      $this->out(sprintf('%s %s %s ', $this->t('FOR'), $stmt->get_variable_name(), $this->t('FROM')));
       $stmt->get_initial()->evaluate($this);
-      $this->writer->out(' A ');
+      $this->writer->out(' ' . $this->t('TO') . ' ');
       $stmt->get_final()->evaluate($this);
-      $this->writer->out(' PAS DE ');
+      $this->writer->out($this->ft(' %s ', $this->t('STEP')));
       $stmt->get_increment()->evaluate($this);
-      $this->writer->outln(' FAIRE');
+      $this->writer->outln(' ' . $this->t('DO'));
       $this->writer->indent();
       $stmt->get_statement()->accept($this);
       $this->writer->unindent();
-      $this->writer->outln('FIN POUR');
+      $this->writer->outln($this->ft('%s %s', 'END', 'FOR'));
     }
 
     public function visit_if_then_stmt(\Guedel\AL\Statement\IfThenStmt $stmt)
     {
-      $this->writer->out('SI ');
+      $this->writer->out($this->t('IF') . ' ');
       $stmt->get_iftest()->evaluate($this);
-      $this->writer->outln(' ALORS');
+      $this->writer->outln(' ' . $this->t('THEN'));
       $this->writer->indent();
       $stmt->get_then_part()->accept($this);
       $this->writer->unindent();
       if ($stmt->get_else_part() !== null) {
-        $this->writer->outln('SINON');
+        $this->writer->outln($this->t('ELSE'));
         $this->writer->indent();
         $stmt->get_else_part()->accept($this);
         $this->writer->unindent();
       }
-      $this->writer->outln('FIN SI');
+      $this->writer->outln($this->ft('%s %s', 'END', 'IF'));
 
 
     }
@@ -261,7 +261,7 @@
 
     public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
     {
-      $this->writer->out('RETOURNE');
+      $this->writer->out($this->t('RETURN'));
       $list = $stmt->get_expressions();
       if (count($list->get_items()) > 0) {
         $first = true;
@@ -287,23 +287,23 @@
 
     public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt)
     {
-      $this->writer->out('TANT QUE ');
+      $this->writer->out($this->t('WHILE'));
       $stmt->get_test()->evaluate($this);
-      $this->writer->outln(' FAIRE');
+      $this->writer->outln(' ' . $this->t('DO'));
       $this->writer->indent();
       $stmt->get_statement()->accept($this);
       $this->writer->unindent();
-      $this->writer->outln('FIN TANT QUE');
+      $this->writer->outln($this->ft('%s %s', 'END', 'WHILE'));
     }
 
     public function visit_any(\Guedel\AL\Datatype\Any $type)
     {
-      $this->writer->out('QUELCONQUE');
+      $this->writer->out($this->t('ANY'));
     }
 
     public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type)
     {
-      $this->writer->out('TABLEAU');
+      $this->writer->out($this->t('ARRAY'));
       $lowerbound = $type->get_lowerbound();
       $upperbound = $type->get_upperbound();
 
@@ -320,7 +320,7 @@
       }
 
       if ($type->get_type() !== null) {
-        $this->writer->out(' DE ');
+        $this->writer->out(' ' . $this->t('OF') . ' ');
         $type->get_type()->accept($this);
       }
     }
@@ -342,14 +342,14 @@
 
     public function visit_reference(\Guedel\AL\Datatype\Reference $type)
     {
-      $this->writer->out('REF DE ' );
+      $this->writer->out($this->ft('%s %s ', 'REF', 'OF') );
       $type->get_type()->accept($this);
     }
 
     public function visit_string(\Guedel\AL\Datatype\StringOfChars $type)
     {
       $len = $type->get_length();
-      $this->writer->out('CHAINE');
+      $this->writer->out($this->t('STRING'));
       if ($len !== null) {
         $this->writer->out(' * ' . $len);
       }
@@ -357,13 +357,13 @@
 
     public function visit_structure(\Guedel\AL\Datatype\Structure $type)
     {
-      $this->writer->outln('STRUCT');
+      $this->writer->outln($this->t('STRUCT'));
       $this->writer->indent();
       foreach($type->get_attributes() as $attribute) {
         $attribute->accept($this);
       }
       $this->writer->unindent();
-      $this->writer->outln('FIN STRUCT');
+      $this->writer->outln($this->ft('%s %s', 'END', 'STRUCT'));
     }
 
     public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
@@ -373,13 +373,13 @@
 
     public function visit_number(\Guedel\AL\Datatype\Number $type)
     {
-      $this->writer->out('NOMBRE('. $type->get_length() . ', ' . $type->get_precision());
+      $this->writer->out($this->t('NUMBER') . '('. $type->get_length() . ', ' . $type->get_precision() . ')');
     }
 
     public function visit_class(\Guedel\AL\Datatype\ClassType $type)
     {
       $this->writer
-          ->outln('CLASSE')
+          ->outln($this->t('CLASS'))
           ->indent()
       ;
       foreach($type->get_attributes() as $attribute) {
@@ -387,7 +387,29 @@
       }
       $this->writer
           ->unindent()
-          ->outln('FIN CLASSE');
+          ->outln($this->ft('%s %s', 'END', 'CLASS'));
+    }
+    
+    /**
+     * Translate language's tokens
+     * @param string $token
+     * @return string
+     */
+    private function t(string $token): string 
+    {
+      if ($this->translator !== null) {
+        return $this->translator->_t($token);
+      }
+      return $token;
+    }
+    
+    private function ft(string $format, ...$args)
+    {
+      $tr = [];
+      foreach ($args as $arg) {
+        $tr[] = $this->t($arg);
+      }
+      return sprintf($format, ... $tr);
     }
 
   }
