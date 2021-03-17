@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -26,18 +26,21 @@
 
   namespace Guedel\AL\Statement;
 
+  use \Guedel\AL\Expression\Expression;
+  use \Guedel\AL\Statement\Statement;
+    
   /**
-   * FOR EACH $varname IN $collection
+   * FOR EACH $varname IN $collection DO $stmt
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class ForEachStmt implements Statement
   {
-    private $varname;
-    private $collection;
-    private $statement;
+    private string $varname;
+    private Expression $collection;
+    private ?Statement $statement;
 
-    public function __construct(string $varname, \Guedel\AL\Expression\Expression $collection, \Guedel\AL\Statement\Statement $stmt = null)
+    public function __construct(string $varname, Expression $collection, ?Statement $stmt = null)
     {
       $this->varname = $varname;
       $this->collection = $collection;
@@ -49,12 +52,12 @@
       return $this->varname;
     }
 
-    public function get_collection(): \Guedel\AL\Expression\Expression
+    public function get_collection(): Expression
     {
       return $this->collection;
     }
 
-    public function get_statement(): Statement
+    public function get_statement(): ?Statement
     {
       return $this->statement;
     }

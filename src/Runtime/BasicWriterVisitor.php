@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,12 @@
 
   namespace Guedel\AL\Runtime;
 
+  use \Guedel\Stream\CodeWriter;
+  use \Guedel\AL\Runtime\Translator;
   /**
-   * Description of BasicWriterVisitor
+   * Write structure as pseudo-code
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class BasicWriterVisitor implements Visitor
   {
@@ -40,7 +42,7 @@
     private $writer;
     private $translator;
 
-    public function __construct(\Guedel\Stream\CodeWriter $writer, \Guedel\AL\Runtime\Translator $translator = null)
+    public function __construct(CodeWriter $writer, Translator $translator = null)
     {
       $this->writer = $writer;
       if ($translator === null) {

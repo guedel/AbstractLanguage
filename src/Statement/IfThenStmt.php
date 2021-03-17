@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +28,9 @@
   use Guedel\AL\Expression\Valuable;
 
   /**
-   * Description of IfThenStmt
+   * IF $iftest THEN $thenpart ELSE $elsepart
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class IfThenStmt implements Statement
   {
@@ -58,7 +58,7 @@
     {
       return $this->thenpart;
     }
-    public function get_else_part(): Statement
+    public function get_else_part(): ?Statement
     {
       return $this->elsepart;
     }

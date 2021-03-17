@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -25,34 +25,38 @@
    */
 
   namespace Guedel\AL\Statement;
+  
+  use \Guedel\AL\Expression\Valuable;
+  use \Guedel\AL\Runtime\Visitor;
 
   /**
-   * Description of WhileStmt
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   *  WHILE $test DO $block
+   *
+   * @author Guedel <guedel87@live.fr>
    */
   class WhileStmt implements Statement
   {
     private $test;
     private $statement;
 
-    public function __construct(\Guedel\AL\Expression\Valuable $test, Statement $block)
+    public function __construct(Valuable $test, ?Statement $block = null)
     {
       $this->test = $test;
       $this->statement = $block;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
       $visitor->visit_while_stmt($this);
     }
 
-    public function get_test(): \Guedel\AL\Expression\Valuable
+    public function get_test(): Valuable
     {
       return $this->test;
     }
 
-    public function get_statement() : Statement
+    public function get_statement() : ?Statement
     {
       return $this->statement;
     }

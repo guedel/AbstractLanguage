@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,9 @@
    */
   namespace Guedel\AL\Declaration;
   /**
-   * Description of NamedDeclaration
+   * Base of all declarations with a name
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   abstract class NamedDeclaration implements \Guedel\AL\Statement\Statement
   {

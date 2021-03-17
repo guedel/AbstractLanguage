@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,10 @@
   namespace Guedel\AL\Expression;
 
   /**
-   * Description of FunctionCall
+   * call of a function
+   * $name($parameters)
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class FunctionCall implements Valuable
   {

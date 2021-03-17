@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -26,25 +26,26 @@
   namespace Guedel\AL\Statement;
 
   use Guedel\AL\Expression\Expression;
+  use \Guedel\AL\Runtime\Visitor;
 
   /**
-   * FOR $varname FROM $initial TO $final [STEP $increment]
+   * FOR $varname FROM $initial TO $final [STEP $increment] DO $statement
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class ForStmt implements Statement
   {
-    private $varname;
-    private $initial;
-    private $final;
-    private $increment;
-    private $statement;
+    private string $varname;
+    private Expression $initial;
+    private Expression $final;
+    private Expression $increment;
+    private ?Statement $statement;
 
     public function __construct(string $varnmame,
         Expression $initial,
         Expression $final,
         Expression $increment,
-        Statement $statement)
+        Statement $statement = null)
     {
       $this->varname = $varnmame;
       $this->initial = $initial;
@@ -53,7 +54,7 @@
       $this->statement = $statement;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
       $visitor->visit_for_stmt($this);
     }
@@ -78,7 +79,7 @@
       return $this->increment;
     }
 
-    public function get_statement() : Statement
+    public function get_statement() : ?Statement
     {
       return $this->statement;
     }
