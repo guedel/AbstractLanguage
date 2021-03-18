@@ -18,8 +18,14 @@
       }
     ],
 	"autoload": {
-		"psr-4": { "guedel\\AL\\": "src/" } 
+		"psr-4": { "Guedel\\AL\\": "src/" } 
 	},
+    "autoload-dev": {
+		"psr-4": { 
+          "Guedel\\Tests\\Unit\\AL\\": "tests/unit/" ,
+          "Guedel\\Tests\\Functional\\AL\\": "tests/functional/"
+    } 
+    },
     "require": {
         "guedel/stream": "dev-master"
     },
