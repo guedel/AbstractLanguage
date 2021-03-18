@@ -22,5 +22,8 @@
 	},
     "require": {
         "guedel/stream": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "10.0.x-dev"
     }
 }
