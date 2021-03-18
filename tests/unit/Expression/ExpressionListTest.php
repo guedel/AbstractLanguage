@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Guedel <guedel87@live.fr>.
+ * Copyright 2021 Guedel <guedel87@live.fr>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,36 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\AL\Expression;
+use PHPUnit\Framework\TestCase;
+use Guedel\AL\Expression\ExpressionList;
+use Guedel\Tests\Mock\AL\EmptyExpression;
 
 /**
- * List of Expression
+ * Description of ExpressionListTest
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers ExpressionList
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class ExpressionListTest extends TestCase
 {
 
-  private $expressions;
-
-  public function __construct(Valuable ...$expressions)
+  public function testEmpty()
   {
-    $this->expressions = $expressions;
+    $list = new ExpressionList();
+    $this->assertCount(0, $list);
   }
-
-  public function getIterator(): \Traversable
+  
+  public function testCount()
   {
-    return new \ArrayIterator($this->expressions);
+    $list = new ExpressionList(new EmptyExpression());
+    $this->assertCount(1, $list);
   }
-
-  public function count(): int
+  
+  public function testIterate()
   {
-    return count($this->expressions);
+    $list = new ExpressionList(new EmptyExpression(), new EmptyExpression(), new EmptyExpression());
+    $this->assertCount(3, $list);
+    $this->assertContainsOnly(EmptyExpression::class, $list);
   }
 
 }

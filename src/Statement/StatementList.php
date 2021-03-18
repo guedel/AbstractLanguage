@@ -42,11 +42,6 @@
       $this->statements = $statements;
     }
 
-    public function &get_statements()
-    {
-      return $this->statements;
-    }
-
     public function add(Statement $statement)
     {
       $this->statements[] = $statement;
@@ -55,7 +50,7 @@
 
     public function last(): ?Statement
     {
-      if (count($this->statements) > 0) {
+      if (0 < $this->count()) {
         return $this->statements[array_key_last($this->statements)];
       }
       return null;

@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Guedel <guedel87@live.fr>.
+ * Copyright 2021 Guedel <guedel87@live.fr>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,24 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\AL\Expression;
+namespace Guedel\Tests\Mock\AL;
+
+use Guedel\AL\Expression\Expression;
 
 /**
- * List of Expression
+ * Description of EmptyExpression
  *
  * @author Guedel <guedel87@live.fr>
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class EmptyExpression extends Expression
 {
-
-  private $expressions;
-
-  public function __construct(Valuable ...$expressions)
+  public function __construct()
   {
-    $this->expressions = $expressions;
+    parent::__construct('$');
   }
-
-  public function getIterator(): \Traversable
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
   {
-    return new \ArrayIterator($this->expressions);
-  }
-
-  public function count(): int
-  {
-    return count($this->expressions);
+    return 10;
   }
 
 }

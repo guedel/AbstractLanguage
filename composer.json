@@ -23,7 +23,8 @@
     "autoload-dev": {
 		"psr-4": { 
           "Guedel\\Tests\\Unit\\AL\\": "tests/unit/" ,
-          "Guedel\\Tests\\Functional\\AL\\": "tests/functional/"
+          "Guedel\\Tests\\Functional\\AL\\": "tests/functional/",
+          "Guedel\\Tests\\Mock\\AL\\": "tests/mock/"
     } 
     },
     "require": {

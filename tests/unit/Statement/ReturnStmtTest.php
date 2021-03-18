@@ -10,19 +10,23 @@ namespace Guedel\Tests\AL\Statement;
 
 use PHPUnit\Framework\TestCase;
 
+use Guedel\AL\Statement\ReturnStmt;
+
 /**
  * Description of ReturnStmtTest
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers ReturnStmt
  */
 class ReturnStmtTest extends TestCase
 {
   /**
   * 
   */
-  public function testSample()
+  public function testReturnSimple()
   {
-    $this->assertCount(0, []);
+    $r = new ReturnStmt();
+    $this->assertEquals('RETURN', $r->accept(new \Guedel\Tests\Mock\AL\TestVisitor()));
   }
 
 }

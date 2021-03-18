@@ -15,6 +15,7 @@ use Guedel\AL\Expression\Value;
  * Description of ValueTest
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers Value
  */
 class ValueTest extends TestCase
 {
@@ -23,6 +24,13 @@ class ValueTest extends TestCase
   {
     $v = new Value(1234);
     $this->assertEquals(1234, $v->get_value());
+  }
+  
+  public function testEvaluate()
+  {
+    $v = new Value(123);
+    $visit = new \Guedel\Tests\Mock\AL\TestVisitor();
+    $this->assertEquals(123, $v->evaluate($visit));
   }
 
 }

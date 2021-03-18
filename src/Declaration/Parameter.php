@@ -53,7 +53,7 @@
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->declare_parameter($this);
+      return $visitor->declare_parameter($this);
     }
 
   }

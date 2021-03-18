@@ -42,7 +42,7 @@
       $this->expressions = new ExpressionList(... $expressions);
     }
 
-    public function get_expressions(): ExpressionList
+    public function getExpressions(): ExpressionList
     {
       return $this->expressions;
     }
@@ -50,6 +50,6 @@
 
     public function accept(Visitor $visitor)
     {
-      $visitor->visit_return_stmt($this);
+      return $visitor->visit_return_stmt($this);
     }
   }

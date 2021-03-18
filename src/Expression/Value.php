@@ -25,6 +25,8 @@
    */
 
   namespace Guedel\AL\Expression;
+  
+  use Guedel\AL\Runtime\Visitor;
 
   /**
    * Simple value
@@ -45,7 +47,7 @@
       return $this->value;
     }
 
-    public function evaluate(guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(Visitor $visitor)
     {
       return $visitor->eval_value($this);
     }

@@ -46,7 +46,7 @@
       return $this->operand;
     }
 
-    public function evaluate(guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
     {
       return $visitor->eval_unary_expression($this);
     }
