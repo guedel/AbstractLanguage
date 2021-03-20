@@ -51,7 +51,7 @@
      */
     public function _attr_(\Guedel\AL\Declaration\VariableDecl $attr): Structure
     {
-      $this->attributes[$attr->get_name()] = $attr;
+      $this->attributes[$attr->getName()] = $attr;
       return $this;
     }
 

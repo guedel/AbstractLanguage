@@ -42,7 +42,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function declare_module(\Guedel\AL\Declaration\Module $decl)
   {
-    
+    return "MODULE " . $decl->getName();
   }
 
   public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)

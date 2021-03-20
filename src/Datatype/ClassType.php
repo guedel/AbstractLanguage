@@ -47,7 +47,7 @@
 
     public function _meth_(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
     {
-      $this->methods[$method->get_name()] = $method;
+      $this->methods[$method->getName()] = $method;
       return $this;
     }
 

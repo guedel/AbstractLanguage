@@ -59,7 +59,7 @@
 
     public function declare_function(\Guedel\AL\Declaration\FunctionDecl $decl)
     {
-      $this->writer->out($this->t('FUNCTION') . ' ' . $decl->get_name() . '(');
+      $this->writer->out($this->t('FUNCTION') . ' ' . $decl->getName() . '(');
       $first = true;
       foreach ($decl->get_parameters() as $parameter) {
         if ($first) {
@@ -83,9 +83,9 @@
 
     public function declare_module(\Guedel\AL\Declaration\Module $decl)
     {
-      $this->writer->outln($this->t('MODULE') . ' ' . $decl->get_name());
+      $this->writer->outln($this->t('MODULE') . ' ' . $decl->getName());
       $this->writer->indent();
-      foreach($decl->get_statements() as $statement) {
+      foreach($decl->getStatements() as $statement) {
         $statement->accept($this);
       }
       $this->writer->unindent();
@@ -95,13 +95,13 @@
     public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)
     {
       $this->writer->out($decl->get_direction() . ' ');
-      $this->writer->out($decl->get_name());
+      $this->writer->out($decl->getName());
       $this->writer->out(': ' . $decl->get_type());
     }
 
     public function declare_procedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
     {
-      $this->writer->out($this->t('PROCEDURE') . ' ' . $decl->get_name() . '(');
+      $this->writer->out($this->t('PROCEDURE') . ' ' . $decl->getName() . '(');
       $first = true;
       foreach ($decl->get_parameters() as $parameter) {
         if ($first) {
@@ -123,7 +123,7 @@
 
     public function declare_type(\Guedel\AL\Declaration\TypeDecl $decl)
     {
-      $this->writer->out($this->t('TYPE') . ' ' . $decl->get_name());
+      $this->writer->out($this->t('TYPE') . ' ' . $decl->getName());
       $this->writer->out(': ');
       $decl->get_definition()->accept($this);
       $this->writer->nl();
@@ -131,7 +131,7 @@
 
     public function declare_variable(\Guedel\AL\Declaration\VariableDecl $decl)
     {
-      $this->writer->out($this->t('VAR') . ' ' . $decl->get_name());
+      $this->writer->out($this->t('VAR') . ' ' . $decl->getName());
       $this->writer->outln(': ' . $decl->get_type());
     }
 
