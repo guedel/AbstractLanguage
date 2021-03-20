@@ -136,7 +136,9 @@
     public function declare_variable(\Guedel\AL\Declaration\VariableDecl $decl)
     {
       $this->writer->out($this->t('VAR') . ' ' . $decl->getName());
-      $this->writer->outln(': ' . $decl->get_type());
+      $this->writer->out(': ');
+      $decl->get_type()->accept($this);
+      $this->writer->nl();
     }
 
     public function eval_binary_expression(\Guedel\AL\Expression\BinaryExpression $exp)
