@@ -25,7 +25,10 @@
    */
 
    namespace Guedel\AL\Declaration;
-
+   
+   use Guedel\AL\Statement\StatementList;
+   use Guedel\AL\Statement\Statement;
+   
    /**
    * PROCEDURE $name ($parameters) IS $body
    *
@@ -47,10 +50,10 @@
     {
       parent::__construct($name);
       $this->parameters = $parameters;
-      if ($body instanceof \Guedel\AL\Statement\StatementList) {
+      if ($body instanceof StatementList) {
         $this->body = $body;
       } else {
-        $this->body = new \Guedel\AL\Statement\StatementList($body);
+        $this->body = new StatementList($body);
       }
     }
 
@@ -59,12 +62,12 @@
       $visitor->declare_procedure($this);
     }
 
-    public function get_parameters(): ParametersList
+    public function getParameters(): ParametersList
     {
       return $this->parameters;
     }
 
-    public function get_body(): \Guedel\AL\Statement\StatementList
+    public function getBody(): StatementList
     {
       return $this->body;
     }

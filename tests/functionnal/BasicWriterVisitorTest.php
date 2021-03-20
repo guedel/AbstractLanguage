@@ -68,6 +68,7 @@ class BasicWriterVisitorTest extends TestCase
         [new Prog\SimpleIfProgram()],
         [new Prog\IfThenElseProgram()],
         [new Prog\VariableUseProgram()],
+        [new Prog\DeclareProcProgram()],
     ];
   }
 }

@@ -35,10 +35,14 @@
   {
     private $type;
 
-    public function __construct($name, \Guedel\AL\Datatype\Type $type)
+    public function __construct($name, \Guedel\AL\Datatype\Type $type = null)
     {
       parent::__construct($name);
-      $this->type = $type;
+      if ($type == null) {
+        $this->type = new \Guedel\AL\Datatype\Any();
+      } else {
+        $this->type = $type;
+      }
    }
 
     public function get_type(): \Guedel\AL\Datatype\Type

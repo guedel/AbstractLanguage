@@ -26,35 +26,34 @@
 
 namespace Guedel\Tests\Mock\AL\Programs;
 
-use Guedel\AL\Statement\StatementList;
-use Guedel\AL\Statement\AssignStmt;
-use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Declaration\Parameter;
+use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Expression\Value;
-use \Guedel\AL\Datatype\Any;
 
 /**
- * Description of VariableUseProgram
+ * Description of DeclareProcProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class VariableUseProgram implements BaseTestProgram
+class DeclareProcProgram implements BaseTestProgram
 {
-  /**
-   * @inherit
-   */
+  //put your code here
   public function attend(): string
   {
     return join(PHP_EOL, [
-        "VAR i: ANY",
-        "i <- 10",
+        "PROCEDURE bonjour(IN name: ANY)",
+        "\tWRITE name",
+        "END PROCEDURE",
     ]) . PHP_EOL;
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    return new StatementList(
-        new VariableDecl("i"),
-        new AssignStmt("i", new Value(10))
+    return new ProcedureDecl(
+        "bonjour",
+        new \Guedel\AL\Declaration\ParametersList(new Parameter("name", "IN")),
+        new ProcedureCall("WRITE", new \Guedel\AL\Expression\Variable("name"))
     );
   }
 

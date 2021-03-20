@@ -24,12 +24,14 @@
    * THE SOFTWARE.
    */
   namespace Guedel\AL\Declaration;
+  
+  use  \Guedel\AL\Statement\Statement;
   /**
    * Base of all declarations with a name
    *
    * @author Guedel <guedel87@live.fr>
    */
-  abstract class NamedDeclaration implements \Guedel\AL\Statement\Statement
+  abstract class NamedDeclaration implements Statement
   {
     private $name;
 

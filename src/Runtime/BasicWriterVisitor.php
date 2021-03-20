@@ -65,7 +65,7 @@
     {
       $this->writer->out($this->t('FUNCTION') . ' ' . $decl->getName() . '(');
       $first = true;
-      foreach ($decl->get_parameters() as $parameter) {
+      foreach ($decl->getParameters() as $parameter) {
         if ($first) {
           $first = false;
         } else {
@@ -79,7 +79,7 @@
       $this->writer->nl();
       $this->writer->indent();
 
-      $decl->get_body()->accept($this);
+      $decl->getBody()->accept($this);
       $this->writer->unindent();
       $this->writer->writeln($this->t('END') . ' ' . $this->t('FUNCTION'));
       $this->writer->nl();
@@ -98,16 +98,17 @@
 
     public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)
     {
-      $this->writer->out($decl->get_direction() . ' ');
+      $this->writer->out($decl->getDirection() . ' ');
       $this->writer->out($decl->getName());
-      $this->writer->out(': ' . $decl->get_type());
+      $this->writer->out(': ');
+      $decl->get_type()->accept($this);
     }
 
     public function declare_procedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
     {
       $this->writer->out($this->t('PROCEDURE') . ' ' . $decl->getName() . '(');
       $first = true;
-      foreach ($decl->get_parameters() as $parameter) {
+      foreach ($decl->getParameters() as $parameter) {
         if ($first) {
           $first = false;
         } else {
@@ -115,14 +116,12 @@
         }
         $parameter->accept($this);
       }
-      $this->writer->outln(' : ' . $decl->get_returntype());
+      $this->writer->outln(")");
       $this->writer->indent();
 
-      $decl->get_body()->accept($this);
+      $decl->getBody()->accept($this);
       $this->writer->unindent();
       $this->writer->outln($this->ft('%s %s', 'END', 'PROCEDURE'));
-      $this->writer->nl();
-
     }
 
     public function declare_type(\Guedel\AL\Declaration\TypeDecl $decl)
@@ -417,5 +416,4 @@
       }
       return sprintf($format, ... $tr);
     }
-
   }
