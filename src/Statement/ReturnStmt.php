@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -25,10 +25,13 @@
    */
   namespace Guedel\AL\Statement;
 
+  use \Guedel\AL\Expression\ExpressionList;
+  use \Guedel\AL\Runtime\Visitor;
+  
   /**
-   * Description of ReturnStmt
+   * Return $expressions
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class ReturnStmt implements Statement
   {
@@ -36,17 +39,17 @@
 
     public function __construct(Valuable ... $expressions)
     {
-      $this->expressions = new \Guedel\AL\Expression\ExpressionList(... $expressions);
+      $this->expressions = new ExpressionList(... $expressions);
     }
 
-    public function get_expressions(): \Guedel\AL\Expression\ExpressionList
+    public function getExpressions(): ExpressionList
     {
       return $this->expressions;
     }
 
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
-      $visitor->visit_return_stmt($this);
+      return $visitor->visit_return_stmt($this);
     }
   }

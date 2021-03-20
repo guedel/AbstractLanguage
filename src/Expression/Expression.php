@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,9 @@
   namespace Guedel\AL\Expression;
 
   /**
-   * Description of Expression
+   * abstract base of an expression
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   abstract class Expression implements Valuable
   {
@@ -55,7 +55,7 @@
       $this->operator = $operator;
     }
 
-    public function get_operator(): string
+    public function getOperator(): string
     {
       return $this->operator;
     }

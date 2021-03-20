@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -27,33 +27,36 @@
   namespace Guedel\AL\Statement;
 
   use Guedel\AL\Expression\ExpressionList;
+  use \Guedel\AL\Expression\Valuable;
+  use \Guedel\AL\Runtime\Visitor;
+  
   /**
-   * Description of ProcedureCall
+   * Call $name With $parameters
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class ProcedureCall implements Statement
   {
     private $name;
     private $parameters;
 
-    public function __construct(string $name, \Guedel\AL\Expression\Valuable ... $parameters)
+    public function __construct(string $name, Valuable ... $parameters)
     {
       $this->name = $name;
       $this->parameters = new ExpressionList( ... $parameters);
     }
     //put your code here
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
       $visitor->visit_procedure_call($this);
     }
 
-    public function get_name() : string
+    public function getName() : string
     {
       return $this->name;
     }
 
-    public function get_parameters(): ExpressionList
+    public function getParameters(): ExpressionList
     {
       return $this->parameters;
     }

@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -25,15 +25,15 @@
    */
 
   namespace Guedel\AL\Expression;
-
+  use Guedel\AL\Expression\ExpressionList;
   /**
    * Description of BinaryExpression
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class BinaryExpression extends Expression
   {
-    private $operands;
+    private ExpressionList $operands;
 
     public function __construct(string $operator, Valuable ...$operands)
     {
@@ -42,12 +42,12 @@
     }
 
 
-    public function get_operands(): ExpressionList
+    public function getOperands(): ExpressionList
     {
       return $this->operands;
     }
 
-    public function evaluate(guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
     {
       return $visitor->eval_binary_expression($this);
     }

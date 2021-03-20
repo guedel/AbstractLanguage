@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,9 @@
   namespace Guedel\AL\Runtime;
 
   /**
-   * Traduction des éléments du langage
+   * Translate of language tokens
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class Translator
   {
@@ -38,21 +38,32 @@
 
     private static $words = array(
       'fr' => array(
+        'ANY' => 'QUELCONQUE',
+        'ARRAY' => 'TABLEAU',
+        'BEGIN' => 'DEBUT',
+        'DECIMAL' => 'DECIMAL',
+        'DO' => 'FAIRE',
+        'EACH' => 'CHAQUE',
+        'ELSE' => 'SINON',
+        'END' => 'FIN',
+        'ELSE' => 'SINON',
+        'IF' => 'SI',
+        'IN' => 'DANS',
+        'INTEGER' => 'ENTIER',
+        'FLOAT' => 'FLOTTANT',
         'FOR' => 'POUR',
-          'EACH' => 'CHAQUE',
-          'FROM' => 'DEPUIS',
-          'TO' => 'JUSQUE',
-          'BEGIN' => 'DEBUT',
-          'END' => 'FIN',
-          'PROCEDURE' => 'PROCEDURE',
-          'FUNCTION' => 'FONCTION',
-          'VAR' => 'VAR',
-          'TYPE' => 'TYPE',
-          'INTEGER' => 'ENTIER',
-          'FLOAT' => 'FLOTTANT',
-          'DECIMAL' => 'DECIMAL',
-          'STRING' => 'CHAINE',
-          'ARRAY' => 'TABLEAU',
+        'FROM' => 'DEPUIS',
+        'FUNCTION' => 'FONCTION',
+        'OF' => 'DE',
+        'PROCEDURE' => 'PROCEDURE',
+        'REF' => 'REF',
+        'STEP' => 'PAS DE',
+        'STRING' => 'CHAINE',
+        'TO' => 'A',
+        'THEN' => 'ALORS',
+        'TYPE' => 'TYPE',
+        'VAR' => 'VAR',
+        'WHILE' => 'TANT QUE',
       ),
     );
 
@@ -68,6 +79,10 @@
       if ($this->language == self::ENGLISH) {
         return $word;
       }
-      return self::$words[$this->language][$word];
+      try {
+        return self::$words[$this->language][$word];
+      } catch(Exception $ex) {
+      }
+      return $word;
     }
   }

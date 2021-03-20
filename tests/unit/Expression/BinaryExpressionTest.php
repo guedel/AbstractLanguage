@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Guedel <guedel87@live.fr>.
+ * Copyright 2021 Guedel <guedel87@live.fr>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,25 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\AL\Expression;
+use PHPUnit\Framework\TestCase;
 
+use Guedel\Tests\Mock\AL\TestVisitor;
+use Guedel\AL\Expression\Expression;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\BinaryExpression;
 /**
- * List of Expression
+ * Description of BinaryExpressionTests
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers BinaryExpression
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class BinaryExpressionTest extends TestCase
 {
 
-  private $expressions;
-
-  public function __construct(Valuable ...$expressions)
+  public function testBinary()
   {
-    $this->expressions = $expressions;
-  }
-
-  public function getIterator(): \Traversable
-  {
-    return new \ArrayIterator($this->expressions);
-  }
-
-  public function count(): int
-  {
-    return count($this->expressions);
+    $e = new BinaryExpression(Expression::OP_ADD, new Value(1), new Value(2));
+    $this->assertEquals("1+2", $e->evaluate(new TestVisitor()));
   }
 
 }

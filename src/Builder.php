@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
   /**
    * Build any class in Abstract Language
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class Builder
   {
@@ -244,7 +244,7 @@
       return new Datatype\Enumeration(...$symbols);
     }
 
-    function arrayType($min, $max, guedel\AL\Datatype\Type $type)
+    function arrayType($min, $max, Guedel\AL\Datatype\Type $type)
     {
       return new Datatype\ArrayOf($type, $min, $max );
     }

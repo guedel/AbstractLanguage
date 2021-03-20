@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -28,11 +28,11 @@
 
 
   /**
-   * Description of newPHPClass
+   * Interface for all values
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   interface Valuable
   {
-    public function evaluate(guedel\AL\Runtime\Visitor $visitor);
+    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor);
   }

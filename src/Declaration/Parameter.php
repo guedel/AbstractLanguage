@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,9 @@
   namespace Guedel\AL\Declaration;
 
   /**
-   * Description of Parameter
+   * Definition of a function or procedure parameter
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class Parameter extends VariableDecl
   {
@@ -53,7 +53,7 @@
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->declare_parameter($this);
+      return $visitor->declare_parameter($this);
     }
 
   }

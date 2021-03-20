@@ -3,7 +3,7 @@
   /*
    * The MIT License
    *
-   * Copyright 2018 Guillaume de Lestanville <guillaume.delestanville@proximit.fr>.
+   * Copyright 2018 Guedel <guedel87@live.fr>.
    *
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,9 @@
   namespace Guedel\AL\Expression;
 
   /**
-   * Description of UnaryExpression
+   * Unary expression
    *
-   * @author Guillaume de Lestanville <guillaume.delestanville@proximit.fr>
+   * @author Guedel <guedel87@live.fr>
    */
   class UnaryExpression extends Expression
   {
@@ -46,7 +46,7 @@
       return $this->operand;
     }
 
-    public function evaluate(guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
     {
       return $visitor->eval_unary_expression($this);
     }
