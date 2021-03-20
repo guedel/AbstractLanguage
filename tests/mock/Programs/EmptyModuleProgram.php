@@ -24,49 +24,23 @@
  * THE SOFTWARE.
  */
 
-use PHPUnit\Framework\TestCase;
-
-use Guedel\AL\Runtime\BasicWriterVisitor;
-use Guedel\AL\Runtime\Translator;
-use Guedel\Tests\Mock\AL\Programs as Prog;
-use Guedel\Stream\CodeWriter;
+namespace Guedel\Tests\Mock\AL\Programs;
 
 /**
- * Description of BasicWriterVisitorTest
+ * Description of EmptyModuleProgram
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BasicWriterVisitor
  */
-class BasicWriterVisitorTest extends TestCase
+class EmptyModuleProgram implements BaseTestProgram
 {
-  private BasicWriterVisitor $visitor;
-  private Translator $translator;
-  private CodeWriter $writer;
-  
-  public function setUp(): void
+  //put your code here
+  public function attend(): string
   {
-    $this->writer = new CodeWriter();
-    $this->translator = new Translator();
-    $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
-  }
-  
-  /**
-   * @dataProvider programs
-   */
-  public function testProgram(Prog\BaseTestProgram $p)
-  {
-    $p->code()->accept($this->visitor);
-    $this->assertEquals($p->attend(), $this->writer->render());
+    return "MODULE Empty" . PHP_EOL . "END MODULE" . PHP_EOL;
   }
 
-  
-  public function programs()
+  public function code(): \Guedel\AL\Statement\Statement
   {
-    return [
-        [new Prog\EmptyModuleProgram()],
-        [new Prog\HelloWorldProgram()],
-        [new Prog\SimpleIfProgram()],
-        [new Prog\IfThenElseProgram()],
-    ];
+    return new \Guedel\AL\Declaration\Module('Empty');
   }
 }

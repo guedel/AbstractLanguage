@@ -23,50 +23,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-use PHPUnit\Framework\TestCase;
-
-use Guedel\AL\Runtime\BasicWriterVisitor;
-use Guedel\AL\Runtime\Translator;
-use Guedel\Tests\Mock\AL\Programs as Prog;
-use Guedel\Stream\CodeWriter;
-
+namespace Guedel\Tests\Mock\AL\Programs;
 /**
- * Description of BasicWriterVisitorTest
+ * Description of BaseTestProgram
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BasicWriterVisitor
  */
-class BasicWriterVisitorTest extends TestCase
+interface BaseTestProgram
 {
-  private BasicWriterVisitor $visitor;
-  private Translator $translator;
-  private CodeWriter $writer;
-  
-  public function setUp(): void
-  {
-    $this->writer = new CodeWriter();
-    $this->translator = new Translator();
-    $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
-  }
-  
-  /**
-   * @dataProvider programs
-   */
-  public function testProgram(Prog\BaseTestProgram $p)
-  {
-    $p->code()->accept($this->visitor);
-    $this->assertEquals($p->attend(), $this->writer->render());
-  }
-
-  
-  public function programs()
-  {
-    return [
-        [new Prog\EmptyModuleProgram()],
-        [new Prog\HelloWorldProgram()],
-        [new Prog\SimpleIfProgram()],
-        [new Prog\IfThenElseProgram()],
-    ];
-  }
+  public function attend(): string;
+  public function code(): \Guedel\AL\Statement\Statement;
 }

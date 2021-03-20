@@ -24,49 +24,32 @@
  * THE SOFTWARE.
  */
 
-use PHPUnit\Framework\TestCase;
+namespace Guedel\Tests\Mock\AL\Programs;
 
-use Guedel\AL\Runtime\BasicWriterVisitor;
-use Guedel\AL\Runtime\Translator;
-use Guedel\Tests\Mock\AL\Programs as Prog;
-use Guedel\Stream\CodeWriter;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\IfThenStmt;
+use Guedel\AL\Expression\Value;
 
 /**
- * Description of BasicWriterVisitorTest
+ * Description of SimpleIfProgram
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BasicWriterVisitor
  */
-class BasicWriterVisitorTest extends TestCase
+class SimpleIfProgram implements BaseTestProgram
 {
-  private BasicWriterVisitor $visitor;
-  private Translator $translator;
-  private CodeWriter $writer;
-  
-  public function setUp(): void
+  //put your code here
+  public function attend(): string
   {
-    $this->writer = new CodeWriter();
-    $this->translator = new Translator();
-    $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
-  }
-  
-  /**
-   * @dataProvider programs
-   */
-  public function testProgram(Prog\BaseTestProgram $p)
-  {
-    $p->code()->accept($this->visitor);
-    $this->assertEquals($p->attend(), $this->writer->render());
+    return join(PHP_EOL, [
+        "IF TRUE THEN",
+        "\tWRITE \"OK\"",
+        "END IF",
+    ]) . PHP_EOL;
   }
 
-  
-  public function programs()
+  public function code(): \Guedel\AL\Statement\Statement
   {
-    return [
-        [new Prog\EmptyModuleProgram()],
-        [new Prog\HelloWorldProgram()],
-        [new Prog\SimpleIfProgram()],
-        [new Prog\IfThenElseProgram()],
-    ];
+    return new IfThenStmt(new Value(true), new ProcedureCall("WRITE", new Value("OK")));
   }
+
 }

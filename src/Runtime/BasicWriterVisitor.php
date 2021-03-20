@@ -37,14 +37,18 @@
   {
     /**
      *
-     * @var \Stream\CodeWriter
+     * @var CodeWriter
      */
     private $writer;
-    private $translator;
+    private Translator $translator;
 
-    public function __construct(CodeWriter $writer, Translator $translator = null)
+    public function __construct(?CodeWriter $writer = null, ?Translator $translator = null)
     {
-      $this->writer = $writer;
+      if ($writer === null) {
+        $this->writer = new CodeWriter();
+      } else {
+        $this->writer = $writer;
+      }
       if ($translator === null) {
         $this->translator = new Translator();
       } else {
@@ -195,7 +199,7 @@
     {
       $this->writer->out($stmt->get_variable_name() . ' <- ' );
       $stmt->get_expression()->evaluate($this);
-      $this->writer->nl;
+      $this->writer->nl();
     }
 
     public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
@@ -256,7 +260,7 @@
         }
         $parameter->evaluate($this);
       }
-      $this->writer->nl;
+      $this->writer->nl();
     }
 
     public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
