@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Guedel <guedel87@live.fr>.
+ * Copyright 2021 Guedel <guedel87@live.fr>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,28 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\AL\Expression;
+use PHPUnit\Framework\TestCase;
+use Guedel\AL\Expression\Variable;
 
 /**
- * List of Expression
+ * Description of VariableTest
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers Variable
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class VariableTest extends TestCase
 {
 
-  private $expressions;
-
-  public function __construct(Valuable ...$expressions)
+  public function testConstruct()
   {
-    $this->expressions = $expressions;
+    $var = new Variable("a");
+    $this->assertEquals("a", $var->get_varname());
   }
-
-  public function getIterator(): \Traversable
+  
+  public function testAccept() 
   {
-    return new \ArrayIterator($this->expressions);
-  }
-
-  public function count(): int
-  {
-    return count($this->expressions);
+    $var = new Variable('num');
+    $this->assertEquals('124', $var->evaluate(new \Guedel\Tests\Mock\AL\TestVisitor()));
   }
 
 }

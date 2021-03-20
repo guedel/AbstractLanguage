@@ -55,7 +55,7 @@
       $this->operator = $operator;
     }
 
-    public function get_operator(): string
+    public function getOperator(): string
     {
       return $this->operator;
     }

@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Guedel <guedel87@live.fr>.
+ * Copyright 2021 Guedel <guedel87@live.fr>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,26 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\AL\Expression;
+use PHPUnit\Framework\TestCase;
+
+use Guedel\AL\Expression\Expression;
+use Guedel\AL\Expression\UnaryExpression;
+use Guedel\Tests\Mock\AL\TestVisitor;
+use Guedel\AL\Expression\Value;
 
 /**
- * List of Expression
+ * Description of UnaryExpressionTest
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers UnaryExpression
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class UnaryExpressionTest extends TestCase
 {
 
-  private $expressions;
-
-  public function __construct(Valuable ...$expressions)
+  public function testAccept()
   {
-    $this->expressions = $expressions;
-  }
-
-  public function getIterator(): \Traversable
-  {
-    return new \ArrayIterator($this->expressions);
-  }
-
-  public function count(): int
-  {
-    return count($this->expressions);
+    $e = new UnaryExpression(Expression::OP_SUB, new Value('1'));
+    $this->assertEquals('-1', $e->evaluate(new TestVisitor()));
   }
 
 }

@@ -51,12 +51,12 @@
       $visitor->visit_procedure_call($this);
     }
 
-    public function get_name() : string
+    public function getName() : string
     {
       return $this->name;
     }
 
-    public function get_parameters(): ExpressionList
+    public function getParameters(): ExpressionList
     {
       return $this->parameters;
     }

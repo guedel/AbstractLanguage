@@ -48,7 +48,7 @@
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->declare_variable($this);
+      return $visitor->declare_variable($this);
     }
 
   }

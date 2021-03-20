@@ -244,7 +244,7 @@
       return new Datatype\Enumeration(...$symbols);
     }
 
-    function arrayType($min, $max, guedel\AL\Datatype\Type $type)
+    function arrayType($min, $max, Guedel\AL\Datatype\Type $type)
     {
       return new Datatype\ArrayOf($type, $min, $max );
     }

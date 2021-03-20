@@ -159,7 +159,7 @@
     public function eval_unary_expression(\Guedel\AL\Expression\UnaryExpression $exp)
     {
       $op = '';
-      switch ($exp->get_operator())
+      switch ($exp->getOperator())
       {
         case \Guedel\AL\Expression\UnaryExpression::OP_ADD:
           $op = '';
@@ -245,9 +245,9 @@
 
     public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc)
     {
-      $this->writer->out($proc->get_name() . ' ');
+      $this->writer->out($proc->getName() . ' ');
       $first = true;
-      foreach($proc->get_parameters() as $parameter)
+      foreach($proc->getParameters() as $parameter)
       {
         if ($first) {
           $first = false;
@@ -262,10 +262,10 @@
     public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
     {
       $this->writer->out($this->t('RETURN'));
-      $list = $stmt->get_expressions();
-      if (count($list->get_items()) > 0) {
+      $list = $stmt->getExpressions();
+      if (count($list) > 0) {
         $first = true;
-        foreach($list->getIterator() as $expr) {
+        foreach($list as $expr) {
           if ($first) {
             $first = false;
             $this->writer->out(' ');

@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2018 Guedel <guedel87@live.fr>.
+ * Copyright 2021 Guedel <guedel87@live.fr>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +24,33 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\AL\Expression;
-
+use PHPUnit\Framework\TestCase;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\Tests\Mock\AL\TestVisitor;
 /**
- * List of Expression
+ * Description of FunctionCallTest
  *
  * @author Guedel <guedel87@live.fr>
+ * @covers FunctionCall
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class FunctionCallTest extends TestCase
 {
-
-  private $expressions;
-
-  public function __construct(Valuable ...$expressions)
+  private $function;
+  private $visitor;
+  
+  public function setUp(): void
   {
-    $this->expressions = $expressions;
+    $this->function = new FunctionCall("cos");
+    $this->visitor = new TestVisitor();
   }
 
-  public function getIterator(): \Traversable
+  public function testConstruction()
   {
-    return new \ArrayIterator($this->expressions);
+    $this->assertEquals('cos', $this->function->get_name());
   }
 
-  public function count(): int
+  public function testEvaluate()
   {
-    return count($this->expressions);
+    $this->assertEquals(0.66, $this->function->evaluate($this->visitor));
   }
-
 }

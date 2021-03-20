@@ -25,7 +25,7 @@
    */
 
   namespace Guedel\AL\Expression;
-
+  use Guedel\AL\Expression\ExpressionList;
   /**
    * Description of BinaryExpression
    *
@@ -33,7 +33,7 @@
    */
   class BinaryExpression extends Expression
   {
-    private $operands;
+    private ExpressionList $operands;
 
     public function __construct(string $operator, Valuable ...$operands)
     {
@@ -42,12 +42,12 @@
     }
 
 
-    public function get_operands(): ExpressionList
+    public function getOperands(): ExpressionList
     {
       return $this->operands;
     }
 
-    public function evaluate(guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
     {
       return $visitor->eval_binary_expression($this);
     }
