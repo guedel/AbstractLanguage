@@ -75,7 +75,7 @@ class BasicWriterVisitor implements Visitor
       }
       $parameter->accept($this);
     }
-    $this->writer->out(' : ');
+    $this->writer->out('): ');
 
     $decl->get_returntype()->accept($this);
     $this->writer->nl();
@@ -83,8 +83,7 @@ class BasicWriterVisitor implements Visitor
 
     $decl->getBody()->accept($this);
     $this->writer->unindent();
-    $this->writer->writeln($this->t('END') . ' ' . $this->t('FUNCTION'));
-    $this->writer->nl();
+    $this->writer->outln($this->t('END') . ' ' . $this->t('FUNCTION'));
   }
 
   public function declare_module(\Guedel\AL\Declaration\Module $decl)
@@ -144,7 +143,25 @@ class BasicWriterVisitor implements Visitor
 
   public function eval_binary_expression(\Guedel\AL\Expression\BinaryExpression $exp)
   {
-    
+    $first = true;
+    foreach ($exp->getOperands() as $op) {
+      if ($first) {
+        $first = false;
+      } else {
+        $this->writer->out(' ' . $exp->getOperator() . ' ');
+      }
+      $parenthesis = false;
+      if ($op instanceof \Guedel\AL\Expression\BinaryExpression) {
+        if ($op->getPriority() < $exp->getPriority()) {
+          $parenthesis = true;
+          $this->writer->out("(");
+        }
+      }
+      $op->evaluate($this);
+      if ($parenthesis) {
+        $this->writer->out(")");
+      }
+    }
   }
 
   public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn)
@@ -176,7 +193,7 @@ class BasicWriterVisitor implements Visitor
         $op = $this->t('NOT') . ' ';
     }
     $this->writer->out($op);
-    $exp->get_operand()->evaluate($this);
+    $exp->getOperand()->evaluate($this);
   }
 
   public function eval_value(\Guedel\AL\Expression\Value $value)

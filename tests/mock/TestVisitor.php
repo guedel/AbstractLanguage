@@ -85,7 +85,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function eval_unary_expression(\Guedel\AL\Expression\UnaryExpression $exp)
   {
-    return $exp->getOperator() . $exp->get_operand()->evaluate($this);
+    return $exp->getOperator() . $exp->getOperand()->evaluate($this);
   }
 
   public function eval_value(\Guedel\AL\Expression\Value $value)

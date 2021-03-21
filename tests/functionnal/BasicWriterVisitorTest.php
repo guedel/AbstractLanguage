@@ -71,6 +71,8 @@ class BasicWriterVisitorTest extends TestCase
         'variable use' => [new Prog\VariableUseProgram()],
         'declare procedure' => [new Prog\DeclareProcProgram()],
         'loops' => [new Prog\LoopProgram()],
+        'expressions' => [new Prog\ExpressionsProgram()],
+        'declare function' => [new Prog\FunctionDeclProgram()],
     ];
   }
 }

@@ -48,9 +48,9 @@
     const OP_AND = '&';
     const OP_XOR = '^';
 
-    private $operator;
+    private string $operator;
 
-    protected function __construct($operator)
+    protected function __construct(string $operator)
     {
       $this->operator = $operator;
     }
