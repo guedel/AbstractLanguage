@@ -199,4 +199,9 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
     return 'WHILE '. $stmt->get_test()->evaluate($this) . ' DO ' . $stmt->get_statement()->accept($this);
   }
 
+  public function visit_comment(\Guedel\AL\Statement\Comment $stmt)
+  {
+    return "// " . $stmt->getMessage();
+  }
+
 }
