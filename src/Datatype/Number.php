@@ -47,17 +47,17 @@
       $visitor->visit_number($this);
     }
 
-    public function get_length(): int
+    public function getLength(): int
     {
       return $this->length;
     }
 
-    public function get_precision(): int
+    public function getPrecision(): int
     {
       return $this->precision;
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       return sprintf('number(%d,%d)', $this->length, $this->precision);
     }

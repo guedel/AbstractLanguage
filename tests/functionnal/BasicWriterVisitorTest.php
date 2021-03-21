@@ -56,19 +56,21 @@ class BasicWriterVisitorTest extends TestCase
   public function testProgram(Prog\BaseTestProgram $p)
   {
     $p->code()->accept($this->visitor);
-    $this->assertEquals($p->attend(), $this->writer->render());
+    $r = $this->writer->render();
+    $this->assertEquals($p->attend(), $r);
   }
 
   
   public function programs()
   {
     return [
-        [new Prog\EmptyModuleProgram()],
-        [new Prog\HelloWorldProgram()],
-        [new Prog\SimpleIfProgram()],
-        [new Prog\IfThenElseProgram()],
-        [new Prog\VariableUseProgram()],
-        [new Prog\DeclareProcProgram()],
+        'empty module' => [new Prog\EmptyModuleProgram()],
+        'hello world' => [new Prog\HelloWorldProgram()],
+        'simple if' => [new Prog\SimpleIfProgram()],
+        'if then else' => [new Prog\IfThenElseProgram()],
+        'variable use' => [new Prog\VariableUseProgram()],
+        'declare procedure' => [new Prog\DeclareProcProgram()],
+        'loops' => [new Prog\LoopProgram()],
     ];
   }
 }

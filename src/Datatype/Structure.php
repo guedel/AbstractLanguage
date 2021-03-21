@@ -60,7 +60,7 @@
       $visitor->visit_structure($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       $ret = '{';
       $first = true;

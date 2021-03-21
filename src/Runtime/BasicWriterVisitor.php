@@ -205,26 +205,27 @@ class BasicWriterVisitor implements Visitor
 
   public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
   {
-    $this->writer->out(sprintf('%s %s %s ', $this->t('FOR'), $stmt->get_varname(), $this->t('IN')));
-    $stmt->get_collection()->evaluate($this);
+    $this->writer->out(sprintf('%s %s %s %s ', $this->t('FOR'), $this->t('EACH'), $stmt->getVarname(), $this->t('IN')));
+    $stmt->getCollection()->evaluate($this);
+    $this->writer->out(' ' . $this->t('DO'));
     $this->writer->nl();
     $this->writer->indent();
-    $stmt->get_statement()->accept($this);
+    $stmt->getStatement()->accept($this);
     $this->writer->unindent();
-    $this->writer->outln('FIN POUR');
+    $this->writer->outln($this->ft('%s %s', 'END', 'FOR'));
   }
 
   public function visit_for_stmt(\Guedel\AL\Statement\ForStmt $stmt)
   {
-    $this->out(sprintf('%s %s %s ', $this->t('FOR'), $stmt->get_variable_name(), $this->t('FROM')));
-    $stmt->get_initial()->evaluate($this);
+    $this->writer->out(sprintf('%s %s %s ', $this->t('FOR'), $stmt->getVariableName(), $this->t('FROM')));
+    $stmt->getInitial()->evaluate($this);
     $this->writer->out(' ' . $this->t('TO') . ' ');
-    $stmt->get_final()->evaluate($this);
+    $stmt->getFinal()->evaluate($this);
     $this->writer->out($this->ft(' %s ', $this->t('STEP')));
-    $stmt->get_increment()->evaluate($this);
+    $stmt->getIncrement()->evaluate($this);
     $this->writer->outln(' ' . $this->t('DO'));
     $this->writer->indent();
-    $stmt->get_statement()->accept($this);
+    $stmt->getStatement()->accept($this);
     $this->writer->unindent();
     $this->writer->outln($this->ft('%s %s', 'END', 'FOR'));
   }
@@ -289,7 +290,7 @@ class BasicWriterVisitor implements Visitor
 
   public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt)
   {
-    $this->writer->out($this->t('WHILE'));
+    $this->writer->out($this->t('WHILE') . ' ');
     $stmt->get_test()->evaluate($this);
     $this->writer->outln(' ' . $this->t('DO'));
     $this->writer->indent();
@@ -322,8 +323,8 @@ class BasicWriterVisitor implements Visitor
   public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type)
   {
     $this->writer->out($this->t('ARRAY'));
-    $lowerbound = $type->get_lowerbound();
-    $upperbound = $type->get_upperbound();
+    $lowerbound = $type->getLowerbound();
+    $upperbound = $type->getUpperbound();
 
     if ($lowerbound !== null || $upperbound !== null) {
       $this->writer->out(' [');
@@ -337,9 +338,9 @@ class BasicWriterVisitor implements Visitor
       $this->writer->out(']');
     }
 
-    if ($type->get_type() !== null) {
+    if ($type->getType() !== null) {
       $this->writer->out(' ' . $this->t('OF') . ' ');
-      $type->get_type()->accept($this);
+      $type->getType()->accept($this);
     }
   }
 
@@ -390,7 +391,7 @@ class BasicWriterVisitor implements Visitor
 
   public function visit_number(\Guedel\AL\Datatype\Number $type)
   {
-    $this->writer->out($this->t('NUMBER') . '(' . $type->get_length() . ', ' . $type->get_precision() . ')');
+    $this->writer->out($this->t('NUMBER') . '(' . $type->getLength() . ', ' . $type->getPrecision() . ')');
   }
 
   public function visit_class(\Guedel\AL\Datatype\ClassType $type)

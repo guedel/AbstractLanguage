@@ -25,7 +25,10 @@
    */
 
   namespace Guedel\AL\Expression;
+  
   use Guedel\AL\Expression\ExpressionList;
+  use Guedel\AL\Runtime\Visitor;
+  
   /**
    * Description of BinaryExpression
    *
@@ -47,7 +50,7 @@
       return $this->operands;
     }
 
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(Visitor $visitor)
     {
       return $visitor->eval_binary_expression($this);
     }

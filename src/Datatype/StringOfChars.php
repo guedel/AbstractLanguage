@@ -60,7 +60,7 @@
       return pack('a', $value);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       $ret = 'STRING';
       if ($this->length !== null) {

@@ -33,5 +33,5 @@
   interface Type
   {
     public function accept(\Guedel\AL\Runtime\Visitor $visitor);
-    public function get_signature(): string;
+    public function getSignature(): string;
   }
