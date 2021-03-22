@@ -25,62 +25,40 @@
  */
 
 namespace Guedel\Tests\Mock\AL\Programs;
-
 use Guedel\AL\Statement\StatementList;
-use Guedel\AL\Declaration\FunctionDecl;
-use Guedel\AL\Expression\Value;
-use Guedel\AL\Expression\Expression;
-use Guedel\AL\Expression\BinaryExpression;
-use Guedel\AL\Declaration\ParametersList;
-use Guedel\AL\Declaration\Parameter;
-use Guedel\AL\Statement\IfThenStmt;
-use Guedel\AL\Statement\ReturnStmt;
-use Guedel\AL\Expression\Variable;
-use Guedel\AL\Expression\FunctionCall;
-use Guedel\AL\Datatype\TypeName;
+use Guedel\AL\Declaration\TypeDecl;
+use Guedel\AL\Datatype\{ Enumeration, Number, StringOfChars, Reference, ArrayOf, Any, TypeName};
 
 /**
- * Description of FunctionDeclProgram
+ * Description of DeclareTypeProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class FunctionDeclProgram implements BaseTestProgram
+class DeclareTypeProgram implements BaseTestProgram
 {
+  //put your code here
   public function attend(): string
   {
     return join(PHP_EOL, [
-        "FUNCTION fact(IN n: INTEGER): INTEGER",
-        "\tIF n <= 1 THEN",
-        "\t\tRETURN 1",
-        "\tEND IF",
-        "\tRETURN n * fact(n - 1)",
-        "END FUNCTION",
+        "TYPE sample1: STRING * 50",
+        "TYPE sample2: ARRAY [1, 10] OF INTEGER",
+        "TYPE sample3: {mercure, venus, earth, mars}",
+        "TYPE sample4: REF OF sample3",
+        "TYPE sample5: NUMBER",
+        "TYPE sample6: NUMBER(8, 3)",
     ]) . PHP_EOL;
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    $int = new TypeName("int");
     return new StatementList(
-        new FunctionDecl(
-            "fact", 
-            $int,
-            new ParametersList(
-                new Parameter("n", Parameter::INPUT, $int)
-                ),
-            new StatementList(
-              new IfThenStmt(
-                  new BinaryExpression(Expression::OP_LTE, new Variable("n"), new Value(1)),
-                  new ReturnStmt(new Value(1)),
-              ),
-              new ReturnStmt(
-                  new BinaryExpression(Expression::OP_MULT, 
-                    new Variable("n"),
-                    new FunctionCall("fact", new BinaryExpression(Expression::OP_SUB, new Variable("n"), new Value(1)))
-                 )
-              )
-            )
-        )
+        new TypeDecl("sample1", new StringOfChars(50)),
+        new TypeDecl("sample2", new ArrayOf(new TypeName(TypeName::dtInteger), 1, 10)),
+        new TypeDecl("sample3", new Enumeration("mercure", "venus", "earth", "mars")),
+        new TypeDecl("sample4", new Reference(new TypeName("sample3"))),
+        new TypeDecl("sample5", new Number()),
+        new TypeDecl("sample6", new Number(8,3)),
     );
   }
+
 }

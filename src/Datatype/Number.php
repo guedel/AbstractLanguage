@@ -33,10 +33,10 @@
    */
   class Number implements Type
   {
-    private $length;
-    private $precision;
+    private ?int $length;
+    private ?int $precision;
 
-    public function __construct(int $length = 12, int $precision = 5)
+    public function __construct(?int $length = null, ?int $precision = null)
     {
       $this->length = $length;
       $this->precision = $precision;
@@ -47,12 +47,12 @@
       $visitor->visit_number($this);
     }
 
-    public function getLength(): int
+    public function getLength(): ?int
     {
       return $this->length;
     }
 
-    public function getPrecision(): int
+    public function getPrecision(): ?int
     {
       return $this->precision;
     }

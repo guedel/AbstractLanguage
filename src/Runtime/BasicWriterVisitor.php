@@ -28,6 +28,7 @@ namespace Guedel\AL\Runtime;
 
 use \Guedel\Stream\CodeWriter;
 use \Guedel\AL\Runtime\Translator;
+use Guedel\AL\Datatype\TypeName;
 
 /**
  * Write structure as pseudo-code
@@ -373,6 +374,7 @@ class BasicWriterVisitor implements Visitor
       }
       $this->writer->out($symbol);
     }
+    $this->writer->out("}");
   }
 
   public function visit_reference(\Guedel\AL\Datatype\Reference $type)
@@ -403,12 +405,37 @@ class BasicWriterVisitor implements Visitor
 
   public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
   {
-    $this->writer->out($type->get_name());
+    $name = $type->get_name();
+    switch ($name) {
+      case TypeName::dtInteger:
+        $outputname = $this->t("INTEGER");
+        break;
+      case TypeName::dtFloat:
+        $outputname = $this->t("FLOAT");
+        break;
+      case TypeName::dtAny: 
+        $outputname = $this->t("ANY");
+        break;
+      default:
+        $outputname = $this->t($name);
+        break;
+    }
+    $this->writer->out($outputname);
   }
 
   public function visit_number(\Guedel\AL\Datatype\Number $type)
   {
-    $this->writer->out($this->t('NUMBER') . '(' . $type->getLength() . ', ' . $type->getPrecision() . ')');
+    $size = '';
+    if ($type->getLength() !== null) {
+      $size .= $type->getLength();
+    }
+    if ($type->getPrecision() !== null) {
+      $size .= ', ' . $type->getPrecision();
+    } 
+    $this->writer->out($this->t('NUMBER'));
+    if (0 < strlen($size)) {
+      $this->writer->out('(' . $size . ')');
+    }
   }
 
   public function visit_class(\Guedel\AL\Datatype\ClassType $type)
