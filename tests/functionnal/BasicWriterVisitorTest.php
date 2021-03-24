@@ -74,6 +74,7 @@ class BasicWriterVisitorTest extends TestCase
         'expressions' => [new Prog\ExpressionsProgram()],
         'declare function' => [new Prog\FunctionDeclProgram()],
         'declare type' => [new Prog\DeclareTypeProgram()],
+        'structure' => [new Prog\StructProgram()],
     ];
   }
 }

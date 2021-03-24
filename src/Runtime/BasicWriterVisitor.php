@@ -396,11 +396,11 @@ class BasicWriterVisitor implements Visitor
   {
     $this->writer->outln($this->t('STRUCT'));
     $this->writer->indent();
-    foreach ($type->get_attributes() as $attribute) {
+    foreach ($type->getAttributes() as $attribute) {
       $attribute->accept($this);
     }
     $this->writer->unindent();
-    $this->writer->outln($this->ft('%s %s', 'END', 'STRUCT'));
+    $this->writer->out($this->ft('%s %s', 'END', 'STRUCT'));
   }
 
   public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
@@ -444,7 +444,7 @@ class BasicWriterVisitor implements Visitor
         ->outln($this->t('CLASS'))
         ->indent()
     ;
-    foreach ($type->get_attributes() as $attribute) {
+    foreach ($type->getAttributes() as $attribute) {
       $attribute->accept($this);
     }
     $this->writer
