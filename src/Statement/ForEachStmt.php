@@ -28,6 +28,7 @@
 
   use \Guedel\AL\Expression\Expression;
   use \Guedel\AL\Statement\Statement;
+  use Guedel\AL\Expression\Valuable;
     
   /**
    * FOR EACH $varname IN $collection DO $stmt
@@ -37,27 +38,27 @@
   class ForEachStmt implements Statement
   {
     private string $varname;
-    private Expression $collection;
+    private Valuable $collection;
     private ?Statement $statement;
 
-    public function __construct(string $varname, Expression $collection, ?Statement $stmt = null)
+    public function __construct(string $varname, Valuable $collection, ?Statement $stmt = null)
     {
       $this->varname = $varname;
       $this->collection = $collection;
       $this->statement = $stmt;
     }
 
-    public function get_varname(): string
+    public function getVarname(): string
     {
       return $this->varname;
     }
 
-    public function get_collection(): Expression
+    public function getCollection(): Valuable
     {
       return $this->collection;
     }
 
-    public function get_statement(): ?Statement
+    public function getStatement(): ?Statement
     {
       return $this->statement;
     }

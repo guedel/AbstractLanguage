@@ -27,6 +27,7 @@
 
   use \Guedel\AL\Expression\ExpressionList;
   use \Guedel\AL\Runtime\Visitor;
+  use Guedel\AL\Expression\Valuable;
   
   /**
    * Return $expressions

@@ -33,28 +33,28 @@
    */
   class ArrayOf implements Type
   {
-    private $type;
-    private $lowerbound;
-    private $upperbound;
+    private Type $type;
+    private ?int $lowerbound;
+    private ?int $upperbound;
 
-    public function __construct(Type $type, int $lowerbound = null, int $upperbound = null)
+    public function __construct(Type $type, ?int $lowerbound = null, ?int $upperbound = null)
     {
       $this->type = $type;
       $this->lowerbound = $lowerbound;
       $this->upperbound = $upperbound;
     }
 
-    public function get_type(): Type
+    public function getType(): Type
     {
       return $this->type;
     }
 
-    public function get_lowerbound(): int
+    public function getLowerbound(): ?int
     {
       return $this->lowerbound;
     }
 
-    public function get_upperbound(): int
+    public function getUpperbound(): ?int
     {
       return $this->upperbound;
     }
@@ -64,13 +64,13 @@
       $visitor->visit_arrayof($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       $ret = 'array[';
       $ret .= $this->lowerbound;
       $ret .= ',';
       $ret .= $this->upperbound;
-      $ret .= ']:' . $this->type->get_signature();
+      $ret .= ']:' . $this->type->getSignature();
       return $ret;
     }
 

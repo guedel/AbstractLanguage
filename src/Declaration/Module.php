@@ -25,6 +25,9 @@
    */
 
   namespace Guedel\AL\Declaration;
+  
+  use Guedel\AL\Statement\StatementList;
+  use Guedel\AL\Statement\Statement;
 
   /**
    * Module $name
@@ -36,20 +39,20 @@
   {
     private $statements;
 
-    public function __construct($name, \Guedel\AL\Statement\Statement ... $statements)
+    public function __construct($name, Statement ... $statements)
     {
       parent::__construct($name);
-      $this->statements = $statements;
+      $this->statements = new StatementList(...$statements);
     }
 
-    public function get_statements()
+    public function getStatements(): StatementList
     {
       return $this->statements;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-
+      return $visitor->declare_module($this);
     }
 
   }

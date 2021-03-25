@@ -56,7 +56,7 @@
       $visitor->visit_typename($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       return 'alias:' . $this->name;
     }

@@ -47,7 +47,7 @@
 
     public function _meth_(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
     {
-      $this->methods[$method->get_name()] = $method;
+      $this->methods[$method->getName()] = $method;
       return $this;
     }
 
@@ -56,7 +56,7 @@
       $visitor->visit_class($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       $ret = '{' . parent::get_signature();
       $first = true;
@@ -67,7 +67,7 @@
         } else {
           $ret .= ';';
         }
-        $ret .= $attr->get_signature();
+        $ret .= $attr->getSignature();
       }
 
       return $ret . '}';

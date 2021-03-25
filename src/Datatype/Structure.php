@@ -25,6 +25,8 @@
    */
 
   namespace Guedel\AL\Datatype;
+  
+  use Guedel\AL\Declaration\VariableDecl;
   /**
    * Description of Structure
    *
@@ -32,27 +34,20 @@
    */
   class Structure implements Type
   {
+    /**
+     * 
+     * @var VariableDecl[]
+     */
     private $attributes;
 
-    public function __construct()
+    public function __construct(VariableDecl ... $attributes)
     {
-      $this->attributes = array();
+      $this->attributes = $attributes;
     }
 
-    public function &get_attributes()
+    public function getAttributes()
     {
       return $this->attributes;
-    }
-
-    /**
-     * Add attribute
-     * @param \Guedel\AL\Declaration\VariableDecl $attr
-     * @return \Guedel\AL\Datatype\Structure
-     */
-    public function _attr_(\Guedel\AL\Declaration\VariableDecl $attr): Structure
-    {
-      $this->attributes[$attr->get_name()] = $attr;
-      return $this;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
@@ -60,7 +55,7 @@
       $visitor->visit_structure($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       $ret = '{';
       $first = true;
@@ -71,7 +66,7 @@
         } else {
           $ret .= ';';
         }
-        $ret .= $attr->get_signature();
+        $ret .= $attr->get_type()->get_signature();
       }
       return $ret . '}';
     }

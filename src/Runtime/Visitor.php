@@ -51,6 +51,7 @@
     public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt);
     public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc);
     public function visit_statement_list(\Guedel\AL\Statement\StatementList $stmt);
+    public function visit_comment(\Guedel\AL\Statement\Comment $stmt);
 
     // Expressions
     public function eval_value(\Guedel\AL\Expression\Value $value);

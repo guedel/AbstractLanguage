@@ -50,9 +50,9 @@
       $visitor->visit_reference($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
-      return '&('. $type->get_signature() . ')';
+      return '&('. $type->getSignature() . ')';
     }
 
   }

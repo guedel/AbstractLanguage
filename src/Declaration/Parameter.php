@@ -46,7 +46,7 @@
       $this->direction = $direction;
     }
 
-    public function get_direction() : string
+    public function getDirection() : string
     {
       return $this->direction;
     }
