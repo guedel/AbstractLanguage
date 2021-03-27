@@ -24,7 +24,9 @@
    * THE SOFTWARE.
    */
   namespace Guedel\AL\Declaration;
-
+  use Guedel\AL\Datatype\Type;
+  use Guedel\AL\Datatype\Any;
+  
   /**
    * Declaration of a variable
    * VARIABLE $name : $type
@@ -35,10 +37,14 @@
   {
     private $type;
 
-    public function __construct($name, \Guedel\AL\Datatype\Type $type)
+    public function __construct($name, Type $type = null)
     {
       parent::__construct($name);
-      $this->type = $type;
+      if ($type == null) {
+        $this->type = Any::getType();
+      } else {
+        $this->type = $type;
+      }
    }
 
     public function get_type(): \Guedel\AL\Datatype\Type

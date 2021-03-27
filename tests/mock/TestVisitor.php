@@ -42,7 +42,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function declare_module(\Guedel\AL\Declaration\Module $decl)
   {
-    
+    return "MODULE " . $decl->getName();
   }
 
   public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)
@@ -85,7 +85,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function eval_unary_expression(\Guedel\AL\Expression\UnaryExpression $exp)
   {
-    return $exp->getOperator() . $exp->get_operand()->evaluate($this);
+    return $exp->getOperator() . $exp->getOperand()->evaluate($this);
   }
 
   public function eval_value(\Guedel\AL\Expression\Value $value)
@@ -111,12 +111,12 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visit_any(\Guedel\AL\Datatype\Any $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_assign_stmt(\Guedel\AL\Statement\AssignStmt $stmt)
@@ -131,7 +131,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visit_enumeration(\Guedel\AL\Datatype\Enumeration $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
@@ -151,7 +151,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visit_number(\Guedel\AL\Datatype\Number $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc)
@@ -161,7 +161,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visit_reference(\Guedel\AL\Datatype\Reference $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
@@ -181,22 +181,27 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visit_string(\Guedel\AL\Datatype\StringOfChars $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_structure(\Guedel\AL\Datatype\Structure $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
   {
-    return $type->get_signature();
+    return $type->getSignature();
   }
 
   public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt)
   {
     return 'WHILE '. $stmt->get_test()->evaluate($this) . ' DO ' . $stmt->get_statement()->accept($this);
+  }
+
+  public function visit_comment(\Guedel\AL\Statement\Comment $stmt)
+  {
+    return "// " . $stmt->getMessage();
   }
 
 }

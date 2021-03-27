@@ -50,7 +50,7 @@
       $visitor->visit_enumeration($this);
     }
 
-    public function get_signature(): string
+    public function getSignature(): string
     {
       $ret = 'enum(';
       $ret .= implode(',', $this->symbols);

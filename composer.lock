@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5ec9376f7f771a29a5a198ebcd57437",
+    "content-hash": "6d62f00ae230d7df8d1dbf57b9f4c856",
     "packages": [
         {
             "name": "guedel/stream",
@@ -670,12 +670,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6ac039eb477cf97a12ae57ddc244f5122a185c98"
+                "reference": "dc2d6c4e2fdd9d53606d2a578de0ba65a162ed5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6ac039eb477cf97a12ae57ddc244f5122a185c98",
-                "reference": "6ac039eb477cf97a12ae57ddc244f5122a185c98",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dc2d6c4e2fdd9d53606d2a578de0ba65a162ed5b",
+                "reference": "dc2d6c4e2fdd9d53606d2a578de0ba65a162ed5b",
                 "shasum": ""
             },
             "require": {
@@ -764,7 +764,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-17T07:49:59+00:00"
+            "time": "2021-03-23T07:17:17+00:00"
         },
         {
             "name": "sebastian/cli-parser",

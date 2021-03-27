@@ -33,7 +33,7 @@
    */
   class UnaryExpression extends Expression
   {
-    private $operand;
+    private Valuable $operand;
 
     public function __construct(string $operator, Valuable $operand)
     {
@@ -41,7 +41,7 @@
       $this->operand = $operand;
     }
 
-    public function get_operand(): Valuable
+    public function getOperand(): Valuable
     {
       return $this->operand;
     }

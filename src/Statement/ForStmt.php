@@ -26,7 +26,8 @@
   namespace Guedel\AL\Statement;
 
   use Guedel\AL\Expression\Expression;
-  use \Guedel\AL\Runtime\Visitor;
+  use Guedel\AL\Expression\Valuable;
+  use Guedel\AL\Runtime\Visitor;
 
   /**
    * FOR $varname FROM $initial TO $final [STEP $increment] DO $statement
@@ -36,15 +37,15 @@
   class ForStmt implements Statement
   {
     private string $varname;
-    private Expression $initial;
-    private Expression $final;
-    private Expression $increment;
+    private Valuable $initial;
+    private Valuable $final;
+    private Valuable $increment;
     private ?Statement $statement;
 
     public function __construct(string $varnmame,
-        Expression $initial,
-        Expression $final,
-        Expression $increment,
+        Valuable $initial,
+        Valuable $final,
+        Valuable $increment,
         Statement $statement = null)
     {
       $this->varname = $varnmame;
@@ -59,27 +60,27 @@
       $visitor->visit_for_stmt($this);
     }
 
-    public function get_variable_name() : string
+    public function getVariableName() : string
     {
       return $this->varname;
     }
 
-    public function get_initial(): Expression
+    public function getInitial(): Valuable
     {
       return $this->initial;
     }
 
-    public function get_final(): Expression
+    public function getFinal(): Valuable
     {
       return $this->final;
     }
 
-    public function get_increment(): Expression
+    public function getIncrement(): Valuable
     {
       return $this->increment;
     }
 
-    public function get_statement() : ?Statement
+    public function getStatement() : ?Statement
     {
       return $this->statement;
     }
