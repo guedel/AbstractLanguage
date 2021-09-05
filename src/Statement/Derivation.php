@@ -31,16 +31,17 @@ namespace Guedel\AL\Statement;
  *
  * @author guillaume
  */
-trait Derivation {
-  private $statement;
-  
-  public function get_statement() : Statement
+trait Derivation
+{
+    private $statement;
+
+  public function getStatement(): Statement
   {
-    return $this->statement;
+      return $this->statement;
   }
-  
-  public function set_statement($stmt)
+
+  public function setStatement($stmt)
   {
-    $this->statement = $stmt;
+      $this->statement = $stmt;
   }
 }

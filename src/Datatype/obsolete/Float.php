@@ -31,42 +31,41 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Float extends Primary
-  {
+class Float extends Primary
+{
     private $double;
 
     public function __construct(bool $is_double = false)
     {
-      $this->double = $is_double;
+        $this->double = $is_double;
     }
 
     public function to_binary_data($value): string
     {
-      if ($this->double) {
-        return pack('d', $value);
-      }
-      return pack('f', $value);
+        if ($this->double) {
+            return pack('d', $value);
+        }
+        return pack('f', $value);
     }
 
     public function get_name(): string
     {
-      if ($this->double) {
-        return 'double';
-      }
-      return 'float';
+        if ($this->double) {
+            return 'double';
+        }
+        return 'float';
     }
 
     public function get_full_name()
     {
-      return parent::get_full_name() . '.' . $this->get_name();
+        return parent::get_full_name() . '.' . $this->get_name();
     }
 
     public function from_binary_data($data)
     {
-      if ($this->double) {
-        return unpack('d', $data);
-      }
-      return unpack('f', $data);
+        if ($this->double) {
+            return unpack('d', $data);
+        }
+        return unpack('f', $data);
     }
-
-  }
+}

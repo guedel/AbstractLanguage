@@ -31,24 +31,23 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  final class Any implements Type
+final class Any implements Type
+{
+  protected function __construct()
   {
-    protected function __construct()
-    {
-    }
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      $visitor->visit_any($this);
-    }
-
-    public function getSignature(): string
-    {
-      return 'any';
-    }
-    
-    public static function getType()
-    {
-      return new Any();
-    }
-
   }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitAny($this);
+  }
+
+  public function getSignature(): string
+  {
+      return 'any';
+  }
+
+  public static function getType()
+  {
+      return new Any();
+  }
+}

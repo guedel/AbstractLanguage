@@ -34,21 +34,20 @@ namespace Guedel\AL\Expression;
 class ExpressionList implements \IteratorAggregate, \Countable
 {
 
-  private $expressions;
+    private $expressions;
 
   public function __construct(Valuable ...$expressions)
   {
-    $this->expressions = $expressions;
+      $this->expressions = $expressions;
   }
 
   public function getIterator(): \Traversable
   {
-    return new \ArrayIterator($this->expressions);
+      return new \ArrayIterator($this->expressions);
   }
 
   public function count(): int
   {
-    return count($this->expressions);
+      return count($this->expressions);
   }
-
 }

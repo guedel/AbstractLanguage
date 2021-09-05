@@ -24,6 +24,7 @@
    * THE SOFTWARE.
    */
   namespace Guedel\AL\Declaration;
+
   use Guedel\AL\Datatype\Type;
   use Guedel\AL\Datatype\Any;
   use Guedel\AL\Expression\Value;
@@ -34,23 +35,23 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class VariableDecl extends NamedDeclaration
-  {
+class VariableDecl extends NamedDeclaration
+{
     private $type;
     private $value;
 
-    public function __construct($name, Type $type = null)
-    {
+  public function __construct($name, Type $type = null)
+  {
       parent::__construct($name);
-      if ($type == null) {
+    if ($type == null) {
         $this->type = Any::getType();
-      } else {
+    } else {
         $this->type = $type;
-      }
-   }
+    }
+  }
 
-    public function get_type(): \Guedel\AL\Datatype\Type
-    {
+  public function getType(): \Guedel\AL\Datatype\Type
+  {
       return $this->type;
     }
 
@@ -73,4 +74,8 @@
       return $this->value;
     }
 
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      return $visitor->declareVariable($this);
   }
+}

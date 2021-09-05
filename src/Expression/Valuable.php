@@ -26,14 +26,24 @@
 
   namespace Guedel\AL\Expression;
 
+<<<<<<< HEAD
   use Guedel\AL\Runtime\Visitor;
   use Guedel\AL\Datatype\Type;
+=======
+>>>>>>> develop
   /**
    * Interface for all values
    *
    * @author Guedel <guedel87@live.fr>
    */
+<<<<<<< HEAD
   interface Valuable
   {
     public function evaluate(Visitor $visitor) : mixed;
   }
+=======
+interface Valuable
+{
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor);
+}
+>>>>>>> develop

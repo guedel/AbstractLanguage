@@ -35,8 +35,8 @@
   {
     private $parameters;
 
-    public function __construct(Parameter ... $parameters)
-    {
+  public function __construct(Parameter ...$parameters)
+  {
       $this->parameters = $parameters;
     }
 

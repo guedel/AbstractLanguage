@@ -39,7 +39,7 @@ class VariableTest extends TestCase
   public function testConstruct()
   {
     $var = new Variable("a");
-    $this->assertEquals("a", $var->get_varname());
+    $this->assertEquals("a", $var->getVarname());
   }
   
   public function testAccept() 

@@ -33,20 +33,18 @@ namespace Guedel\AL\Statement;
  */
 class Comment implements \Guedel\AL\Statement\Statement
 {
-  private $message;
-  
+    private $message;
+
   public function __construct($message)
   {
-    $this->message = $message;
+      $this->message = $message;
   }
   public function getMessage()
   {
-    return $this->message;
+      return $this->message;
   }
 
   public function accept(\Guedel\AL\Runtime\Visitor $visitor)
   {
-    
   }
-
 }
