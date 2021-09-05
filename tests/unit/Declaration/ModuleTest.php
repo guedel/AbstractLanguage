@@ -34,7 +34,7 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  * Description of ModuleTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Module
+ * @covers Guedel\AL\Declaration\Module
  */
 class ModuleTest extends TestCase
 {

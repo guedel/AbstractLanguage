@@ -35,7 +35,7 @@ use Guedel\AL\Expression\BinaryExpression;
  * Description of BinaryExpressionTests
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BinaryExpression
+ * @covers \Guedel\AL\Expression\BinaryExpression
  */
 class BinaryExpressionTest extends TestCase
 {

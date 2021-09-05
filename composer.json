@@ -27,6 +27,7 @@
     } 
     },
     "require": {
+        "php": "~7.4|~8",
         "guedel/stream": "dev-master"
     },
     "require-dev": {

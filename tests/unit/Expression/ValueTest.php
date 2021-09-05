@@ -15,7 +15,7 @@ use Guedel\AL\Expression\Value;
  * Description of ValueTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Value
+ * @covers Guedel\AL\Expression\Value
  */
 class ValueTest extends TestCase
 {

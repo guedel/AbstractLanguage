@@ -33,7 +33,7 @@ use Guedel\Tests\Mock\AL\EmptyStatement;
  * Description of StatementListTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers StatementList
+ * @covers Guedel\AL\Statement\StatementList
  */
 class StatementListTest extends TestCase
 {

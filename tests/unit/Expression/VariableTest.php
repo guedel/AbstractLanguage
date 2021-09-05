@@ -32,7 +32,7 @@ use Guedel\AL\Expression\Variable;
  * Description of VariableTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Variable
+ * @covers \Guedel\AL\Expression\Variable
  */
 class VariableTest extends TestCase
 {

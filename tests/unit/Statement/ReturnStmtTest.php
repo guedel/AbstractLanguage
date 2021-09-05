@@ -15,7 +15,7 @@ use Guedel\AL\Statement\ReturnStmt;
  * Description of ReturnStmtTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers ReturnStmt
+ * @covers Guedel\AL\Statement\ReturnStmt
  */
 class ReturnStmtTest extends TestCase
 {

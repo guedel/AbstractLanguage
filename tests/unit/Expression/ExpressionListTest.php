@@ -33,7 +33,7 @@ use Guedel\Tests\Mock\AL\EmptyExpression;
  * Description of ExpressionListTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers ExpressionList
+ * @covers Guedel\AL\Expression\ExpressionList
  */
 class ExpressionListTest extends TestCase
 {

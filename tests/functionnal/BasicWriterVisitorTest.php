@@ -35,7 +35,7 @@ use Guedel\Stream\CodeWriter;
  * Description of BasicWriterVisitorTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BasicWriterVisitor
+ * @covers Guedel\AL\Runtime\BasicWriterVisitor
  */
 class BasicWriterVisitorTest extends TestCase
 {

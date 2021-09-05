@@ -33,7 +33,7 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  * Description of FunctionCallTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers FunctionCall
+ * @covers Guedel\AL\Expression\FunctionCall
  */
 class FunctionCallTest extends TestCase
 {

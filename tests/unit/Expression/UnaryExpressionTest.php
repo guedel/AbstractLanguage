@@ -35,11 +35,18 @@ use Guedel\AL\Expression\Value;
  * Description of UnaryExpressionTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers UnaryExpression
+ * @covers Guedel\AL\Expression\UnaryExpression
  */
 class UnaryExpressionTest extends TestCase
 {
 
+  public function testConstruct()
+  {
+   $e = new UnaryExpression(Expression::OP_ADD, new Value('0'));
+   $this->assertEquals(Expression::OP_ADD, $e->getOperator());
+   $this->assertEquals('0', $e->getOperand()[0]->getValue());
+  }
+  
   public function testAccept()
   {
     $e = new UnaryExpression(Expression::OP_SUB, new Value('1'));
