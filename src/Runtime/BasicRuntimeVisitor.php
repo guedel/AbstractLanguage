@@ -60,12 +60,12 @@ class BasicRuntimeVisitor implements Visitor
   }
 
   //put your code here
-  public function declare_function(\Guedel\AL\Declaration\FunctionDecl $decl)
+  public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl)
   {
     $this->context->addFunction($decl);
   }
 
-  public function declare_module(\Guedel\AL\Declaration\Module $decl)
+  public function declareModule(\Guedel\AL\Declaration\Module $decl)
   {
     $this->pushContext($decl->getName());
     foreach ($decl->getStatements() as $stmt) {
@@ -74,27 +74,27 @@ class BasicRuntimeVisitor implements Visitor
     $this->popContext();
   }
 
-  public function declare_parameter(\Guedel\AL\Declaration\Parameter $decl)
+  public function declareParameter(\Guedel\AL\Declaration\Parameter $decl)
   {
     $this->context->addVariable($decl);
   }
 
-  public function declare_procedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
+  public function declareProcedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
   {
     $this->context->addProcedure($decl);
   }
 
-  public function declare_type(\Guedel\AL\Declaration\TypeDecl $decl)
+  public function declareType(\Guedel\AL\Declaration\TypeDecl $decl)
   {
     $this->context->addType($decl);
   }
 
-  public function declare_variable(VariableDecl $decl)
+  public function declareVariable(VariableDecl $decl)
   {
     $this->context->addVariable($decl);
   }
 
-  public function eval_binary_expression(BinaryExpression $exp)
+  public function evalBinaryExpression(BinaryExpression $exp)
   {
     $first = true;
     $acc = null;
@@ -155,7 +155,7 @@ class BasicRuntimeVisitor implements Visitor
     return $acc;
   }
 
-  public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn)
+  public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)
   {
     $name = $fn->getName();
 
@@ -185,7 +185,7 @@ class BasicRuntimeVisitor implements Visitor
     $this->popContext();
   }
 
-  public function eval_unary_expression(\Guedel\AL\Expression\UnaryExpression $exp)
+  public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp)
   {
     switch ($exp->getOperator()) {
       case Expression::OP_ADD:
@@ -199,12 +199,12 @@ class BasicRuntimeVisitor implements Visitor
     }
   }
 
-  public function eval_value(\Guedel\AL\Expression\Value $value)
+  public function evalValue(\Guedel\AL\Expression\Value $value)
   {
     return $value->getValue();
   }
 
-  public function eval_variable(\Guedel\AL\Expression\Variable $variable)
+  public function evalVariable(\Guedel\AL\Expression\Variable $variable)
   {
     $name = $variable->get_varname();
     $v = $this->context->findVariable($name);
@@ -213,41 +213,41 @@ class BasicRuntimeVisitor implements Visitor
     }
   }
 
-  public function visit_any(\Guedel\AL\Datatype\Any $type)
+  public function visitAny(\Guedel\AL\Datatype\Any $type)
   {
   }
 
-  public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type)
+  public function visitArrayof(\Guedel\AL\Datatype\ArrayOf $type)
   {
   }
 
-  public function visit_assign_stmt(\Guedel\AL\Statement\AssignStmt $stmt)
+  public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
   {
   }
 
-  public function visit_class(\Guedel\AL\Datatype\ClassType $type)
+  public function visitClass(\Guedel\AL\Datatype\ClassType $type)
   {
     // TODO
   }
 
-  public function visit_comment(\Guedel\AL\Statement\Comment $stmt)
+  public function visitComment(\Guedel\AL\Statement\Comment $stmt)
   {
     // do nothing
   }
 
-  public function visit_enumeration(\Guedel\AL\Datatype\Enumeration $type)
+  public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
   {
   }
 
-  public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
+  public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt)
   {
   }
 
-  public function visit_for_stmt(\Guedel\AL\Statement\ForStmt $stmt)
+  public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
   {
   }
 
-  public function visit_if_then_stmt(\Guedel\AL\Statement\IfThenStmt $stmt)
+  public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)
   {
     $test = $stmt->get_iftest()->evaluate($this);
     if ($test) {
@@ -261,19 +261,19 @@ class BasicRuntimeVisitor implements Visitor
     }
   }
 
-  public function visit_number(\Guedel\AL\Datatype\Number $type)
+  public function visitNumber(\Guedel\AL\Datatype\Number $type)
   {
   }
 
-  public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc)
+  public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
   {
   }
 
-  public function visit_reference(\Guedel\AL\Datatype\Reference $type)
+  public function visitReference(\Guedel\AL\Datatype\Reference $type)
   {
   }
 
-  public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
+  public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
   {
     $value = [];
     foreach ($stmt->getExpressions() as $expr) {
@@ -282,26 +282,26 @@ class BasicRuntimeVisitor implements Visitor
     return $value;
   }
 
-  public function visit_statement_list(\Guedel\AL\Statement\StatementList $stmt)
+  public function visitStatementList(\Guedel\AL\Statement\StatementList $stmt)
   {
     foreach ($stmt as $s) {
       $s->accept($this);
     }
   }
 
-  public function visit_string(\Guedel\AL\Datatype\StringOfChars $type)
+  public function visitString(\Guedel\AL\Datatype\StringOfChars $type)
   {
   }
 
-  public function visit_structure(\Guedel\AL\Datatype\Structure $type)
+  public function visitStructure(\Guedel\AL\Datatype\Structure $type)
   {
   }
 
-  public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
+  public function visitTypename(\Guedel\AL\Datatype\TypeName $type)
   {
   }
 
-  public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt)
+  public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
   {
     $test = $stmt->get_test();
     while ($test->evaluate($this)) {
