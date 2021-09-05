@@ -31,28 +31,27 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Reference implements Type
-  {
+class Reference implements Type
+{
     private $type;
 
-    public function __construct($type)
-    {
+  public function __construct($type)
+  {
       $this->type = $type;
-    }
-
-    public function get_type(): Type
-    {
-      return $this->type;
-    }
-
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      $visitor->visit_reference($this);
-    }
-
-    public function getSignature(): string
-    {
-      return '&('. $type->getSignature() . ')';
-    }
-
   }
+
+  public function getType(): Type
+  {
+      return $this->type;
+  }
+
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitReference($this);
+  }
+
+  public function getSignature(): string
+  {
+      return '&(' . $type->getSignature() . ')';
+  }
+}

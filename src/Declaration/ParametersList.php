@@ -31,34 +31,33 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ParametersList implements \IteratorAggregate, \Countable
-  {
+class ParametersList implements \IteratorAggregate, \Countable
+{
     private $parameters;
 
-    public function __construct(Parameter ... $parameters)
-    {
+  public function __construct(Parameter ...$parameters)
+  {
       $this->parameters = $parameters;
-    }
+  }
 
-    public function &get_parameters()
-    {
+  public function &getParameters()
+  {
       return $this->parameters;
-    }
+  }
 
-    public function add(Parameter $param)
-    {
+  public function add(Parameter $param)
+  {
       $this->parameters[] = $param;
       return $this;
-    }
-
-    public function getIterator(): \Traversable
-    {
-      return new \ArrayIterator($this->parameters);
-    }
-
-    public function count(): int
-    {
-      return count($this->parameters);
-    }
-
   }
+
+  public function getIterator(): \Traversable
+  {
+      return new \ArrayIterator($this->parameters);
+  }
+
+  public function count(): int
+  {
+      return count($this->parameters);
+  }
+}

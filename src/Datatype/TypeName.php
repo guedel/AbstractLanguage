@@ -31,34 +31,33 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class TypeName implements Type
-  {
+class TypeName implements Type
+{
     // Quelque types de base
-    const dtAny = 'any';
-    const dtInteger = 'int';
-    const dtFloat = 'float';
-    const dtNumber = 'number';
+  public const DT_ANY = 'any';
+  public const DT_INTEGER = 'int';
+  public const DT_FLOAT = 'float';
+  public const DT_NUMBER = 'number';
 
     private $name;
 
-    public function __construct(string $name)
-    {
+  public function __construct(string $name)
+  {
       $this->name = $name;
-    }
-
-    public function get_name(): string
-    {
-      return $this->name;
-    }
-
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      $visitor->visit_typename($this);
-    }
-
-    public function getSignature(): string
-    {
-      return 'alias:' . $this->name;
-    }
-
   }
+
+  public function getName(): string
+  {
+      return $this->name;
+  }
+
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitTypename($this);
+  }
+
+  public function getSignature(): string
+  {
+      return 'alias:' . $this->name;
+  }
+}

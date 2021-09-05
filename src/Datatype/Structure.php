@@ -25,50 +25,49 @@
    */
 
   namespace Guedel\AL\Datatype;
-  
+
   use Guedel\AL\Declaration\VariableDecl;
+
   /**
    * Description of Structure
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Structure implements Type
-  {
+class Structure implements Type
+{
     /**
-     * 
+     *
      * @var VariableDecl[]
      */
     private $attributes;
 
-    public function __construct(VariableDecl ... $attributes)
-    {
+  public function __construct(VariableDecl ...$attributes)
+  {
       $this->attributes = $attributes;
-    }
+  }
 
-    public function getAttributes()
-    {
+  public function getAttributes()
+  {
       return $this->attributes;
-    }
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      $visitor->visit_structure($this);
-    }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitStructure($this);
+  }
 
-    public function getSignature(): string
-    {
+  public function getSignature(): string
+  {
       $ret = '{';
       $first = true;
-      foreach($this->attributes as $attr)
-      {
-        if ($first) {
-          $first = false;
-        } else {
+    foreach ($this->attributes as $attr) {
+      if ($first) {
+        $first = false;
+      } else {
           $ret .= ';';
-        }
-        $ret .= $attr->get_type()->get_signature();
       }
-      return $ret . '}';
+        $ret .= $attr->getType()->get_signature();
     }
-
+      return $ret . '}';
   }
+}

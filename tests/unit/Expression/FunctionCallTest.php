@@ -46,7 +46,7 @@ class FunctionCallTest extends TestCase
 
   public function testConstruction()
   {
-    $this->assertEquals('cos', $this->function->get_name());
+    $this->assertEquals('cos', $this->function->getName());
   }
 
   public function testEvaluate()

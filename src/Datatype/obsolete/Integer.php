@@ -25,13 +25,14 @@
    */
 
   namespace Guedel\AL\Datatype;
+
   /**
    * Description of Integer
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Integer extends Primary
-  {
+class Integer extends Primary
+{
     private $unsigned = false;
     /**
      *
@@ -42,74 +43,73 @@
 
     public function __construct($size = 8, $unsigned = false)
     {
-      if ($size > 64) {
-        throw new \OverflowException('the size of ' . $this->size . 'is not supported. Please use bigint instead');
-      }
-      $this->unsigned = $unsigned;
-      $this->size = $size;
+        if ($size > 64) {
+            throw new \OverflowException('the size of ' . $this->size . 'is not supported. Please use bigint instead');
+        }
+        $this->unsigned = $unsigned;
+        $this->size = $size;
       // $this->realsize = (intdiv($size, 8) + (($size % 8) > 0 ? 1 : 0)) * 8;
     }
 
     public function get_full_name(): string
     {
-      return parent::get_full_name() . '.' . $this->get_name();
+        return parent::get_full_name() . '.' . $this->get_name();
     }
 
     public function get_name(): string
     {
-      return sprintf('integer(%d)', $this->size);
+        return sprintf('integer(%d)', $this->size);
     }
 
     public function to_binary_data($value): string
     {
-      if ($this->unsigned) {
-        if ($this->size <= 8) {
-            return pack('C', $value);
-        } elseif ($this->size <= 16) {
-            return pack('S', $value);
-        } elseif ($this->size <= 32) {
-            return pack('L', $value);
-        } elseif ($this->size <= 64) {
-            return pack('Q', $value);
+        if ($this->unsigned) {
+            if ($this->size <= 8) {
+                return pack('C', $value);
+            } elseif ($this->size <= 16) {
+                return pack('S', $value);
+            } elseif ($this->size <= 32) {
+                return pack('L', $value);
+            } elseif ($this->size <= 64) {
+                return pack('Q', $value);
+            }
+        } else {
+            if ($this->size <= 8) {
+                return pack('c', $value);
+            } elseif ($this->size <= 16) {
+                return pack('s', $value);
+            } elseif ($this->size <= 32) {
+                return pack('l', $value);
+            } elseif ($this->size <= 64) {
+                return pack('q', $value);
+            }
         }
-      } else {
-        if ($this->size <= 8) {
-            return pack('c', $value);
-        } elseif ($this->size <= 16) {
-            return pack('s', $value);
-        } elseif ($this->size <= 32) {
-            return pack('l', $value);
-        } elseif ($this->size <= 64) {
-            return pack('q', $value);
-        }
-      }
-      throw new \OverflowException('the size of ' . $this->size . 'is not supported');
+        throw new \OverflowException('the size of ' . $this->size . 'is not supported');
     }
 
     public function from_binary_data($data)
     {
-      if ($this->unsigned) {
-        if ($this->size <= 8) {
-            return unpack('C', $data);
-        } elseif ($this->size <= 16) {
-            return unpack('S', $data);
-        } elseif ($this->size <= 32) {
-            return unpack('L', $data);
-        } elseif ($this->size <= 64) {
-            return unpack('Q', $data);
+        if ($this->unsigned) {
+            if ($this->size <= 8) {
+                return unpack('C', $data);
+            } elseif ($this->size <= 16) {
+                return unpack('S', $data);
+            } elseif ($this->size <= 32) {
+                return unpack('L', $data);
+            } elseif ($this->size <= 64) {
+                return unpack('Q', $data);
+            }
+        } else {
+            if ($this->size <= 8) {
+                return unpack('c', $data);
+            } elseif ($this->size <= 16) {
+                return unpack('s', $data);
+            } elseif ($this->size <= 32) {
+                return unpack('l', $data);
+            } elseif ($this->size <= 64) {
+                return unpack('q', $data);
+            }
         }
-      } else {
-        if ($this->size <= 8) {
-            return unpack('c', $data);
-        } elseif ($this->size <= 16) {
-            return unpack('s', $data);
-        } elseif ($this->size <= 32) {
-            return unpack('l', $data);
-        } elseif ($this->size <= 64) {
-            return unpack('q', $data);
-        }
-      }
-      throw new \OverflowException('the size of ' . $this->size . 'is not supported');
+        throw new \OverflowException('the size of ' . $this->size . 'is not supported');
     }
-
-  }
+}

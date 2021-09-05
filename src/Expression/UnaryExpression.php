@@ -31,24 +31,23 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class UnaryExpression extends Expression
-  {
-    private Valuable $operand;
+class UnaryExpression extends Expression
+{
+  private Valuable $operand;
 
-    public function __construct(string $operator, Valuable $operand)
-    {
+  public function __construct(string $operator, Valuable $operand)
+  {
       parent::__construct($operator);
       $this->operand = $operand;
-    }
-
-    public function getOperand(): Valuable
-    {
-      return $this->operand;
-    }
-
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      return $visitor->eval_unary_expression($this);
-    }
-
   }
+
+  public function getOperand(): Valuable
+  {
+      return $this->operand;
+  }
+
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      return $visitor->evalUnaryExpression($this);
+  }
+}

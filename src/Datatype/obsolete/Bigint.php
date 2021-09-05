@@ -32,23 +32,20 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Bigint extends Primary
-  {
+class Bigint extends Primary
+{
     private static $stop = "\xFF";
     public function get_name(): string
     {
-      return 'bigint';
+        return 'bigint';
     }
 
 
     public function from_binary_data($data)
     {
-
     }
 
     public function to_binary_data($value): string
     {
-
     }
-
-  }
+}

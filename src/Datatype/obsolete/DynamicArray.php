@@ -25,12 +25,13 @@
    */
 
   namespace Guedel\AL\Datatype;
+
   /**
    * Description of DynamicArray
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class DynamicArray
-  {
+class DynamicArray
+{
     //put your code here
-  }
+}

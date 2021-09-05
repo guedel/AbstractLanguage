@@ -25,7 +25,7 @@
    */
 
   namespace Guedel\AL\Expression;
-  
+
   use Guedel\AL\Runtime\Visitor;
 
   /**
@@ -33,22 +33,22 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Value implements Valuable
-  {
+class Value implements Valuable
+{
     private $value;
 
-    public function __construct($value)
-    {
+  public function __construct($value)
+  {
       $this->value = $value;
-    }
-
-    public function get_value()
-    {
-      return $this->value;
-    }
-
-    public function evaluate(Visitor $visitor)
-    {
-      return $visitor->eval_value($this);
-    }
   }
+
+  public function getValue()
+  {
+      return $this->value;
+  }
+
+  public function evaluate(Visitor $visitor)
+  {
+      return $visitor->evalValue($this);
+  }
+}
