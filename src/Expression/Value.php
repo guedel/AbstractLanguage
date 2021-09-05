@@ -42,7 +42,7 @@
       $this->value = $value;
     }
 
-    public function get_value()
+    public function getValue()
     {
       return $this->value;
     }

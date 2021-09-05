@@ -167,9 +167,9 @@ class BasicWriterVisitor implements Visitor
 
   public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn)
   {
-    $this->writer->out($fn->get_name() . '(');
+    $this->writer->out($fn->getName() . '(');
     $first = true;
-    foreach ($fn->get_parameters() as $parameter) {
+    foreach ($fn->getParameters() as $parameter) {
       if ($first) {
         $first = false;
       } else {
@@ -199,7 +199,7 @@ class BasicWriterVisitor implements Visitor
 
   public function eval_value(\Guedel\AL\Expression\Value $value)
   {
-    $v = $value->get_value();
+    $v = $value->getValue();
     if (is_bool($v)) {
       $this->writer->out($v ? $this->t('TRUE') : $this->t('FALSE'));
     } elseif (is_string($v)) {

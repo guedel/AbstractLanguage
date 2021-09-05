@@ -26,7 +26,8 @@
 
   namespace Guedel\AL\Expression;
 
-
+  use Guedel\AL\Runtime\Visitor;
+  use Guedel\AL\Datatype\Type;
   /**
    * Interface for all values
    *
@@ -34,5 +35,5 @@
    */
   interface Valuable
   {
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor);
+    public function evaluate(Visitor $visitor) : mixed;
   }

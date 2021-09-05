@@ -76,7 +76,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn)
   {
-    switch ($fn->get_name()) {
+    switch ($fn->getName()) {
       case 'sin': return 0.5;
       case 'cos': return 0.66;
       case 'souschaine': return 'abc';
@@ -90,7 +90,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function eval_value(\Guedel\AL\Expression\Value $value)
   {
-    return $value->get_value();
+    return $value->getValue();
   }
 
   /**

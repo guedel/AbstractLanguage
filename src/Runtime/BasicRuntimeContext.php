@@ -38,6 +38,7 @@ use Guedel\AL\Declaration\VariableDecl;
  */
 final class BasicRuntimeContext
 {
+  private $name;
   private ?BasicRuntimeContext $parent = null;
   private $types = [];
   
@@ -49,9 +50,20 @@ final class BasicRuntimeContext
   private $functions = [];
   private $procedures = [];
   
-  public function __construct(?BasicRuntimeContext $parent = null)
+  public function __construct(?BasicRuntimeContext $parent = null, string $name = null)
   {
+    $this->name = $name;
     $this->parent = $parent;
+  }
+  
+  public function getParent(): ?BasicRuntimeContext
+  {
+    return $this->parent;
+  }
+  
+  public function getName(): ?string
+  {
+    return $this->name;
   }
   
   /**
@@ -119,7 +131,7 @@ final class BasicRuntimeContext
     return $this;
   }
   
-  protected function find(string $name, $collectionName, callable $funcToCall)
+  protected function find(string $name, $collectionName, string $funcToCall)
   {
     if (isset($this->$collectionName[$name])) {
       return $this->$collectionName[$name];

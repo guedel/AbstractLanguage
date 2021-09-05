@@ -23,7 +23,7 @@ class ValueTest extends TestCase
   public function testConstruct()
   {
     $v = new Value(1234);
-    $this->assertEquals(1234, $v->get_value());
+    $this->assertEquals(1234, $v->getValue());
   }
   
   public function testEvaluate()

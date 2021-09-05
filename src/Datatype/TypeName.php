@@ -38,6 +38,7 @@
     const dtInteger = 'int';
     const dtFloat = 'float';
     const dtNumber = 'number';
+    const dtString = 'string';
 
     private $name;
 

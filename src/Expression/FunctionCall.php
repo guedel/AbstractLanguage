@@ -43,12 +43,12 @@
       $this->parameters = new ExpressionList(... $parameters);
     }
 
-    public function get_name()
+    public function getName()
     {
       return $this->name;
     }
 
-    public function get_parameters()
+    public function getParameters(): ExpressionList
     {
       return $this->parameters;
     }

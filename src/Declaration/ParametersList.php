@@ -31,18 +31,13 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ParametersList implements \IteratorAggregate, \Countable
+  class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
   {
     private $parameters;
 
     public function __construct(Parameter ... $parameters)
     {
       $this->parameters = $parameters;
-    }
-
-    public function &get_parameters()
-    {
-      return $this->parameters;
     }
 
     public function add(Parameter $param)
@@ -61,4 +56,24 @@
       return count($this->parameters);
     }
 
+  public function offsetExists(mixed $offset): bool
+  {
+    return isset($this->parameters[$offset]);
   }
+
+  public function offsetGet(mixed $offset): mixed
+  {
+    return $this->parameters[$offset];
+  }
+
+  public function offsetSet(mixed $offset, mixed $value): void
+  {
+    $this->parameters[$offset] = $value;
+  }
+
+  public function offsetUnset(mixed $offset): void
+  {
+    unset($this->parameters[$offset]);
+  }
+
+}

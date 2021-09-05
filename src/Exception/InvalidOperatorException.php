@@ -24,33 +24,14 @@
  * THE SOFTWARE.
  */
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Expression\FunctionCall;
-use Guedel\Tests\Mock\AL\TestVisitor;
+namespace Gudele\AL\Exception;
+
 /**
- * Description of FunctionCallTest
+ * Description of InvalidOperatorException
  *
  * @author Guedel <guedel87@live.fr>
- * @covers FunctionCall
  */
-class FunctionCallTest extends TestCase
+class InvalidOperatorException extends \Exception
 {
-  private $function;
-  private $visitor;
-  
-  public function setUp(): void
-  {
-    $this->function = new FunctionCall("cos");
-    $this->visitor = new TestVisitor();
-  }
-
-  public function testConstruction()
-  {
-    $this->assertEquals('cos', $this->function->getName());
-  }
-
-  public function testEvaluate()
-  {
-    $this->assertEquals(0.66, $this->function->evaluate($this->visitor));
-  }
+  //put your code here
 }
