@@ -25,9 +25,9 @@
    */
 
   namespace Guedel\AL\Statement;
-  
-  use \Guedel\AL\Expression\Valuable;
-  use \Guedel\AL\Runtime\Visitor;
+
+  use Guedel\AL\Expression\Valuable;
+  use Guedel\AL\Runtime\Visitor;
 
   /**
    *
@@ -35,29 +35,29 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class WhileStmt implements Statement
-  {
+class WhileStmt implements Statement
+{
     private $test;
     private $statement;
 
     public function __construct(Valuable $test, ?Statement $block = null)
     {
-      $this->test = $test;
-      $this->statement = $block;
+        $this->test = $test;
+        $this->statement = $block;
     }
 
     public function accept(Visitor $visitor)
     {
-      $visitor->visit_while_stmt($this);
+        $visitor->visit_while_stmt($this);
     }
 
     public function get_test(): Valuable
     {
-      return $this->test;
+        return $this->test;
     }
 
-    public function get_statement() : ?Statement
+    public function get_statement(): ?Statement
     {
-      return $this->statement;
+        return $this->statement;
     }
-  }
+}

@@ -31,8 +31,8 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Parameter extends VariableDecl
-  {
+class Parameter extends VariableDecl
+{
     const INPUT = 'IN';
     const OUTPUT = 'OUT';
     const INOUT = 'INOUT';
@@ -42,18 +42,17 @@
 
     public function __construct(string $name, string $direction, \Guedel\AL\Datatype\Type $type = null)
     {
-      parent::__construct($name, $type);
-      $this->direction = $direction;
+        parent::__construct($name, $type);
+        $this->direction = $direction;
     }
 
-    public function getDirection() : string
+    public function getDirection(): string
     {
-      return $this->direction;
+        return $this->direction;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      return $visitor->declare_parameter($this);
+        return $visitor->declare_parameter($this);
     }
-
-  }
+}

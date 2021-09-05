@@ -31,8 +31,8 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class TypeName implements Type
-  {
+class TypeName implements Type
+{
     // Quelque types de base
     const dtAny = 'any';
     const dtInteger = 'int';
@@ -43,22 +43,21 @@
 
     public function __construct(string $name)
     {
-      $this->name = $name;
+        $this->name = $name;
     }
 
     public function get_name(): string
     {
-      return $this->name;
+        return $this->name;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->visit_typename($this);
+        $visitor->visit_typename($this);
     }
 
     public function getSignature(): string
     {
-      return 'alias:' . $this->name;
+        return 'alias:' . $this->name;
     }
-
-  }
+}

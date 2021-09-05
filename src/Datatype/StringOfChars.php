@@ -31,41 +31,41 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class StringOfChars implements Type, Convertible
-  {
+class StringOfChars implements Type, Convertible
+{
     private $length;
 
     public function __construct($length = null)
     {
-      $this->length = $length;
+        $this->length = $length;
     }
 
     public function get_length(): int
     {
-      return $this->length;
+        return $this->length;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->visit_string($this);
+        $visitor->visit_string($this);
     }
 
     public function from_binary_data($data)
     {
-      return unpack('a', $data);
+        return unpack('a', $data);
     }
 
     public function to_binary_data($value): string
     {
-      return pack('a', $value);
+        return pack('a', $value);
     }
 
     public function getSignature(): string
     {
-      $ret = 'STRING';
-      if ($this->length !== null) {
-        $ret .= '*' . $this->length;
-      }
-      return $ret;
+        $ret = 'STRING';
+        if ($this->length !== null) {
+            $ret .= '*' . $this->length;
+        }
+        return $ret;
     }
-  }
+}

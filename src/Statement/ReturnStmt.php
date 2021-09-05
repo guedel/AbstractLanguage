@@ -25,32 +25,32 @@
    */
   namespace Guedel\AL\Statement;
 
-  use \Guedel\AL\Expression\ExpressionList;
-  use \Guedel\AL\Runtime\Visitor;
+  use Guedel\AL\Expression\ExpressionList;
+  use Guedel\AL\Runtime\Visitor;
   use Guedel\AL\Expression\Valuable;
-  
+
   /**
    * Return $expressions
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ReturnStmt implements Statement
-  {
+class ReturnStmt implements Statement
+{
     private $expressions;
 
-    public function __construct(Valuable ... $expressions)
+    public function __construct(Valuable ...$expressions)
     {
-      $this->expressions = new ExpressionList(... $expressions);
+        $this->expressions = new ExpressionList(... $expressions);
     }
 
     public function getExpressions(): ExpressionList
     {
-      return $this->expressions;
+        return $this->expressions;
     }
 
 
     public function accept(Visitor $visitor)
     {
-      return $visitor->visit_return_stmt($this);
+        return $visitor->visit_return_stmt($this);
     }
-  }
+}

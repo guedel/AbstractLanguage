@@ -30,13 +30,13 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  interface BasicStorage
-  {
+interface BasicStorage
+{
     public function get_free_address(int $size): int;
 
     public function put_bytes(int $address, string $bytes): int;
     public function get_bytes(int $address, int $count): string;
 
     public function store_object(stdClass $value, int $address);
-    public function retrieve_object(int $address) : stdClass;
-  }
+    public function retrieve_object(int $address): stdClass;
+}

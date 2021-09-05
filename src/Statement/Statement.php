@@ -31,7 +31,7 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  interface Statement
-  {
+interface Statement
+{
     public function accept(\Guedel\AL\Runtime\Visitor $visitor);
-  }
+}

@@ -31,8 +31,8 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  abstract class Expression implements Valuable
-  {
+abstract class Expression implements Valuable
+{
     const OP_ADD = '+';
     const OP_SUB = '-';
     const OP_MULT = '*';
@@ -52,12 +52,11 @@
 
     protected function __construct(string $operator)
     {
-      $this->operator = $operator;
+        $this->operator = $operator;
     }
 
     public function getOperator(): string
     {
-      return $this->operator;
+        return $this->operator;
     }
-
-  }
+}

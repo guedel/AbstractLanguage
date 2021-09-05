@@ -32,18 +32,17 @@
   use Guedel\AL\Expression\Valuable;
   use Guedel\AL\Expression\Value;
 
-
   /**
    * Build any class in Abstract Language
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Builder
-  {
-      /**
-       *
-       * @var Statement\StatementList
-       */
+class Builder
+{
+    /**
+     *
+     * @var Statement\StatementList
+     */
     private $statements;
     /**
      * @var Builder
@@ -52,25 +51,25 @@
 
     public function __construct()
     {
-      $this->statements = new Statement\StatementList();
-      $this->parent = null;
+        $this->statements = new Statement\StatementList();
+        $this->parent = null;
     }
 
-    public function getStatements() : Statement\StatementList
+    public function getStatements(): Statement\StatementList
     {
-      return $this->statements;
+        return $this->statements;
     }
 
     public function stmtType(string $name, Datatype\Type $definition): Builder
     {
-      $this->statements->add(new Declaration\TypeDecl($name, $definition));
-      return $this;
+        $this->statements->add(new Declaration\TypeDecl($name, $definition));
+        return $this;
     }
 
     public function stmtVariable(string $name, Type $type): Builder
     {
-      $this->statements->add(new Declaration\VariableDecl($name, $type));
-      return $this;
+        $this->statements->add(new Declaration\VariableDecl($name, $type));
+        return $this;
     }
 
     public function _let(string $varname, Valuable $value): Builder
@@ -81,175 +80,174 @@
 
     public function stmtProcedure(string $name, Declaration\ParametersList $parameters = null): Builder
     {
-      $ret = $this->stmtBegin();
-      $this->statements->add(new Declaration\ProcedureDecl($name, $parameters, $ret->statements));
-      return $ret;
+        $ret = $this->stmtBegin();
+        $this->statements->add(new Declaration\ProcedureDecl($name, $parameters, $ret->statements));
+        return $ret;
     }
 
     public function stmtFunction(string $name, Type $return_type, Declaration\ParametersList $parameters = null): Builder
     {
-      $ret = $this->stmtBegin();
-      $this->statements->add(new Declaration\FunctionDecl($name, $return_type, $parameters, $ret->statements));
-      return $ret;
+        $ret = $this->stmtBegin();
+        $this->statements->add(new Declaration\FunctionDecl($name, $return_type, $parameters, $ret->statements));
+        return $ret;
     }
 
     public function stmtModule(string $name): Builder
     {
-      $ret = $this->stmtBegin();
-      $this->statements->add(new Declaration\Module($name, $ret->statements));
-      return $ret;
+        $ret = $this->stmtBegin();
+        $this->statements->add(new Declaration\Module($name, $ret->statements));
+        return $ret;
     }
 
     public function stmtFor($varname, $init, $final, $step): Builder
     {
-      $ret = $this->stmtBegin();
-      $this->statements->add(new Statement\ForStmt($varname, $init, $final, $step, $ret->statements));
-      return $ret;
+        $ret = $this->stmtBegin();
+        $this->statements->add(new Statement\ForStmt($varname, $init, $final, $step, $ret->statements));
+        return $ret;
     }
 
     public function stmtForEach($varname, $collection): Builder
     {
-      $ret = $this->stmtBegin();
-      $this->statements->add(new Statement\ForEachStmt($varname, $collection, $ret->statements));
-      return $ret;
+        $ret = $this->stmtBegin();
+        $this->statements->add(new Statement\ForEachStmt($varname, $collection, $ret->statements));
+        return $ret;
     }
 
     public function stmtIf($test): Builder
     {
-      $then = $this->stmtBegin();
-      $else = new Statement\StatementList();
+        $then = $this->stmtBegin();
+        $else = new Statement\StatementList();
 
-      $this->statements->add(new Statement\IfThenStmt($test, $then->statements, $else));
-      return $then;
+        $this->statements->add(new Statement\IfThenStmt($test, $then->statements, $else));
+        return $then;
     }
 
     public function stmtElse(): Builder
     {
-      $me = $this->stmtEnd();
-      $ret = $me->stmtBegin();
-      $last = $me->statements->last();
-      if ($last instanceof Statement\IfThenStmt) {
-        $ret->statements = $last->get_else_part();
-      }
-      return $ret;
+        $me = $this->stmtEnd();
+        $ret = $me->stmtBegin();
+        $last = $me->statements->last();
+        if ($last instanceof Statement\IfThenStmt) {
+            $ret->statements = $last->get_else_part();
+        }
+        return $ret;
     }
 
     public function stmtWhile(Valuable $test): Builder
     {
-      $ret = $this->stmtBegin();
-      $this->statements->add(new Statement\WhileStmt($test, $ret->statements));
-      return $ret;
+        $ret = $this->stmtBegin();
+        $this->statements->add(new Statement\WhileStmt($test, $ret->statements));
+        return $ret;
     }
 
     protected function stmtBegin(): Builder
     {
-      $builder = new Builder();
-      $builder->parent = $this;
-      return $builder;
+        $builder = new Builder();
+        $builder->parent = $this;
+        return $builder;
     }
 
     public function stmtEnd(): Builder
     {
-      $ret = $this->parent;
-      $this->statements = null;
-      $this->parent = null;
-      return $ret;
+        $ret = $this->parent;
+        $this->statements = null;
+        $this->parent = null;
+        return $ret;
     }
 
-    public function stmtCall($name, ... $args): Builder
+    public function stmtCall($name, ...$args): Builder
     {
-      $a = array();
-      foreach ($args as $arg) {
-        if ($arg instanceof Valuable) {
-          $a[] = $arg;
-        } else {
-          $a[] = new Value($arg);
+        $a = array();
+        foreach ($args as $arg) {
+            if ($arg instanceof Valuable) {
+                $a[] = $arg;
+            } else {
+                $a[] = new Value($arg);
+            }
         }
-      }
-      $this->statements->add(new Statement\ProcedureCall($name, ... $a));
-      return $this;
+        $this->statements->add(new Statement\ProcedureCall($name, ... $a));
+        return $this;
     }
-
-  }
+}
 
     // ========================
     // expressions
     // ========================
-    function fnExp(string $name, Valuable ... $args): Expression\FunctionCall
-    {
-      return new Expression\FunctionCall($name, ... $args);
-    }
+function fnExp(string $name, Valuable ...$args): Expression\FunctionCall
+{
+    return new Expression\FunctionCall($name, ... $args);
+}
 
-    function addExp(Expression\Valuable ... $exp): BinaryExpression
-    {
-      return new BinaryExpression(Expression::OP_ADD, ... $exp);
-    }
+function addExp(Expression\Valuable ...$exp): BinaryExpression
+{
+    return new BinaryExpression(Expression::OP_ADD, ... $exp);
+}
 
-    function subsExp(Expression\Valuable ... $exp): BinaryExpression
-    {
-      return new BinaryExpression(Expression::OP_SUB, ... $exp);
-    }
+function subsExp(Expression\Valuable ...$exp): BinaryExpression
+{
+    return new BinaryExpression(Expression::OP_SUB, ... $exp);
+}
 
-    function multExp(Expression\Valuable ... $exp): BinaryExpression
-    {
-      return new BinaryExpression(Expression::OP_MULT, ... $exp);
-    }
+function multExp(Expression\Valuable ...$exp): BinaryExpression
+{
+    return new BinaryExpression(Expression::OP_MULT, ... $exp);
+}
 
-    function divExp(Expression\Valuable ... $exp): BinaryExpression
-    {
-      return new BinaryExpression(Expression::OP_DIV, ... $exp);
-    }
+function divExp(Expression\Valuable ...$exp): BinaryExpression
+{
+    return new BinaryExpression(Expression::OP_DIV, ... $exp);
+}
 
-    function eqExp(Valuable $left, Valuable $right): BinaryExpression
-    {
-      return new BinaryExpression(Expression\Expression::OP_EQUAL, $left, $right);
-    }
+function eqExp(Valuable $left, Valuable $right): BinaryExpression
+{
+    return new BinaryExpression(Expression\Expression::OP_EQUAL, $left, $right);
+}
 
-    function ltExp(Valuable $left, Valuable $right): BinaryExpression
-    {
-      return new BinaryExpression(Expression\Expression::OP_LT, $left, $right);
-    }
+function ltExp(Valuable $left, Valuable $right): BinaryExpression
+{
+    return new BinaryExpression(Expression\Expression::OP_LT, $left, $right);
+}
 
-    function lteExp(Valuable $left, Valuable $right): BinaryExpression
-    {
-      return new BinaryExpression(Expression\Expression::OP_LTE, $left, $right);
-    }
+function lteExp(Valuable $left, Valuable $right): BinaryExpression
+{
+    return new BinaryExpression(Expression\Expression::OP_LTE, $left, $right);
+}
 
-    function gtExp(Valuable $left, Valuable $right): BinaryExpression
-    {
-      return new BinaryExpression(Expression\Expression::OP_GT, $left, $right);
-    }
+function gtExp(Valuable $left, Valuable $right): BinaryExpression
+{
+    return new BinaryExpression(Expression\Expression::OP_GT, $left, $right);
+}
 
-    function gteExp(Valuable $left, Valuable $right): BinaryExpression
-    {
-      return new BinaryExpression(Expression\Expression::OP_GTE, $left, $right);
-    }
+function gteExp(Valuable $left, Valuable $right): BinaryExpression
+{
+    return new BinaryExpression(Expression\Expression::OP_GTE, $left, $right);
+}
 
-    function diffExp(Valuable $left, Valuable $right): BinaryExpression
-    {
-      return new BinaryExpression(Expression\Expression::OP_DIFF, $left, $right);
-    }
+function diffExp(Valuable $left, Valuable $right): BinaryExpression
+{
+    return new BinaryExpression(Expression\Expression::OP_DIFF, $left, $right);
+}
 
-    function v($val) : Valuable
-    {
-      return new Expression\Value($val);
-    }
+function v($val): Valuable
+{
+    return new Expression\Value($val);
+}
 
     // ========================
     // data types
     // ========================
 
-    function enumType(string ... $symbols): Datatype\Enumeration
-    {
-      return new Datatype\Enumeration(...$symbols);
-    }
+function enumType(string ...$symbols): Datatype\Enumeration
+{
+    return new Datatype\Enumeration(...$symbols);
+}
 
-    function arrayType($min, $max, Guedel\AL\Datatype\Type $type)
-    {
-      return new Datatype\ArrayOf($type, $min, $max );
-    }
+function arrayType($min, $max, Guedel\AL\Datatype\Type $type)
+{
+    return new Datatype\ArrayOf($type, $min, $max);
+}
 
-    function stringType($len = null)
-    {
-      return new Datatype\StringOfChars($len);
-    }
+function stringType($len = null)
+{
+    return new Datatype\StringOfChars($len);
+}

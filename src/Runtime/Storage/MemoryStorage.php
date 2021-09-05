@@ -31,8 +31,8 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class MemoryStorage implements BasicStorage
-  {
+class MemoryStorage implements BasicStorage
+{
     private $memory = "";
     private $size;
 
@@ -44,8 +44,8 @@
 
     public function __construct($size)
     {
-      $this->size = $size;
-      $this->memory = str_repeat(self::$UNDEF, $size); // ctrl-U
+        $this->size = $size;
+        $this->memory = str_repeat(self::$UNDEF, $size); // ctrl-U
     }
 
     /**
@@ -57,10 +57,10 @@
      */
     public function get_bytes(int $address, int $count): string
     {
-      if ($address < 0 || $address > $this->size - $count) {
-        throw new \OverflowException();
-      }
-      return substr($this->memory, $address, $count);
+        if ($address < 0 || $address > $this->size - $count) {
+            throw new \OverflowException();
+        }
+        return substr($this->memory, $address, $count);
     }
 
     /**
@@ -71,15 +71,14 @@
      */
     public function put_bytes(int $address, string $bytes): int
     {
-      $len = strlen($bytes);
-      if ($address < 0 || $address > $this->size - $len) {
-        throw new \OverflowException();
-      }
-      for ($index = 0; $index < $len; ++$index, ++$address)
-      {
-        $this->memory[$address] = $bytes[$index];
-      }
-      return $len;
+        $len = strlen($bytes);
+        if ($address < 0 || $address > $this->size - $len) {
+            throw new \OverflowException();
+        }
+        for ($index = 0; $index < $len; ++$index, ++$address) {
+            $this->memory[$address] = $bytes[$index];
+        }
+        return $len;
     }
 
     /**
@@ -90,18 +89,18 @@
      */
     public function get_free_address(int $size, int $start = 0): int
     {
-      $ok = true;
-      $index = 0;
-      do {
-        $start = $this->get_next_free_byte($start + $index);
-        for ($index = $start + 1; $index < $start + $size; ++$index) {
-          $ok = ($ok && $this->memory[$index] == self::$UNDEF);
-        }
-        if (! $ok) {
-          $start = $this->get_next_free_byte($start + $size);
-        }
-      } while (! $ok && $index < $this->size);
-      return $start;
+        $ok = true;
+        $index = 0;
+        do {
+            $start = $this->get_next_free_byte($start + $index);
+            for ($index = $start + 1; $index < $start + $size; ++$index) {
+                $ok = ($ok && $this->memory[$index] == self::$UNDEF);
+            }
+            if (! $ok) {
+                $start = $this->get_next_free_byte($start + $size);
+            }
+        } while (! $ok && $index < $this->size);
+        return $start;
     }
 
     /**
@@ -112,13 +111,12 @@
      */
     private function get_next_free_byte($start): int
     {
-      for ($index = $start; $index < $this->size; ++$index)
-      {
-        if ($this->memory[$index] == self::$UNDEF) {
-          return $index;
+        for ($index = $start; $index < $this->size; ++$index) {
+            if ($this->memory[$index] == self::$UNDEF) {
+                return $index;
+            }
         }
-      }
-      throw new \OverflowException();
+        throw new \OverflowException();
     }
 
     public function retrieve_object(int $address): stdClass
@@ -130,5 +128,4 @@
     {
       // TODO
     }
-
-  }
+}

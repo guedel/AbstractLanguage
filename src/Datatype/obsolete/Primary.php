@@ -25,15 +25,16 @@
    */
 
   namespace Guedel\AL\Datatype;
+
   /**
    * Description of Scalar
    *
    * @author Guedel <guedel87@live.fr>
    */
-  abstract class Primary extends BaseType
-  {
+abstract class Primary extends BaseType
+{
     public function get_full_name(): string
     {
-      return 'core.primary';
+        return 'core.primary';
     }
-  }
+}

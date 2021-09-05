@@ -31,58 +31,58 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Translator
-  {
+class Translator
+{
     const FRENCH = 'fr';
     const ENGLISH = 'en';
 
     private static $words = array(
-      'fr' => array(
-        'ANY' => 'QUELCONQUE',
-        'ARRAY' => 'TABLEAU',
-        'BEGIN' => 'DEBUT',
-        'DECIMAL' => 'DECIMAL',
-        'DO' => 'FAIRE',
-        'EACH' => 'CHAQUE',
-        'ELSE' => 'SINON',
-        'END' => 'FIN',
-        'ELSE' => 'SINON',
-        'IF' => 'SI',
-        'IN' => 'DANS',
-        'INTEGER' => 'ENTIER',
-        'FLOAT' => 'FLOTTANT',
-        'FOR' => 'POUR',
-        'FROM' => 'DEPUIS',
-        'FUNCTION' => 'FONCTION',
-        'OF' => 'DE',
-        'PROCEDURE' => 'PROCEDURE',
-        'REF' => 'REF',
-        'STEP' => 'PAS DE',
-        'STRING' => 'CHAINE',
-        'TO' => 'A',
-        'THEN' => 'ALORS',
-        'TYPE' => 'TYPE',
-        'VAR' => 'VAR',
-        'WHILE' => 'TANT QUE',
-      ),
+    'fr' => array(
+      'ANY' => 'QUELCONQUE',
+      'ARRAY' => 'TABLEAU',
+      'BEGIN' => 'DEBUT',
+      'DECIMAL' => 'DECIMAL',
+      'DO' => 'FAIRE',
+      'EACH' => 'CHAQUE',
+      'ELSE' => 'SINON',
+      'END' => 'FIN',
+      'ELSE' => 'SINON',
+      'IF' => 'SI',
+      'IN' => 'DANS',
+      'INTEGER' => 'ENTIER',
+      'FLOAT' => 'FLOTTANT',
+      'FOR' => 'POUR',
+      'FROM' => 'DEPUIS',
+      'FUNCTION' => 'FONCTION',
+      'OF' => 'DE',
+      'PROCEDURE' => 'PROCEDURE',
+      'REF' => 'REF',
+      'STEP' => 'PAS DE',
+      'STRING' => 'CHAINE',
+      'TO' => 'A',
+      'THEN' => 'ALORS',
+      'TYPE' => 'TYPE',
+      'VAR' => 'VAR',
+      'WHILE' => 'TANT QUE',
+    ),
     );
 
     private $language;
 
     public function __construct($language = 'en')
     {
-      $this->language = $language;
+        $this->language = $language;
     }
 
     public function _t(string $word): string
     {
-      if ($this->language == self::ENGLISH) {
+        if ($this->language == self::ENGLISH) {
+            return $word;
+        }
+        try {
+            return self::$words[$this->language][$word];
+        } catch (Exception $ex) {
+        }
         return $word;
-      }
-      try {
-        return self::$words[$this->language][$word];
-      } catch(Exception $ex) {
-      }
-      return $word;
     }
-  }
+}

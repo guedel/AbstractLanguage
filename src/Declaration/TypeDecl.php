@@ -27,29 +27,29 @@
   namespace Guedel\AL\Declaration;
 
   use Guedel\AL\Datatype\Type;
+
   /**
    * Declaration of type
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class TypeDecl extends NamedDeclaration
-  {
+class TypeDecl extends NamedDeclaration
+{
     private $definition;
 
     public function __construct(string $name, Type $definition)
     {
-      parent::__construct($name);
-      $this->definition = $definition;
+        parent::__construct($name);
+        $this->definition = $definition;
     }
 
     public function get_definition(): Type
     {
-      return $this->definition;
+        return $this->definition;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->declare_type($this);
+        $visitor->declare_type($this);
     }
-
-  }
+}

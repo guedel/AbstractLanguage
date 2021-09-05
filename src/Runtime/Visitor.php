@@ -27,13 +27,14 @@
   namespace Guedel\AL\Runtime;
 
   use Guedel\AL\Expression\Valuable;
+
   /**
    * Description of Visitor
    *
    * @author Guedel <guedel87@live.fr>
    */
-  interface Visitor
-  {
+interface Visitor
+{
     // Declarations
     public function declare_module(\Guedel\AL\Declaration\Module $decl);
     public function declare_variable(\Guedel\AL\Declaration\VariableDecl $decl);
@@ -70,4 +71,4 @@
     public function visit_reference(\Guedel\AL\Datatype\Reference $type);
     public function visit_enumeration(\Guedel\AL\Datatype\Enumeration $type);
     public function visit_number(\Guedel\AL\Datatype\Number $type);
-  }
+}

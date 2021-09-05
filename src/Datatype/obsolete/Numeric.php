@@ -25,39 +25,39 @@
    */
 
   namespace Guedel\AL\Datatype;
+
   /**
    * Description of Numeric
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Numeric extends Primary
-  {
+class Numeric extends Primary
+{
     private $size;
     private $precision;
-    
+
     public function get_name(): string
     {
-      return 'numeric';
+        return 'numeric';
     }
 
     public function get_full_name()
     {
-      return parent::get_full_name() . '.' . $this->get_name();
+        return parent::get_full_name() . '.' . $this->get_name();
     }
 
     public static function get_type(): BaseTye
     {
-      return new Numeric();
+        return new Numeric();
     }
 
     public function to_binary_data($value): string
     {
-      return pack('d', $value);
+        return pack('d', $value);
     }
 
     public function from_binary_data($data)
     {
-      return unpack('d', $data);
+        return unpack('d', $data);
     }
-
-  }
+}

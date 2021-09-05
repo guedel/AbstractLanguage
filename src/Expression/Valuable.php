@@ -26,13 +26,12 @@
 
   namespace Guedel\AL\Expression;
 
-
   /**
    * Interface for all values
    *
    * @author Guedel <guedel87@live.fr>
    */
-  interface Valuable
-  {
+interface Valuable
+{
     public function evaluate(\Guedel\AL\Runtime\Visitor $visitor);
-  }
+}

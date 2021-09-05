@@ -25,19 +25,20 @@
    */
 
   namespace Guedel\AL\Datatype;
+
   /**
    * Description of SizedArray
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class SizedArray
-  {
+class SizedArray
+{
     private $type = null;
     private $size = 0;
 
     public function __construct($size, Type $type)
     {
-      $this->size = $size;
-      $this->type = $type;
+        $this->size = $size;
+        $this->type = $type;
     }
-  }
+}

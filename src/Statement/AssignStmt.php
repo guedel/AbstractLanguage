@@ -26,37 +26,37 @@
 
   namespace Guedel\AL\Statement;
 
-  use \Guedel\AL\Expression\Valuable;
-  use \Guedel\AL\Runtime\Visitor;
-  
+  use Guedel\AL\Expression\Valuable;
+  use Guedel\AL\Runtime\Visitor;
+
   /**
    * $varname <- $expression
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class AssignStmt implements Statement
-  {
+class AssignStmt implements Statement
+{
     private string $varname;
     private Valuable $expression;
 
     public function __construct(string $varname, Valuable $expression)
     {
-      $this->varname = $varname;
-      $this->expression = $expression;
+        $this->varname = $varname;
+        $this->expression = $expression;
     }
 
     public function accept(Visitor $visitor)
     {
-      $visitor->visit_assign_stmt($this);
+        $visitor->visit_assign_stmt($this);
     }
 
-    public function get_variable_name() : string
+    public function get_variable_name(): string
     {
-      return $this->varname;
+        return $this->varname;
     }
 
     public function get_expression(): Valuable
     {
-      return $this->expression;
+        return $this->expression;
     }
-  }
+}

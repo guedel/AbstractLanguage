@@ -24,29 +24,30 @@
    * THE SOFTWARE.
    */
   namespace Guedel\AL\Declaration;
-  
-  use  \Guedel\AL\Statement\Statement;
+
+  use  Guedel\AL\Statement\Statement;
+
   /**
    * Base of all declarations with a name
    *
    * @author Guedel <guedel87@live.fr>
    */
-  abstract class NamedDeclaration implements Statement
-  {
+abstract class NamedDeclaration implements Statement
+{
     private $name;
 
     public function __construct(string $name)
     {
-      $this->name = $name;
+        $this->name = $name;
     }
 
     public function getName(): string
     {
-      return $this->name;
+        return $this->name;
     }
 
     public function setName(string $name)
     {
-      $this->name = $name;
+        $this->name = $name;
     }
-  }
+}

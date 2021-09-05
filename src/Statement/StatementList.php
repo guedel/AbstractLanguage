@@ -26,49 +26,48 @@
 
   namespace Guedel\AL\Statement;
 
-  use \Guedel\AL\Runtime\Visitor;
-  
+  use Guedel\AL\Runtime\Visitor;
+
   /**
    * Collection of statements
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class StatementList implements Statement, \IteratorAggregate, \Countable
-  {
+class StatementList implements Statement, \IteratorAggregate, \Countable
+{
     private $statements;
 
-    public function __construct(Statement ... $statements)
+    public function __construct(Statement ...$statements)
     {
-      $this->statements = $statements;
+        $this->statements = $statements;
     }
 
     public function add(Statement $statement)
     {
-      $this->statements[] = $statement;
-      return $this;
+        $this->statements[] = $statement;
+        return $this;
     }
 
     public function last(): ?Statement
     {
-      if (0 < $this->count()) {
-        return $this->statements[array_key_last($this->statements)];
-      }
-      return null;
+        if (0 < $this->count()) {
+            return $this->statements[array_key_last($this->statements)];
+        }
+        return null;
     }
 
     public function getIterator(): \Traversable
     {
-      return new \ArrayIterator($this->statements);
+        return new \ArrayIterator($this->statements);
     }
 
     public function accept(Visitor $visitor)
     {
-      $visitor->visit_statement_list($this);
+        $visitor->visit_statement_list($this);
     }
 
     public function count(): int
     {
-      return count($this->statements);
+        return count($this->statements);
     }
-
-  }
+}

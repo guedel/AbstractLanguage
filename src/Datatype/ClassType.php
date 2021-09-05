@@ -31,46 +31,44 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ClassType extends Structure
-  {
+class ClassType extends Structure
+{
     private $methods;
 
     public function __construct()
     {
-      $this->methods = array();
+        $this->methods = array();
     }
 
     public function &get_methods()
     {
-      return $this->methods;
+        return $this->methods;
     }
 
     public function _meth_(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
     {
-      $this->methods[$method->getName()] = $method;
-      return $this;
+        $this->methods[$method->getName()] = $method;
+        return $this;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->visit_class($this);
+        $visitor->visit_class($this);
     }
 
     public function getSignature(): string
     {
-      $ret = '{' . parent::get_signature();
-      $first = true;
-      foreach($this->methods as $attr)
-      {
-        if ($first) {
-          $first = false;
-        } else {
-          $ret .= ';';
+        $ret = '{' . parent::get_signature();
+        $first = true;
+        foreach ($this->methods as $attr) {
+            if ($first) {
+                $first = false;
+            } else {
+                $ret .= ';';
+            }
+            $ret .= $attr->getSignature();
         }
-        $ret .= $attr->getSignature();
-      }
 
-      return $ret . '}';
+        return $ret . '}';
     }
-
-  }
+}

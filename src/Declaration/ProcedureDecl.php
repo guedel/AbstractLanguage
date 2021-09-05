@@ -25,17 +25,17 @@
    */
 
    namespace Guedel\AL\Declaration;
-   
+
    use Guedel\AL\Statement\StatementList;
    use Guedel\AL\Statement\Statement;
-   
+
    /**
    * PROCEDURE $name ($parameters) IS $body
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ProcedureDecl extends NamedDeclaration
-  {
+class ProcedureDecl extends NamedDeclaration
+{
     /**
      *
      * @var ParametersList
@@ -48,27 +48,27 @@
 
     public function __construct(string $name, ParametersList $parameters = null, Statement $body = null)
     {
-      parent::__construct($name);
-      $this->parameters = $parameters;
-      if ($body instanceof StatementList) {
-        $this->body = $body;
-      } else {
-        $this->body = new StatementList($body);
-      }
+        parent::__construct($name);
+        $this->parameters = $parameters;
+        if ($body instanceof StatementList) {
+            $this->body = $body;
+        } else {
+            $this->body = new StatementList($body);
+        }
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->declare_procedure($this);
+        $visitor->declare_procedure($this);
     }
 
     public function getParameters(): ParametersList
     {
-      return $this->parameters;
+        return $this->parameters;
     }
 
     public function getBody(): StatementList
     {
-      return $this->body;
+        return $this->body;
     }
-  }
+}

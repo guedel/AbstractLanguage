@@ -31,7 +31,7 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class BuiltType
-  {
+class BuiltType
+{
     //put your code here
-  }
+}

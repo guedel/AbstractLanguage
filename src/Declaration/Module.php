@@ -25,7 +25,7 @@
    */
 
   namespace Guedel\AL\Declaration;
-  
+
   use Guedel\AL\Statement\StatementList;
   use Guedel\AL\Statement\Statement;
 
@@ -35,24 +35,23 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Module extends NamedDeclaration
-  {
+class Module extends NamedDeclaration
+{
     private $statements;
 
-    public function __construct($name, Statement ... $statements)
+    public function __construct($name, Statement ...$statements)
     {
-      parent::__construct($name);
-      $this->statements = new StatementList(...$statements);
+        parent::__construct($name);
+        $this->statements = new StatementList(...$statements);
     }
 
     public function getStatements(): StatementList
     {
-      return $this->statements;
+        return $this->statements;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      return $visitor->declare_module($this);
+        return $visitor->declare_module($this);
     }
-
-  }
+}

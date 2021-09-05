@@ -25,13 +25,14 @@
    */
 
   namespace Guedel\AL\Datatype;
+
   /**
    * Description of BaseType
    *
    * @author Guedel <guedel87@live.fr>
    */
-  interface Type
-  {
+interface Type
+{
     public function accept(\Guedel\AL\Runtime\Visitor $visitor);
     public function getSignature(): string;
-  }
+}

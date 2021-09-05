@@ -31,31 +31,30 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Enumeration implements Type
-  {
+class Enumeration implements Type
+{
     private $symbols;
 
-    public function __construct(string ... $symbols)
+    public function __construct(string ...$symbols)
     {
-      $this->symbols = $symbols;
+        $this->symbols = $symbols;
     }
 
     public function get_symbols()
     {
-      return $this->symbols;
+        return $this->symbols;
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
     {
-      $visitor->visit_enumeration($this);
+        $visitor->visit_enumeration($this);
     }
 
     public function getSignature(): string
     {
-      $ret = 'enum(';
-      $ret .= implode(',', $this->symbols);
-      $ret .= ')';
-      return $ret;
+        $ret = 'enum(';
+        $ret .= implode(',', $this->symbols);
+        $ret .= ')';
+        return $ret;
     }
-
-  }
+}
