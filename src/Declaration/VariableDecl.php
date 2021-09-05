@@ -28,7 +28,7 @@
   use Guedel\AL\Datatype\Type;
   use Guedel\AL\Datatype\Any;
   use Guedel\AL\Expression\Value;
-  
+
   /**
    * Declaration of a variable
    * VARIABLE $name : $type
@@ -53,26 +53,26 @@ class VariableDecl extends NamedDeclaration
   public function getType(): \Guedel\AL\Datatype\Type
   {
       return $this->type;
-    }
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      return $visitor->declare_variable($this);
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+    return $visitor->declare_variable($this);
+  }
+
+  public function setValue($value)
+  {
+    if ($value instanceof Value) {
+      $this->value = $this->value;
+    } else {
+      $this->value = new Value($value);
     }
-    
-    public function setValue($value)
-    {
-      if ($value instanceof Value) {
-        $this->value = $this->value;
-      } else {
-        $this->value = new Value($value);
-      }
-    }
-    
-    public function getValue()
-    {
-      return $this->value;
-    }
+  }
+
+  public function getValue()
+  {
+    return $this->value;
+  }
 
   public function accept(\Guedel\AL\Runtime\Visitor $visitor)
   {

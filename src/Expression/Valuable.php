@@ -26,7 +26,7 @@
 
   namespace Guedel\AL\Expression;
 
-<<<<<<< HEAD
+<<  << <<< HEAD
   use Guedel\AL\Runtime\Visitor;
   use Guedel\AL\Datatype\Type;
 =======

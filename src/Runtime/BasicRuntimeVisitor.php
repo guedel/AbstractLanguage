@@ -46,7 +46,7 @@ class BasicRuntimeVisitor implements Visitor
       $stmt->accept($this);
     }
   }
-  
+
   private function pushContext(string $name = null)
   {
     $context = new BasicRuntimeContext($this->context, $name);
@@ -68,7 +68,7 @@ class BasicRuntimeVisitor implements Visitor
   public function declare_module(\Guedel\AL\Declaration\Module $decl)
   {
     $this->pushContext($decl->getName());
-    foreach($decl->getStatements() as $stmt) {
+    foreach ($decl->getStatements() as $stmt) {
       $stmt->accept($this);
     }
     $this->popContext();
@@ -98,7 +98,7 @@ class BasicRuntimeVisitor implements Visitor
   {
     $first = true;
     $acc = null;
-    foreach($exp->getOperands() as $op) {
+    foreach ($exp->getOperands() as $op) {
       if ($first) {
         $acc = $op;
         $prev = $op;
@@ -107,48 +107,48 @@ class BasicRuntimeVisitor implements Visitor
         switch ($exp->getOperator()) {
           case Expression::OP_ADD:
             $acc += $op;
-            break;
+                break;
           case Expression::OP_SUB:
             $acc -= $op;
-            break;
+                break;
           case Expression::OP_MULT:
             $acc *= $op;
-            break;
+                break;
           case Expression::OP_DIV:
             $acc /= $op;
-            break;
+                break;
           case Expression::OP_EQUAL:
             // a = b = c <=> a = b AND b = c
             $acc = $acc && $prev == $op;
-            break;
+                break;
           case Expression::OP_DIFF:
             // a != b != c <=> a != b AND b != c
             $acc = $acc && $prev != $op;
-            break;
+                break;
           case Expression::OP_LT:
             // a < b < c <=> a < b AND b < c
             $acc = $acc && $prev < $op;
-            break;
+                break;
           case Expression::OP_GT:
             $acc = $acc && $prev > $op;
-            break;
+                break;
           case Expression::OP_LTE:
             $acc = $acc && $prev <= $op;
-            break;
+                break;
           case Expression::OP_GTE:
             $acc = $acc && $prev >= $op;
-            break;
+                break;
           case Expression::OP_OR:
             $acc |= $op;
-            break;
+                break;
           case Expression::OP_AND:
             $acc &= $op;
-            break;
+                break;
           case Expression::OP_XOR:
             $acc ^= $op;
-            break;
+                break;
           default:
-            throw new InvalidOperatorException();
+                throw new InvalidOperatorException();
         }
       }
     }
@@ -158,7 +158,7 @@ class BasicRuntimeVisitor implements Visitor
   public function eval_function_call(\Guedel\AL\Expression\FunctionCall $fn)
   {
     $name = $fn->getName();
-    
+
     if (function_exists($name)) {
       // call of PHP function
       return ;
@@ -167,7 +167,7 @@ class BasicRuntimeVisitor implements Visitor
     if ($func === null) {
       throw new NotFoundException("function $name not found in this scope");
     }
-    
+
     $this->pushContext($name);
     // Les arguments
     $itParams = $func->getParameters()->getIterator();
@@ -179,7 +179,7 @@ class BasicRuntimeVisitor implements Visitor
       }
       $itParams->next();
     }
-    
+
     // Appel des instructions de la fonction
     $func->getBody()->accept($this);
     $this->popContext();
@@ -189,13 +189,13 @@ class BasicRuntimeVisitor implements Visitor
   {
     switch ($exp->getOperator()) {
       case Expression::OP_ADD:
-        return $exp->getOperand()->evaluate($this);
+            return $exp->getOperand()->evaluate($this);
       case Expression::OP_NOT:
-        return $exp->getOperand()->evaluate($this);
+            return $exp->getOperand()->evaluate($this);
       case Expression::OP_SUB:
-        return - $exp->getOperand()->evaluate($this);
-      default :
-        throw new InvalidOperatorException();
+            return - $exp->getOperand()->evaluate($this);
+      default:
+            throw new InvalidOperatorException();
     }
   }
 
@@ -215,17 +215,14 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visit_any(\Guedel\AL\Datatype\Any $type)
   {
-    
   }
 
   public function visit_arrayof(\Guedel\AL\Datatype\ArrayOf $type)
   {
-    
   }
 
   public function visit_assign_stmt(\Guedel\AL\Statement\AssignStmt $stmt)
   {
-    
   }
 
   public function visit_class(\Guedel\AL\Datatype\ClassType $type)
@@ -240,17 +237,14 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visit_enumeration(\Guedel\AL\Datatype\Enumeration $type)
   {
-    
   }
 
   public function visit_for_each_stmt(\Guedel\AL\Statement\ForEachStmt $stmt)
   {
-    
   }
 
   public function visit_for_stmt(\Guedel\AL\Statement\ForStmt $stmt)
   {
-    
   }
 
   public function visit_if_then_stmt(\Guedel\AL\Statement\IfThenStmt $stmt)
@@ -269,17 +263,14 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visit_number(\Guedel\AL\Datatype\Number $type)
   {
-    
   }
 
   public function visit_procedure_call(\Guedel\AL\Statement\ProcedureCall $proc)
   {
-    
   }
 
   public function visit_reference(\Guedel\AL\Datatype\Reference $type)
   {
-    
   }
 
   public function visit_return_stmt(\Guedel\AL\Statement\ReturnStmt $stmt)
@@ -300,17 +291,14 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visit_string(\Guedel\AL\Datatype\StringOfChars $type)
   {
-    
   }
 
   public function visit_structure(\Guedel\AL\Datatype\Structure $type)
   {
-    
   }
 
   public function visit_typename(\Guedel\AL\Datatype\TypeName $type)
   {
-    
   }
 
   public function visit_while_stmt(\Guedel\AL\Statement\WhileStmt $stmt)

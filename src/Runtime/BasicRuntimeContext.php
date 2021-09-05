@@ -41,31 +41,31 @@ final class BasicRuntimeContext
   private $name;
   private ?BasicRuntimeContext $parent = null;
   private $types = [];
-  
+
   /**
-   * 
+   *
    * @var VariableDecl[]
    */
   private $variables = [];
   private $functions = [];
   private $procedures = [];
-  
+
   public function __construct(?BasicRuntimeContext $parent = null, string $name = null)
   {
     $this->name = $name;
     $this->parent = $parent;
   }
-  
+
   public function getParent(): ?BasicRuntimeContext
   {
     return $this->parent;
   }
-  
+
   public function getName(): ?string
   {
     return $this->name;
   }
-  
+
   /**
    * Search a variable declaration in current scope.
    * @param string $name
@@ -75,7 +75,7 @@ final class BasicRuntimeContext
   {
     return $this->find($name, "variables", "findVariable");
   }
-  
+
   public function addVariable(VariableDecl $decl): BasicRuntimeContext
   {
     $name = $decl->getName();
@@ -85,7 +85,7 @@ final class BasicRuntimeContext
     $this->variables[$name] = $decl;
     return $this;
   }
-  
+
   public function findFunction(string $name): ?FunctionDecl
   {
     return $this->find($name, "functions", "findFunction");
@@ -100,13 +100,13 @@ final class BasicRuntimeContext
     $this->functions[$name] = $decl;
     return $this;
   }
-  
+
   public function findProcedure(string $name): ?ProcedureDecl
   {
     return $this->find($name, "procedures", "findProcedure");
   }
-  
-  public function addProcedure(ProcedureDecl $decl) : BasicRuntimeContext
+
+  public function addProcedure(ProcedureDecl $decl): BasicRuntimeContext
   {
     $name = $decl->getName();
     if (isset($this->procedures[$name])) {
@@ -115,12 +115,12 @@ final class BasicRuntimeContext
     $this->procedures[$name] = $decl;
     return $this;
   }
-  
+
   public function findType(string $name): ?TypeDecl
   {
     return $this->find($name, "types", "findType");
   }
-  
+
   public function addType(TypeDecl $decl)
   {
     $name = $decl->getName();
@@ -130,7 +130,7 @@ final class BasicRuntimeContext
     $this->types[$name] = $decl;
     return $this;
   }
-  
+
   protected function find(string $name, $collectionName, string $funcToCall)
   {
     if (isset($this->$collectionName[$name])) {

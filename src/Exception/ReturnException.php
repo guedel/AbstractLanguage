@@ -34,7 +34,7 @@ namespace Gudele\AL\Exception;
 class ReturnException extends \Exception
 {
   private $returnvalue;
-  
+
   public function __construct($returnvalue)
   {
     $this->returnvalue = $returnvalue;
