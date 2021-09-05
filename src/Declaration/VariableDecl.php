@@ -38,23 +38,23 @@ class VariableDecl extends NamedDeclaration
 {
     private $type;
 
-    public function __construct($name, Type $type = null)
-    {
-        parent::__construct($name);
-        if ($type == null) {
-            $this->type = Any::getType();
-        } else {
-            $this->type = $type;
-        }
+  public function __construct($name, Type $type = null)
+  {
+      parent::__construct($name);
+    if ($type == null) {
+        $this->type = Any::getType();
+    } else {
+        $this->type = $type;
     }
+  }
 
-    public function get_type(): \Guedel\AL\Datatype\Type
-    {
-        return $this->type;
-    }
+  public function getType(): \Guedel\AL\Datatype\Type
+  {
+      return $this->type;
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        return $visitor->declare_variable($this);
-    }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      return $visitor->declareVariable($this);
+  }
 }

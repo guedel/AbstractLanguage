@@ -40,24 +40,24 @@ class WhileStmt implements Statement
     private $test;
     private $statement;
 
-    public function __construct(Valuable $test, ?Statement $block = null)
-    {
-        $this->test = $test;
-        $this->statement = $block;
-    }
+  public function __construct(Valuable $test, ?Statement $block = null)
+  {
+      $this->test = $test;
+      $this->statement = $block;
+  }
 
-    public function accept(Visitor $visitor)
-    {
-        $visitor->visit_while_stmt($this);
-    }
+  public function accept(Visitor $visitor)
+  {
+      $visitor->visitWhileStmt($this);
+  }
 
-    public function get_test(): Valuable
-    {
-        return $this->test;
-    }
+  public function getTest(): Valuable
+  {
+      return $this->test;
+  }
 
-    public function get_statement(): ?Statement
-    {
-        return $this->statement;
-    }
+  public function getStatement(): ?Statement
+  {
+      return $this->statement;
+  }
 }

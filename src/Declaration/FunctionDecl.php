@@ -26,6 +26,10 @@
 
   namespace Guedel\AL\Declaration;
 
+  use Guedel\AL\Statement\Statement;
+  use Guedel\AL\Datatype\Type;
+  use Guedel\AL\Runtime\Visitor;
+
   /**
    * FUNCTION $name ($arguments) : $returntype IS $body
    *
@@ -36,19 +40,19 @@ class FunctionDecl extends ProcedureDecl
     private $returntype;
 
 
-    public function __construct(string $name, \Guedel\AL\Datatype\Type $returntype, ParametersList $arguments, \Guedel\AL\Statement\Statement $body)
-    {
-        parent::__construct($name, $arguments, $body);
-        $this->returntype = $returntype;
-    }
+  public function __construct(string $name, Type $returntype, ParametersList $arguments, Statement $body)
+  {
+      parent::__construct($name, $arguments, $body);
+      $this->returntype = $returntype;
+  }
 
-    public function get_returntype(): \Guedel\AL\Datatype\Type
-    {
-        return $this->returntype;
-    }
+  public function getReturnType(): Type
+  {
+      return $this->returntype;
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        return $visitor->declare_function($this);
-    }
+  public function accept(Visitor $visitor)
+  {
+      return $visitor->declareFunction($this);
+  }
 }

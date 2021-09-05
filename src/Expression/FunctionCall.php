@@ -37,24 +37,24 @@ class FunctionCall implements Valuable
     private $name;
     private $parameters;
 
-    public function __construct($name, ...$parameters)
-    {
-        $this->name = $name;
-        $this->parameters = new ExpressionList(... $parameters);
-    }
+  public function __construct($name, ...$parameters)
+  {
+      $this->name = $name;
+      $this->parameters = new ExpressionList(... $parameters);
+  }
 
-    public function get_name()
-    {
-        return $this->name;
-    }
+  public function getName()
+  {
+      return $this->name;
+  }
 
-    public function get_parameters()
-    {
-        return $this->parameters;
-    }
+  public function getParameters()
+  {
+      return $this->parameters;
+  }
 
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        return $visitor->eval_function_call($this);
-    }
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      return $visitor->evalFunctionCall($this);
+  }
 }

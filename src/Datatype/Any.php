@@ -33,21 +33,21 @@
    */
 final class Any implements Type
 {
-    protected function __construct()
-    {
-    }
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        $visitor->visit_any($this);
-    }
+  protected function __construct()
+  {
+  }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitAny($this);
+  }
 
-    public function getSignature(): string
-    {
-        return 'any';
-    }
+  public function getSignature(): string
+  {
+      return 'any';
+  }
 
-    public static function getType()
-    {
-        return new Any();
-    }
+  public static function getType()
+  {
+      return new Any();
+  }
 }

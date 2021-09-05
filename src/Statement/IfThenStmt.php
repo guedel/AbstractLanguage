@@ -38,28 +38,28 @@ class IfThenStmt implements Statement
     protected $thenpart;
     protected $elsepart;
 
-    public function __construct($iftest, Statement $thenpart, Statement $elsepart = null)
-    {
-        $this->iftest = $iftest;
-        $this->thenpart = $thenpart;
-        $this->elsepart = $elsepart;
-    }
+  public function __construct($iftest, Statement $thenpart, Statement $elsepart = null)
+  {
+      $this->iftest = $iftest;
+      $this->thenpart = $thenpart;
+      $this->elsepart = $elsepart;
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        $visitor->visit_if_then_stmt($this);
-    }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitIfThenStmt($this);
+  }
 
-    public function get_iftest(): Valuable
-    {
-        return $this->iftest;
-    }
-    public function get_then_part(): Statement
-    {
-        return $this->thenpart;
-    }
-    public function get_else_part(): ?Statement
-    {
-        return $this->elsepart;
-    }
+  public function getIfTest(): Valuable
+  {
+      return $this->iftest;
+  }
+  public function getThenPart(): Statement
+  {
+      return $this->thenpart;
+  }
+  public function getElsePart(): ?Statement
+  {
+      return $this->elsepart;
+  }
 }

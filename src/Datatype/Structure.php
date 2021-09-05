@@ -41,33 +41,33 @@ class Structure implements Type
      */
     private $attributes;
 
-    public function __construct(VariableDecl ...$attributes)
-    {
-        $this->attributes = $attributes;
-    }
+  public function __construct(VariableDecl ...$attributes)
+  {
+      $this->attributes = $attributes;
+  }
 
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
+  public function getAttributes()
+  {
+      return $this->attributes;
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        $visitor->visit_structure($this);
-    }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitStructure($this);
+  }
 
-    public function getSignature(): string
-    {
-        $ret = '{';
-        $first = true;
-        foreach ($this->attributes as $attr) {
-            if ($first) {
-                $first = false;
-            } else {
-                $ret .= ';';
-            }
-            $ret .= $attr->get_type()->get_signature();
-        }
-        return $ret . '}';
+  public function getSignature(): string
+  {
+      $ret = '{';
+      $first = true;
+    foreach ($this->attributes as $attr) {
+      if ($first) {
+        $first = false;
+      } else {
+          $ret .= ';';
+      }
+        $ret .= $attr->getType()->get_signature();
     }
+      return $ret . '}';
+  }
 }

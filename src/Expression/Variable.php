@@ -37,18 +37,18 @@ class Variable implements Valuable
 {
     private $varname;
 
-    public function __construct($varname)
-    {
-        $this->varname = $varname;
-    }
+  public function __construct($varname)
+  {
+      $this->varname = $varname;
+  }
 
-    public function get_varname(): string
-    {
-        return $this->varname;
-    }
+  public function getVarname(): string
+  {
+      return $this->varname;
+  }
 
-    public function evaluate(Visitor $visitor)
-    {
-        return $visitor->eval_variable($this);
-    }
+  public function evaluate(Visitor $visitor)
+  {
+      return $visitor->evalVariable($this);
+  }
 }

@@ -38,19 +38,19 @@ class ReturnStmt implements Statement
 {
     private $expressions;
 
-    public function __construct(Valuable ...$expressions)
-    {
-        $this->expressions = new ExpressionList(... $expressions);
-    }
+  public function __construct(Valuable ...$expressions)
+  {
+      $this->expressions = new ExpressionList(... $expressions);
+  }
 
-    public function getExpressions(): ExpressionList
-    {
-        return $this->expressions;
-    }
+  public function getExpressions(): ExpressionList
+  {
+      return $this->expressions;
+  }
 
 
-    public function accept(Visitor $visitor)
-    {
-        return $visitor->visit_return_stmt($this);
-    }
+  public function accept(Visitor $visitor)
+  {
+      return $visitor->visitReturnStmt($this);
+  }
 }

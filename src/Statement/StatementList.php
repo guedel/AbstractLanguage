@@ -37,37 +37,37 @@ class StatementList implements Statement, \IteratorAggregate, \Countable
 {
     private $statements;
 
-    public function __construct(Statement ...$statements)
-    {
-        $this->statements = $statements;
-    }
+  public function __construct(Statement ...$statements)
+  {
+      $this->statements = $statements;
+  }
 
-    public function add(Statement $statement)
-    {
-        $this->statements[] = $statement;
-        return $this;
-    }
+  public function add(Statement $statement)
+  {
+      $this->statements[] = $statement;
+      return $this;
+  }
 
-    public function last(): ?Statement
-    {
-        if (0 < $this->count()) {
-            return $this->statements[array_key_last($this->statements)];
-        }
-        return null;
+  public function last(): ?Statement
+  {
+    if (0 < $this->count()) {
+        return $this->statements[array_key_last($this->statements)];
     }
+      return null;
+  }
 
-    public function getIterator(): \Traversable
-    {
-        return new \ArrayIterator($this->statements);
-    }
+  public function getIterator(): \Traversable
+  {
+      return new \ArrayIterator($this->statements);
+  }
 
-    public function accept(Visitor $visitor)
-    {
-        $visitor->visit_statement_list($this);
-    }
+  public function accept(Visitor $visitor)
+  {
+      $visitor->visitStatementList($this);
+  }
 
-    public function count(): int
-    {
-        return count($this->statements);
-    }
+  public function count(): int
+  {
+      return count($this->statements);
+  }
 }

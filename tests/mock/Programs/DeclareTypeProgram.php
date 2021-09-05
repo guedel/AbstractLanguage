@@ -53,7 +53,7 @@ class DeclareTypeProgram implements BaseTestProgram
   {
     return new StatementList(
         new TypeDecl("sample1", new StringOfChars(50)),
-        new TypeDecl("sample2", new ArrayOf(new TypeName(TypeName::dtInteger), 1, 10)),
+        new TypeDecl("sample2", new ArrayOf(new TypeName(TypeName::DT_INTEGER), 1, 10)),
         new TypeDecl("sample3", new Enumeration("mercure", "venus", "earth", "mars")),
         new TypeDecl("sample4", new Reference(new TypeName("sample3"))),
         new TypeDecl("sample5", new Number()),

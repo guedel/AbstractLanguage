@@ -40,24 +40,24 @@ class ProcedureCall implements Statement
     private $name;
     private $parameters;
 
-    public function __construct(string $name, Valuable ...$parameters)
-    {
-        $this->name = $name;
-        $this->parameters = new ExpressionList(... $parameters);
-    }
+  public function __construct(string $name, Valuable ...$parameters)
+  {
+      $this->name = $name;
+      $this->parameters = new ExpressionList(... $parameters);
+  }
     //put your code here
-    public function accept(Visitor $visitor)
-    {
-        $visitor->visit_procedure_call($this);
-    }
+  public function accept(Visitor $visitor)
+  {
+      $visitor->visitProcedureCall($this);
+  }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+  public function getName(): string
+  {
+      return $this->name;
+  }
 
-    public function getParameters(): ExpressionList
-    {
-        return $this->parameters;
-    }
+  public function getParameters(): ExpressionList
+  {
+      return $this->parameters;
+  }
 }

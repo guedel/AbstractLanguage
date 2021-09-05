@@ -36,27 +36,27 @@
    */
 class AssignStmt implements Statement
 {
-    private string $varname;
-    private Valuable $expression;
+  private string $varname;
+  private Valuable $expression;
 
-    public function __construct(string $varname, Valuable $expression)
-    {
-        $this->varname = $varname;
-        $this->expression = $expression;
-    }
+  public function __construct(string $varname, Valuable $expression)
+  {
+      $this->varname = $varname;
+      $this->expression = $expression;
+  }
 
-    public function accept(Visitor $visitor)
-    {
-        $visitor->visit_assign_stmt($this);
-    }
+  public function accept(Visitor $visitor)
+  {
+      $visitor->visitAssignStmt($this);
+  }
 
-    public function get_variable_name(): string
-    {
-        return $this->varname;
-    }
+  public function getVariableName(): string
+  {
+      return $this->varname;
+  }
 
-    public function get_expression(): Valuable
-    {
-        return $this->expression;
-    }
+  public function getExpression(): Valuable
+  {
+      return $this->expression;
+  }
 }

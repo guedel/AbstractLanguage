@@ -33,30 +33,30 @@
    */
 abstract class Expression implements Valuable
 {
-    const OP_ADD = '+';
-    const OP_SUB = '-';
-    const OP_MULT = '*';
-    const OP_DIV = '/';
-    const OP_EQUAL = '==';
-    const OP_DIFF = '!=';
-    const OP_LT = '<';
-    const OP_GT = '>';
-    const OP_LTE = '<=';
-    const OP_GTE = '>=';
-    const OP_NOT = '!';
-    const OP_OR = '|';
-    const OP_AND = '&';
-    const OP_XOR = '^';
+  public const OP_ADD = '+';
+  public const OP_SUB = '-';
+  public const OP_MULT = '*';
+  public const OP_DIV = '/';
+  public const OP_EQUAL = '==';
+  public const OP_DIFF = '!=';
+  public const OP_LT = '<';
+  public const OP_GT = '>';
+  public const OP_LTE = '<=';
+  public const OP_GTE = '>=';
+  public const OP_NOT = '!';
+  public const OP_OR = '|';
+  public const OP_AND = '&';
+  public const OP_XOR = '^';
 
-    private string $operator;
+  private string $operator;
 
-    protected function __construct(string $operator)
-    {
-        $this->operator = $operator;
-    }
+  protected function __construct(string $operator)
+  {
+      $this->operator = $operator;
+  }
 
-    public function getOperator(): string
-    {
-        return $this->operator;
-    }
+  public function getOperator(): string
+  {
+      return $this->operator;
+  }
 }

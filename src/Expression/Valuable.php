@@ -33,5 +33,5 @@
    */
 interface Valuable
 {
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor);
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor);
 }

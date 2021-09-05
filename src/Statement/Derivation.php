@@ -35,13 +35,13 @@ trait Derivation
 {
     private $statement;
 
-    public function get_statement(): Statement
-    {
-        return $this->statement;
-    }
+  public function getStatement(): Statement
+  {
+      return $this->statement;
+  }
 
-    public function set_statement($stmt)
-    {
-        $this->statement = $stmt;
-    }
+  public function setStatement($stmt)
+  {
+      $this->statement = $stmt;
+  }
 }

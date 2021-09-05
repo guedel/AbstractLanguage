@@ -36,48 +36,48 @@
    */
 class BinaryExpression extends Expression
 {
-    private ExpressionList $operands;
+  private ExpressionList $operands;
 
-    public function __construct(string $operator, Valuable ...$operands)
-    {
-        parent::__construct($operator);
-        $this->operands = new ExpressionList(...$operands);
+  public function __construct(string $operator, Valuable ...$operands)
+  {
+      parent::__construct($operator);
+      $this->operands = new ExpressionList(...$operands);
+  }
+
+
+  public function getOperands(): ExpressionList
+  {
+      return $this->operands;
+  }
+
+  public function evaluate(Visitor $visitor)
+  {
+      return $visitor->evalBinaryExpression($this);
+  }
+
+  public function getPriority(): int
+  {
+    switch ($this->getOperator()) {
+      case OP_MULT:
+      case OP_DIV:
+            return 5;
+      case OP_ADD:
+      case OP_SUB:
+            return 4;
+      case OP_EQUAL:
+      case OP_DIFF:
+      case OP_LT:
+      case OP_GT:
+      case OP_LTE:
+      case OP_GTE:
+            return 3;
+      case OP_AND:
+            return 2;
+      case OP_OR:
+      case OP_XOR:
+            return 1;
+      default:
+            return 0;
     }
-
-
-    public function getOperands(): ExpressionList
-    {
-        return $this->operands;
-    }
-
-    public function evaluate(Visitor $visitor)
-    {
-        return $visitor->eval_binary_expression($this);
-    }
-
-    public function getPriority(): int
-    {
-        switch ($this->getOperator()) {
-            case OP_MULT:
-            case OP_DIV:
-                return 5;
-            case OP_ADD:
-            case OP_SUB:
-                return 4;
-            case OP_EQUAL:
-            case OP_DIFF:
-            case OP_LT:
-            case OP_GT:
-            case OP_LTE:
-            case OP_GTE:
-                return 3;
-            case OP_AND:
-                return 2;
-            case OP_OR:
-            case OP_XOR:
-                return 1;
-            default:
-                return 0;
-        }
-    }
+  }
 }

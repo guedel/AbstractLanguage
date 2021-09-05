@@ -33,44 +33,44 @@
    */
 class ArrayOf implements Type
 {
-    private Type $type;
-    private ?int $lowerbound;
-    private ?int $upperbound;
+  private Type $type;
+  private ?int $lowerbound;
+  private ?int $upperbound;
 
-    public function __construct(Type $type, ?int $lowerbound = null, ?int $upperbound = null)
-    {
-        $this->type = $type;
-        $this->lowerbound = $lowerbound;
-        $this->upperbound = $upperbound;
-    }
+  public function __construct(Type $type, ?int $lowerbound = null, ?int $upperbound = null)
+  {
+      $this->type = $type;
+      $this->lowerbound = $lowerbound;
+      $this->upperbound = $upperbound;
+  }
 
-    public function getType(): Type
-    {
-        return $this->type;
-    }
+  public function getType(): Type
+  {
+      return $this->type;
+  }
 
-    public function getLowerbound(): ?int
-    {
-        return $this->lowerbound;
-    }
+  public function getLowerbound(): ?int
+  {
+      return $this->lowerbound;
+  }
 
-    public function getUpperbound(): ?int
-    {
-        return $this->upperbound;
-    }
+  public function getUpperbound(): ?int
+  {
+      return $this->upperbound;
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        $visitor->visit_arrayof($this);
-    }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitArrayof($this);
+  }
 
-    public function getSignature(): string
-    {
-        $ret = 'array[';
-        $ret .= $this->lowerbound;
-        $ret .= ',';
-        $ret .= $this->upperbound;
-        $ret .= ']:' . $this->type->getSignature();
-        return $ret;
-    }
+  public function getSignature(): string
+  {
+      $ret = 'array[';
+      $ret .= $this->lowerbound;
+      $ret .= ',';
+      $ret .= $this->upperbound;
+      $ret .= ']:' . $this->type->getSignature();
+      return $ret;
+  }
 }

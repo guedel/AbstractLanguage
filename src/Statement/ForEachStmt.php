@@ -37,34 +37,34 @@
    */
 class ForEachStmt implements Statement
 {
-    private string $varname;
-    private Valuable $collection;
-    private ?Statement $statement;
+  private string $varname;
+  private Valuable $collection;
+  private ?Statement $statement;
 
-    public function __construct(string $varname, Valuable $collection, ?Statement $stmt = null)
-    {
-        $this->varname = $varname;
-        $this->collection = $collection;
-        $this->statement = $stmt;
-    }
+  public function __construct(string $varname, Valuable $collection, ?Statement $stmt = null)
+  {
+      $this->varname = $varname;
+      $this->collection = $collection;
+      $this->statement = $stmt;
+  }
 
-    public function getVarname(): string
-    {
-        return $this->varname;
-    }
+  public function getVarname(): string
+  {
+      return $this->varname;
+  }
 
-    public function getCollection(): Valuable
-    {
-        return $this->collection;
-    }
+  public function getCollection(): Valuable
+  {
+      return $this->collection;
+  }
 
-    public function getStatement(): ?Statement
-    {
-        return $this->statement;
-    }
+  public function getStatement(): ?Statement
+  {
+      return $this->statement;
+  }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-        $visitor->visit_for_each_stmt($this);
-    }
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      $visitor->visitForEachStmt($this);
+  }
 }
