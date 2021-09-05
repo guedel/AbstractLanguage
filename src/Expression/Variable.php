@@ -47,7 +47,7 @@ class Variable implements Valuable
       return $this->varname;
   }
 
-  public function evaluate(Visitor $visitor)
+  public function evaluate(Visitor $visitor): mixed
   {
       return $visitor->evalVariable($this);
   }

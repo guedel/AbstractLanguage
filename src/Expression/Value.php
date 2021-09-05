@@ -47,7 +47,7 @@ class Value implements Valuable
       return $this->value;
   }
 
-  public function evaluate(Visitor $visitor)
+  public function evaluate(Visitor $visitor): mixed
   {
       return $visitor->evalValue($this);
   }

@@ -27,6 +27,7 @@
 namespace Guedel\Tests\Mock\AL;
 
 use Guedel\AL\Statement\Statement;
+use Guedel\AL\Runtime\Visitor;
 /**
  * Description of EmptyStatement
  *
@@ -35,7 +36,7 @@ use Guedel\AL\Statement\Statement;
 class EmptyStatement implements Statement
 {
   //put your code here
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  public function accept(Visitor $visitor)
   {
     return 'EMPTY';
   }

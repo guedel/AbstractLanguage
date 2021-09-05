@@ -55,11 +55,6 @@ class VariableDecl extends NamedDeclaration
       return $this->type;
   }
 
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-    return $visitor->declare_variable($this);
-  }
-
   public function setValue($value)
   {
     if ($value instanceof Value) {

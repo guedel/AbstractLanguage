@@ -56,22 +56,22 @@ class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
     return count($this->parameters);
   }
 
-  public function offsetExists(mixed $offset): bool
+  public function offsetExists($offset)
   {
     return isset($this->parameters[$offset]);
   }
 
-  public function offsetGet(mixed $offset): mixed
+  public function offsetGet($offset)
   {
     return $this->parameters[$offset];
   }
 
-  public function offsetSet(mixed $offset, mixed $value): void
+  public function offsetSet($offset, $value): void
   {
     $this->parameters[$offset] = $value;
   }
 
-  public function offsetUnset(mixed $offset): void
+  public function offsetUnset($offset): void
   {
     unset($this->parameters[$offset]);
   }

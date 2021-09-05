@@ -46,7 +46,7 @@ class UnaryExpression extends Expression
       return $this->operand;
   }
 
-  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor): mixed
   {
       return $visitor->evalUnaryExpression($this);
   }
