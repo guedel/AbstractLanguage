@@ -90,9 +90,8 @@ class Builder
   public function stmtFunction(
       string $name,
       Type $return_type,
-      Declaration\ParametersList
-      $parameters = null): Builder
-  {
+      Declaration\ParametersList $parameters = null
+  ): Builder {
     $ret = $this->stmtBegin();
     $this->statements->add(new Declaration\FunctionDecl($name, $return_type, $parameters, $ret->statements));
     return $ret;
@@ -174,7 +173,6 @@ class Builder
     $this->statements->add(new Statement\ProcedureCall($name, ... $a));
     return $this;
   }
-
 }
 
 // ========================
