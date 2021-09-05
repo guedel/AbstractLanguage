@@ -40,9 +40,8 @@ class EmptyExpression extends Expression
   {
     parent::__construct('$');
   }
-  public function evaluate(Visitor $visitor): mixed
+  public function evaluate(Visitor $visitor)
   {
     return 10;
   }
-
 }

@@ -24,6 +24,7 @@
  * THE SOFTWARE.
  */
 namespace Guedel\Tests\Mock\AL\Programs;
+
 /**
  * Description of BaseTestProgram
  *

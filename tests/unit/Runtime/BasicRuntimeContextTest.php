@@ -23,12 +23,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\AL\Runtime;
 
 use PHPUnit\Framework\TestCase;
-
 use Guedel\AL\Runtime\BasicRuntimeContext;
 use Guedel\AL\Declaration\{
-FunctionDecl, ProcedureDecl, VariableDecl, TypeDecl, ParametersList };
+  FunctionDecl,
+  ProcedureDecl,
+  VariableDecl,
+  TypeDecl,
+  ParametersList
+};
 use Guedel\AL\Datatype\Any;
 use Guedel\AL\Statement\StatementList;
 
@@ -51,7 +56,7 @@ class BasicRuntimeContextTest extends TestCase
     $this->assertEquals("sample", $this->context->getName());
     $this->assertNull($this->context->getParent());
   }
-  
+
   public function testAddFunction()
   {
     $decl = new FunctionDecl("fun", Any::getType(), new ParametersList(), new StatementList());
@@ -67,7 +72,7 @@ class BasicRuntimeContextTest extends TestCase
     $found = $this->context->findProcedure("proc");
     $this->assertNotNull($found);
   }
-  
+
   public function testAddType()
   {
     $decl = new TypeDecl("t", Any::getType());
@@ -75,7 +80,7 @@ class BasicRuntimeContextTest extends TestCase
     $found = $this->context->findtype("t");
     $this->assertNotNull($found);
   }
-  
+
   public function testAddVariable()
   {
     $decl = new VariableDecl("v");
@@ -83,7 +88,7 @@ class BasicRuntimeContextTest extends TestCase
     $found = $this->context->findVariable("v");
     $this->assertNotNull($found);
   }
-  
+
   public function testPushParent()
   {
     $ctx = new BasicRuntimeContext($this->context, "sp");

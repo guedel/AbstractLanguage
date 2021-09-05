@@ -37,7 +37,7 @@ class Variable implements Valuable
 {
     private $varname;
 
-  public function __construct($varname)
+  public function __construct(string $varname)
   {
       $this->varname = $varname;
   }
@@ -47,7 +47,7 @@ class Variable implements Valuable
       return $this->varname;
   }
 
-  public function evaluate(Visitor $visitor): mixed
+  public function evaluate(Visitor $visitor)
   {
       return $visitor->evalVariable($this);
   }

@@ -57,5 +57,4 @@ class IfThenElseProgram implements BaseTestProgram
         new ProcedureCall("WRITE", new Value("NOT OK"))
     );
   }
-
 }

@@ -28,6 +28,7 @@ namespace Guedel\Tests\Mock\AL;
 
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of EmptyStatement
  *
@@ -40,5 +41,4 @@ class EmptyStatement implements Statement
   {
     return 'EMPTY';
   }
-
 }

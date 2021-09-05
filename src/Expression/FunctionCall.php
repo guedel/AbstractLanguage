@@ -53,7 +53,12 @@ class FunctionCall implements Valuable
       return $this->parameters;
   }
 
-  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor): mixed
+  /**
+   *
+   * @param \Guedel\AL\Runtime\Visitor $visitor
+   * @return mixed
+   */
+  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
   {
       return $visitor->evalFunctionCall($this);
   }

@@ -25,6 +25,7 @@
  */
 
 namespace Guedel\Tests\Mock\AL\Programs;
+
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\TypeDecl;
 use Guedel\AL\Datatype\{ Enumeration, Number, StringOfChars, Reference, ArrayOf, Any, TypeName};
@@ -57,8 +58,7 @@ class DeclareTypeProgram implements BaseTestProgram
         new TypeDecl("sample3", new Enumeration("mercure", "venus", "earth", "mars")),
         new TypeDecl("sample4", new Reference(new TypeName("sample3"))),
         new TypeDecl("sample5", new Number()),
-        new TypeDecl("sample6", new Number(8,3)),
+        new TypeDecl("sample6", new Number(8, 3)),
     );
   }
-
 }

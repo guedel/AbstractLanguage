@@ -23,9 +23,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Functionnal\AL;
 
 use PHPUnit\Framework\TestCase;
-
 use Guedel\AL\Runtime\BasicWriterVisitor;
 use Guedel\AL\Runtime\Translator;
 use Guedel\Tests\Mock\AL\Programs as Prog;
@@ -42,14 +42,14 @@ class BasicWriterVisitorTest extends TestCase
   private BasicWriterVisitor $visitor;
   private Translator $translator;
   private CodeWriter $writer;
-  
+
   public function setUp(): void
   {
     $this->writer = new CodeWriter();
     $this->translator = new Translator();
     $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
   }
-  
+
   /**
    * @dataProvider programs
    */
@@ -60,7 +60,7 @@ class BasicWriterVisitorTest extends TestCase
     $this->assertEquals($p->attend(), $r);
   }
 
-  
+
   public function programs()
   {
     return [

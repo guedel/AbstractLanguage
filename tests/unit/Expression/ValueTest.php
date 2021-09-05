@@ -25,12 +25,11 @@ class ValueTest extends TestCase
     $v = new Value(1234);
     $this->assertEquals(1234, $v->getValue());
   }
-  
+
   public function testEvaluate()
   {
     $v = new Value(123);
     $visit = new \Guedel\Tests\Mock\AL\TestVisitor();
     $this->assertEquals(123, $v->evaluate($visit));
   }
-
 }

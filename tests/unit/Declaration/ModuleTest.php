@@ -23,6 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\AL\Declaration;
 
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Declaration\Module;
@@ -44,18 +45,17 @@ class ModuleTest extends TestCase
     $this->assertEquals("Test", $m->getName());
     $this->assertCount(0, $m->getStatements());
   }
-  
+
   public function testCreateOne()
   {
     $m = new Module("Test", new EmptyStatement());
     $this->assertCount(1, $m->getStatements());
   }
-  
+
   public function testAccept()
   {
     $m = new Module("Test");
     $ret = $m->accept(new TestVisitor());
     $this->assertEquals("MODULE Test", $ret);
   }
-
 }

@@ -23,10 +23,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\Expression;
 
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Expression\FunctionCall;
 use Guedel\Tests\Mock\AL\TestVisitor;
+
 /**
  * Description of FunctionCallTest
  *
@@ -37,7 +39,7 @@ class FunctionCallTest extends TestCase
 {
   private $function;
   private $visitor;
-  
+
   public function setUp(): void
   {
     $this->function = new FunctionCall("cos");

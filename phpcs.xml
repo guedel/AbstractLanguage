@@ -3,6 +3,7 @@
   <description></description>
   <report>full</report>
   <file>src</file>
+  <file>tests</file>
   <exclude-pattern>src/Datatype/obsolete/*</exclude-pattern>
   <rule ref="PSR12"  />
   

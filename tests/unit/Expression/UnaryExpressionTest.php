@@ -23,9 +23,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\Expression;
 
 use PHPUnit\Framework\TestCase;
-
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\UnaryExpression;
 use Guedel\Tests\Mock\AL\TestVisitor;
@@ -45,5 +45,4 @@ class UnaryExpressionTest extends TestCase
     $e = new UnaryExpression(Expression::OP_SUB, new Value('1'));
     $this->assertEquals('-1', $e->evaluate(new TestVisitor()));
   }
-
 }

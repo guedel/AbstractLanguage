@@ -23,6 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\AL\Statement;
 
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Statement\StatementList;
@@ -37,20 +38,19 @@ use Guedel\Tests\Mock\AL\EmptyStatement;
 class StatementListTest extends TestCase
 {
   /**
-   * 
+   *
    */
   public function testEmptyList()
   {
     $list = new StatementList();
     $this->assertCount(0, $list);
   }
-  
+
   public function testCountElementList()
   {
     $list = new StatementList(new EmptyStatement());
     $this->assertCount(1, $list);
-    $list->add(new EmptyStatement() );
+    $list->add(new EmptyStatement());
     $this->assertCount(2, $list);
   }
-
 }

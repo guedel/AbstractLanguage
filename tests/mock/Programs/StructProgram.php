@@ -28,7 +28,7 @@ namespace Guedel\Tests\Mock\AL\Programs;
 
 use Guedel\AL\Datatype\{Structure, TypeName, Any};
 use Guedel\AL\Declaration\VariableDecl;
-use \Guedel\AL\Declaration\TypeDecl;
+use Guedel\AL\Declaration\TypeDecl;
 
 /**
  * Description of ClassProgram
@@ -50,12 +50,11 @@ class StructProgram implements BaseTestProgram
   public function code(): \Guedel\AL\Statement\Statement
   {
     return new TypeDecl(
-       "mystruct",
-      new Structure(
-          new VariableDecl("one", Any::getType()),
-          new VariableDecl("two", new TypeName("int"))
+        "mystruct",
+        new Structure(
+            new VariableDecl("one", Any::getType()),
+            new VariableDecl("two", new TypeName("int"))
         )
     );
   }
-
 }

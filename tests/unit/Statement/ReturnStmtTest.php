@@ -6,10 +6,9 @@
  * and open the template in the editor.
  */
 
-namespace Guedel\Tests\AL\Statement;
+namespace Guedel\Tests\Unit\AL\Statement;
 
 use PHPUnit\Framework\TestCase;
-
 use Guedel\AL\Statement\ReturnStmt;
 
 /**
@@ -21,12 +20,11 @@ use Guedel\AL\Statement\ReturnStmt;
 class ReturnStmtTest extends TestCase
 {
   /**
-  * 
+  *
   */
   public function testReturnSimple()
   {
     $r = new ReturnStmt();
     $this->assertEquals('RETURN', $r->accept(new \Guedel\Tests\Mock\AL\TestVisitor()));
   }
-
 }

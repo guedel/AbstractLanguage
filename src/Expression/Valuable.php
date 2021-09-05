@@ -36,5 +36,10 @@
    */
 interface Valuable
 {
-  public function evaluate(Visitor $visitor): mixed;
+  /**
+   *
+   * @param Visitor $visitor
+   * @return mixed
+   */
+  public function evaluate(Visitor $visitor);
 }

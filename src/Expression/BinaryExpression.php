@@ -50,7 +50,12 @@ class BinaryExpression extends Expression
       return $this->operands;
   }
 
-  public function evaluate(Visitor $visitor): mixed
+  /**
+   *
+   * @param Visitor $visitor
+   * @return mixed
+   */
+  public function evaluate(Visitor $visitor)
   {
       return $visitor->evalBinaryExpression($this);
   }

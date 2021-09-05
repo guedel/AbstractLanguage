@@ -23,6 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\Expression;
 
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Expression\ExpressionList;
@@ -42,18 +43,17 @@ class ExpressionListTest extends TestCase
     $list = new ExpressionList();
     $this->assertCount(0, $list);
   }
-  
+
   public function testCount()
   {
     $list = new ExpressionList(new EmptyExpression());
     $this->assertCount(1, $list);
   }
-  
+
   public function testIterate()
   {
     $list = new ExpressionList(new EmptyExpression(), new EmptyExpression(), new EmptyExpression());
     $this->assertCount(3, $list);
     $this->assertContainsOnly(EmptyExpression::class, $list);
   }
-
 }

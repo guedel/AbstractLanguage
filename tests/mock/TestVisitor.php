@@ -37,7 +37,6 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
   //put your code here
   public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl)
   {
-    
   }
 
   public function declareModule(\Guedel\AL\Declaration\Module $decl)
@@ -47,22 +46,18 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function declareParameter(\Guedel\AL\Declaration\Parameter $decl)
   {
-    
   }
 
   public function declareProcedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
   {
-    
   }
 
   public function declareType(\Guedel\AL\Declaration\TypeDecl $decl)
   {
-    
   }
 
   public function declareVariable(\Guedel\AL\Declaration\VariableDecl $decl)
   {
-    
   }
 
   public function evalBinaryExpression(\Guedel\AL\Expression\BinaryExpression $exp)
@@ -77,9 +72,12 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
   public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)
   {
     switch ($fn->getName()) {
-      case 'sin': return 0.5;
-      case 'cos': return 0.66;
-      case 'souschaine': return 'abc';
+      case 'sin':
+            return 0.5;
+      case 'cos':
+            return 0.66;
+      case 'souschaine':
+            return 'abc';
     }
   }
 
@@ -100,11 +98,11 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
    */
   public function evalVariable(\Guedel\AL\Expression\Variable $variable)
   {
-    switch($variable->getVarname()) {
+    switch ($variable->getVarname()) {
       case 'alpha':
-        return 'abdef';
+            return 'abdef';
       case 'num':
-        return '124';
+            return '124';
     }
     return null;
   }
@@ -121,12 +119,10 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
   {
-    
   }
 
   public function visitClass(\Guedel\AL\Datatype\ClassType $type)
   {
-    
   }
 
   public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
@@ -136,17 +132,14 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt)
   {
-    
   }
 
   public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
   {
-    
   }
 
   public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)
   {
-    
   }
 
   public function visitNumber(\Guedel\AL\Datatype\Number $type)
@@ -156,7 +149,6 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
   {
-    
   }
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)
@@ -196,12 +188,11 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
 
   public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
   {
-    return 'WHILE '. $stmt->getTest()->evaluate($this) . ' DO ' . $stmt->getStatement()->accept($this);
+    return 'WHILE ' . $stmt->getTest()->evaluate($this) . ' DO ' . $stmt->getStatement()->accept($this);
   }
 
   public function visitComment(\Guedel\AL\Statement\Comment $stmt)
   {
     return "// " . $stmt->getMessage();
   }
-
 }

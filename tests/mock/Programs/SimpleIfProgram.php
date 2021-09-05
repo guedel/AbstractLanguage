@@ -51,5 +51,4 @@ class SimpleIfProgram implements BaseTestProgram
   {
     return new IfThenStmt(new Value(true), new ProcedureCall("WRITE", new Value("OK")));
   }
-
 }
