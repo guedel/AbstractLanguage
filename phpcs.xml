@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+  <description></description>
+  <report>full</report>
+  <file>src</file>
+  <file>tests</file>
+  <exclude-pattern>src/Datatype/obsolete/*</exclude-pattern>
+  <rule ref="PSR12"  />
+  
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="2"/>
+    </properties>
+  </rule>
+    
+</ruleset>

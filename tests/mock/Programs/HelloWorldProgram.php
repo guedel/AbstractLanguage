@@ -24,6 +24,7 @@
  * THE SOFTWARE.
  */
 namespace Guedel\Tests\Mock\AL\Programs;
+
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Expression\Value;
@@ -47,9 +48,9 @@ class HelloWorldProgram implements BaseTestProgram
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    return new Module("Hello",
+    return new Module(
+        "Hello",
         new ProcedureCall("WRITE", new Value("Hello World !"))
     );
   }
-
 }

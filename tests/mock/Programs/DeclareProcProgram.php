@@ -56,5 +56,4 @@ class DeclareProcProgram implements BaseTestProgram
         new ProcedureCall("WRITE", new \Guedel\AL\Expression\Variable("name"))
     );
   }
-
 }

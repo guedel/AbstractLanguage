@@ -30,7 +30,7 @@ use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Statement\AssignStmt;
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Expression\Value;
-use \Guedel\AL\Datatype\Any;
+use Guedel\AL\Datatype\Any;
 
 /**
  * Description of VariableUseProgram
@@ -57,5 +57,4 @@ class VariableUseProgram implements BaseTestProgram
         new AssignStmt("i", new Value(10))
     );
   }
-
 }

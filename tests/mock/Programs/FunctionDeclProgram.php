@@ -63,22 +63,27 @@ class FunctionDeclProgram implements BaseTestProgram
     $int = new TypeName("int");
     return new StatementList(
         new FunctionDecl(
-            "fact", 
+            "fact",
             $int,
             new ParametersList(
                 new Parameter("n", Parameter::INPUT, $int)
-                ),
+            ),
             new StatementList(
-              new IfThenStmt(
-                  new BinaryExpression(Expression::OP_LTE, new Variable("n"), new Value(1)),
-                  new ReturnStmt(new Value(1)),
-              ),
-              new ReturnStmt(
-                  new BinaryExpression(Expression::OP_MULT, 
-                    new Variable("n"),
-                    new FunctionCall("fact", new BinaryExpression(Expression::OP_SUB, new Variable("n"), new Value(1)))
-                 )
-              )
+                new IfThenStmt(
+                    new BinaryExpression(Expression::OP_LTE, new Variable("n"), new Value(1)),
+                    new ReturnStmt(new Value(1)),
+                ),
+                new ReturnStmt(
+                    new BinaryExpression(
+                        Expression::OP_MULT,
+                        new Variable("n"),
+                        new FunctionCall("fact", new BinaryExpression(
+                            Expression::OP_SUB,
+                            new Variable("n"),
+                            new Value(1)
+                        ))
+                    )
+                )
             )
         )
     );

@@ -34,54 +34,55 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ForStmt implements Statement
-  {
-    private string $varname;
-    private Valuable $initial;
-    private Valuable $final;
-    private Valuable $increment;
-    private ?Statement $statement;
+class ForStmt implements Statement
+{
+  private string $varname;
+  private Valuable $initial;
+  private Valuable $final;
+  private Valuable $increment;
+  private ?Statement $statement;
 
-    public function __construct(string $varnmame,
-        Valuable $initial,
-        Valuable $final,
-        Valuable $increment,
-        Statement $statement = null)
-    {
+  public function __construct(
+      string $varnmame,
+      Valuable $initial,
+      Valuable $final,
+      Valuable $increment,
+      Statement $statement = null
+  ) {
       $this->varname = $varnmame;
       $this->initial = $initial;
       $this->final = $final;
       $this->increment = $increment;
       $this->statement = $statement;
-    }
-
-    public function accept(Visitor $visitor)
-    {
-      $visitor->visit_for_stmt($this);
-    }
-
-    public function getVariableName() : string
-    {
-      return $this->varname;
-    }
-
-    public function getInitial(): Valuable
-    {
-      return $this->initial;
-    }
-
-    public function getFinal(): Valuable
-    {
-      return $this->final;
-    }
-
-    public function getIncrement(): Valuable
-    {
-      return $this->increment;
-    }
-
-    public function getStatement() : ?Statement
-    {
-      return $this->statement;
-    }
   }
+
+  public function accept(Visitor $visitor)
+  {
+      $visitor->visitForStmt($this);
+  }
+
+  public function getVariableName(): string
+  {
+      return $this->varname;
+  }
+
+  public function getInitial(): Valuable
+  {
+      return $this->initial;
+  }
+
+  public function getFinal(): Valuable
+  {
+      return $this->final;
+  }
+
+  public function getIncrement(): Valuable
+  {
+      return $this->increment;
+  }
+
+  public function getStatement(): ?Statement
+  {
+      return $this->statement;
+  }
+}

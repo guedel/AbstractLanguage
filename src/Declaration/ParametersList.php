@@ -31,34 +31,48 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class ParametersList implements \IteratorAggregate, \Countable
+class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
+{
+  private $parameters;
+
+  public function __construct(Parameter ...$parameters)
   {
-    private $parameters;
-
-    public function __construct(Parameter ... $parameters)
-    {
       $this->parameters = $parameters;
-    }
-
-    public function &get_parameters()
-    {
-      return $this->parameters;
-    }
-
-    public function add(Parameter $param)
-    {
-      $this->parameters[] = $param;
-      return $this;
-    }
-
-    public function getIterator(): \Traversable
-    {
-      return new \ArrayIterator($this->parameters);
-    }
-
-    public function count(): int
-    {
-      return count($this->parameters);
-    }
-
   }
+
+  public function add(Parameter $param)
+  {
+    $this->parameters[] = $param;
+    return $this;
+  }
+
+  public function getIterator(): \Traversable
+  {
+    return new \ArrayIterator($this->parameters);
+  }
+
+  public function count(): int
+  {
+    return count($this->parameters);
+  }
+
+  public function offsetExists($offset)
+  {
+    return isset($this->parameters[$offset]);
+  }
+
+  public function offsetGet($offset)
+  {
+    return $this->parameters[$offset];
+  }
+
+  public function offsetSet($offset, $value): void
+  {
+    $this->parameters[$offset] = $value;
+  }
+
+  public function offsetUnset($offset): void
+  {
+    unset($this->parameters[$offset]);
+  }
+}

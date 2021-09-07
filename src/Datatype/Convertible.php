@@ -30,8 +30,8 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  interface Convertible
-  {
-    public function to_binary_data($value): string;
-    public function from_binary_data($data);
-  }
+interface Convertible
+{
+  public function toBinaryData($value): string;
+  public function fromBinaryData($data);
+}

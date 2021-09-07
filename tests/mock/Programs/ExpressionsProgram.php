@@ -28,10 +28,10 @@ namespace Guedel\Tests\Mock\AL\Programs;
 
 use Guedel\AL\Statement\{StatementList, ReturnStmt};
 use Guedel\AL\Expression\{
-  Expression, 
-  UnaryExpression, 
-  BinaryExpression, 
-  Value, 
+  Expression,
+  UnaryExpression,
+  BinaryExpression,
+  Value,
   Variable
 };
 
@@ -59,13 +59,12 @@ class ExpressionsProgram implements BaseTestProgram
             new UnaryExpression(Expression::OP_NOT, new Variable("a"))
         ),
         new ReturnStmt(
-          new BinaryExpression(Expression::OP_ADD, new Variable("a"), new Variable("b")),
-          new BinaryExpression(Expression::OP_SUB, new Variable("a"), new Variable("b")),
-          new BinaryExpression(Expression::OP_MULT, new Variable("a"), new Variable("b")),
-          new BinaryExpression(Expression::OP_DIV, new Variable("a"), new Variable("b")),
-          new BinaryExpression(Expression::OP_DIFF, new Variable("a"), new Variable("b"))
+            new BinaryExpression(Expression::OP_ADD, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_SUB, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_MULT, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_DIV, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_DIFF, new Variable("a"), new Variable("b"))
         )
     );
   }
-
 }

@@ -23,18 +23,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\Expression;
 
 use PHPUnit\Framework\TestCase;
-
 use Guedel\Tests\Mock\AL\TestVisitor;
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\Value;
 use Guedel\AL\Expression\BinaryExpression;
+
 /**
  * Description of BinaryExpressionTests
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BinaryExpression
+ * @covers \Guedel\AL\Expression\BinaryExpression
  */
 class BinaryExpressionTest extends TestCase
 {
@@ -44,5 +45,4 @@ class BinaryExpressionTest extends TestCase
     $e = new BinaryExpression(Expression::OP_ADD, new Value(1), new Value(2));
     $this->assertEquals("1+2", $e->evaluate(new TestVisitor()));
   }
-
 }

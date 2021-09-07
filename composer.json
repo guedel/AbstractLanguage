@@ -27,9 +27,10 @@
     } 
     },
     "require": {
+        "php": "~7.4|~8",
         "guedel/stream": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "10.0.x-dev"
+        "phpunit/phpunit": "~9-stable"
     }
 }

@@ -24,31 +24,13 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
-
-use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Statement\IfThenStmt;
-use Guedel\AL\Expression\Value;
+namespace Gudele\AL\Exception;
 
 /**
- * Description of SimpleIfProgram
+ * Description of NotFoundException
  *
  * @author Guedel <guedel87@live.fr>
  */
-class SimpleIfProgram implements BaseTestProgram
+class NotFoundException extends \Exception
 {
-  //put your code here
-  public function attend(): string
-  {
-    return join(PHP_EOL, [
-        "IF TRUE THEN",
-        "\tWRITE \"OK\"",
-        "END IF",
-    ]) . PHP_EOL;
-  }
-
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new IfThenStmt(new Value(true), new ProcedureCall("WRITE", new Value("OK")));
-  }
 }

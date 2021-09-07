@@ -62,14 +62,20 @@ class LoopProgram implements BaseTestProgram
         new WhileStmt(
             new Variable("i"),
             new ProcedureCall("DEC", new Variable("i"))
-          ),
-        new ForStmt("i", new Value(1), new Value(10), new Value(1), 
-            new ProcedureCall("WRITE", new Variable("i"))),
+        ),
+        new ForStmt(
+            "i",
+            new Value(1),
+            new Value(10),
+            new Value(1),
+            new ProcedureCall("WRITE", new Variable("i"))
+        ),
         new VariableDecl("arr", new ArrayOf(Any::getType())),
-        new ForEachStmt("item", new Variable("arr"), 
+        new ForEachStmt(
+            "item",
+            new Variable("arr"),
             new ProcedureCall("WRITE", new Variable("item"))
         )
     );
   }
-
 }

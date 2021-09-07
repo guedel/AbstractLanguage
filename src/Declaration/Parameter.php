@@ -31,29 +31,28 @@
    *
    * @author Guedel <guedel87@live.fr>
    */
-  class Parameter extends VariableDecl
-  {
-    const INPUT = 'IN';
-    const OUTPUT = 'OUT';
-    const INOUT = 'INOUT';
-    const RET = 'RETURN';
+class Parameter extends VariableDecl
+{
+  public const INPUT = 'IN';
+  public const OUTPUT = 'OUT';
+  public const INOUT = 'INOUT';
+  public const RET = 'RETURN';
 
     private $direction;
 
-    public function __construct(string $name, string $direction, \Guedel\AL\Datatype\Type $type = null)
-    {
+  public function __construct(string $name, string $direction, \Guedel\AL\Datatype\Type $type = null)
+  {
       parent::__construct($name, $type);
       $this->direction = $direction;
-    }
-
-    public function getDirection() : string
-    {
-      return $this->direction;
-    }
-
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-    {
-      return $visitor->declare_parameter($this);
-    }
-
   }
+
+  public function getDirection(): string
+  {
+      return $this->direction;
+  }
+
+  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+  {
+      return $visitor->declareParameter($this);
+  }
+}

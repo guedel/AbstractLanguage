@@ -27,6 +27,7 @@
 namespace Guedel\Tests\Mock\AL;
 
 use Guedel\AL\Expression\Expression;
+use Guedel\AL\Runtime\Visitor;
 
 /**
  * Description of EmptyExpression
@@ -39,9 +40,8 @@ class EmptyExpression extends Expression
   {
     parent::__construct('$');
   }
-  public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+  public function evaluate(Visitor $visitor)
   {
     return 10;
   }
-
 }
