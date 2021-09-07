@@ -41,12 +41,14 @@ class ExpressionListTest extends TestCase
   public function testEmpty()
   {
     $list = new ExpressionList();
+    $this->assertNotNull($list);
     $this->assertCount(0, $list);
   }
 
   public function testCount()
   {
     $list = new ExpressionList(new EmptyExpression());
+    $this->assertNotNull($list);
     $this->assertCount(1, $list);
   }
 

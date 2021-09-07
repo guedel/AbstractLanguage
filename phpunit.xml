@@ -11,8 +11,11 @@
          failOnWarning="true"
          verbose="true">
     <testsuites>
-        <testsuite name="default">
-            <directory suffix="Test.php">tests</directory>
+        <testsuite name="unit">
+            <directory suffix="Test.php">tests/unit</directory>
+        </testsuite>
+        <testsuite name="functionnal">
+            <directory suffix="Test.php">tests/functionnal</directory>
         </testsuite>
     </testsuites>
 

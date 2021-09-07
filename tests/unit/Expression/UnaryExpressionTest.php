@@ -44,7 +44,7 @@ class UnaryExpressionTest extends TestCase
   {
    $e = new UnaryExpression(Expression::OP_ADD, new Value('0'));
    $this->assertEquals(Expression::OP_ADD, $e->getOperator());
-   $this->assertEquals('0', $e->getOperand()[0]->getValue());
+   $this->assertEquals('0', $e->getOperand()->getValue());
   }
   
   public function testAccept()

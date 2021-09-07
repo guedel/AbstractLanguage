@@ -35,7 +35,6 @@ use Guedel\Stream\CodeWriter;
  * Description of BasicWriterVisitorTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Guedel\AL\Runtime\BasicWriterVisitor
  */
 class BasicWriterVisitorTest extends TestCase
 {
@@ -52,6 +51,7 @@ class BasicWriterVisitorTest extends TestCase
 
   /**
    * @dataProvider programs
+   * @coversNothing
    */
   public function testProgram(Prog\BaseTestProgram $p)
   {

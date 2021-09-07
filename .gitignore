@@ -2,3 +2,5 @@
 /nbproject/private/
 /.phpunit.cache
 /nbproject
+.phpunit.result.cache
+/.vscode

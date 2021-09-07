@@ -50,6 +50,9 @@ class DeclareTypeProgram implements BaseTestProgram
     ]) . PHP_EOL;
   }
 
+  /**
+   * @return \Guedel\AL\Statement\Statement
+   */
   public function code(): \Guedel\AL\Statement\Statement
   {
     return new StatementList(
