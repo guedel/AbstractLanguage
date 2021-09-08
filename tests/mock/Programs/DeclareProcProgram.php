@@ -27,9 +27,9 @@
 namespace Guedel\Tests\Mock\AL\Programs;
 
 use Guedel\AL\Declaration\ProcedureDecl;
-use Guedel\AL\Declaration\Parameter;
+use Guedel\AL\Declaration\{Parameter, ParametersList};
 use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
 
 /**
  * Description of DeclareProcProgram
@@ -52,8 +52,8 @@ class DeclareProcProgram implements BaseTestProgram
   {
     return new ProcedureDecl(
         "bonjour",
-        new \Guedel\AL\Declaration\ParametersList(new Parameter("name", "IN")),
-        new ProcedureCall("WRITE", new \Guedel\AL\Expression\Variable("name"))
+        new ParametersList(new Parameter("name", "IN")),
+        new ProcedureCall("WRITE", new Variable("name"))
     );
   }
 }
