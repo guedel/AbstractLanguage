@@ -109,48 +109,48 @@ class BasicRuntimeVisitor implements Visitor
         switch ($exp->getOperator()) {
           case Expression::OP_ADD:
             $acc += $op;
-                break;
+              break;
           case Expression::OP_SUB:
             $acc -= $op;
-                break;
+              break;
           case Expression::OP_MULT:
             $acc *= $op;
-                break;
+              break;
           case Expression::OP_DIV:
             $acc /= $op;
-                break;
+              break;
           case Expression::OP_EQUAL:
             // a = b = c <=> a = b AND b = c
             $acc = $acc && $prev == $op;
-                break;
+              break;
           case Expression::OP_DIFF:
             // a != b != c <=> a != b AND b != c
             $acc = $acc && $prev != $op;
-                break;
+              break;
           case Expression::OP_LT:
             // a < b < c <=> a < b AND b < c
             $acc = $acc && $prev < $op;
-                break;
+              break;
           case Expression::OP_GT:
             $acc = $acc && $prev > $op;
-                break;
+              break;
           case Expression::OP_LTE:
             $acc = $acc && $prev <= $op;
-                break;
+              break;
           case Expression::OP_GTE:
             $acc = $acc && $prev >= $op;
-                break;
+              break;
           case Expression::OP_OR:
             $acc |= $op;
-                break;
+              break;
           case Expression::OP_AND:
             $acc &= $op;
-                break;
+              break;
           case Expression::OP_XOR:
             $acc ^= $op;
-                break;
+              break;
           default:
-                throw new InvalidOperatorException();
+              throw new InvalidOperatorException();
         }
       }
     }
@@ -191,13 +191,13 @@ class BasicRuntimeVisitor implements Visitor
   {
     switch ($exp->getOperator()) {
       case Expression::OP_ADD:
-            return $exp->getOperand()->evaluate($this);
+          return $exp->getOperand()->evaluate($this);
       case Expression::OP_NOT:
-            return $exp->getOperand()->evaluate($this);
+          return $exp->getOperand()->evaluate($this);
       case Expression::OP_SUB:
-            return - $exp->getOperand()->evaluate($this);
+          return - $exp->getOperand()->evaluate($this);
       default:
-            throw new InvalidOperatorException();
+          throw new InvalidOperatorException();
     }
   }
 

@@ -72,5 +72,4 @@ class ClassType extends Structure
 
     return $ret . '}';
   }
-
 }

@@ -65,24 +65,24 @@ class BinaryExpression extends Expression
     switch ($this->getOperator()) {
       case self::OP_MULT:
       case self::OP_DIV:
-            return 5;
+          return 5;
       case self::OP_ADD:
       case self::OP_SUB:
-            return 4;
+          return 4;
       case self::OP_EQUAL:
       case self::OP_DIFF:
       case self::OP_LT:
       case self::OP_GT:
       case self::OP_LTE:
       case self::OP_GTE:
-            return 3;
+          return 3;
       case self::OP_AND:
-            return 2;
+          return 2;
       case self::OP_OR:
       case self::OP_XOR:
-            return 1;
+          return 1;
       default:
-            return 0;
+          return 0;
     }
   }
 }

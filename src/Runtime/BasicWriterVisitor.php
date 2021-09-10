@@ -186,10 +186,10 @@ class BasicWriterVisitor implements Visitor
     switch ($exp->getOperator()) {
       case \Guedel\AL\Expression\UnaryExpression::OP_ADD:
         $op = '';
-            break;
+          break;
       case \Guedel\AL\Expression\UnaryExpression::OP_SUB:
           $op = '-';
-            break;
+          break;
       case \Guedel\AL\Expression\UnaryExpression::OP_NOT:
           $op = $this->t('NOT') . ' ';
     }
@@ -415,16 +415,16 @@ class BasicWriterVisitor implements Visitor
     switch ($name) {
       case TypeName::DT_INTEGER:
         $outputname = $this->t("INTEGER");
-            break;
+          break;
       case TypeName::DT_FLOAT:
           $outputname = $this->t("FLOAT");
-            break;
+          break;
       case TypeName::DT_ANY:
           $outputname = $this->t("ANY");
-            break;
+          break;
       default:
           $outputname = $this->t($name);
-            break;
+          break;
     }
       $this->writer->out($outputname);
   }
