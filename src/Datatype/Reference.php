@@ -52,6 +52,6 @@ class Reference implements Type
 
   public function getSignature(): string
   {
-      return '&(' . $type->getSignature() . ')';
+      return '&(' . $this->type->getSignature() . ')';
   }
 }

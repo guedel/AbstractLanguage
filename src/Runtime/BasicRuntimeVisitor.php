@@ -30,6 +30,8 @@ use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\BinaryExpression;
+use Gudele\AL\Exception\InvalidOperatorException;
+use Gudele\AL\Exception\NotFoundException;
 
 /**
  * Description of BasicRuntimeVisitor

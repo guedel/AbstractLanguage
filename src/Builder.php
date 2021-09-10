@@ -27,10 +27,11 @@
 namespace Guedel\AL;
 
 use Datatype\Type;
-use Guedel\AL\Expression\Expression;
+use Guedel\AL\Expression;
 use Guedel\AL\Expression\BinaryExpression;
-use Guedel\AL\Expression\Valuable;
+use Guedel\AL\Expresion\Valuable;
 use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\BinaryExpression;
 
 /**
  * Build any class in Abstract Language
@@ -68,7 +69,7 @@ class Builder
     return $this;
   }
 
-  public function stmtVariable(string $name, Type $type): Builder
+  public function stmtVariable(string $name, Datatype\Type $type): Builder
   {
     $this->statements->add(new Declaration\VariableDecl($name, $type));
     return $this;
@@ -89,7 +90,7 @@ class Builder
 
   public function stmtFunction(
       string $name,
-      Type $return_type,
+      DaataType\Type $return_type,
       Declaration\ParametersList $parameters = null
   ): Builder {
     $ret = $this->stmtBegin();
@@ -183,54 +184,54 @@ function fnExp(string $name, Valuable ...$args): Expression\FunctionCall
   return new Expression\FunctionCall($name, ... $args);
 }
 
-function addExp(Expression\Valuable ...$exp): BinaryExpression
+function addExp(Valuable ...$exp): BinaryExpression
 {
   return new BinaryExpression(Expression::OP_ADD, ... $exp);
 }
 
-function subsExp(Expression\Valuable ...$exp): BinaryExpression
+function subsExp(Valuable ...$exp): BinaryExpression
 {
   return new BinaryExpression(Expression::OP_SUB, ... $exp);
 }
 
-function multExp(Expression\Valuable ...$exp): BinaryExpression
+function multExp(Valuable ...$exp): BinaryExpression
 {
   return new BinaryExpression(Expression::OP_MULT, ... $exp);
 }
 
-function divExp(Expression\Valuable ...$exp): BinaryExpression
+function divExp(Valuable ...$exp): BinaryExpression
 {
   return new BinaryExpression(Expression::OP_DIV, ... $exp);
 }
 
 function eqExp(Valuable $left, Valuable $right): BinaryExpression
 {
-  return new BinaryExpression(Expression\Expression::OP_EQUAL, $left, $right);
+  return new BinaryExpression(Expression::OP_EQUAL, $left, $right);
 }
 
 function ltExp(Valuable $left, Valuable $right): BinaryExpression
 {
-  return new BinaryExpression(Expression\Expression::OP_LT, $left, $right);
+  return new BinaryExpression(Expression::OP_LT, $left, $right);
 }
 
 function lteExp(Valuable $left, Valuable $right): BinaryExpression
 {
-  return new BinaryExpression(Expression\Expression::OP_LTE, $left, $right);
+  return new BinaryExpression(Expression::OP_LTE, $left, $right);
 }
 
 function gtExp(Valuable $left, Valuable $right): BinaryExpression
 {
-  return new BinaryExpression(Expression\Expression::OP_GT, $left, $right);
+  return new BinaryExpression(Expression::OP_GT, $left, $right);
 }
 
 function gteExp(Valuable $left, Valuable $right): BinaryExpression
 {
-  return new BinaryExpression(Expression\Expression::OP_GTE, $left, $right);
+  return new BinaryExpression(Expression::OP_GTE, $left, $right);
 }
 
 function diffExp(Valuable $left, Valuable $right): BinaryExpression
 {
-  return new BinaryExpression(Expression\Expression::OP_DIFF, $left, $right);
+  return new BinaryExpression(Expression::OP_DIFF, $left, $right);
 }
 
 function v($val): Valuable
