@@ -68,7 +68,7 @@ class Builder
     return $this;
   }
 
-  public function stmtVariable(string $name, Type $type): Builder
+  public function stmtVariable(string $name, Datatype\Type $type): Builder
   {
     $this->statements->add(new Declaration\VariableDecl($name, $type));
     return $this;

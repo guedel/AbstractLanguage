@@ -119,12 +119,12 @@ class MemoryStorage implements BasicStorage
       throw new \OverflowException();
   }
 
-  public function retrieveObject(int $address): stdClass
+  public function retrieveObject(int $address): \stdClass
   {
     // TODO
   }
 
-  public function storeObject(stdClass $value, int $address)
+  public function storeObject(\stdClass $value, int $address)
   {
     // TODO
   }
