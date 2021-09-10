@@ -28,7 +28,6 @@ namespace Guedel\AL;
 
 use Datatype\Type;
 use Guedel\AL\Expression;
-use Guedel\AL\Expression\BinaryExpression;
 use Guedel\AL\Expresion\Valuable;
 use Guedel\AL\Expression\Value;
 use Guedel\AL\Expression\BinaryExpression;
