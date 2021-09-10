@@ -63,26 +63,26 @@ class BinaryExpression extends Expression
   public function getPriority(): int
   {
     switch ($this->getOperator()) {
-      case OP_MULT:
-      case OP_DIV:
-            return 5;
-      case OP_ADD:
-      case OP_SUB:
-            return 4;
-      case OP_EQUAL:
-      case OP_DIFF:
-      case OP_LT:
-      case OP_GT:
-      case OP_LTE:
-      case OP_GTE:
-            return 3;
-      case OP_AND:
-            return 2;
-      case OP_OR:
-      case OP_XOR:
-            return 1;
+      case self::OP_MULT:
+      case self::OP_DIV:
+          return 5;
+      case self::OP_ADD:
+      case self::OP_SUB:
+          return 4;
+      case self::OP_EQUAL:
+      case self::OP_DIFF:
+      case self::OP_LT:
+      case self::OP_GT:
+      case self::OP_LTE:
+      case self::OP_GTE:
+          return 3;
+      case self::OP_AND:
+          return 2;
+      case self::OP_OR:
+      case self::OP_XOR:
+          return 1;
       default:
-            return 0;
+          return 0;
     }
   }
 }

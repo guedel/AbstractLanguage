@@ -73,11 +73,11 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
   {
     switch ($fn->getName()) {
       case 'sin':
-            return 0.5;
+          return 0.5;
       case 'cos':
-            return 0.66;
+          return 0.66;
       case 'souschaine':
-            return 'abc';
+          return 'abc';
     }
   }
 
@@ -100,9 +100,9 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
   {
     switch ($variable->getVarname()) {
       case 'alpha':
-            return 'abdef';
+          return 'abdef';
       case 'num':
-            return '124';
+          return '124';
     }
     return null;
   }

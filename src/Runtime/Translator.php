@@ -46,7 +46,6 @@ class Translator
       'EACH' => 'CHAQUE',
       'ELSE' => 'SINON',
       'END' => 'FIN',
-      'ELSE' => 'SINON',
       'IF' => 'SI',
       'IN' => 'DANS',
       'INTEGER' => 'ENTIER',
@@ -81,7 +80,7 @@ class Translator
     }
     try {
         return self::$words[$this->language][$word];
-    } catch (Exception $ex) {
+    } catch (\Exception $ex) {
     }
       return $word;
   }
