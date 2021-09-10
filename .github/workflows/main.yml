@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Analayse de code statique
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  static-code-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: PHPStan
+        uses: docker://jakzal/phpqa:php8.0-alpine
+        with:
+          args: phpstan analyze src/ -l 1
+      - name: PHP-CS-Fixer
+        uses: docker://jakzal/phpqa:php8.0-alpine
+        with:
+          args: php-cs-fixer --dry-run --allow-risky=yes --no-interaction --ansi fix
+      - name: Deptrac
+        uses: docker://jakzal/phpqa:php8.0-alpine
+        with:
+          args: deptrac --no-interaction --ansi --formatter-graphviz-display=0
