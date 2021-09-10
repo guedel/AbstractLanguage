@@ -31,7 +31,7 @@ jobs:
 #        uses: docker://jakzal/phpqa:php8.0-alpine
 #        with:
 #          args: php-cs-fixer --dry-run --allow-risky=yes --no-interaction --ansi fix
-      - name: Deptrac
-        uses: docker://jakzal/phpqa:php7.4-alpine
-        with:
-          args: deptrac --no-interaction --ansi --formatter-graphviz-display=0
+#      - name: Deptrac
+#        uses: docker://jakzal/phpqa:php7.4-alpine
+#        with:
+#          args: deptrac --no-interaction --ansi --formatter-graphviz-display=0
