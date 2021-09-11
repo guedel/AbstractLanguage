@@ -1,0 +1,17 @@
+paths:
+  - ./src
+exclude_files:
+  - '#.*test.*#'
+layers:
+  - name: Runtime
+    collectors:
+      - type: className
+        regex: src\/Runtime\/.*
+  - name: Library
+    collectors:
+      - type: className
+        regex: src\/(!Runtime)
+ruleset:
+  Runtime:
+    - Library
+  Library:
