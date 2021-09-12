@@ -24,37 +24,49 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
-use Guedel\AL\Statement\IfThenStmt;
-use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Expression\Value;
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+
+use Guedel\AL\Statement\{StatementList, ReturnStmt};
+use Guedel\AL\Expression\{
+  Expression,
+  UnaryExpression,
+  BinaryExpression,
+  Value,
+  Variable
+};
 
 /**
- * Description of IfThenElseProgram
+ *Test of expressions
  *
  * @author Guedel <guedel87@live.fr>
  */
-class IfThenElseProgram implements BaseTestProgram
+class ExpressionsProgram implements BaseTestProgram
 {
-  //put your code here
   public function attend(): string
   {
     return join(PHP_EOL, [
-        "IF \"a\" THEN",
-        "\tWRITE \"OK\"",
-        "ELSE",
-        "\tWRITE \"NOT OK\"",
-        "END IF",
+        "RETURN a, -a, NOT a",
+        "RETURN a + b, a - b, a * b, a / b, a != b"
     ]) . PHP_EOL;
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    return new IfThenStmt(
-        new Value("a"),
-        new ProcedureCall("WRITE", new Value("OK")),
-        new ProcedureCall("WRITE", new Value("NOT OK"))
+    return new StatementList(
+        new ReturnStmt(
+            new UnaryExpression(Expression::OP_ADD, new Variable("a")),
+            new UnaryExpression(Expression::OP_SUB, new Variable("a")),
+            new UnaryExpression(Expression::OP_NOT, new Variable("a"))
+        ),
+        new ReturnStmt(
+            new BinaryExpression(Expression::OP_ADD, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_SUB, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_MULT, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_DIV, new Variable("a"), new Variable("b")),
+            new BinaryExpression(Expression::OP_DIFF, new Variable("a"), new Variable("b"))
+        )
     );
   }
 }

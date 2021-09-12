@@ -28,7 +28,8 @@ namespace Guedel\Tests\Functionnal\AL;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Runtime\BasicWriterVisitor;
 use Guedel\AL\Runtime\Translator;
-use Guedel\Tests\Mock\AL\Programs as Prog;
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+use Guedel\Tests\Mock\AL\Programs\Writer as Prog;
 use Guedel\Stream\CodeWriter;
 
 /**
@@ -53,7 +54,7 @@ class BasicWriterVisitorTest extends TestCase
    * @dataProvider programs
    * @coversNothing
    */
-  public function testProgram(Prog\BaseTestProgram $p)
+  public function testProgram(BaseTestProgram $p)
   {
     $p->code()->accept($this->visitor);
     $r = $this->writer->render();

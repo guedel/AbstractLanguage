@@ -23,7 +23,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Writer;
+
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
