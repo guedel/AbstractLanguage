@@ -34,5 +34,21 @@
   },
   "require-dev": {
     "phpunit/phpunit": "~9-stable"
+  },
+  "scripts": {
+    "phpstan-test": "phpstan analyze src/ -l 1",
+    "phpunit-test": "phpunit",
+    "phpcs-test": "phpcs",
+    "deptrac-test": "deptrac --no-interaction --ansi --graphviz-display=0",
+    "static-tests": [
+      "@phpstan-test",
+      "@deptrac-test"
+    ],
+    "unit-tests": "@phpunit-test",
+    "all-tests": [
+      "@static-tests",
+      "@unit-tests"
+    ]
+    
   }
 }
