@@ -1,36 +1,38 @@
 {
-    "name": "guedel/al",
-    "description": "Library of Php Abstract Language",
-    "type": "library",
-    "license": "MIT",
-    "minimum-stability": "dev",
-    "authors": [
-        {
-            "name": "Guedel",
-            "email": "guedel87@live.fr"
-        }
-    ],
-    "repositories": [
-      {
-        "type": "vcs",
-        "url": "https://github.com/guedel/Stream"
-      }
-    ],
-	"autoload": {
-		"psr-4": { "Guedel\\AL\\": "src/" } 
-	},
-    "autoload-dev": {
-		"psr-4": { 
-          "Guedel\\Tests\\Unit\\AL\\": "tests/unit/" ,
-          "Guedel\\Tests\\Functional\\AL\\": "tests/functional/",
-          "Guedel\\Tests\\Mock\\AL\\": "tests/mock/"
-    } 
-    },
-    "require": {
-        "php": "~7.4|~8",
-        "guedel/stream": "dev-master"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~9-stable"
+  "name": "guedel/al",
+  "description": "Library of Php Abstract Language",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Guedel",
+      "email": "guedel87@live.fr"
     }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/guedel/Stream"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Guedel\\AL\\": "src/"
+    } 
+  },
+  "autoload-dev": {
+    "psr-4": { 
+      "Guedel\\Tests\\Unit\\AL\\": "tests/unit/",
+      "Guedel\\Tests\\Functional\\AL\\": "tests/functional/",
+      "Guedel\\Tests\\Mock\\AL\\": "tests/mock/"
+    } 
+  },
+  "require": {
+    "php": "~7.4|~8",
+    "guedel/stream": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~9-stable"
+  }
 }
