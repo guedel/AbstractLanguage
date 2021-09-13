@@ -216,11 +216,12 @@ class BasicRuntimeVisitor implements Visitor
 
   public function evalVariable(\Guedel\AL\Expression\Variable $variable)
   {
-    $name = $variable->get_varname();
+    $name = $variable->getVarname();
     $v = $this->context->findVariable($name);
-    if (! $v === null) {
+    if ($v === null) {
       throw new NotFoundException("variable $name not found in this scope");
     }
+    return $v->getValue()->evaluate($this);
   }
 
   public function visitAny(\Guedel\AL\Datatype\Any $type)
@@ -233,6 +234,13 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
   {
+    $name = $stmt->getVariableName();
+    $v = $this->context->findVariable($name);
+    if ($v === null) {
+      throw new NotFoundException("variable $name not found in this scope");
+    }
+    $value = $stmt->getExpression()->evaluate($this);
+    $v->setValue($value);
   }
 
   public function visitClass(\Guedel\AL\Datatype\ClassType $type)

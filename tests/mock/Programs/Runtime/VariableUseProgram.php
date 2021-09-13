@@ -24,46 +24,37 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
-use Guedel\AL\Statement\StatementList;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\AssignStmt;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Description of VariableUseProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class VariableUseProgram implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  public function code(): Statement
   {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
-  
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return new Module('varUse',
+        new VariableDecl('v'),
+        new AssignStmt('v', new Value("Hello World !")),
+        new ProcedureCall('write', new Variable('v'))
+    );
   }
 
-  public function programs()
+  public function expect(): string
   {
-    return [
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-        'variable use' => [new Prog\VariableUseProgram()],
-    ];
+    return "Hello World !";
   }
 
-  
 }

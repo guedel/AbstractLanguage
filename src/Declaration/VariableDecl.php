@@ -58,13 +58,13 @@ class VariableDecl extends NamedDeclaration
   public function setValue($value)
   {
     if ($value instanceof Value) {
-      $this->value = $this->value;
+      $this->value = $value;
     } else {
       $this->value = new Value($value);
     }
   }
 
-  public function getValue()
+  public function getValue(): Value
   {
     return $this->value;
   }
