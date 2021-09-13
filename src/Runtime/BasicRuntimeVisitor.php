@@ -26,8 +26,10 @@
 
 namespace Guedel\AL\Runtime;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\Valuable;
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\BinaryExpression;
 use Guedel\AL\Exception\InvalidOperatorException;
@@ -41,13 +43,18 @@ use Guedel\AL\Exception\NotFoundException;
 class BasicRuntimeVisitor implements Visitor
 {
   private BasicRuntimeContext $context;
+  
+  private function debug($output)
+  {
+    $f = fopen("test.out", "a+");
+    fwrite($f, $output . PHP_EOL);
+    fclose($f);
+  }
 
-  public function run(StatementList $statements)
+  public function run(Statement $statement)
   {
     $this->context = new BasicRuntimeContext();
-    foreach ($statements as $stmt) {
-      $stmt->accept($this);
-    }
+    $statement->accept($this);
   }
 
   private function pushContext(string $name = null)
@@ -274,12 +281,10 @@ class BasicRuntimeVisitor implements Visitor
       return;
     }
     $name = strtolower($proc->getName());
-
-    // special case of print
-    $proc = $this->context->findProcedure($name);
-    if ($proc === null) {
+    $pf = $this->context->findProcedure($name);
+    if ($pf === null) {
       if (function_exists($name)) {
-        // call of PHP function
+        $this->phpProcedure($proc);
         return ;
       }
       throw new NotFoundException("procedure $name not found in this scope");
@@ -350,10 +355,10 @@ class BasicRuntimeVisitor implements Visitor
   private function internalCommand(\Guedel\AL\Statement\ProcedureCall $proc): bool
   {
     // TODO remplacer par un mapping
-    $name = $proc->getName();
+    $name = strtolower($proc->getName());
     if ($name === 'write' || $name === 'writeln') {
       foreach ($proc->getParameters() as $p) {
-        if ($p instanceof Expression) {
+        if ($p instanceof Valuable) {
           echo $p->evaluate($this);
         }
       }
@@ -363,6 +368,27 @@ class BasicRuntimeVisitor implements Visitor
       return true;
     }
     return false;
+  }
+  
+  private function phpProcedure(\Guedel\AL\Statement\ProcedureCall $proc): void
+  {
+    call_user_func_array($proc->getName(), $this->builParametersArray($proc->getParameters()));
+  }
+
+  private function phpFunction(\Guedel\AL\Expression\FunctionCall $func): mixed
+  {
+    return call_user_func_array($func->getName(), $this->builParametersArray($func->getParameters()));
+  }
+  
+  private function builParametersArray(\Guedel\AL\Expression\ExpressionList $list): array
+  {
+    $params = [];
+    foreach($list as $param) {
+      if ($param instanceof Valuable) {
+        $params[] = $param->evaluate($this);
+      }
+    }
+    return $params;
   }
   
 }

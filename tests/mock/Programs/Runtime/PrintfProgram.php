@@ -24,45 +24,32 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
-use Guedel\AL\Statement\StatementList;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Expression\Value;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Test of call of internal functions of PHP
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class PrintfProgram implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  public function expect(): string
   {
-    $this->visitor = new BasicRuntimeVisitor();
+    return "Hello World !";
   }
   
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
+  public function code(): Statement
   {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return new Module(
+        "Hello",
+        new ProcedureCall("printf", new Value("Hello %s !"), new Value("World"))
+    );
   }
-
-  public function programs()
-  {
-    return [
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-    ];
-  }
-
-  
 }
