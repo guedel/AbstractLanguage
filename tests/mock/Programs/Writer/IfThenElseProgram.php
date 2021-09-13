@@ -40,7 +40,7 @@ use Guedel\AL\Expression\Value;
 class IfThenElseProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "IF \"a\" THEN",

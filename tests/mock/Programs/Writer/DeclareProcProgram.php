@@ -41,7 +41,7 @@ use Guedel\AL\Expression\Variable;
 class DeclareProcProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "PROCEDURE bonjour(IN name: ANY)",

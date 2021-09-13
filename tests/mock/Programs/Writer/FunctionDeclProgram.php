@@ -48,7 +48,7 @@ use Guedel\AL\Datatype\TypeName;
  */
 class FunctionDeclProgram implements BaseTestProgram
 {
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "FUNCTION fact(IN n: INTEGER): INTEGER",

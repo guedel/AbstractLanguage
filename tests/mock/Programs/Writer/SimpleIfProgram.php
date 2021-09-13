@@ -40,7 +40,7 @@ use Guedel\AL\Expression\Value;
 class SimpleIfProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "IF TRUE THEN",

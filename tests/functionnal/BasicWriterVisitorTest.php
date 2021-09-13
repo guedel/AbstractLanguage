@@ -58,7 +58,7 @@ class BasicWriterVisitorTest extends TestCase
   {
     $p->code()->accept($this->visitor);
     $r = $this->writer->render();
-    $this->assertEquals($p->attend(), $r);
+    $this->assertEquals($p->expect(), $r);
   }
 
 

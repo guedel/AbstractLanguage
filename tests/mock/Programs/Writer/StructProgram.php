@@ -39,7 +39,7 @@ use Guedel\AL\Declaration\TypeDecl;
  */
 class StructProgram implements BaseTestProgram
 {
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "TYPE mystruct: STRUCT",

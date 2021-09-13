@@ -40,7 +40,7 @@ use Guedel\AL\Datatype\{ Enumeration, Number, StringOfChars, Reference, ArrayOf,
 class DeclareTypeProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "TYPE sample1: STRING * 50",

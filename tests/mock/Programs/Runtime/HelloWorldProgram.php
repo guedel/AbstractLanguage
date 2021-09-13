@@ -23,46 +23,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Guedel\Tests\Unit\AL\Statement;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Statement\StatementList;
-use Guedel\Tests\Mock\AL\EmptyStatement;
-use Guedel\Tests\Mock\AL\TestVisitor;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
+
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Expression\Value;
 
 /**
- * Description of StatementListTest
+ * Description of HelloWorldProgram
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Guedel\AL\Statement\StatementList
  */
-class StatementListTest extends TestCase
+class HelloWorldProgram implements BaseTestProgram
 {
-  /**
-   *
-   */
-  public function testEmptyList()
+  public function expect(): string
   {
-    $list = new StatementList();
-    $this->assertCount(0, $list);
-  }
-
-  public function testCountElementList()
-  {
-    $list = new StatementList(new EmptyStatement());
-    $this->assertCount(1, $list);
-    $list->add(new EmptyStatement());
-    $this->assertCount(2, $list);
+    return "Hello World !";
   }
   
-  public function testEnumElementList()
+  public function code(): Statement
   {
-    $visitor = new TestVisitor();
-    $list = new StatementList(new EmptyStatement(), new EmptyStatement());
-    $this->assertCount(2, $list);
-    foreach ($list as $item) {
-      $this->assertInstanceOf(EmptyStatement::class, $item);
-      $this->assertEquals('EMPTY', $item->accept($visitor));
-    }
+    return new Module(
+        "Hello",
+        new ProcedureCall("WRITE", new Value("Hello World !"))
+    );
   }
 }

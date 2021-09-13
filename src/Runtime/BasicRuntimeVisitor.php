@@ -30,8 +30,8 @@ use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\BinaryExpression;
-use Gudele\AL\Exception\InvalidOperatorException;
-use Gudele\AL\Exception\NotFoundException;
+use Guedel\AL\Exception\InvalidOperatorException;
+use Guedel\AL\Exception\NotFoundException;
 
 /**
  * Description of BasicRuntimeVisitor
@@ -41,6 +41,7 @@ use Gudele\AL\Exception\NotFoundException;
 class BasicRuntimeVisitor implements Visitor
 {
   private BasicRuntimeContext $context;
+
   public function run(StatementList $statements)
   {
     $this->context = new BasicRuntimeContext();
@@ -269,6 +270,36 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
   {
+    if ( $this->internalCommand($proc)) {
+      return;
+    }
+    $name = strtolower($proc->getName());
+
+    // special case of print
+    $proc = $this->context->findProcedure($name);
+    if ($proc === null) {
+      if (function_exists($name)) {
+        // call of PHP function
+        return ;
+      }
+      throw new NotFoundException("procedure $name not found in this scope");
+    }
+
+    $this->pushContext($name);
+    // Les arguments
+    $itParams = $proc->getParameters()->getIterator();
+    foreach ($proc->getParameters() as $param) {
+      if ($itParams->valid()) {
+        $var = new VariableDecl($itParams->getName(), $itParams->getType);
+        $var->setValue($param->getValue());
+        $this->context->addVariable($var);
+      }
+      $itParams->next();
+    }
+
+    // Appel des instructions de la fonction
+    $proc->getBody()->accept($this);
+    $this->popContext();
   }
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)
@@ -310,4 +341,28 @@ class BasicRuntimeVisitor implements Visitor
       $stmt->get_statement()->accept($this);
     }
   }
+  
+  /**
+   * 
+   * @param \Guedel\AL\Statement\ProcedureCall $proc
+   * @return bool true if internal procédure found
+   */
+  private function internalCommand(\Guedel\AL\Statement\ProcedureCall $proc): bool
+  {
+    // TODO remplacer par un mapping
+    $name = $proc->getName();
+    if ($name === 'write' || $name === 'writeln') {
+      foreach ($proc->getParameters() as $p) {
+        if ($p instanceof Expression) {
+          echo $p->evaluate($this);
+        }
+      }
+      if ($name === 'writeln') {
+        echo PHP_EOL;
+      }
+      return true;
+    }
+    return false;
+  }
+  
 }

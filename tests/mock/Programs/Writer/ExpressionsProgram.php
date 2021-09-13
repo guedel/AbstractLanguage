@@ -44,7 +44,7 @@ use Guedel\AL\Expression\{
  */
 class ExpressionsProgram implements BaseTestProgram
 {
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "RETURN a, -a, NOT a",

@@ -44,7 +44,7 @@ class VariableUseProgram implements BaseTestProgram
   /**
    * @inherit
    */
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "VAR i: ANY",

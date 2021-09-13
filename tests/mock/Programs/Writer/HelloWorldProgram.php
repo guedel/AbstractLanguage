@@ -39,7 +39,7 @@ use Guedel\AL\Expression\Value;
 class HelloWorldProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "MODULE Hello",

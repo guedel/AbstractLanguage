@@ -23,46 +23,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Guedel\Tests\Unit\AL\Statement;
+
+namespace Guedel\Tests\Functionnal\AL;
 
 use PHPUnit\Framework\TestCase;
+use Guedel\AL\Runtime\BasicRuntimeVisitor;
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
 use Guedel\AL\Statement\StatementList;
-use Guedel\Tests\Mock\AL\EmptyStatement;
-use Guedel\Tests\Mock\AL\TestVisitor;
 
 /**
- * Description of StatementListTest
+ * Description of BasicRuntimeVisitorTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Guedel\AL\Statement\StatementList
  */
-class StatementListTest extends TestCase
+class BasicRuntimeVisitorTest extends TestCase
 {
-  /**
-   *
-   */
-  public function testEmptyList()
+  private BasicRuntimeVisitor $visitor;
+  
+  public function setUp(): void
   {
-    $list = new StatementList();
-    $this->assertCount(0, $list);
-  }
-
-  public function testCountElementList()
-  {
-    $list = new StatementList(new EmptyStatement());
-    $this->assertCount(1, $list);
-    $list->add(new EmptyStatement());
-    $this->assertCount(2, $list);
+    $this->visitor = new BasicRuntimeVisitor();
   }
   
-  public function testEnumElementList()
+  /**
+   * @dataProvider programs
+   * @coversNothing
+   */
+  public function testProgram(BaseTestProgram $p)
   {
-    $visitor = new TestVisitor();
-    $list = new StatementList(new EmptyStatement(), new EmptyStatement());
-    $this->assertCount(2, $list);
-    foreach ($list as $item) {
-      $this->assertInstanceOf(EmptyStatement::class, $item);
-      $this->assertEquals('EMPTY', $item->accept($visitor));
-    }
+    ob_start();
+    $code = new StatementList($p->code());
+    $this->visitor->run($code);
+    $result = ob_get_flush();
+    $this->assertEquals($p->expect(), $result);
   }
+
+  public function programs()
+  {
+    return [
+        'hello world' => [new Prog\HelloWorldProgram()],
+    ];
+  }
+
+  
 }

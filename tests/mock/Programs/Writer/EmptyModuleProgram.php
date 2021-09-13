@@ -36,7 +36,7 @@ use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 class EmptyModuleProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return "MODULE Empty" . PHP_EOL . "END MODULE" . PHP_EOL;
   }
