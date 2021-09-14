@@ -24,47 +24,33 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
-use Guedel\AL\Statement\StatementList;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\AL\Expression\Value;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Test of call of php function
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class PhpFunctionCall implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  public function code(): Statement
   {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
-  
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return new Module("phpfunctioncall", 
+        new ProcedureCall("write", new FunctionCall("sprintf", new Value("Hello %s !"), new Value("World")))
+    );
   }
 
-  public function programs()
+  public function expect(): string
   {
-    return [
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-        'variable use' => [new Prog\VariableUseProgram()],
-        'php function call' => [new Prog\PhpFunctionCall()],
-    ];
+    return "Hello World !";
   }
 
-  
 }

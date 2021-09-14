@@ -169,12 +169,12 @@ class BasicRuntimeVisitor implements Visitor
   {
     $name = $fn->getName();
 
-    if (function_exists($name)) {
-      // call of PHP function
-      return ;
-    }
     $func = $this->context->findFunction($name);
     if ($func === null) {
+      if (function_exists($name)) {
+        // call of PHP function
+        return $this->phpFunction($fn);
+      }
       throw new NotFoundException("function $name not found in this scope");
     }
 
@@ -383,7 +383,7 @@ class BasicRuntimeVisitor implements Visitor
     call_user_func_array($proc->getName(), $this->builParametersArray($proc->getParameters()));
   }
 
-  private function phpFunction(\Guedel\AL\Expression\FunctionCall $func): mixed
+  private function phpFunction(\Guedel\AL\Expression\FunctionCall $func)
   {
     return call_user_func_array($func->getName(), $this->builParametersArray($func->getParameters()));
   }
