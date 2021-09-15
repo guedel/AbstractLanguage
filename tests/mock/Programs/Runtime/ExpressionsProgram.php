@@ -24,48 +24,45 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
-use Guedel\AL\Statement\StatementList;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\BinaryExpression;
+use Guedel\AL\Expression\Expression;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Description of ExpressionsProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class ExpressionsProgram implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  //put your code here
+  public function code(): Statement
   {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
-  
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return new Module("expressions", 
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_ADD, new Value(4), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_MULT, new Value(4), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_DIV, new Value(8), new Value(2))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_SUB, new Value(4), new Value(3))),
+    );
+    
   }
 
-  public function programs()
+  public function expect(): string
   {
-    return [
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-        'variable use' => [new Prog\VariableUseProgram()],
-        'php function call' => [new Prog\PhpFunctionCall()],
-        'expression' => [new Prog\ExpressionsProgram()],
-    ];
+    return implode(PHP_EOL, [
+        '7',
+        '12',
+        '4',
+        '1',
+    ]) . PHP_EOL;
   }
 
-  
 }

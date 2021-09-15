@@ -27,7 +27,6 @@
 namespace Guedel\AL\Runtime;
 
 use Guedel\AL\Statement\Statement;
-use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Expression\Valuable;
 use Guedel\AL\Expression\Expression;
@@ -108,7 +107,8 @@ class BasicRuntimeVisitor implements Visitor
   {
     $first = true;
     $acc = null;
-    foreach ($exp->getOperands() as $op) {
+    foreach ($exp->getOperands() as $operand) {
+      $op = $operand->evaluate($this);
       if ($first) {
         $acc = $op;
         $prev = $op;
@@ -267,11 +267,11 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)
   {
-    $test = $stmt->get_iftest()->evaluate($this);
+    $test = $stmt->getIfTest()->evaluate($this);
     if ($test) {
-      return $stmt->get_then_part()->accept($this);
+      return $stmt->getThenPart()->accept($this);
     } else {
-      $elsePart = $stmt->get_else_part();
+      $elsePart = $stmt->getElsePart();
       if ($elsePart) {
         return $elsePart->accept($this);
       }
