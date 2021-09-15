@@ -24,50 +24,40 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
-use Guedel\AL\Statement\StatementList;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\ForStmt;
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Description of ForProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class ForProgram implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  //put your code here
+  public function code(): Statement
   {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
-  
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return new Module("forstmt",
+        new VariableDecl('i'),
+        new ForStmt('i', new Value(1), new Value(5), new Value(1), 
+            new ProcedureCall('writeln', new Variable('i'))),
+        new ForStmt('i', new Value(5), new Value(1), new Value(-1), 
+            new ProcedureCall('writeln', new Variable('i')))
+    );
   }
 
-  public function programs()
+  public function expect(): string
   {
-    return [
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-        'variable use' => [new Prog\VariableUseProgram()],
-        'php function call' => [new Prog\PhpFunctionCall()],
-        'expression' => [new Prog\ExpressionsProgram()],
-        'if then structure' => [new Prog\IfThenProgram()],
-        'for structure' => [new Prog\ForProgram()],
-    ];
+    return join(PHP_EOL, [1,2,3,4,5,5,4,3,2,1]) . PHP_EOL;
   }
 
-  
 }

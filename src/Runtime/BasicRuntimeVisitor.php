@@ -263,6 +263,35 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
   {
+    $name = $stmt->getVariableName();
+    $var = $this->context->findVariable($name);
+    if ($var === null) {
+      // variable must be declared
+      throw new NotFoundException("variable $name not found in this scope");
+    }
+
+    $start = $stmt->getInitial()->evaluate($this);
+    $final = $stmt->getFinal()->evaluate($this);
+    $increment = $stmt->getIncrement()->evaluate($this);
+    if ($increment > 0) {
+      for (
+          $var->setValue($start); 
+          $var->getValue()->evaluate($this) <= $final; 
+          $var->setValue($var->getValue()->evaluate($this) + $increment)
+      ) {
+        $stmt->getStatement()->accept($this);
+      }
+    } elseif ($increment < 0) {
+      for (
+          $var->setValue($start); 
+          $var->getValue()->evaluate($this) >= $final; 
+          $var->setValue($var->getValue()->evaluate($this) + $increment)
+      ) {
+        $stmt->getStatement()->accept($this);
+      }
+    } else {
+      
+    }
   }
 
   public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)

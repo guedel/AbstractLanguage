@@ -31,7 +31,6 @@ use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Expression\FunctionCall;
 use Guedel\AL\Expression\Value;
 use Guedel\AL\Expression\BinaryExpression;
 use Guedel\AL\Expression\Expression;
