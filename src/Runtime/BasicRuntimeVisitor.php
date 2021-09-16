@@ -290,7 +290,7 @@ class BasicRuntimeVisitor implements Visitor
         $stmt->getStatement()->accept($this);
       }
     } else {
-      
+      throw new EndlessLoopException();
     }
   }
 
