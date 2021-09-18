@@ -37,7 +37,7 @@ use Guedel\AL\Expression\Value;
  * @covers BinaryExpression::evaluate
  * @covers BasicRuntimeVisitor::evalBinaryExpression
  */
-class EqualityTests extends TestCase
+class EqualityTest extends TestCase
 {
   private $visitor;
   
