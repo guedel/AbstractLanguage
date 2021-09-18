@@ -66,6 +66,7 @@ class BasicRuntimeVisitorTest extends TestCase
         'expression' => [new Prog\ExpressionsProgram()],
         'if then structure' => [new Prog\IfThenProgram()],
         'for structure' => [new Prog\ForProgram()],
+        'while structure' => [new Prog\WhileProgram()],
     ];
   }
 

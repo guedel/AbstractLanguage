@@ -33,6 +33,7 @@ use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\BinaryExpression;
 use Guedel\AL\Exception\InvalidOperatorException;
 use Guedel\AL\Exception\NotFoundException;
+use Guedel\AL\Exception\EndlessLoopException;
 
 /**
  * Description of BasicRuntimeVisitor
@@ -111,7 +112,6 @@ class BasicRuntimeVisitor implements Visitor
       $op = $operand->evaluate($this);
       if ($first) {
         $acc = $op;
-        $prev = $op;
         $first = false;
       } else {
         switch ($exp->getOperator()) {
@@ -161,6 +161,7 @@ class BasicRuntimeVisitor implements Visitor
               throw new InvalidOperatorException();
         }
       }
+      $prev = $op;
     }
     return $acc;
   }
@@ -240,6 +241,7 @@ class BasicRuntimeVisitor implements Visitor
       throw new NotFoundException("variable $name not found in this scope");
     }
     $value = $stmt->getExpression()->evaluate($this);
+    $this->debug(print_r($value, true));
     $v->setValue($value);
   }
 
@@ -378,9 +380,9 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
   {
-    $test = $stmt->get_test();
+    $test = $stmt->getTest();
     while ($test->evaluate($this)) {
-      $stmt->get_statement()->accept($this);
+      $stmt->getStatement()->accept($this);
     }
   }
   

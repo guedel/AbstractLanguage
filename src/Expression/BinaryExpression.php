@@ -38,9 +38,10 @@ class BinaryExpression extends Expression
 {
   private ExpressionList $operands;
 
-  public function __construct(string $operator, Valuable ...$operands)
+  public function __construct(string $operator, Valuable $op1, Valuable $op2, Valuable ...$operands)
   {
       parent::__construct($operator);
+      array_unshift($operands, $op1, $op2);
       $this->operands = new ExpressionList(...$operands);
   }
 

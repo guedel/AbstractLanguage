@@ -50,6 +50,10 @@ class ExpressionsProgram implements BaseTestProgram
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_MULT, new Value(4), new Value(3))),
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_DIV, new Value(8), new Value(2))),
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_SUB, new Value(4), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_LT, new Value(0), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_LTE, new Value(0), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_GT, new Value(4), new Value(0))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_GTE, new Value(4), new Value(0))),
     );
     
   }
@@ -61,6 +65,8 @@ class ExpressionsProgram implements BaseTestProgram
         '12',
         '4',
         '1',
+        1, 1, 1, 1
+        
     ]) . PHP_EOL;
   }
 
