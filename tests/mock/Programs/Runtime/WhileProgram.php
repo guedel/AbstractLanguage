@@ -24,54 +24,47 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
+
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\WhileStmt;
+use Guedel\AL\Statement\AssignStmt;
 use Guedel\AL\Statement\StatementList;
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
+use Guedel\AL\Expression\BinaryExpression;
+use Guedel\AL\Expression\Expression;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Description of WhileProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class WhileProgram implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  public function code(): Statement
   {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
-  
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return new Module("whilestmt",
+        new VariableDecl('w'),
+        new AssignStmt('w', new Value(0)),
+        new WhileStmt(
+            new BinaryExpression(Expression::OP_LTE, new Variable('w'), new Value(3)),
+            new \Guedel\AL\Statement\StatementList(
+                new ProcedureCall('writeln', new Variable('w')),
+                new AssignStmt('w', new BinaryExpression(Expression::OP_ADD, new Variable('w'), new Value(1)))
+            )
+        )
+    );
   }
 
-  public function programs()
+  public function expect(): string
   {
-    return [
-        /*
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-        'variable use' => [new Prog\VariableUseProgram()],
-        'php function call' => [new Prog\PhpFunctionCall()],
-        'expression' => [new Prog\ExpressionsProgram()],
-        'if then structure' => [new Prog\IfThenProgram()],
-        'for structure' => [new Prog\ForProgram()],
-         * 
-         */
-        'while structure' => [new Prog\WhileProgram()],
-    ];
+    return join(PHP_EOL, [0,1,2,3]) . PHP_EOL;
   }
 
-  
 }

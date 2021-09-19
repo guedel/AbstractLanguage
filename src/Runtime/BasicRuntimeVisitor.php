@@ -42,8 +42,9 @@ use Guedel\AL\Exception\EndlessLoopException;
  */
 class BasicRuntimeVisitor implements Visitor
 {
+
   private BasicRuntimeContext $context;
-  
+
   private function debug($output)
   {
     $f = fopen("test.out", "a+");
@@ -107,59 +108,86 @@ class BasicRuntimeVisitor implements Visitor
   public function evalBinaryExpression(BinaryExpression $exp)
   {
     $first = true;
+    $second = false;
     $acc = null;
     foreach ($exp->getOperands() as $operand) {
       $op = $operand->evaluate($this);
       if ($first) {
         $acc = $op;
         $first = false;
+        $second = true;
       } else {
         switch ($exp->getOperator()) {
           case Expression::OP_ADD:
             $acc += $op;
-              break;
+            break;
           case Expression::OP_SUB:
             $acc -= $op;
-              break;
+            break;
           case Expression::OP_MULT:
             $acc *= $op;
-              break;
+            break;
           case Expression::OP_DIV:
             $acc /= $op;
-              break;
+            break;
           case Expression::OP_EQUAL:
             // a = b = c <=> a = b AND b = c
-            $acc = $acc && $prev == $op;
-              break;
+            if ($second) {
+              $acc = $prev == $op;
+            } else {
+              $acc = $acc && $prev == $op;
+            }
+            break;
           case Expression::OP_DIFF:
             // a != b != c <=> a != b AND b != c
-            $acc = $acc && $prev != $op;
-              break;
+            if ($second) {
+              $acc = $prev != $op;
+            } else {
+              $acc = $acc && $prev != $op;
+            }
+            break;
           case Expression::OP_LT:
             // a < b < c <=> a < b AND b < c
-            $acc = $acc && $prev < $op;
-              break;
+            if ($second) {
+              $acc = $prev < $op;
+            } else {
+              $acc = $acc && $prev < $op;
+            }
+            break;
           case Expression::OP_GT:
-            $acc = $acc && $prev > $op;
-              break;
+            if ($second) {
+              $acc = $prev > $op;
+            } else {
+              $acc = $acc && $prev > $op;
+            }
+            break;
           case Expression::OP_LTE:
-            $acc = $acc && $prev <= $op;
-              break;
+            if ($second) {
+              $acc = $prev <= $op;
+            } else {
+              $acc = $acc && $prev <= $op;
+            }
+            break;
           case Expression::OP_GTE:
-            $acc = $acc && $prev >= $op;
-              break;
+            if ($second) {
+              $acc = $prev >= $op;
+            } else {
+              $acc = $acc && $prev >= $op;
+            }
+            break;
           case Expression::OP_OR:
             $acc |= $op;
-              break;
+            break;
           case Expression::OP_AND:
             $acc &= $op;
-              break;
+            break;
           case Expression::OP_XOR:
             $acc ^= $op;
-              break;
+            break;
           default:
-              throw new InvalidOperatorException();
+            throw new InvalidOperatorException();
         }
+        $second = false;
       }
       $prev = $op;
     }
@@ -200,13 +228,13 @@ class BasicRuntimeVisitor implements Visitor
   {
     switch ($exp->getOperator()) {
       case Expression::OP_ADD:
-          return $exp->getOperand()->evaluate($this);
+        return $exp->getOperand()->evaluate($this);
       case Expression::OP_NOT:
-          return $exp->getOperand()->evaluate($this);
+        return $exp->getOperand()->evaluate($this);
       case Expression::OP_SUB:
-          return - $exp->getOperand()->evaluate($this);
+        return - $exp->getOperand()->evaluate($this);
       default:
-          throw new InvalidOperatorException();
+        throw new InvalidOperatorException();
     }
   }
 
@@ -227,10 +255,12 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitAny(\Guedel\AL\Datatype\Any $type)
   {
+    
   }
 
   public function visitArrayof(\Guedel\AL\Datatype\ArrayOf $type)
   {
+    
   }
 
   public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
@@ -241,7 +271,6 @@ class BasicRuntimeVisitor implements Visitor
       throw new NotFoundException("variable $name not found in this scope");
     }
     $value = $stmt->getExpression()->evaluate($this);
-    $this->debug(print_r($value, true));
     $v->setValue($value);
   }
 
@@ -257,10 +286,12 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
   {
+    
   }
 
   public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt)
   {
+    
   }
 
   public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
@@ -277,17 +308,13 @@ class BasicRuntimeVisitor implements Visitor
     $increment = $stmt->getIncrement()->evaluate($this);
     if ($increment > 0) {
       for (
-          $var->setValue($start); 
-          $var->getValue()->evaluate($this) <= $final; 
-          $var->setValue($var->getValue()->evaluate($this) + $increment)
+      $var->setValue($start); $var->getValue()->evaluate($this) <= $final; $var->setValue($var->getValue()->evaluate($this) + $increment)
       ) {
         $stmt->getStatement()->accept($this);
       }
     } elseif ($increment < 0) {
       for (
-          $var->setValue($start); 
-          $var->getValue()->evaluate($this) >= $final; 
-          $var->setValue($var->getValue()->evaluate($this) + $increment)
+      $var->setValue($start); $var->getValue()->evaluate($this) >= $final; $var->setValue($var->getValue()->evaluate($this) + $increment)
       ) {
         $stmt->getStatement()->accept($this);
       }
@@ -312,11 +339,12 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitNumber(\Guedel\AL\Datatype\Number $type)
   {
+    
   }
 
   public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
   {
-    if ( $this->internalCommand($proc)) {
+    if ($this->internalCommand($proc)) {
       return;
     }
     $name = strtolower($proc->getName());
@@ -324,7 +352,7 @@ class BasicRuntimeVisitor implements Visitor
     if ($pf === null) {
       if (function_exists($name)) {
         $this->phpProcedure($proc);
-        return ;
+        return;
       }
       throw new NotFoundException("procedure $name not found in this scope");
     }
@@ -348,6 +376,7 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)
   {
+    
   }
 
   public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
@@ -368,14 +397,17 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitString(\Guedel\AL\Datatype\StringOfChars $type)
   {
+    
   }
 
   public function visitStructure(\Guedel\AL\Datatype\Structure $type)
   {
+    
   }
 
   public function visitTypename(\Guedel\AL\Datatype\TypeName $type)
   {
+    
   }
 
   public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
@@ -385,7 +417,7 @@ class BasicRuntimeVisitor implements Visitor
       $stmt->getStatement()->accept($this);
     }
   }
-  
+
   /**
    * 
    * @param \Guedel\AL\Statement\ProcedureCall $proc
@@ -408,7 +440,7 @@ class BasicRuntimeVisitor implements Visitor
     }
     return false;
   }
-  
+
   private function phpProcedure(\Guedel\AL\Statement\ProcedureCall $proc): void
   {
     call_user_func_array($proc->getName(), $this->builParametersArray($proc->getParameters()));
@@ -418,16 +450,16 @@ class BasicRuntimeVisitor implements Visitor
   {
     return call_user_func_array($func->getName(), $this->builParametersArray($func->getParameters()));
   }
-  
+
   private function builParametersArray(\Guedel\AL\Expression\ExpressionList $list): array
   {
     $params = [];
-    foreach($list as $param) {
+    foreach ($list as $param) {
       if ($param instanceof Valuable) {
         $params[] = $param->evaluate($this);
       }
     }
     return $params;
   }
-  
+
 }

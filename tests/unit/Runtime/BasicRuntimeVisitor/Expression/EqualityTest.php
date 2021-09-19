@@ -71,6 +71,8 @@ class EqualityTest extends TestCase
       2 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(3))],  
       3 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(2))],  
       4 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(3))],  
+      5 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(0))],  
+      6 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(1))],  
     ];
   }
   

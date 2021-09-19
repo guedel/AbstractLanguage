@@ -86,4 +86,26 @@ class BinaryExpression extends Expression
           return 0;
     }
   }
+  
+  public function getFirst($value)
+  {
+    switch ($this->getOperator()) {
+      case OP_ADD: 
+      case OP_SUB: 
+      case OP_MULT:
+      case OP_DIV: 
+        return $value;
+      case OP_EQUAL: 
+      case OP_DIFF: 
+      case OP_LT: 
+      case OP_GT: 
+      case OP_LTE: 
+      case OP_GTE: 
+      case OP_AND: 
+        return true;
+      case OP_OR: 
+      case OP_XOR: 
+        return null;
+    }
+  }
 }
