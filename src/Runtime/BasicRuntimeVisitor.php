@@ -370,7 +370,7 @@ class BasicRuntimeVisitor implements Visitor
     }
 
     // Appel des instructions de la fonction
-    $proc->getBody()->accept($this);
+    $pf->getBody()->accept($this);
     $this->popContext();
   }
 
