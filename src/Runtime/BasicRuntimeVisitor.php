@@ -359,10 +359,11 @@ class BasicRuntimeVisitor implements Visitor
 
     $this->pushContext($name);
     // Les arguments
-    $itParams = $proc->getParameters()->getIterator();
+    $itParams = $pf->getParameters()->getIterator();
     foreach ($proc->getParameters() as $param) {
       if ($itParams->valid()) {
-        $var = new VariableDecl($itParams->getName(), $itParams->getType);
+        // $this->debug(print_r($itParams, true));
+        $var = new VariableDecl($itParams->current()->getName(), $itParams->current()->getType());
         $var->setValue($param->getValue());
         $this->context->addVariable($var);
       }

@@ -24,52 +24,40 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Functionnal\AL;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
+
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Declaration\{Parameter, ParametersList};
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Expression\Variable;
+use \Guedel\AL\Expression\Value;
 
 /**
- * Description of BasicRuntimeVisitorTest
+ * Test of défined procedure with paramater
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicRuntimeVisitorTest extends TestCase
+class ProcParamProgram implements BaseTestProgram
 {
-  private BasicRuntimeVisitor $visitor;
-  
-  public function setUp(): void
+  //put your code here
+  public function expect(): string
   {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
-  
-  /**
-   * @dataProvider programs
-   * @coversNothing
-   */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
+    return "Hello World !";
   }
 
-  public function programs()
+  public function code(): \Guedel\AL\Statement\Statement
   {
-    return [
-        'hello world' => [new Prog\HelloWorldProgram()],
-        'printf hello' => [new Prog\PrintfProgram()],
-        'variable use' => [new Prog\VariableUseProgram()],
-        'php function call' => [new Prog\PhpFunctionCall()],
-        'expression' => [new Prog\ExpressionsProgram()],
-        'if then structure' => [new Prog\IfThenProgram()],
-        'for structure' => [new Prog\ForProgram()],
-        'while structure' => [new Prog\WhileProgram()],
-        'simple user procedure call' => [new Prog\ProcProgram()],
-        'user procedure call' => [new Prog\ProcParamProgram()],
-    ];
+    return new Module(
+        "helloProcedureWithParam",
+        new ProcedureDecl(
+            "hello",
+            new ParametersList(new Parameter("name", "IN")),
+            new ProcedureCall("PRINTF", new Value("Hello %s !"), new Variable("name"))
+        ),
+        new ProcedureCall("hello", new Value("World"))
+    );
   }
-
-  
 }
