@@ -40,7 +40,7 @@ class FunctionDecl extends ProcedureDecl
     private $returntype;
 
 
-  public function __construct(string $name, Type $returntype, ParametersList $arguments, Statement $body)
+  public function __construct(string $name, Type $returntype, ParametersList $arguments = null, Statement $body = null)
   {
       parent::__construct($name, $arguments, $body);
       $this->returntype = $returntype;

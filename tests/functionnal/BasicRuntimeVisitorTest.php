@@ -68,6 +68,7 @@ class BasicRuntimeVisitorTest extends TestCase
         'while structure' => [new Prog\WhileProgram()],
         'simple user procedure call' => [new Prog\ProcProgram()],
         'user procedure call' => [new Prog\ProcParamProgram()],
+        'simple user function call' => [new Prog\FuncProgram()],
     ];
   }
 

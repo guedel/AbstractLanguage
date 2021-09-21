@@ -196,7 +196,7 @@ class BasicRuntimeVisitor implements Visitor
 
   public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)
   {
-    $name = $fn->getName();
+    $name = strtolower($fn->getName());
 
     $func = $this->context->findFunction($name);
     if ($func === null) {
@@ -212,7 +212,7 @@ class BasicRuntimeVisitor implements Visitor
     $itParams = $func->getParameters()->getIterator();
     foreach ($fn->getParameters() as $param) {
       if ($itParams->valid()) {
-        $var = new VariableDecl($itParams->getName(), $itParams->getType);
+        $var = new VariableDecl($itParams->current()->getName(), $itParams->current()->getType());
         $var->setValue($param->getValue());
         $this->context->addVariable($var);
       }
@@ -221,7 +221,17 @@ class BasicRuntimeVisitor implements Visitor
 
     // Appel des instructions de la fonction
     $func->getBody()->accept($this);
+    $return = [];
+    if ($this->context->isReturnRequest()) {
+      $return = $this->context->getReturnValues();
+    }
     $this->popContext();
+    // $this->debug(print_r($return, true));
+    // At this time only one return value is supported
+    if (isset($return[0])) {
+      return $return[0];
+    }
+    return null;
   }
 
   public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp)
@@ -380,19 +390,27 @@ class BasicRuntimeVisitor implements Visitor
     
   }
 
+  /**
+   * Return an array of values if multiple expressions
+   * @param \Guedel\AL\Statement\ReturnStmt $stmt
+   * @return type
+   */
   public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
   {
     $value = [];
     foreach ($stmt->getExpressions() as $expr) {
-      $value[] = $expr->eval($this);
+      $value[] = $expr->evaluate($this);
     }
-    return $value;
+    $this->context->setReturnRequest(true, ...$value);
   }
 
   public function visitStatementList(\Guedel\AL\Statement\StatementList $stmt)
   {
     foreach ($stmt as $s) {
       $s->accept($this);
+      if ($this->context->isReturnRequest()) {
+        return;
+      }
     }
   }
 
