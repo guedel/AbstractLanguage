@@ -30,9 +30,11 @@ use Guedel\AL\Declaration\FunctionDecl;
 use Guedel\AL\Declaration\ProcedureDecl;
 use Guedel\AL\Declaration\TypeDecl;
 use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\ExpressionList;
+use Guedel\AL\Expression\Value;
 
 /**
- * Description of BasicRuntimeContext
+ * Store context for basic runtime visitor
  *
  * @author Guedel <guedel87@live.fr>
  */
@@ -41,6 +43,8 @@ final class BasicRuntimeContext
   private $name;
   private ?BasicRuntimeContext $parent = null;
   private $types = [];
+  private $returnValues = [];
+  private bool $returnRequest = false;
 
   /**
    *
@@ -140,5 +144,21 @@ final class BasicRuntimeContext
       return $this->parent->$funcToCall($name);
     }
     return null;
+  }
+
+  public function setReturnRequest(bool $enable = true, ...$values)
+  {
+    $this->returnRequest = $enable;
+    $this->returnValues = $values;
+  }
+
+  public function getReturnValues(): array
+  {
+    return $this->returnValues;
+  }
+
+  public function isReturnRequest(): bool
+  {
+    return $this->returnRequest;
   }
 }

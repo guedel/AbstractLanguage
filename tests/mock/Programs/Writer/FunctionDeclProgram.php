@@ -24,8 +24,9 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\FunctionDecl;
 use Guedel\AL\Expression\Value;
@@ -46,7 +47,7 @@ use Guedel\AL\Datatype\TypeName;
  */
 class FunctionDeclProgram implements BaseTestProgram
 {
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
         "FUNCTION fact(IN n: INTEGER): INTEGER",

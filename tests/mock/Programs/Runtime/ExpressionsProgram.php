@@ -24,37 +24,42 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use Guedel\AL\Statement\IfThenStmt;
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\BinaryExpression;
+use Guedel\AL\Expression\Expression;
 
 /**
- * Description of IfThenElseProgram
+ * Description of ExpressionsProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class IfThenElseProgram implements BaseTestProgram
+class ExpressionsProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function code(): Statement
   {
-    return join(PHP_EOL, [
-        "IF \"a\" THEN",
-        "\tWRITE \"OK\"",
-        "ELSE",
-        "\tWRITE \"NOT OK\"",
-        "END IF",
-    ]) . PHP_EOL;
+    return new Module(
+        "expressions",
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_ADD, new Value(4), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_MULT, new Value(4), new Value(3))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_DIV, new Value(8), new Value(2))),
+        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_SUB, new Value(4), new Value(3))),
+    );
   }
 
-  public function code(): \Guedel\AL\Statement\Statement
+  public function expect(): string
   {
-    return new IfThenStmt(
-        new Value("a"),
-        new ProcedureCall("WRITE", new Value("OK")),
-        new ProcedureCall("WRITE", new Value("NOT OK"))
-    );
+    return implode(PHP_EOL, [
+        '7',
+        '12',
+        '4',
+        '1',
+    ]) . PHP_EOL;
   }
 }

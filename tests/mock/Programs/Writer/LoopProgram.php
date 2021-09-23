@@ -24,37 +24,59 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
-use Guedel\AL\Statement\StatementList;
-use Guedel\AL\Statement\AssignStmt;
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Declaration\VariableDecl;
-use Guedel\AL\Expression\Value;
+use Guedel\AL\Statement\{WhileStmt, ForStmt, ForEachStmt, StatementList, ProcedureCall};
+use Guedel\AL\Expression\{Value, Variable};
+use Guedel\AL\Datatype\ArrayOf;
 use Guedel\AL\Datatype\Any;
 
 /**
- * Description of VariableUseProgram
+ * Description of LoopProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class VariableUseProgram implements BaseTestProgram
+class LoopProgram implements BaseTestProgram
 {
-  /**
-   * @inherit
-   */
-  public function attend(): string
+  //put your code here
+  public function expect(): string
   {
     return join(PHP_EOL, [
-        "VAR i: ANY",
-        "i <- 10",
+        "WHILE i DO",
+        "\tDEC i",
+        "END WHILE",
+        "FOR i FROM 1 TO 10 STEP 1 DO",
+        "\tWRITE i",
+        "END FOR",
+        "VAR arr: ARRAY OF ANY",
+        "FOR EACH item IN arr DO",
+        "\tWRITE item",
+        "END FOR",
     ]) . PHP_EOL;
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
     return new StatementList(
-        new VariableDecl("i"),
-        new AssignStmt("i", new Value(10))
+        new WhileStmt(
+            new Variable("i"),
+            new ProcedureCall("DEC", new Variable("i"))
+        ),
+        new ForStmt(
+            "i",
+            new Value(1),
+            new Value(10),
+            new Value(1),
+            new ProcedureCall("WRITE", new Variable("i"))
+        ),
+        new VariableDecl("arr", new ArrayOf(Any::getType())),
+        new ForEachStmt(
+            "item",
+            new Variable("arr"),
+            new ProcedureCall("WRITE", new Variable("item"))
+        )
     );
   }
 }

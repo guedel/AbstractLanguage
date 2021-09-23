@@ -24,23 +24,39 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
+
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Declaration\{Parameter, ParametersList};
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Expression\Variable;
+use Guedel\AL\Expression\Value;
 
 /**
- * Description of EmptyModuleProgram
+ * Test of défined procedure with paramater
  *
  * @author Guedel <guedel87@live.fr>
  */
-class EmptyModuleProgram implements BaseTestProgram
+class ProcParamProgram implements BaseTestProgram
 {
   //put your code here
-  public function attend(): string
+  public function expect(): string
   {
-    return "MODULE Empty" . PHP_EOL . "END MODULE" . PHP_EOL;
+    return "Hello World !";
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    return new \Guedel\AL\Declaration\Module('Empty');
+    return new Module(
+        "helloProcedureWithParam",
+        new ProcedureDecl(
+            "hello",
+            new ParametersList(new Parameter("name", "IN")),
+            new ProcedureCall("PRINTF", new Value("Hello %s !"), new Variable("name"))
+        ),
+        new ProcedureCall("hello", new Value("World"))
+    );
   }
 }

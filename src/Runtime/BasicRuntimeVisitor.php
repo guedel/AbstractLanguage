@@ -26,12 +26,14 @@
 
 namespace Guedel\AL\Runtime;
 
-use Guedel\AL\Statement\StatementList;
+use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\Valuable;
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\BinaryExpression;
-use Gudele\AL\Exception\InvalidOperatorException;
-use Gudele\AL\Exception\NotFoundException;
+use Guedel\AL\Exception\InvalidOperatorException;
+use Guedel\AL\Exception\NotFoundException;
+use Guedel\AL\Exception\EndlessLoopException;
 
 /**
  * Description of BasicRuntimeVisitor
@@ -40,13 +42,20 @@ use Gudele\AL\Exception\NotFoundException;
  */
 class BasicRuntimeVisitor implements Visitor
 {
+
   private BasicRuntimeContext $context;
-  public function run(StatementList $statements)
+
+  private function debug($output)
+  {
+    $f = fopen("test.out", "a+");
+    fwrite($f, $output . PHP_EOL);
+    fclose($f);
+  }
+
+  public function run(Statement $statement)
   {
     $this->context = new BasicRuntimeContext();
-    foreach ($statements as $stmt) {
-      $stmt->accept($this);
-    }
+    $statement->accept($this);
   }
 
   private function pushContext(string $name = null)
@@ -99,12 +108,14 @@ class BasicRuntimeVisitor implements Visitor
   public function evalBinaryExpression(BinaryExpression $exp)
   {
     $first = true;
+    $second = false;
     $acc = null;
-    foreach ($exp->getOperands() as $op) {
+    foreach ($exp->getOperands() as $operand) {
+      $op = $operand->evaluate($this);
       if ($first) {
         $acc = $op;
-        $prev = $op;
         $first = false;
+        $second = true;
       } else {
         switch ($exp->getOperator()) {
           case Expression::OP_ADD:
@@ -121,24 +132,48 @@ class BasicRuntimeVisitor implements Visitor
               break;
           case Expression::OP_EQUAL:
             // a = b = c <=> a = b AND b = c
-            $acc = $acc && $prev == $op;
+            if ($second) {
+              $acc = $prev == $op;
+            } else {
+              $acc = $acc && $prev == $op;
+            }
               break;
           case Expression::OP_DIFF:
             // a != b != c <=> a != b AND b != c
-            $acc = $acc && $prev != $op;
+            if ($second) {
+              $acc = $prev != $op;
+            } else {
+              $acc = $acc && $prev != $op;
+            }
               break;
           case Expression::OP_LT:
             // a < b < c <=> a < b AND b < c
-            $acc = $acc && $prev < $op;
+            if ($second) {
+              $acc = $prev < $op;
+            } else {
+              $acc = $acc && $prev < $op;
+            }
               break;
           case Expression::OP_GT:
-            $acc = $acc && $prev > $op;
+            if ($second) {
+              $acc = $prev > $op;
+            } else {
+              $acc = $acc && $prev > $op;
+            }
               break;
           case Expression::OP_LTE:
-            $acc = $acc && $prev <= $op;
+            if ($second) {
+              $acc = $prev <= $op;
+            } else {
+              $acc = $acc && $prev <= $op;
+            }
               break;
           case Expression::OP_GTE:
-            $acc = $acc && $prev >= $op;
+            if ($second) {
+              $acc = $prev >= $op;
+            } else {
+              $acc = $acc && $prev >= $op;
+            }
               break;
           case Expression::OP_OR:
             $acc |= $op;
@@ -152,21 +187,23 @@ class BasicRuntimeVisitor implements Visitor
           default:
               throw new InvalidOperatorException();
         }
+        $second = false;
       }
+      $prev = $op;
     }
     return $acc;
   }
 
   public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)
   {
-    $name = $fn->getName();
+    $name = strtolower($fn->getName());
 
-    if (function_exists($name)) {
-      // call of PHP function
-      return ;
-    }
     $func = $this->context->findFunction($name);
     if ($func === null) {
+      if (function_exists($name)) {
+        // call of PHP function
+        return $this->phpFunction($fn);
+      }
       throw new NotFoundException("function $name not found in this scope");
     }
 
@@ -175,7 +212,7 @@ class BasicRuntimeVisitor implements Visitor
     $itParams = $func->getParameters()->getIterator();
     foreach ($fn->getParameters() as $param) {
       if ($itParams->valid()) {
-        $var = new VariableDecl($itParams->getName(), $itParams->getType);
+        $var = new VariableDecl($itParams->current()->getName(), $itParams->current()->getType());
         $var->setValue($param->getValue());
         $this->context->addVariable($var);
       }
@@ -184,7 +221,17 @@ class BasicRuntimeVisitor implements Visitor
 
     // Appel des instructions de la fonction
     $func->getBody()->accept($this);
+    $return = [];
+    if ($this->context->isReturnRequest()) {
+      $return = $this->context->getReturnValues();
+    }
     $this->popContext();
+    // $this->debug(print_r($return, true));
+    // At this time only one return value is supported
+    if (isset($return[0])) {
+      return $return[0];
+    }
+    return null;
   }
 
   public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp)
@@ -208,11 +255,12 @@ class BasicRuntimeVisitor implements Visitor
 
   public function evalVariable(\Guedel\AL\Expression\Variable $variable)
   {
-    $name = $variable->get_varname();
+    $name = $variable->getVarname();
     $v = $this->context->findVariable($name);
-    if (! $v === null) {
+    if ($v === null) {
       throw new NotFoundException("variable $name not found in this scope");
     }
+    return $v->getValue()->evaluate($this);
   }
 
   public function visitAny(\Guedel\AL\Datatype\Any $type)
@@ -225,6 +273,13 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
   {
+    $name = $stmt->getVariableName();
+    $v = $this->context->findVariable($name);
+    if ($v === null) {
+      throw new NotFoundException("variable $name not found in this scope");
+    }
+    $value = $stmt->getExpression()->evaluate($this);
+    $v->setValue($value);
   }
 
   public function visitClass(\Guedel\AL\Datatype\ClassType $type)
@@ -247,15 +302,44 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
   {
+    $name = $stmt->getVariableName();
+    $var = $this->context->findVariable($name);
+    if ($var === null) {
+      // variable must be declared
+      throw new NotFoundException("variable $name not found in this scope");
+    }
+
+    $start = $stmt->getInitial()->evaluate($this);
+    $final = $stmt->getFinal()->evaluate($this);
+    $increment = $stmt->getIncrement()->evaluate($this);
+    if ($increment > 0) {
+      for (
+          $var->setValue($start);
+          $var->getValue()->evaluate($this) <= $final;
+          $var->setValue($var->getValue()->evaluate($this) + $increment)
+      ) {
+        $stmt->getStatement()->accept($this);
+      }
+    } elseif ($increment < 0) {
+      for (
+          $var->setValue($start);
+          $var->getValue()->evaluate($this) >= $final;
+          $var->setValue($var->getValue()->evaluate($this) + $increment)
+      ) {
+        $stmt->getStatement()->accept($this);
+      }
+    } else {
+      throw new EndlessLoopException();
+    }
   }
 
   public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)
   {
-    $test = $stmt->get_iftest()->evaluate($this);
+    $test = $stmt->getIfTest()->evaluate($this);
     if ($test) {
-      return $stmt->get_then_part()->accept($this);
+      return $stmt->getThenPart()->accept($this);
     } else {
-      $elsePart = $stmt->get_else_part();
+      $elsePart = $stmt->getElsePart();
       if ($elsePart) {
         return $elsePart->accept($this);
       }
@@ -269,25 +353,61 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
   {
+    if ($this->internalCommand($proc)) {
+      return;
+    }
+    $name = strtolower($proc->getName());
+    $pf = $this->context->findProcedure($name);
+    if ($pf === null) {
+      if (function_exists($name)) {
+        $this->phpProcedure($proc);
+        return;
+      }
+      throw new NotFoundException("procedure $name not found in this scope");
+    }
+
+    $this->pushContext($name);
+    // Les arguments
+    $itParams = $pf->getParameters()->getIterator();
+    foreach ($proc->getParameters() as $param) {
+      if ($itParams->valid()) {
+        // $this->debug(print_r($itParams, true));
+        $var = new VariableDecl($itParams->current()->getName(), $itParams->current()->getType());
+        $var->setValue($param->getValue());
+        $this->context->addVariable($var);
+      }
+      $itParams->next();
+    }
+
+    // Appel des instructions de la fonction
+    $pf->getBody()->accept($this);
+    $this->popContext();
   }
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)
   {
   }
 
+  /**
+   * Return an array of values if multiple expressions
+   * @param \Guedel\AL\Statement\ReturnStmt $stmt
+   */
   public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
   {
     $value = [];
     foreach ($stmt->getExpressions() as $expr) {
-      $value[] = $expr->eval($this);
+      $value[] = $expr->evaluate($this);
     }
-    return $value;
+    $this->context->setReturnRequest(true, ...$value);
   }
 
   public function visitStatementList(\Guedel\AL\Statement\StatementList $stmt)
   {
     foreach ($stmt as $s) {
       $s->accept($this);
+      if ($this->context->isReturnRequest()) {
+        return;
+      }
     }
   }
 
@@ -305,9 +425,53 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
   {
-    $test = $stmt->get_test();
+    $test = $stmt->getTest();
     while ($test->evaluate($this)) {
-      $stmt->get_statement()->accept($this);
+      $stmt->getStatement()->accept($this);
     }
+  }
+
+  /**
+   *
+   * @param \Guedel\AL\Statement\ProcedureCall $proc
+   * @return bool true if internal procédure found
+   */
+  private function internalCommand(\Guedel\AL\Statement\ProcedureCall $proc): bool
+  {
+    // TODO remplacer par un mapping
+    $name = strtolower($proc->getName());
+    if ($name === 'write' || $name === 'writeln') {
+      foreach ($proc->getParameters() as $p) {
+        if ($p instanceof Valuable) {
+          echo $p->evaluate($this);
+        }
+      }
+      if ($name === 'writeln') {
+        echo PHP_EOL;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  private function phpProcedure(\Guedel\AL\Statement\ProcedureCall $proc): void
+  {
+    call_user_func_array($proc->getName(), $this->builParametersArray($proc->getParameters()));
+  }
+
+  private function phpFunction(\Guedel\AL\Expression\FunctionCall $func)
+  {
+    return call_user_func_array($func->getName(), $this->builParametersArray($func->getParameters()));
+  }
+
+  private function builParametersArray(\Guedel\AL\Expression\ExpressionList $list): array
+  {
+    $params = [];
+    foreach ($list as $param) {
+      if ($param instanceof Valuable) {
+        $params[] = $param->evaluate($this);
+      }
+    }
+    return $params;
   }
 }

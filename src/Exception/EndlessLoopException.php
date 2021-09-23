@@ -24,36 +24,14 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
-
-use Guedel\AL\Declaration\ProcedureDecl;
-use Guedel\AL\Declaration\{Parameter, ParametersList};
-use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Expression\Variable;
+namespace Guedel\AL\Exception;
 
 /**
- * Description of DeclareProcProgram
+ * Raised when increment is zero
  *
  * @author Guedel <guedel87@live.fr>
  */
-class DeclareProcProgram implements BaseTestProgram
+class EndlessLoopException extends \Exception
 {
   //put your code here
-  public function attend(): string
-  {
-    return join(PHP_EOL, [
-        "PROCEDURE bonjour(IN name: ANY)",
-        "\tWRITE name",
-        "END PROCEDURE",
-    ]) . PHP_EOL;
-  }
-
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new ProcedureDecl(
-        "bonjour",
-        new ParametersList(new Parameter("name", "IN")),
-        new ProcedureCall("WRITE", new Variable("name"))
-    );
-  }
 }

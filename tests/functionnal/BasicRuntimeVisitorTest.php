@@ -23,31 +23,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace Guedel\Tests\Functionnal\AL;
 
 use PHPUnit\Framework\TestCase;
-use Guedel\AL\Runtime\BasicWriterVisitor;
-use Guedel\AL\Runtime\Translator;
+use Guedel\AL\Runtime\BasicRuntimeVisitor;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-use Guedel\Tests\Mock\AL\Programs\Writer as Prog;
-use Guedel\Stream\CodeWriter;
+use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
 
 /**
- * Description of BasicWriterVisitorTest
+ * Description of BasicRuntimeVisitorTest
  *
  * @author Guedel <guedel87@live.fr>
  */
-class BasicWriterVisitorTest extends TestCase
+class BasicRuntimeVisitorTest extends TestCase
 {
-  private BasicWriterVisitor $visitor;
-  private Translator $translator;
-  private CodeWriter $writer;
+  private BasicRuntimeVisitor $visitor;
 
   public function setUp(): void
   {
-    $this->writer = new CodeWriter();
-    $this->translator = new Translator();
-    $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
+    $this->visitor = new BasicRuntimeVisitor();
   }
 
   /**
@@ -56,26 +51,24 @@ class BasicWriterVisitorTest extends TestCase
    */
   public function testProgram(BaseTestProgram $p)
   {
-    $p->code()->accept($this->visitor);
-    $r = $this->writer->render();
-    $this->assertEquals($p->expect(), $r);
+    $this->expectOutputString($p->expect());
+    $this->visitor->run($p->code());
   }
-
 
   public function programs()
   {
     return [
-        'empty module' => [new Prog\EmptyModuleProgram()],
         'hello world' => [new Prog\HelloWorldProgram()],
-        'simple if' => [new Prog\SimpleIfProgram()],
-        'if then else' => [new Prog\IfThenElseProgram()],
+        'printf hello' => [new Prog\PrintfProgram()],
         'variable use' => [new Prog\VariableUseProgram()],
-        'declare procedure' => [new Prog\DeclareProcProgram()],
-        'loops' => [new Prog\LoopProgram()],
-        'expressions' => [new Prog\ExpressionsProgram()],
-        'declare function' => [new Prog\FunctionDeclProgram()],
-        'declare type' => [new Prog\DeclareTypeProgram()],
-        'structure' => [new Prog\StructProgram()],
+        'php function call' => [new Prog\PhpFunctionCall()],
+        'expression' => [new Prog\ExpressionsProgram()],
+        'if then structure' => [new Prog\IfThenProgram()],
+        'for structure' => [new Prog\ForProgram()],
+        'while structure' => [new Prog\WhileProgram()],
+        'simple user procedure call' => [new Prog\ProcProgram()],
+        'user procedure call' => [new Prog\ProcParamProgram()],
+        'simple user function call' => [new Prog\FuncProgram()],
     ];
   }
 }

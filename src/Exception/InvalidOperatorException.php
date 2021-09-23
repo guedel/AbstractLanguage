@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-namespace Gudele\AL\Exception;
+namespace Guedel\AL\Exception;
 
 /**
  * Description of InvalidOperatorException

@@ -28,6 +28,7 @@ namespace Guedel\Tests\Unit\AL\Statement;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Statement\StatementList;
 use Guedel\Tests\Mock\AL\EmptyStatement;
+use Guedel\Tests\Mock\AL\TestVisitor;
 
 /**
  * Description of StatementListTest
@@ -52,5 +53,16 @@ class StatementListTest extends TestCase
     $this->assertCount(1, $list);
     $list->add(new EmptyStatement());
     $this->assertCount(2, $list);
+  }
+
+  public function testEnumElementList()
+  {
+    $visitor = new TestVisitor();
+    $list = new StatementList(new EmptyStatement(), new EmptyStatement());
+    $this->assertCount(2, $list);
+    foreach ($list as $item) {
+      $this->assertInstanceOf(EmptyStatement::class, $item);
+      $this->assertEquals('EMPTY', $item->accept($visitor));
+    }
   }
 }

@@ -23,34 +23,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace Guedel\Tests\Mock\AL\Programs;
 
-use Guedel\AL\Declaration\Module;
-use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Expression\Value;
+namespace Guedel\Tests\Mock\AL\Programs\Writer;
+
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+use Guedel\AL\Datatype\{Structure, TypeName, Any};
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Declaration\TypeDecl;
 
 /**
- * Description of HelloWorldProgram
+ * Description of ClassProgram
  *
  * @author Guedel <guedel87@live.fr>
  */
-class HelloWorldProgram implements BaseTestProgram
+class StructProgram implements BaseTestProgram
 {
-  //put your code here
-  public function attend(): string
+  public function expect(): string
   {
     return join(PHP_EOL, [
-        "MODULE Hello",
-        "\tWRITE \"Hello World !\"",
-        "END MODULE",
+        "TYPE mystruct: STRUCT",
+        "\tVAR one: ANY",
+        "\tVAR two: INTEGER",
+        "END STRUCT",
     ]) . PHP_EOL;
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    return new Module(
-        "Hello",
-        new ProcedureCall("WRITE", new Value("Hello World !"))
+    return new TypeDecl(
+        "mystruct",
+        new Structure(
+            new VariableDecl("one", Any::getType()),
+            new VariableDecl("two", new TypeName("int"))
+        )
     );
   }
 }

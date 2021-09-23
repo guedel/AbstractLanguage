@@ -46,5 +46,6 @@ class Comment implements \Guedel\AL\Statement\Statement
 
   public function accept(\Guedel\AL\Runtime\Visitor $visitor)
   {
+    return $visitor->visitComment($this);
   }
 }

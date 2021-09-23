@@ -24,47 +24,36 @@
  * THE SOFTWARE.
  */
 
-namespace Guedel\Tests\Mock\AL\Programs;
+namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
-use Guedel\AL\Statement\{StatementList, ReturnStmt};
-use Guedel\AL\Expression\{
-  Expression,
-  UnaryExpression,
-  BinaryExpression,
-  Value,
-  Variable
-};
+use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\FunctionDecl;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\ReturnStmt;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\AL\Datatype\Any;
 
 /**
- *Test of expressions
+ * Test return of function without parameter
  *
  * @author Guedel <guedel87@live.fr>
  */
-class ExpressionsProgram implements BaseTestProgram
+class FuncProgram implements BaseTestProgram
 {
-  public function attend(): string
+  //put your code here
+  public function expect(): string
   {
-    return join(PHP_EOL, [
-        "RETURN a, -a, NOT a",
-        "RETURN a + b, a - b, a * b, a / b, a != b"
-    ]) . PHP_EOL;
+    return "Hello World !";
   }
 
   public function code(): \Guedel\AL\Statement\Statement
   {
-    return new StatementList(
-        new ReturnStmt(
-            new UnaryExpression(Expression::OP_ADD, new Variable("a")),
-            new UnaryExpression(Expression::OP_SUB, new Variable("a")),
-            new UnaryExpression(Expression::OP_NOT, new Variable("a"))
-        ),
-        new ReturnStmt(
-            new BinaryExpression(Expression::OP_ADD, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_SUB, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_MULT, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_DIV, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_DIFF, new Variable("a"), new Variable("b"))
-        )
+    return new Module(
+        "simpleHelloFunction",
+        new FunctionDecl("hello", Any::getType(), null, new ReturnStmt(new Value("Hello World !"))),
+        new ProcedureCall("WRITE", new FunctionCall("hello"))
     );
   }
 }
