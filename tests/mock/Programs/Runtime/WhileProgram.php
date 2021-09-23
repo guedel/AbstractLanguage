@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -49,7 +48,8 @@ class WhileProgram implements BaseTestProgram
 {
   public function code(): Statement
   {
-    return new Module("whilestmt",
+    return new Module(
+        "whilestmt",
         new VariableDecl('w'),
         new AssignStmt('w', new Value(0)),
         new WhileStmt(
@@ -66,5 +66,4 @@ class WhileProgram implements BaseTestProgram
   {
     return join(PHP_EOL, [0,1,2,3]) . PHP_EOL;
   }
-
 }

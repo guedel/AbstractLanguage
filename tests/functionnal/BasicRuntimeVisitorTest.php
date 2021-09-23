@@ -39,12 +39,12 @@ use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
 class BasicRuntimeVisitorTest extends TestCase
 {
   private BasicRuntimeVisitor $visitor;
-  
+
   public function setUp(): void
   {
     $this->visitor = new BasicRuntimeVisitor();
   }
-  
+
   /**
    * @dataProvider programs
    * @coversNothing
@@ -71,6 +71,4 @@ class BasicRuntimeVisitorTest extends TestCase
         'simple user function call' => [new Prog\FuncProgram()],
     ];
   }
-
-  
 }

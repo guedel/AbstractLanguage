@@ -23,6 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\AL\Runtime\BasicRuntimeVisitor\Expression;
 
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Runtime\BasicRuntimeVisitor;
@@ -40,12 +41,12 @@ use Guedel\AL\Expression\Value;
 class EqualityTest extends TestCase
 {
   private $visitor;
-  
+
   public function setUp(): void
   {
     $this->visitor = new BasicRuntimeVisitor();
   }
-  
+
   /**
    * @dataProvider equalityExpressions
    */
@@ -54,7 +55,7 @@ class EqualityTest extends TestCase
     $res = $exp->evaluate($this->visitor);
     $this->assertEquals($expect, $res);
   }
-  
+
   /**
    * @dataProvider differentExpressions
    */
@@ -63,19 +64,19 @@ class EqualityTest extends TestCase
     $res = $exp->evaluate($this->visitor);
     $this->assertEquals($expect, $res);
   }
-  
+
   public function equalityExpressions()
   {
     return [
-      1 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2))],  
-      2 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(3))],  
-      3 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(2))],  
-      4 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(3))],  
-      5 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(0))],  
-      6 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(1))],  
+      1 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2))],
+      2 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(3))],
+      3 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(2))],
+      4 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(3))],
+      5 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(0))],
+      6 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(1))],
     ];
   }
-  
+
   public function differentExpressions()
   {
     return [
@@ -86,5 +87,4 @@ class EqualityTest extends TestCase
         5 => [1, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(3), new Value(2))],
     ];
   }
-
 }

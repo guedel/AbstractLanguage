@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Statement\{WhileStmt, ForStmt, ForEachStmt, StatementList, ProcedureCall};
 use Guedel\AL\Expression\{Value, Variable};

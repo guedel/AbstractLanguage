@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\{StatementList, ReturnStmt};
 use Guedel\AL\Expression\{
   Expression,

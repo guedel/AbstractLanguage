@@ -49,11 +49,11 @@ class ProcedureDecl extends NamedDeclaration
   public function __construct(string $name, ParametersList $parameters = null, Statement $body = null)
   {
       parent::__construct($name);
-      if ($parameters === null) {
-        $this->parameters = new ParametersList();
-      } else {
-        $this->parameters = $parameters;
-      }
+    if ($parameters === null) {
+      $this->parameters = new ParametersList();
+    } else {
+      $this->parameters = $parameters;
+    }
     if ($body instanceof StatementList) {
         $this->body = $body;
     } else {

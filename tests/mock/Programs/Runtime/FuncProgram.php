@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Declaration\FunctionDecl;
 use Guedel\AL\Statement\ProcedureCall;

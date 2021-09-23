@@ -120,16 +120,16 @@ class BasicRuntimeVisitor implements Visitor
         switch ($exp->getOperator()) {
           case Expression::OP_ADD:
             $acc += $op;
-            break;
+              break;
           case Expression::OP_SUB:
             $acc -= $op;
-            break;
+              break;
           case Expression::OP_MULT:
             $acc *= $op;
-            break;
+              break;
           case Expression::OP_DIV:
             $acc /= $op;
-            break;
+              break;
           case Expression::OP_EQUAL:
             // a = b = c <=> a = b AND b = c
             if ($second) {
@@ -137,7 +137,7 @@ class BasicRuntimeVisitor implements Visitor
             } else {
               $acc = $acc && $prev == $op;
             }
-            break;
+              break;
           case Expression::OP_DIFF:
             // a != b != c <=> a != b AND b != c
             if ($second) {
@@ -145,7 +145,7 @@ class BasicRuntimeVisitor implements Visitor
             } else {
               $acc = $acc && $prev != $op;
             }
-            break;
+              break;
           case Expression::OP_LT:
             // a < b < c <=> a < b AND b < c
             if ($second) {
@@ -153,39 +153,39 @@ class BasicRuntimeVisitor implements Visitor
             } else {
               $acc = $acc && $prev < $op;
             }
-            break;
+              break;
           case Expression::OP_GT:
             if ($second) {
               $acc = $prev > $op;
             } else {
               $acc = $acc && $prev > $op;
             }
-            break;
+              break;
           case Expression::OP_LTE:
             if ($second) {
               $acc = $prev <= $op;
             } else {
               $acc = $acc && $prev <= $op;
             }
-            break;
+              break;
           case Expression::OP_GTE:
             if ($second) {
               $acc = $prev >= $op;
             } else {
               $acc = $acc && $prev >= $op;
             }
-            break;
+              break;
           case Expression::OP_OR:
             $acc |= $op;
-            break;
+              break;
           case Expression::OP_AND:
             $acc &= $op;
-            break;
+              break;
           case Expression::OP_XOR:
             $acc ^= $op;
-            break;
+              break;
           default:
-            throw new InvalidOperatorException();
+              throw new InvalidOperatorException();
         }
         $second = false;
       }
@@ -238,13 +238,13 @@ class BasicRuntimeVisitor implements Visitor
   {
     switch ($exp->getOperator()) {
       case Expression::OP_ADD:
-        return $exp->getOperand()->evaluate($this);
+          return $exp->getOperand()->evaluate($this);
       case Expression::OP_NOT:
-        return $exp->getOperand()->evaluate($this);
+          return $exp->getOperand()->evaluate($this);
       case Expression::OP_SUB:
-        return - $exp->getOperand()->evaluate($this);
+          return - $exp->getOperand()->evaluate($this);
       default:
-        throw new InvalidOperatorException();
+          throw new InvalidOperatorException();
     }
   }
 
@@ -265,12 +265,10 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitAny(\Guedel\AL\Datatype\Any $type)
   {
-    
   }
 
   public function visitArrayof(\Guedel\AL\Datatype\ArrayOf $type)
   {
-    
   }
 
   public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
@@ -296,12 +294,10 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
   {
-    
   }
 
   public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt)
   {
-    
   }
 
   public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
@@ -318,13 +314,17 @@ class BasicRuntimeVisitor implements Visitor
     $increment = $stmt->getIncrement()->evaluate($this);
     if ($increment > 0) {
       for (
-      $var->setValue($start); $var->getValue()->evaluate($this) <= $final; $var->setValue($var->getValue()->evaluate($this) + $increment)
+          $var->setValue($start);
+          $var->getValue()->evaluate($this) <= $final;
+          $var->setValue($var->getValue()->evaluate($this) + $increment)
       ) {
         $stmt->getStatement()->accept($this);
       }
     } elseif ($increment < 0) {
       for (
-      $var->setValue($start); $var->getValue()->evaluate($this) >= $final; $var->setValue($var->getValue()->evaluate($this) + $increment)
+          $var->setValue($start);
+          $var->getValue()->evaluate($this) >= $final;
+          $var->setValue($var->getValue()->evaluate($this) + $increment)
       ) {
         $stmt->getStatement()->accept($this);
       }
@@ -349,7 +349,6 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitNumber(\Guedel\AL\Datatype\Number $type)
   {
-    
   }
 
   public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
@@ -387,13 +386,11 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)
   {
-    
   }
 
   /**
    * Return an array of values if multiple expressions
    * @param \Guedel\AL\Statement\ReturnStmt $stmt
-   * @return type
    */
   public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
   {
@@ -416,17 +413,14 @@ class BasicRuntimeVisitor implements Visitor
 
   public function visitString(\Guedel\AL\Datatype\StringOfChars $type)
   {
-    
   }
 
   public function visitStructure(\Guedel\AL\Datatype\Structure $type)
   {
-    
   }
 
   public function visitTypename(\Guedel\AL\Datatype\TypeName $type)
   {
-    
   }
 
   public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
@@ -438,7 +432,7 @@ class BasicRuntimeVisitor implements Visitor
   }
 
   /**
-   * 
+   *
    * @param \Guedel\AL\Statement\ProcedureCall $proc
    * @return bool true if internal procédure found
    */
@@ -480,5 +474,4 @@ class BasicRuntimeVisitor implements Visitor
     }
     return $params;
   }
-
 }

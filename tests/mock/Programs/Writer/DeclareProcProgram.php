@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Declaration\ProcedureDecl;
 use Guedel\AL\Declaration\{Parameter, ParametersList};
 use Guedel\AL\Statement\ProcedureCall;

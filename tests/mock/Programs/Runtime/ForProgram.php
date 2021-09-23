@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -46,12 +45,23 @@ class ForProgram implements BaseTestProgram
   //put your code here
   public function code(): Statement
   {
-    return new Module("forstmt",
+    return new Module(
+        "forstmt",
         new VariableDecl('i'),
-        new ForStmt('i', new Value(1), new Value(5), new Value(1), 
-            new ProcedureCall('writeln', new Variable('i'))),
-        new ForStmt('i', new Value(5), new Value(1), new Value(-1), 
-            new ProcedureCall('writeln', new Variable('i')))
+        new ForStmt(
+            'i',
+            new Value(1),
+            new Value(5),
+            new Value(1),
+            new ProcedureCall('writeln', new Variable('i'))
+        ),
+        new ForStmt(
+            'i',
+            new Value(5),
+            new Value(1),
+            new Value(-1),
+            new ProcedureCall('writeln', new Variable('i'))
+        )
     );
   }
 
@@ -59,5 +69,4 @@ class ForProgram implements BaseTestProgram
   {
     return join(PHP_EOL, [1,2,3,4,5,5,4,3,2,1]) . PHP_EOL;
   }
-
 }

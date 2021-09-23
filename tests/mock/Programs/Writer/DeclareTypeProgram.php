@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\TypeDecl;
 use Guedel\AL\Datatype\{ Enumeration, Number, StringOfChars, Reference, ArrayOf, Any, TypeName};

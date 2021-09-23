@@ -23,6 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+namespace Guedel\Tests\Unit\AL\Runtime\BasicRuntimeVisitor\Expression;
 
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Runtime\BasicRuntimeVisitor;
@@ -40,7 +41,7 @@ use Guedel\AL\Expression\Value;
 class InequalityTest extends TestCase
 {
   private $visitor;
-  
+
   public function setUp(): void
   {
     $this->visitor = new BasicRuntimeVisitor();
@@ -54,7 +55,7 @@ class InequalityTest extends TestCase
     $res = $exp->evaluate($this->visitor);
     $this->assertEquals($expect, $res);
   }
-  
+
   /**
    * @dataProvider lessThanOrEqualExpressions
    * @param type $expect
@@ -87,7 +88,7 @@ class InequalityTest extends TestCase
     $res = $exp->evaluate($this->visitor);
     $this->assertEquals($expect, $res);
   }
-  
+
   public function lessThanExpressions()
   {
     return [
@@ -99,7 +100,7 @@ class InequalityTest extends TestCase
         5 => [0 , new BinaryExpression(Expression::OP_LT, new Value(2), new Value(3), new Value(2))],
     ];
   }
-  
+
   public function lessThanOrEqualExpressions()
   {
     return [
@@ -111,9 +112,8 @@ class InequalityTest extends TestCase
         5 => [0 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(2))],
         6 => [1 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(3))],
     ];
-    
   }
-  
+
   public function greatThanExpression()
   {
     return [
@@ -126,15 +126,15 @@ class InequalityTest extends TestCase
     ];
   }
 
-   public function greatThanOrEqualExpression()
+  public function greatThanOrEqualExpression()
   {
     return [
-        1 => [0, new BinaryExpression(Expression::OP_GTE, new Value(1), new Value(2))],
-        2 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(2), new Value(1))],
-        3 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(2), new Value(2))],
-        4 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(-3), new Value(-4))],
-        5 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(4), new Value(3), new Value(2))],
-        5 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(3), new Value(2), new Value(2))],
+       1 => [0, new BinaryExpression(Expression::OP_GTE, new Value(1), new Value(2))],
+       2 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(2), new Value(1))],
+       3 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(2), new Value(2))],
+       4 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(-3), new Value(-4))],
+       5 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(4), new Value(3), new Value(2))],
+       5 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(3), new Value(2), new Value(2))],
     ];
   }
 }

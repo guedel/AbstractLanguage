@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Declaration\VariableDecl;
@@ -45,7 +44,8 @@ class VariableUseProgram implements BaseTestProgram
 {
   public function code(): Statement
   {
-    return new Module('varUse',
+    return new Module(
+        'varUse',
         new VariableDecl('v'),
         new AssignStmt('v', new Value("Hello World !")),
         new ProcedureCall('write', new Variable('v'))
@@ -56,5 +56,4 @@ class VariableUseProgram implements BaseTestProgram
   {
     return "Hello World !";
   }
-
 }

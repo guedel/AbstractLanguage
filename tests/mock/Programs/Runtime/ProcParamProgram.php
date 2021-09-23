@@ -27,13 +27,12 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Declaration\ProcedureDecl;
 use Guedel\AL\Declaration\{Parameter, ParametersList};
 use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Expression\Variable;
-use \Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Value;
 
 /**
  * Test of défined procedure with paramater

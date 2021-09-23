@@ -145,21 +145,20 @@ final class BasicRuntimeContext
     }
     return null;
   }
-  
-  public function setReturnRequest(bool $enable = true, ...$values )
+
+  public function setReturnRequest(bool $enable = true, ...$values)
   {
     $this->returnRequest = $enable;
     $this->returnValues = $values;
   }
-  
+
   public function getReturnValues(): array
   {
     return $this->returnValues;
   }
-  
+
   public function isReturnRequest(): bool
   {
     return $this->returnRequest;
   }
-    
 }

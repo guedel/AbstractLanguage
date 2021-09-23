@@ -54,7 +54,7 @@ class StatementListTest extends TestCase
     $list->add(new EmptyStatement());
     $this->assertCount(2, $list);
   }
-  
+
   public function testEnumElementList()
   {
     $visitor = new TestVisitor();

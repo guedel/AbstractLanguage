@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -45,13 +44,13 @@ class ExpressionsProgram implements BaseTestProgram
   //put your code here
   public function code(): Statement
   {
-    return new Module("expressions", 
+    return new Module(
+        "expressions",
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_ADD, new Value(4), new Value(3))),
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_MULT, new Value(4), new Value(3))),
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_DIV, new Value(8), new Value(2))),
         new ProcedureCall("writeln", new BinaryExpression(Expression::OP_SUB, new Value(4), new Value(3))),
     );
-    
   }
 
   public function expect(): string
@@ -63,5 +62,4 @@ class ExpressionsProgram implements BaseTestProgram
         '1',
     ]) . PHP_EOL;
   }
-
 }

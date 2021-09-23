@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\IfThenStmt;
 use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Expression\Value;

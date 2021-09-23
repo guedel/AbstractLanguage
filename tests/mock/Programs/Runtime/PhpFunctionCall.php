@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -43,7 +42,8 @@ class PhpFunctionCall implements BaseTestProgram
 {
   public function code(): Statement
   {
-    return new Module("phpfunctioncall", 
+    return new Module(
+        "phpfunctioncall",
         new ProcedureCall("write", new FunctionCall("sprintf", new Value("Hello %s !"), new Value("World")))
     );
   }
@@ -52,5 +52,4 @@ class PhpFunctionCall implements BaseTestProgram
   {
     return "Hello World !";
   }
-
 }

@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -44,7 +43,7 @@ class HelloWorldProgram implements BaseTestProgram
   {
     return "Hello World !";
   }
-  
+
   public function code(): Statement
   {
     return new Module(

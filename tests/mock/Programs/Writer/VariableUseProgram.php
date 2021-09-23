@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Statement\AssignStmt;
 use Guedel\AL\Declaration\VariableDecl;

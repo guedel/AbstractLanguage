@@ -27,7 +27,6 @@
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
-
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -45,9 +44,11 @@ class IfThenProgram implements BaseTestProgram
   //put your code here
   public function code(): Statement
   {
-    return new Module("ifthen",
+    return new Module(
+        "ifthen",
         new IfThenStmt(new Value(true), new ProcedureCall("writeln", new Value("OK"))),
-        new IfThenStmt(new Value(false), 
+        new IfThenStmt(
+            new Value(false),
             new ProcedureCall("writeln", new Value("OK")),
             new ProcedureCall("writeln", new Value("KO"))
         )
@@ -56,9 +57,8 @@ class IfThenProgram implements BaseTestProgram
 
   public function expect(): string
   {
-    return 
-      "OK" . PHP_EOL 
+    return
+      "OK" . PHP_EOL
       . "KO" . PHP_EOL;
   }
-
 }
