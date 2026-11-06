@@ -66,7 +66,7 @@ class Structure implements Type
       } else {
           $ret .= ';';
       }
-        $ret .= $attr->getType()->get_signature();
+        $ret .= $attr->getType()->getSignature();
     }
       return $ret . '}';
   }

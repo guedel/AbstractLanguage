@@ -110,6 +110,7 @@ class BasicRuntimeVisitor implements Visitor
     $first = true;
     $second = false;
     $acc = null;
+    $prev = null;
     foreach ($exp->getOperands() as $operand) {
       $op = $operand->evaluate($this);
       if ($first) {
