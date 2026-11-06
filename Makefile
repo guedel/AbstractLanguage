@@ -1,6 +1,6 @@
 .PHONY: clean check style fix-style package
 
-PHPQA = podman run --init -it --rm -v "`pwd`:/project" -v "`pwd`/var/tmp-phpqa:/tmp" -w /project docker.io/jakzal/phpqa:php7.4-alpine
+PHPQA = podman run --init -it --rm -v "`pwd`:/project" -v "`pwd`/var/tmp-phpqa:/tmp" -v "$(REGISTRY_PATH)/composer:/registry" -w /project docker.io/jakzal/phpqa:php7.4-alpine
 
 clean:
 	@echo "Nettoyage"
@@ -16,7 +16,7 @@ style:
 
 check:
 	@echo "Tests"
-	vendor/bin/phpunit
+	$(PHPQA) composer exec phpunit
 
 package: check
-	composer archive -f zip --dir $(REGISTRY_PATH)/composer/
+	$(PHPQA) composer archive -f zip --dir /registry
