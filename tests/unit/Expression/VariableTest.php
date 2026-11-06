@@ -36,7 +36,6 @@ use Guedel\AL\Expression\Variable;
  */
 class VariableTest extends TestCase
 {
-
   public function testConstruct()
   {
     $var = new Variable("a");

@@ -56,7 +56,7 @@ class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
     return count($this->parameters);
   }
 
-  public function offsetExists($offset)
+  public function offsetExists($offset): bool
   {
     return isset($this->parameters[$offset]);
   }

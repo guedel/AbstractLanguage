@@ -42,7 +42,6 @@ use Guedel\AL\Exception\EndlessLoopException;
  */
 class BasicRuntimeVisitor implements Visitor
 {
-
   private BasicRuntimeContext $context;
 
   private function debug($output)
@@ -110,6 +109,7 @@ class BasicRuntimeVisitor implements Visitor
     $first = true;
     $second = false;
     $acc = null;
+    $prev = null;
     foreach ($exp->getOperands() as $operand) {
       $op = $operand->evaluate($this);
       if ($first) {

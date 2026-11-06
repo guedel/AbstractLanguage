@@ -39,7 +39,6 @@ use Guedel\AL\Expression\BinaryExpression;
  */
 class BinaryExpressionTest extends TestCase
 {
-
   public function testBinary()
   {
     $e = new BinaryExpression(Expression::OP_ADD, new Value(1), new Value(2));

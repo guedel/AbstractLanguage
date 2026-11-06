@@ -36,7 +36,6 @@ use Guedel\AL\Expression;
  */
 class Builder
 {
-
   /**
    *
    * @var Statement\StatementList

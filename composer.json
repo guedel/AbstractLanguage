@@ -1,6 +1,7 @@
 {
   "name": "guedel/al",
   "description": "Library of Php Abstract Language",
+  "version": "0.1",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
@@ -19,14 +20,14 @@
   "autoload": {
     "psr-4": {
       "Guedel\\AL\\": "src/"
-    } 
+    }
   },
   "autoload-dev": {
-    "psr-4": { 
+    "psr-4": {
       "Guedel\\Tests\\Unit\\AL\\": "tests/unit/",
       "Guedel\\Tests\\Functional\\AL\\": "tests/functional/",
       "Guedel\\Tests\\Mock\\AL\\": "tests/mock/"
-    } 
+    }
   },
   "require": {
     "php": "~7.4|~8",
@@ -49,6 +50,6 @@
       "@static-tests",
       "@unit-tests"
     ]
-    
+
   }
 }

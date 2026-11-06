@@ -1,0 +1,104 @@
+@startuml AbstractLanguage
+
+namespace Runtime {
+  interface Visitor {
+  }
+  interface Allow {
+    <<build>> Allow(Operation op, Type left, Type right)
+  }
+}
+
+namespace Datatype {
+  interface Type {
+    void accept(Runtime.Visitor $visitor)
+    string getSignature()
+  }
+  Type <|.. Any
+  class Any {
+    {static} Type getType()
+  }
+  Type <|.. ArrayOf
+  class ArrayOf {
+    - int lowerBound
+    - int upperBound
+    + <<build>> ArrayOf(Type baseType, int lowerbound = null, int upperBound = null)
+  }
+  Type <|.. Structure
+  class Structure {
+    + <<build>> Structure(VariableDecl ... attributes)
+  }
+
+  Structure <|-- ClassType
+  class ClassType {
+    + addMethod()
+
+  }
+  class Convertible {
+  }
+  class Enumeration {
+  }
+  class Number {
+  }
+  class Reference {
+  }
+  class StringOfChars {
+  }
+  class TypeName {
+  }
+}
+
+namespace Declaration {
+}
+
+namespace Expression {
+  enum Operator {
+    OP_ADD = '+'
+    OP_SUB = '-'
+    OP_MULT = '*'
+    ...
+  }
+
+  Valuable ...> Runtime.Visitor : use
+  interface Valuable {
+    + mixed evaluate(Runtime.Visitor)
+    + Datatype.Type getType(Runtime.Visitor)
+  }
+  Valuable <|.. Expression
+  Operator <.. Expression : use
+  abstract class Expression {
+    + <<build>> Expression(Operator op)
+    + Operator getOperator()
+  }
+  Expression <|-- UnaryExpression
+  class UnaryExpression {
+    + <<build>> UnaryExpression(Operator operator, Valuable operand)
+  }
+  Expression <|-- BinaryExpression
+  class BinaryExpression {
+    + <<build>> BinaryExpression(Operator operator, Valuable op1, Valuable op2, Valuable ... operands)
+  }
+  ExpressionList o-> Valuable
+  class ExpressionList {
+  }
+  Valuable <|.. FunctionCall
+  class FunctionCall {
+    - string name
+    - ExpressionList parameters
+
+    + <<build>> FunctionCall(string name, ...parameters)
+    + string getName()
+    + ExpressionList getParameters()
+    + mixed evaluate(Runtime.Visitor visitor)
+  }
+
+  Valuable <|-- Value
+  class Value {
+    + <<build>> Value(mixed value)
+    + mixed getValue()
+    + mixed evaluate(Runtime.Visitor visitor)
+  }
+}
+
+namespace Statement {
+}
+@enduml

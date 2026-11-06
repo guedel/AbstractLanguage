@@ -33,7 +33,6 @@ namespace Guedel\AL\Expression;
  */
 class ExpressionList implements \IteratorAggregate, \Countable
 {
-
     private $expressions;
 
   public function __construct(Valuable ...$expressions)

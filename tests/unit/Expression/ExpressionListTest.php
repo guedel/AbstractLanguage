@@ -37,7 +37,6 @@ use Guedel\Tests\Mock\AL\EmptyExpression;
  */
 class ExpressionListTest extends TestCase
 {
-
   public function testEmpty()
   {
     $list = new ExpressionList();
