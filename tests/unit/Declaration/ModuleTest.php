@@ -38,7 +38,6 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  */
 class ModuleTest extends TestCase
 {
-
   public function testCreateEmpty()
   {
     $m = new Module("Test");

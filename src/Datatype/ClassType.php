@@ -33,7 +33,6 @@ namespace Guedel\AL\Datatype;
  */
 class ClassType extends Structure
 {
-
   private $methods;
 
   public function __construct()

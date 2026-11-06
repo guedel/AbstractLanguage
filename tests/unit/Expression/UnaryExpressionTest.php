@@ -39,7 +39,6 @@ use Guedel\AL\Expression\Value;
  */
 class UnaryExpressionTest extends TestCase
 {
-
   public function testConstruct()
   {
     $e = new UnaryExpression(Expression::OP_ADD, new Value('0'));

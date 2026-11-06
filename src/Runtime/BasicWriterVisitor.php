@@ -37,7 +37,6 @@ use Guedel\AL\Datatype\TypeName;
  */
 class BasicWriterVisitor implements Visitor
 {
-
   /**
    *
    * @var CodeWriter

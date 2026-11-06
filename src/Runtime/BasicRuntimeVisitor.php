@@ -42,7 +42,6 @@ use Guedel\AL\Exception\EndlessLoopException;
  */
 class BasicRuntimeVisitor implements Visitor
 {
-
   private BasicRuntimeContext $context;
 
   private function debug($output)

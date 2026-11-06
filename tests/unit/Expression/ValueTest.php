@@ -19,7 +19,6 @@ use Guedel\AL\Expression\Value;
  */
 class ValueTest extends TestCase
 {
-
   public function testConstruct()
   {
     $v = new Value(1234);
