@@ -1,7 +1,7 @@
 {
   "name": "guedel/al",
   "description": "Library of Php Abstract Language",
-  "version": "0.1",
+  "version": "0.4",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
@@ -30,7 +30,7 @@
     }
   },
   "require": {
-    "php": "~7.4|~8",
+    "php": "~8.4",
     "guedel/stream": "dev-master"
   },
   "require-dev": {

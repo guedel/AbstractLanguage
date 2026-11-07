@@ -6,3 +6,4 @@
 /.vscode
 /.php-cs-fixer.cache
 /.deptrac.cache
+/var
