@@ -377,9 +377,9 @@ class BasicWriterVisitor implements Visitor
       } else {
           $this->writer->out(', ');
       }
-        $this->writer->out($symbol);
+      $this->writer->out($symbol);
     }
-      $this->writer->out("}");
+    $this->writer->out("}");
   }
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)

@@ -23,10 +23,13 @@ style:
 	@mkdir -p var/tmp-phpqa
 	$(PHPQA) phpcs
 
-analyze:
+phpmd:
+	$(PHPQA) phpmd analyze --ruleset=cleancode --ignore-errors-on-exit --reportfile-html var/phpmd src
+
+phpstan:
 	$(PHPQA) phpstan analyze src/ -l 1
-	# $(PHPQA) deptrac
-	$(PHPQA) phpmd analyze --ignore-errors-on-exit --report-file var/phpmd src
+
+analyze: phpstan
 
 test:
 	@echo "Tests"
