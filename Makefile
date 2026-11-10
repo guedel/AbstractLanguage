@@ -27,13 +27,14 @@ phpmd:
 	$(PHPQA) phpmd analyze --ruleset=cleancode --ignore-errors-on-exit --reportfile-html var/phpmd src
 
 phpstan:
-	$(PHPQA) phpstan analyze src/ -l 1
+	$(PHPQA) phpstan analyze src/ -l 2
 
 analyze: phpstan
 
 test:
 	@echo "Tests"
-	$(PHPQA) composer exec phpunit
+	$(PHPQA) composer exec -- phpunit
+	# XDEBUG_MODE=coverage composer exec -- phpunit --coverage-html var/phpunit
 
 check: style analyze test
 
