@@ -46,7 +46,10 @@ class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
     return $this;
   }
 
-  public function getIterator(): \Traversable
+  /**
+   * @return \Iterator<Parameter>
+   */
+  public function getIterator(): \Iterator
   {
     return new \ArrayIterator($this->parameters);
   }

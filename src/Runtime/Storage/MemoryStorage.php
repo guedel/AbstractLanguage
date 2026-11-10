@@ -38,9 +38,9 @@ class MemoryStorage implements BasicStorage
 
     /**
      *
-     * @var char memory unallocated
+     * @var string memory unallocated
      */
-  private const UNDEF = "\024";
+  private const string UNDEF = "\024";
 
   public function __construct($size)
   {
@@ -105,11 +105,11 @@ class MemoryStorage implements BasicStorage
 
     /**
      * Récupère l'adresse du prochain octet libre
-     * @param type $start adresse de départ
+     * @param int $start adresse de départ
      * @return int adresse trouvée
      * @throws \OverflowException
      */
-  private function getNextFreeByte($start): int
+  private function getNextFreeByte(int $start): int
   {
     for ($index = $start; $index < $this->size; ++$index) {
       if ($this->memory[$index] == self::UNDEF) {

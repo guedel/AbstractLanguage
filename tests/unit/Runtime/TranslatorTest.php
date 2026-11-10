@@ -8,7 +8,7 @@ use Guedel\AL\Runtime\Translator;
 /**
  * @covers \Guedel\AL\Runtime\Translator
  */
-class TranslatortTest extends TestCase
+class TranslatorTest extends TestCase
 {
     public function testEnglishWord()
     {

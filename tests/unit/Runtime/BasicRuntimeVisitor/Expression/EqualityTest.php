@@ -35,8 +35,11 @@ use Guedel\AL\Expression\Value;
  * Description of EqualityTests
  *
  * @author Guedel <guedel87@live.fr>
- * @covers BinaryExpression::evaluate
- * @covers BasicRuntimeVisitor::evalBinaryExpression
+ * @covers \Guedel\AL\Expression\Expression
+ * @covers \Guedel\AL\Expression\ExpressionList
+ * @covers \Guedel\AL\Expression\Value
+ * @covers \Guedel\AL\Expression\BinaryExpression
+ * @covers \Guedel\AL\Runtime\BasicRuntimeVisitor
  */
 class EqualityTest extends TestCase
 {
@@ -50,7 +53,7 @@ class EqualityTest extends TestCase
   /**
    * @dataProvider equalityExpressions
    */
-  public function testIsEqual($expect, BinaryExpression $exp)
+  public function testIsEqual(int $expect, BinaryExpression $exp): void
   {
     $res = $exp->evaluate($this->visitor);
     $this->assertEquals($expect, $res);
@@ -59,7 +62,7 @@ class EqualityTest extends TestCase
   /**
    * @dataProvider differentExpressions
    */
-  public function testIsDifferent($expect, BinaryExpression $exp)
+  public function testIsDifferent(int $expect, BinaryExpression $exp): void
   {
     $res = $exp->evaluate($this->visitor);
     $this->assertEquals($expect, $res);
