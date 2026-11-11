@@ -78,10 +78,6 @@ class Translator
     if ($this->language == self::ENGLISH) {
         return $word;
     }
-    try {
-        return self::$words[$this->language][$word];
-    } catch (\Exception $ex) {
-    }
-      return $word;
+    return self::$words[$this->language][$word] ?? $word;
   }
 }

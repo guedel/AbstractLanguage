@@ -38,14 +38,14 @@ class MemoryStorage implements BasicStorage
 
     /**
      *
-     * @var char memory unallocated
+     * @var string memory unallocated
      */
-  private static $UNDEF = "\024";
+  private const string UNDEF = "\024";
 
   public function __construct($size)
   {
       $this->size = $size;
-      $this->memory = str_repeat(self::$UNDEF, $size); // ctrl-U
+      $this->memory = str_repeat(self::UNDEF, $size); // ctrl-U
   }
 
     /**
@@ -94,7 +94,7 @@ class MemoryStorage implements BasicStorage
     do {
         $start = $this->getNextFreeByte($start + $index);
       for ($index = $start + 1; $index < $start + $size; ++$index) {
-        $ok = ($ok && $this->memory[$index] == self::$UNDEF);
+        $ok = ($ok && $this->memory[$index] == self::UNDEF);
       }
       if (! $ok) {
           $start = $this->getNextFreeByte($start + $size);
@@ -105,14 +105,14 @@ class MemoryStorage implements BasicStorage
 
     /**
      * Récupère l'adresse du prochain octet libre
-     * @param type $start adresse de départ
+     * @param int $start adresse de départ
      * @return int adresse trouvée
      * @throws \OverflowException
      */
-  private function getNextFreeByte($start): int
+  private function getNextFreeByte(int $start): int
   {
     for ($index = $start; $index < $this->size; ++$index) {
-      if ($this->memory[$index] == self::$UNDEF) {
+      if ($this->memory[$index] == self::UNDEF) {
         return $index;
       }
     }

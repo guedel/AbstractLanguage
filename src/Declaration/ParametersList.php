@@ -46,7 +46,10 @@ class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
     return $this;
   }
 
-  public function getIterator(): \Traversable
+  /**
+   * @return \Iterator<Parameter>
+   */
+  public function getIterator(): \Iterator
   {
     return new \ArrayIterator($this->parameters);
   }
@@ -56,12 +59,12 @@ class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
     return count($this->parameters);
   }
 
-  public function offsetExists($offset): bool
+  public function offsetExists(mixed $offset): bool
   {
     return isset($this->parameters[$offset]);
   }
 
-  public function offsetGet($offset)
+  public function offsetGet(mixed $offset): mixed
   {
     return $this->parameters[$offset];
   }

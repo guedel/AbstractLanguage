@@ -28,6 +28,7 @@ namespace Guedel\AL;
 
 use Guedel\AL\Datatype\Type;
 use Guedel\AL\Expression;
+use Guedel\AL\Statement\StatementList;
 
 /**
  * Build any class in Abstract Language
@@ -36,24 +37,17 @@ use Guedel\AL\Expression;
  */
 class Builder
 {
-  /**
-   *
-   * @var Statement\StatementList
-   */
-  private $statements;
+  private StatementList $statements;
 
-  /**
-   * @var Builder
-   */
-  private $parent;
+  private ?Builder $parent;
 
   public function __construct()
   {
-    $this->statements = new Statement\StatementList();
+    $this->statements = new StatementList();
     $this->parent = null;
   }
 
-  public function getStatements(): Statement\StatementList
+  public function getStatements(): ?StatementList
   {
     return $this->statements;
   }
@@ -129,7 +123,7 @@ class Builder
     $ret = $me->stmtBegin();
     $last = $me->statements->last();
     if ($last instanceof Statement\IfThenStmt) {
-      $ret->statements = $last->getElsePart();
+      $ret->statements->add($last->getElsePart());
     }
     return $ret;
   }
@@ -151,7 +145,7 @@ class Builder
   public function stmtEnd(): Builder
   {
     $ret = $this->parent;
-    $this->statements = null;
+    // $this->statements = null;
     $this->parent = null;
     return $ret;
   }

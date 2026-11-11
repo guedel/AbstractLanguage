@@ -34,8 +34,11 @@ use Guedel\AL\Expression\Value;
 /**
  * Description of InequalityTest
  *
- * @covers BinaryExpression::evaluate
- * @covers BasicRuntimeVisitor::evalBinaryExpression
+ * @covers \Guedel\AL\Expression\Expression
+ * @covers \Guedel\AL\Expression\ExpressionList
+ * @covers \Guedel\AL\Expression\Value
+ * @covers \Guedel\AL\Expression\BinaryExpression
+ * @covers \Guedel\AL\Runtime\BasicRuntimeVisitor
  * @author Guedel <guedel87@live.fr>
  */
 class InequalityTest extends TestCase

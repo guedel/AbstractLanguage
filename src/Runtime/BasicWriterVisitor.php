@@ -37,11 +37,7 @@ use Guedel\AL\Datatype\TypeName;
  */
 class BasicWriterVisitor implements Visitor
 {
-  /**
-   *
-   * @var CodeWriter
-   */
-    private $writer;
+  private ?CodeWriter $writer;
   private Translator $translator;
 
   public function __construct(?CodeWriter $writer = null, ?Translator $translator = null)
@@ -377,9 +373,9 @@ class BasicWriterVisitor implements Visitor
       } else {
           $this->writer->out(', ');
       }
-        $this->writer->out($symbol);
+      $this->writer->out($symbol);
     }
-      $this->writer->out("}");
+    $this->writer->out("}");
   }
 
   public function visitReference(\Guedel\AL\Datatype\Reference $type)
@@ -445,10 +441,8 @@ class BasicWriterVisitor implements Visitor
 
   public function visitClass(\Guedel\AL\Datatype\ClassType $type)
   {
-      $this->writer
-      ->outln($this->t('CLASS'))
-      ->indent()
-      ;
+      $this->writer->outln($this->t('CLASS'));
+      $this->writer->indent();
     foreach ($type->getAttributes() as $attribute) {
         $attribute->accept($this);
     }
