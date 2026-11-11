@@ -36,8 +36,8 @@
    */
 class ProcedureDecl extends NamedDeclaration
 {
-    private ?ParametersList $parameters;
-    private ?Statement $body;
+  private ?ParametersList $parameters;
+  private ?Statement $body;
 
   public function __construct(string $name, ?ParametersList $parameters = null, ?Statement $body = null)
   {
