@@ -7,11 +7,6 @@ PHPSTAN_LEVEL = 3
 help:
 	@echo "targets: bump, clean, fix-style, shell, style, phpmd, phpstan, analyse, test, check, package"
 
-bump:
-	@echo "Bump version"
-	# TODO
-	jq '.version' < composer.json
-
 clean:
 	@echo "Nettoyage"
 	rm -rf var/*
