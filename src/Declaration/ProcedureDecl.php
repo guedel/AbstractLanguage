@@ -36,17 +36,10 @@
    */
 class ProcedureDecl extends NamedDeclaration
 {
-    /**
-     *
-     * @var ParametersList
-     */
-    private $parameters;
-    /**
-     * @var Statement
-     */
-    private $body;
+    private ?ParametersList $parameters;
+    private ?Statement $body;
 
-  public function __construct(string $name, ParametersList $parameters = null, Statement $body = null)
+  public function __construct(string $name, ?ParametersList $parameters = null, ?Statement $body = null)
   {
       parent::__construct($name);
     if ($parameters === null) {
@@ -66,12 +59,12 @@ class ProcedureDecl extends NamedDeclaration
       $visitor->declareProcedure($this);
   }
 
-  public function getParameters(): ParametersList
+  public function getParameters(): ?ParametersList
   {
       return $this->parameters;
   }
 
-  public function getBody(): StatementList
+  public function getBody(): ?Statement
   {
       return $this->body;
   }

@@ -2,7 +2,7 @@
 
 PHPVER = php8.3
 PHPQA = podman run --init -it --rm -v "`pwd`:/project" -v "`pwd`/var/tmp-phpqa:/tmp" -v "$(REGISTRY_PATH)/composer:/registry" -w /project docker.io/jakzal/phpqa:$(PHPVER)-alpine
-PHPSTAN_LEVEL = 2
+PHPSTAN_LEVEL = 3
 
 help:
 	@echo "targets: bump, clean, fix-style, shell, style, phpmd, phpstan, analyse, test, check, package"
@@ -14,6 +14,7 @@ bump:
 
 clean:
 	@echo "Nettoyage"
+	rm -rf var/*
 
 fix-style:
 	@echo "Correction du style"
