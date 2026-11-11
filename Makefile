@@ -1,7 +1,11 @@
-.PHONY: bump clean check test shell style fix-style package
+.PHONY: help bump clean check test shell style fix-style package
 
 PHPVER = php8.3
 PHPQA = podman run --init -it --rm -v "`pwd`:/project" -v "`pwd`/var/tmp-phpqa:/tmp" -v "$(REGISTRY_PATH)/composer:/registry" -w /project docker.io/jakzal/phpqa:$(PHPVER)-alpine
+PHPSTAN_LEVEL = 2
+
+help:
+	@echo "targets: bump, clean, fix-style, shell, style, phpmd, phpstan, analyse, test, check, package"
 
 bump:
 	@echo "Bump version"
@@ -12,7 +16,7 @@ clean:
 	@echo "Nettoyage"
 
 fix-style:
-	@echo "Correction du style
+	@echo "Correction du style"
 	$(PHPQA) phpcbf
 
 shell:
@@ -27,7 +31,7 @@ phpmd:
 	$(PHPQA) phpmd analyze --ruleset=cleancode --ignore-errors-on-exit --reportfile-html var/phpmd src
 
 phpstan:
-	$(PHPQA) phpstan analyze src/ -l 2
+	$(PHPQA) phpstan analyze src/ -l $(PHPSTAN_LEVEL)
 
 analyze: phpstan
 
