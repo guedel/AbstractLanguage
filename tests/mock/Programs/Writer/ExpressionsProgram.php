@@ -30,7 +30,7 @@ class ExpressionsProgram implements BaseTestProgram
 {
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "RETURN a, -a, NOT a",
         "RETURN a + b, a - b, a * b, a / b, a != b"
         ]) . PHP_EOL;

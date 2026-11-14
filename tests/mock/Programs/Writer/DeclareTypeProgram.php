@@ -26,7 +26,7 @@ class DeclareTypeProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "TYPE sample1: STRING * 50",
         "TYPE sample2: ARRAY [1, 10] OF INTEGER",
         "TYPE sample3: {mercure, venus, earth, mars}",

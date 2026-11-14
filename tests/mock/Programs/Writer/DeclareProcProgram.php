@@ -27,7 +27,7 @@ class DeclareProcProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "PROCEDURE bonjour(IN name: ANY)",
         "\tWRITE name",
         "END PROCEDURE",

@@ -25,7 +25,7 @@ class StructProgram implements BaseTestProgram
 {
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "TYPE mystruct: STRUCT",
         "\tVAR one: ANY",
         "\tVAR two: INTEGER",

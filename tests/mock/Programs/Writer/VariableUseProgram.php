@@ -30,7 +30,7 @@ class VariableUseProgram implements BaseTestProgram
      */
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "VAR i: ANY",
         "i <- 10",
         ]) . PHP_EOL;

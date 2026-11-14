@@ -26,7 +26,7 @@ class HelloWorldProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "MODULE Hello",
         "\tWRITE \"Hello World !\"",
         "END MODULE",

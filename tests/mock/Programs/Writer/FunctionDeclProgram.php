@@ -34,7 +34,7 @@ class FunctionDeclProgram implements BaseTestProgram
 {
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "FUNCTION fact(IN n: INTEGER): INTEGER",
         "\tIF n <= 1 THEN",
         "\t\tRETURN 1",

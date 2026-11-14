@@ -52,7 +52,7 @@ class TestVisitor implements Visitor
         foreach ($exp->getOperands() as $op) {
             $operands[] = $op->evaluate($this);
         }
-        return join($exp->getOperator(), $operands);
+        return implode($exp->getOperator(), $operands);
     }
 
     public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)

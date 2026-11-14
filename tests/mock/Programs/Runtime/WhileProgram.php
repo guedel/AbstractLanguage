@@ -49,6 +49,6 @@ class WhileProgram implements BaseTestProgram
 
     public function expect(): string
     {
-        return join(PHP_EOL, [0,1,2,3]) . PHP_EOL;
+        return implode(PHP_EOL, [0,1,2,3]) . PHP_EOL;
     }
 }

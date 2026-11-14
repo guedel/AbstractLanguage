@@ -28,7 +28,7 @@ class LoopProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "WHILE i DO",
         "\tDEC i",
         "END WHILE",

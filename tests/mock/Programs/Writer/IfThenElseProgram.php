@@ -26,7 +26,7 @@ class IfThenElseProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "IF \"a\" THEN",
         "\tWRITE \"OK\"",
         "ELSE",

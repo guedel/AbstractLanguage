@@ -26,7 +26,7 @@ class SimpleIfProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "IF TRUE THEN",
         "\tWRITE \"OK\"",
         "END IF",
