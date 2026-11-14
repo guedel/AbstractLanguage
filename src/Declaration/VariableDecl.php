@@ -40,37 +40,37 @@ class VariableDecl extends NamedDeclaration
     private $type;
     private $value;
 
-  public function __construct($name, Type $type = null)
-  {
-      parent::__construct($name);
-    if ($type == null) {
-        $this->type = Any::getType();
-    } else {
-        $this->type = $type;
+    public function __construct($name, Type $type = null)
+    {
+        parent::__construct($name);
+        if ($type == null) {
+            $this->type = Any::getType();
+        } else {
+            $this->type = $type;
+        }
     }
-  }
 
-  public function getType(): \Guedel\AL\Datatype\Type
-  {
-      return $this->type;
-  }
-
-  public function setValue($value)
-  {
-    if ($value instanceof Value) {
-      $this->value = $value;
-    } else {
-      $this->value = new Value($value);
+    public function getType(): \Guedel\AL\Datatype\Type
+    {
+        return $this->type;
     }
-  }
 
-  public function getValue(): Value
-  {
-    return $this->value;
-  }
+    public function setValue($value)
+    {
+        if ($value instanceof Value) {
+            $this->value = $value;
+        } else {
+            $this->value = new Value($value);
+        }
+    }
 
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-      return $visitor->declareVariable($this);
-  }
+    public function getValue(): Value
+    {
+        return $this->value;
+    }
+
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        return $visitor->declareVariable($this);
+    }
 }

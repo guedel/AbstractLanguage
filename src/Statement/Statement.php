@@ -33,5 +33,5 @@ namespace Guedel\AL\Statement;
  */
 interface Statement
 {
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor);
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor);
 }

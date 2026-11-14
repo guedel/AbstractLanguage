@@ -37,22 +37,22 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  */
 class FunctionCallTest extends TestCase
 {
-  private $function;
-  private $visitor;
+    private $function;
+    private $visitor;
 
-  public function setUp(): void
-  {
-    $this->function = new FunctionCall("cos");
-    $this->visitor = new TestVisitor();
-  }
+    public function setUp(): void
+    {
+        $this->function = new FunctionCall("cos");
+        $this->visitor = new TestVisitor();
+    }
 
-  public function testConstruction()
-  {
-    $this->assertEquals('cos', $this->function->getName());
-  }
+    public function testConstruction()
+    {
+        $this->assertEquals('cos', $this->function->getName());
+    }
 
-  public function testEvaluate()
-  {
-    $this->assertEquals(0.66, $this->function->evaluate($this->visitor));
-  }
+    public function testEvaluate()
+    {
+        $this->assertEquals(0.66, $this->function->evaluate($this->visitor));
+    }
 }

@@ -39,16 +39,16 @@ use Guedel\AL\Expression\Value;
  */
 class PrintfProgram implements BaseTestProgram
 {
-  public function expect(): string
-  {
-    return "Hello World !";
-  }
+    public function expect(): string
+    {
+        return "Hello World !";
+    }
 
-  public function code(): Statement
-  {
-    return new Module(
-        "Hello",
-        new ProcedureCall("printf", new Value("Hello %s !"), new Value("World"))
-    );
-  }
+    public function code(): Statement
+    {
+        return new Module(
+            "Hello",
+            new ProcedureCall("printf", new Value("Hello %s !"), new Value("World"))
+        );
+    }
 }

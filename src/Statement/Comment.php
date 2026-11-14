@@ -35,17 +35,17 @@ class Comment implements \Guedel\AL\Statement\Statement
 {
     private $message;
 
-  public function __construct($message)
-  {
-      $this->message = $message;
-  }
-  public function getMessage()
-  {
-      return $this->message;
-  }
+    public function __construct($message)
+    {
+        $this->message = $message;
+    }
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-    return $visitor->visitComment($this);
-  }
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        return $visitor->visitComment($this);
+    }
 }

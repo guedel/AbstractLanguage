@@ -40,16 +40,16 @@ use Guedel\AL\Expression\Value;
  */
 class PhpFunctionCall implements BaseTestProgram
 {
-  public function code(): Statement
-  {
-    return new Module(
-        "phpfunctioncall",
-        new ProcedureCall("write", new FunctionCall("sprintf", new Value("Hello %s !"), new Value("World")))
-    );
-  }
+    public function code(): Statement
+    {
+        return new Module(
+            "phpfunctioncall",
+            new ProcedureCall("write", new FunctionCall("sprintf", new Value("Hello %s !"), new Value("World")))
+        );
+    }
 
-  public function expect(): string
-  {
-    return "Hello World !";
-  }
+    public function expect(): string
+    {
+        return "Hello World !";
+    }
 }

@@ -39,32 +39,32 @@ use Guedel\Stream\CodeWriter;
  */
 class BasicWriterVisitorTest extends TestCase
 {
-  private BasicWriterVisitor $visitor;
-  private Translator $translator;
-  private CodeWriter $writer;
+    private BasicWriterVisitor $visitor;
+    private Translator $translator;
+    private CodeWriter $writer;
 
-  public function setUp(): void
-  {
-    $this->writer = new CodeWriter();
-    $this->translator = new Translator();
-    $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
-  }
+    public function setUp(): void
+    {
+        $this->writer = new CodeWriter();
+        $this->translator = new Translator();
+        $this->visitor = new BasicWriterVisitor($this->writer, $this->translator);
+    }
 
   /**
    * @dataProvider programs
    * @coversNothing
    */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $p->code()->accept($this->visitor);
-    $r = $this->writer->render();
-    $this->assertEquals($p->expect(), $r);
-  }
+    public function testProgram(BaseTestProgram $p)
+    {
+        $p->code()->accept($this->visitor);
+        $r = $this->writer->render();
+        $this->assertEquals($p->expect(), $r);
+    }
 
 
-  public static function programs()
-  {
-    return [
+    public static function programs()
+    {
+        return [
         'empty module' => [new Prog\EmptyModuleProgram()],
         'hello world' => [new Prog\HelloWorldProgram()],
         'simple if' => [new Prog\SimpleIfProgram()],
@@ -76,6 +76,6 @@ class BasicWriterVisitorTest extends TestCase
         'declare function' => [new Prog\FunctionDeclProgram()],
         'declare type' => [new Prog\DeclareTypeProgram()],
         'structure' => [new Prog\StructProgram()],
-    ];
-  }
+        ];
+    }
 }

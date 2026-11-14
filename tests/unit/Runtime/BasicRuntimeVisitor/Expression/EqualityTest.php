@@ -43,51 +43,51 @@ use Guedel\AL\Expression\Value;
  */
 class EqualityTest extends TestCase
 {
-  private $visitor;
+    private $visitor;
 
-  public function setUp(): void
-  {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
+    public function setUp(): void
+    {
+        $this->visitor = new BasicRuntimeVisitor();
+    }
 
   /**
    * @dataProvider equalityExpressions
    */
-  public function testIsEqual(int $expect, BinaryExpression $exp): void
-  {
-    $res = $exp->evaluate($this->visitor);
-    $this->assertEquals($expect, $res);
-  }
+    public function testIsEqual(int $expect, BinaryExpression $exp): void
+    {
+        $res = $exp->evaluate($this->visitor);
+        $this->assertEquals($expect, $res);
+    }
 
   /**
    * @dataProvider differentExpressions
    */
-  public function testIsDifferent(int $expect, BinaryExpression $exp): void
-  {
-    $res = $exp->evaluate($this->visitor);
-    $this->assertEquals($expect, $res);
-  }
+    public function testIsDifferent(int $expect, BinaryExpression $exp): void
+    {
+        $res = $exp->evaluate($this->visitor);
+        $this->assertEquals($expect, $res);
+    }
 
-  public static function equalityExpressions()
-  {
-    return [
-      1 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2))],
-      2 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(3))],
-      3 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(2))],
-      4 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(3))],
-      5 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(0))],
-      6 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(1))],
-    ];
-  }
+    public static function equalityExpressions()
+    {
+        return [
+        1 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2))],
+        2 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(3))],
+        3 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(2))],
+        4 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2), new Value(3))],
+        5 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(0))],
+        6 => [0, new BinaryExpression(Expression::OP_EQUAL, new Value(0), new Value(0), new Value(1))],
+        ];
+    }
 
-  public static function differentExpressions()
-  {
-    return [
+    public static function differentExpressions()
+    {
+        return [
         1 => [0, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(2))],
         2 => [1, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(3))],
         3 => [0, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(2), new Value(2))],
         4 => [1, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(3), new Value(4))],
         5 => [1, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(3), new Value(2))],
-    ];
-  }
+        ];
+    }
 }

@@ -39,35 +39,38 @@ class Structure implements Type
      *
      * @var VariableDecl[]
      */
-    private $attributes;
+    private array $attributes;
 
-  public function __construct(VariableDecl ...$attributes)
-  {
-      $this->attributes = $attributes;
-  }
-
-  public function getAttributes()
-  {
-      return $this->attributes;
-  }
-
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-      $visitor->visitStructure($this);
-  }
-
-  public function getSignature(): string
-  {
-      $ret = '{';
-      $first = true;
-    foreach ($this->attributes as $attr) {
-      if ($first) {
-        $first = false;
-      } else {
-          $ret .= ';';
-      }
-        $ret .= $attr->getType()->getSignature();
+    public function __construct(VariableDecl ...$attributes)
+    {
+        $this->attributes = $attributes;
     }
-      return $ret . '}';
-  }
+
+  /**
+   * @return VariableDecl[]
+   */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        $visitor->visitStructure($this);
+    }
+
+    public function getSignature(): string
+    {
+        $ret = '{';
+        $first = true;
+        foreach ($this->attributes as $attr) {
+            if ($first) {
+                $first = false;
+            } else {
+                $ret .= ';';
+            }
+            $ret .= $attr->getType()->getSignature();
+        }
+        return $ret . '}';
+    }
 }

@@ -37,21 +37,21 @@ class Value implements Valuable
 {
     private $value;
 
-  public function __construct($value)
-  {
-      $this->value = $value;
-  }
+    public function __construct($value)
+    {
+        $this->value = $value;
+    }
 
-  public function getValue()
-  {
-      return $this->value;
-  }
+    public function getValue()
+    {
+        return $this->value;
+    }
 
   /**
    * @inherit
    */
-  public function evaluate(Visitor $visitor)
-  {
-      return $visitor->evalValue($this);
-  }
+    public function evaluate(Visitor $visitor)
+    {
+        return $visitor->evalValue($this);
+    }
 }

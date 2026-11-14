@@ -42,24 +42,24 @@ use Guedel\AL\Expression\Expression;
 class ExpressionsProgram implements BaseTestProgram
 {
   //put your code here
-  public function code(): Statement
-  {
-    return new Module(
-        "expressions",
-        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_ADD, new Value(4), new Value(3))),
-        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_MULT, new Value(4), new Value(3))),
-        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_DIV, new Value(8), new Value(2))),
-        new ProcedureCall("writeln", new BinaryExpression(Expression::OP_SUB, new Value(4), new Value(3))),
-    );
-  }
+    public function code(): Statement
+    {
+        return new Module(
+            "expressions",
+            new ProcedureCall("writeln", new BinaryExpression(Expression::OP_ADD, new Value(4), new Value(3))),
+            new ProcedureCall("writeln", new BinaryExpression(Expression::OP_MULT, new Value(4), new Value(3))),
+            new ProcedureCall("writeln", new BinaryExpression(Expression::OP_DIV, new Value(8), new Value(2))),
+            new ProcedureCall("writeln", new BinaryExpression(Expression::OP_SUB, new Value(4), new Value(3))),
+        );
+    }
 
-  public function expect(): string
-  {
-    return implode(PHP_EOL, [
+    public function expect(): string
+    {
+        return implode(PHP_EOL, [
         '7',
         '12',
         '4',
         '1',
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 }

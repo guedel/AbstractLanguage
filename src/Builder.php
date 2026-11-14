@@ -37,35 +37,35 @@ use Guedel\AL\Statement\StatementList;
  */
 class Builder
 {
-  use Guedel\AL\Statement\StatementBuilder;
-  use Guedel\AL\Expression\ExpressionBuilder;
-  use Guedel\AL\Declaration\DeclarationBuilder;
-  use Guedel\AL\Datatype\DataTypeBuilder;
+    use Guedel\AL\Statement\StatementBuilder;
+    use Guedel\AL\Expression\ExpressionBuilder;
+    use Guedel\AL\Declaration\DeclarationBuilder;
+    use Guedel\AL\Datatype\DataTypeBuilder;
 
-  protected StatementList $statements;
+    protected StatementList $statements;
 
-  public function __construct(private readonly ?Builder $parent = null)
-  {
-    $this->statements = new StatementList();
-  }
+    public function __construct(private readonly ?Builder $parent = null)
+    {
+        $this->statements = new StatementList();
+    }
 
-  public function getStatements(): StatementList
-  {
-    return $this->statements;
-  }
+    public function getStatements(): StatementList
+    {
+        return $this->statements;
+    }
 
-  protected function stmtBegin(): Builder
-  {
-    $builder = new Builder();
-    $builder->parent = $this;
-    return $builder;
-  }
+    protected function stmtBegin(): Builder
+    {
+        $builder = new Builder();
+        $builder->parent = $this;
+        return $builder;
+    }
 
-  public function stmtEnd(): Builder
-  {
-    $ret = $this->parent;
-    // $this->statements = null;
-    $this->parent = null;
-    return $ret;
-  }
+    public function stmtEnd(): Builder
+    {
+        $ret = $this->parent;
+      // $this->statements = null;
+        $this->parent = null;
+        return $ret;
+    }
 }

@@ -38,26 +38,26 @@ use Guedel\Tests\Mock\AL\Programs\Runtime as Prog;
  */
 class BasicRuntimeVisitorTest extends TestCase
 {
-  private BasicRuntimeVisitor $visitor;
+    private BasicRuntimeVisitor $visitor;
 
-  public function setUp(): void
-  {
-    $this->visitor = new BasicRuntimeVisitor();
-  }
+    public function setUp(): void
+    {
+        $this->visitor = new BasicRuntimeVisitor();
+    }
 
   /**
    * @dataProvider programs
    * @coversNothing
    */
-  public function testProgram(BaseTestProgram $p)
-  {
-    $this->expectOutputString($p->expect());
-    $this->visitor->run($p->code());
-  }
+    public function testProgram(BaseTestProgram $p)
+    {
+        $this->expectOutputString($p->expect());
+        $this->visitor->run($p->code());
+    }
 
-  public static function programs()
-  {
-    return [
+    public static function programs()
+    {
+        return [
         'hello world' => [new Prog\HelloWorldProgram()],
         'printf hello' => [new Prog\PrintfProgram()],
         'variable use' => [new Prog\VariableUseProgram()],
@@ -69,6 +69,6 @@ class BasicRuntimeVisitorTest extends TestCase
         'simple user procedure call' => [new Prog\ProcProgram()],
         'user procedure call' => [new Prog\ProcParamProgram()],
         'simple user function call' => [new Prog\FuncProgram()],
-    ];
-  }
+        ];
+    }
 }

@@ -34,30 +34,30 @@
 class TypeName implements Type
 {
     // Quelque types de base
-  public const DT_ANY = 'any';
-  public const DT_INTEGER = 'int';
-  public const DT_FLOAT = 'float';
-  public const DT_NUMBER = 'number';
-  public const DT_STRING = 'string';
+    public const DT_ANY = 'any';
+    public const DT_INTEGER = 'int';
+    public const DT_FLOAT = 'float';
+    public const DT_NUMBER = 'number';
+    public const DT_STRING = 'string';
 
     private $name;
-  public function __construct(string $name)
-  {
-      $this->name = $name;
-  }
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+    }
 
-  public function getName(): string
-  {
-      return $this->name;
-  }
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-      $visitor->visitTypename($this);
-  }
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        $visitor->visitTypename($this);
+    }
 
-  public function getSignature(): string
-  {
-      return 'alias:' . $this->name;
-  }
+    public function getSignature(): string
+    {
+        return 'alias:' . $this->name;
+    }
 }

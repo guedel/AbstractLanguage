@@ -33,42 +33,42 @@ namespace Guedel\AL\Datatype;
  */
 class ClassType extends Structure
 {
-  private $methods;
+    private $methods;
 
-  public function __construct()
-  {
-    $this->methods = array();
-  }
-
-  public function &getMethods()
-  {
-    return $this->methods;
-  }
-
-  public function addMethod(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
-  {
-    $this->methods[$method->getName()] = $method;
-    return $this;
-  }
-
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-    $visitor->visitClass($this);
-  }
-
-  public function getSignature(): string
-  {
-    $ret = '{' . parent::getSignature();
-    $first = true;
-    foreach ($this->methods as $attr) {
-      if ($first) {
-        $first = false;
-      } else {
-        $ret .= ';';
-      }
-      $ret .= $attr->getSignature();
+    public function __construct()
+    {
+        $this->methods = array();
     }
 
-    return $ret . '}';
-  }
+    public function &getMethods()
+    {
+        return $this->methods;
+    }
+
+    public function addMethod(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
+    {
+        $this->methods[$method->getName()] = $method;
+        return $this;
+    }
+
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        $visitor->visitClass($this);
+    }
+
+    public function getSignature(): string
+    {
+        $ret = '{' . parent::getSignature();
+        $first = true;
+        foreach ($this->methods as $attr) {
+            if ($first) {
+                $first = false;
+            } else {
+                $ret .= ';';
+            }
+            $ret .= $attr->getSignature();
+        }
+
+        return $ret . '}';
+    }
 }

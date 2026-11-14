@@ -38,23 +38,23 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  */
 class ModuleTest extends TestCase
 {
-  public function testCreateEmpty()
-  {
-    $m = new Module("Test");
-    $this->assertEquals("Test", $m->getName());
-    $this->assertCount(0, $m->getStatements());
-  }
+    public function testCreateEmpty()
+    {
+        $m = new Module("Test");
+        $this->assertEquals("Test", $m->getName());
+        $this->assertCount(0, $m->getStatements());
+    }
 
-  public function testCreateOne()
-  {
-    $m = new Module("Test", new EmptyStatement());
-    $this->assertCount(1, $m->getStatements());
-  }
+    public function testCreateOne()
+    {
+        $m = new Module("Test", new EmptyStatement());
+        $this->assertCount(1, $m->getStatements());
+    }
 
-  public function testAccept()
-  {
-    $m = new Module("Test");
-    $ret = $m->accept(new TestVisitor());
-    $this->assertEquals("MODULE Test", $ret);
-  }
+    public function testAccept()
+    {
+        $m = new Module("Test");
+        $ret = $m->accept(new TestVisitor());
+        $this->assertEquals("MODULE Test", $ret);
+    }
 }

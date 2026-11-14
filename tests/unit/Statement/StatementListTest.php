@@ -41,28 +41,28 @@ class StatementListTest extends TestCase
   /**
    *
    */
-  public function testEmptyList()
-  {
-    $list = new StatementList();
-    $this->assertCount(0, $list);
-  }
-
-  public function testCountElementList()
-  {
-    $list = new StatementList(new EmptyStatement());
-    $this->assertCount(1, $list);
-    $list->add(new EmptyStatement());
-    $this->assertCount(2, $list);
-  }
-
-  public function testEnumElementList()
-  {
-    $visitor = new TestVisitor();
-    $list = new StatementList(new EmptyStatement(), new EmptyStatement());
-    $this->assertCount(2, $list);
-    foreach ($list as $item) {
-      $this->assertInstanceOf(EmptyStatement::class, $item);
-      $this->assertEquals('EMPTY', $item->accept($visitor));
+    public function testEmptyList()
+    {
+        $list = new StatementList();
+        $this->assertCount(0, $list);
     }
-  }
+
+    public function testCountElementList()
+    {
+        $list = new StatementList(new EmptyStatement());
+        $this->assertCount(1, $list);
+        $list->add(new EmptyStatement());
+        $this->assertCount(2, $list);
+    }
+
+    public function testEnumElementList()
+    {
+        $visitor = new TestVisitor();
+        $list = new StatementList(new EmptyStatement(), new EmptyStatement());
+        $this->assertCount(2, $list);
+        foreach ($list as $item) {
+            $this->assertInstanceOf(EmptyStatement::class, $item);
+            $this->assertEquals('EMPTY', $item->accept($visitor));
+        }
+    }
 }

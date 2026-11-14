@@ -43,29 +43,29 @@ use Guedel\AL\Expression\{
  */
 class ExpressionsProgram implements BaseTestProgram
 {
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "RETURN a, -a, NOT a",
         "RETURN a + b, a - b, a * b, a / b, a != b"
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new StatementList(
-        new ReturnStmt(
-            new UnaryExpression(Expression::OP_ADD, new Variable("a")),
-            new UnaryExpression(Expression::OP_SUB, new Variable("a")),
-            new UnaryExpression(Expression::OP_NOT, new Variable("a"))
-        ),
-        new ReturnStmt(
-            new BinaryExpression(Expression::OP_ADD, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_SUB, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_MULT, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_DIV, new Variable("a"), new Variable("b")),
-            new BinaryExpression(Expression::OP_DIFF, new Variable("a"), new Variable("b"))
-        )
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new StatementList(
+            new ReturnStmt(
+                new UnaryExpression(Expression::OP_ADD, new Variable("a")),
+                new UnaryExpression(Expression::OP_SUB, new Variable("a")),
+                new UnaryExpression(Expression::OP_NOT, new Variable("a"))
+            ),
+            new ReturnStmt(
+                new BinaryExpression(Expression::OP_ADD, new Variable("a"), new Variable("b")),
+                new BinaryExpression(Expression::OP_SUB, new Variable("a"), new Variable("b")),
+                new BinaryExpression(Expression::OP_MULT, new Variable("a"), new Variable("b")),
+                new BinaryExpression(Expression::OP_DIV, new Variable("a"), new Variable("b")),
+                new BinaryExpression(Expression::OP_DIFF, new Variable("a"), new Variable("b"))
+            )
+        );
+    }
 }

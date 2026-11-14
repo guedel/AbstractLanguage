@@ -38,20 +38,20 @@ use Guedel\AL\Expression\Value;
 class HelloWorldProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "MODULE Hello",
         "\tWRITE \"Hello World !\"",
         "END MODULE",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new Module(
-        "Hello",
-        new ProcedureCall("WRITE", new Value("Hello World !"))
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new Module(
+            "Hello",
+            new ProcedureCall("WRITE", new Value("Hello World !"))
+        );
+    }
 }

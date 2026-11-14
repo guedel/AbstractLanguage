@@ -39,23 +39,23 @@ use Guedel\AL\Expression\Value;
 class IfThenElseProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "IF \"a\" THEN",
         "\tWRITE \"OK\"",
         "ELSE",
         "\tWRITE \"NOT OK\"",
         "END IF",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new IfThenStmt(
-        new Value("a"),
-        new ProcedureCall("WRITE", new Value("OK")),
-        new ProcedureCall("WRITE", new Value("NOT OK"))
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new IfThenStmt(
+            new Value("a"),
+            new ProcedureCall("WRITE", new Value("OK")),
+            new ProcedureCall("WRITE", new Value("NOT OK"))
+        );
+    }
 }

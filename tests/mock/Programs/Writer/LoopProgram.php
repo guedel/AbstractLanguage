@@ -41,9 +41,9 @@ use Guedel\AL\Datatype\Any;
 class LoopProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "WHILE i DO",
         "\tDEC i",
         "END WHILE",
@@ -54,29 +54,29 @@ class LoopProgram implements BaseTestProgram
         "FOR EACH item IN arr DO",
         "\tWRITE item",
         "END FOR",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new StatementList(
-        new WhileStmt(
-            new Variable("i"),
-            new ProcedureCall("DEC", new Variable("i"))
-        ),
-        new ForStmt(
-            "i",
-            new Value(1),
-            new Value(10),
-            new Value(1),
-            new ProcedureCall("WRITE", new Variable("i"))
-        ),
-        new VariableDecl("arr", new ArrayOf(Any::getType())),
-        new ForEachStmt(
-            "item",
-            new Variable("arr"),
-            new ProcedureCall("WRITE", new Variable("item"))
-        )
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new StatementList(
+            new WhileStmt(
+                new Variable("i"),
+                new ProcedureCall("DEC", new Variable("i"))
+            ),
+            new ForStmt(
+                "i",
+                new Value(1),
+                new Value(10),
+                new Value(1),
+                new ProcedureCall("WRITE", new Variable("i"))
+            ),
+            new VariableDecl("arr", new ArrayOf(Any::getType())),
+            new ForEachStmt(
+                "item",
+                new Variable("arr"),
+                new ProcedureCall("WRITE", new Variable("item"))
+            )
+        );
+    }
 }

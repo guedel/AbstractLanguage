@@ -32,11 +32,11 @@
    */
 interface BasicStorage
 {
-  public function getFreeAddress(int $size): int;
+    public function getFreeAddress(int $size): int;
 
-  public function putBytes(int $address, string $bytes): int;
-  public function getBytes(int $address, int $count): string;
+    public function putBytes(int $address, string $bytes): int;
+    public function getBytes(int $address, int $count): string;
 
-  public function storeObject(\stdClass $value, int $address);
-  public function retrieveObject(int $address): \stdClass;
+    public function storeObject(\stdClass $value, int $address);
+    public function retrieveObject(int $address): \stdClass;
 }

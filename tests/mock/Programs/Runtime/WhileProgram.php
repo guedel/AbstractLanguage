@@ -46,24 +46,24 @@ use Guedel\AL\Expression\Expression;
  */
 class WhileProgram implements BaseTestProgram
 {
-  public function code(): Statement
-  {
-    return new Module(
-        "whilestmt",
-        new VariableDecl('w'),
-        new AssignStmt('w', new Value(0)),
-        new WhileStmt(
-            new BinaryExpression(Expression::OP_LTE, new Variable('w'), new Value(3)),
-            new \Guedel\AL\Statement\StatementList(
-                new ProcedureCall('writeln', new Variable('w')),
-                new AssignStmt('w', new BinaryExpression(Expression::OP_ADD, new Variable('w'), new Value(1)))
+    public function code(): Statement
+    {
+        return new Module(
+            "whilestmt",
+            new VariableDecl('w'),
+            new AssignStmt('w', new Value(0)),
+            new WhileStmt(
+                new BinaryExpression(Expression::OP_LTE, new Variable('w'), new Value(3)),
+                new \Guedel\AL\Statement\StatementList(
+                    new ProcedureCall('writeln', new Variable('w')),
+                    new AssignStmt('w', new BinaryExpression(Expression::OP_ADD, new Variable('w'), new Value(1)))
+                )
             )
-        )
-    );
-  }
+        );
+    }
 
-  public function expect(): string
-  {
-    return join(PHP_EOL, [0,1,2,3]) . PHP_EOL;
-  }
+    public function expect(): string
+    {
+        return join(PHP_EOL, [0,1,2,3]) . PHP_EOL;
+    }
 }

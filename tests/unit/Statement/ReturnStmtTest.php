@@ -22,9 +22,9 @@ class ReturnStmtTest extends TestCase
   /**
   *
   */
-  public function testReturnSimple()
-  {
-    $r = new ReturnStmt();
-    $this->assertEquals('RETURN', $r->accept(new \Guedel\Tests\Mock\AL\TestVisitor()));
-  }
+    public function testReturnSimple()
+    {
+        $r = new ReturnStmt();
+        $this->assertEquals('RETURN', $r->accept(new \Guedel\Tests\Mock\AL\TestVisitor()));
+    }
 }

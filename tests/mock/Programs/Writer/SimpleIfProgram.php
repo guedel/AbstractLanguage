@@ -39,17 +39,17 @@ use Guedel\AL\Expression\Value;
 class SimpleIfProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "IF TRUE THEN",
         "\tWRITE \"OK\"",
         "END IF",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new IfThenStmt(new Value(true), new ProcedureCall("WRITE", new Value("OK")));
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new IfThenStmt(new Value(true), new ProcedureCall("WRITE", new Value("OK")));
+    }
 }

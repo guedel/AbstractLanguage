@@ -38,24 +38,24 @@ use Guedel\AL\Declaration\TypeDecl;
  */
 class StructProgram implements BaseTestProgram
 {
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "TYPE mystruct: STRUCT",
         "\tVAR one: ANY",
         "\tVAR two: INTEGER",
         "END STRUCT",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new TypeDecl(
-        "mystruct",
-        new Structure(
-            new VariableDecl("one", Any::getType()),
-            new VariableDecl("two", new TypeName("int"))
-        )
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new TypeDecl(
+            "mystruct",
+            new Structure(
+                new VariableDecl("one", Any::getType()),
+                new VariableDecl("two", new TypeName("int"))
+            )
+        );
+    }
 }

@@ -42,21 +42,21 @@ use Guedel\AL\Expression\Value;
 class ProcParamProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return "Hello World !";
-  }
+    public function expect(): string
+    {
+        return "Hello World !";
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new Module(
-        "helloProcedureWithParam",
-        new ProcedureDecl(
-            "hello",
-            new ParametersList(new Parameter("name", "IN")),
-            new ProcedureCall("PRINTF", new Value("Hello %s !"), new Variable("name"))
-        ),
-        new ProcedureCall("hello", new Value("World"))
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new Module(
+            "helloProcedureWithParam",
+            new ProcedureDecl(
+                "hello",
+                new ParametersList(new Parameter("name", "IN")),
+                new ProcedureCall("PRINTF", new Value("Hello %s !"), new Variable("name"))
+            ),
+            new ProcedureCall("hello", new Value("World"))
+        );
+    }
 }

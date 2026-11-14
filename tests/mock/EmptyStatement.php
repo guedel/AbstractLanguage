@@ -37,8 +37,8 @@ use Guedel\AL\Runtime\Visitor;
 class EmptyStatement implements Statement
 {
   //put your code here
-  public function accept(Visitor $visitor)
-  {
-    return 'EMPTY';
-  }
+    public function accept(Visitor $visitor)
+    {
+        return 'EMPTY';
+    }
 }

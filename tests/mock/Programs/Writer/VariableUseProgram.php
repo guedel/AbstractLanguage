@@ -43,19 +43,19 @@ class VariableUseProgram implements BaseTestProgram
   /**
    * @inherit
    */
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "VAR i: ANY",
         "i <- 10",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new StatementList(
-        new VariableDecl("i"),
-        new AssignStmt("i", new Value(10))
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new StatementList(
+            new VariableDecl("i"),
+            new AssignStmt("i", new Value(10))
+        );
+    }
 }

@@ -42,18 +42,18 @@ use Guedel\AL\Expression\Variable;
  */
 class VariableUseProgram implements BaseTestProgram
 {
-  public function code(): Statement
-  {
-    return new Module(
-        'varUse',
-        new VariableDecl('v'),
-        new AssignStmt('v', new Value("Hello World !")),
-        new ProcedureCall('write', new Variable('v'))
-    );
-  }
+    public function code(): Statement
+    {
+        return new Module(
+            'varUse',
+            new VariableDecl('v'),
+            new AssignStmt('v', new Value("Hello World !")),
+            new ProcedureCall('write', new Variable('v'))
+        );
+    }
 
-  public function expect(): string
-  {
-    return "Hello World !";
-  }
+    public function expect(): string
+    {
+        return "Hello World !";
+    }
 }

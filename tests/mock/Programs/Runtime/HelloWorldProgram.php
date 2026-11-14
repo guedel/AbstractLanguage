@@ -39,16 +39,16 @@ use Guedel\AL\Expression\Value;
  */
 class HelloWorldProgram implements BaseTestProgram
 {
-  public function expect(): string
-  {
-    return "Hello World !";
-  }
+    public function expect(): string
+    {
+        return "Hello World !";
+    }
 
-  public function code(): Statement
-  {
-    return new Module(
-        "Hello",
-        new ProcedureCall("WRITE", new Value("Hello World !"))
-    );
-  }
+    public function code(): Statement
+    {
+        return new Module(
+            "Hello",
+            new ProcedureCall("WRITE", new Value("Hello World !"))
+        );
+    }
 }

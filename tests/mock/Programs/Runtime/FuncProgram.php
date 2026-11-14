@@ -43,17 +43,17 @@ use Guedel\AL\Datatype\Any;
 class FuncProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return "Hello World !";
-  }
+    public function expect(): string
+    {
+        return "Hello World !";
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new Module(
-        "simpleHelloFunction",
-        new FunctionDecl("hello", Any::getType(), null, new ReturnStmt(new Value("Hello World !"))),
-        new ProcedureCall("WRITE", new FunctionCall("hello"))
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new Module(
+            "simpleHelloFunction",
+            new FunctionDecl("hello", Any::getType(), null, new ReturnStmt(new Value("Hello World !"))),
+            new ProcedureCall("WRITE", new FunctionCall("hello"))
+        );
+    }
 }

@@ -33,10 +33,10 @@
    */
 class Translator
 {
-  public const FRENCH = 'fr';
-  public const ENGLISH = 'en';
+    public const FRENCH = 'fr';
+    public const ENGLISH = 'en';
 
-  private static $words = array(
+    private static $words = array(
     'fr' => array(
       'ANY' => 'QUELCONQUE',
       'ARRAY' => 'TABLEAU',
@@ -68,16 +68,16 @@ class Translator
 
     private $language;
 
-  public function __construct($language = self::ENGLISH)
-  {
-      $this->language = $language;
-  }
-
-  public function tr(string $word): string
-  {
-    if ($this->language == self::ENGLISH) {
-        return $word;
+    public function __construct($language = self::ENGLISH)
+    {
+        $this->language = $language;
     }
-    return self::$words[$this->language][$word] ?? $word;
-  }
+
+    public function tr(string $word): string
+    {
+        if ($this->language == self::ENGLISH) {
+            return $word;
+        }
+        return self::$words[$this->language][$word] ?? $word;
+    }
 }

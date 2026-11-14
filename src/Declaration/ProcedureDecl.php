@@ -36,36 +36,36 @@
    */
 class ProcedureDecl extends NamedDeclaration
 {
-  private ?ParametersList $parameters;
-  private ?Statement $body;
+    private ?ParametersList $parameters;
+    private ?Statement $body;
 
-  public function __construct(string $name, ?ParametersList $parameters = null, ?Statement $body = null)
-  {
-      parent::__construct($name);
-    if ($parameters === null) {
-      $this->parameters = new ParametersList();
-    } else {
-      $this->parameters = $parameters;
+    public function __construct(string $name, ?ParametersList $parameters = null, ?Statement $body = null)
+    {
+        parent::__construct($name);
+        if ($parameters === null) {
+            $this->parameters = new ParametersList();
+        } else {
+            $this->parameters = $parameters;
+        }
+        if ($body instanceof StatementList) {
+            $this->body = $body;
+        } else {
+            $this->body = new StatementList($body);
+        }
     }
-    if ($body instanceof StatementList) {
-        $this->body = $body;
-    } else {
-        $this->body = new StatementList($body);
+
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        $visitor->declareProcedure($this);
     }
-  }
 
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-      $visitor->declareProcedure($this);
-  }
+    public function getParameters(): ?ParametersList
+    {
+        return $this->parameters;
+    }
 
-  public function getParameters(): ?ParametersList
-  {
-      return $this->parameters;
-  }
-
-  public function getBody(): ?Statement
-  {
-      return $this->body;
-  }
+    public function getBody(): ?Statement
+    {
+        return $this->body;
+    }
 }

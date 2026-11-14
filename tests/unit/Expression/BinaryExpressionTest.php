@@ -39,9 +39,9 @@ use Guedel\AL\Expression\BinaryExpression;
  */
 class BinaryExpressionTest extends TestCase
 {
-  public function testBinary()
-  {
-    $e = new BinaryExpression(Expression::OP_ADD, new Value(1), new Value(2));
-    $this->assertEquals("1+2", $e->evaluate(new TestVisitor()));
-  }
+    public function testBinary()
+    {
+        $e = new BinaryExpression(Expression::OP_ADD, new Value(1), new Value(2));
+        $this->assertEquals("1+2", $e->evaluate(new TestVisitor()));
+    }
 }

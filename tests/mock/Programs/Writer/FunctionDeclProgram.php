@@ -47,46 +47,46 @@ use Guedel\AL\Datatype\TypeName;
  */
 class FunctionDeclProgram implements BaseTestProgram
 {
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "FUNCTION fact(IN n: INTEGER): INTEGER",
         "\tIF n <= 1 THEN",
         "\t\tRETURN 1",
         "\tEND IF",
         "\tRETURN n * fact(n - 1)",
         "END FUNCTION",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    $int = new TypeName("int");
-    return new StatementList(
-        new FunctionDecl(
-            "fact",
-            $int,
-            new ParametersList(
-                new Parameter("n", Parameter::INPUT, $int)
-            ),
-            new StatementList(
-                new IfThenStmt(
-                    new BinaryExpression(Expression::OP_LTE, new Variable("n"), new Value(1)),
-                    new ReturnStmt(new Value(1)),
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        $int = new TypeName("int");
+        return new StatementList(
+            new FunctionDecl(
+                "fact",
+                $int,
+                new ParametersList(
+                    new Parameter("n", Parameter::INPUT, $int)
                 ),
-                new ReturnStmt(
-                    new BinaryExpression(
-                        Expression::OP_MULT,
-                        new Variable("n"),
-                        new FunctionCall("fact", new BinaryExpression(
-                            Expression::OP_SUB,
+                new StatementList(
+                    new IfThenStmt(
+                        new BinaryExpression(Expression::OP_LTE, new Variable("n"), new Value(1)),
+                        new ReturnStmt(new Value(1)),
+                    ),
+                    new ReturnStmt(
+                        new BinaryExpression(
+                            Expression::OP_MULT,
                             new Variable("n"),
-                            new Value(1)
-                        ))
+                            new FunctionCall("fact", new BinaryExpression(
+                                Expression::OP_SUB,
+                                new Variable("n"),
+                                new Value(1)
+                            ))
+                        )
                     )
                 )
             )
-        )
-    );
-  }
+        );
+    }
 }

@@ -35,37 +35,37 @@ class StringOfChars implements Type, Convertible
 {
     private $length;
 
-  public function __construct($length = null)
-  {
-      $this->length = $length;
-  }
-
-  public function getLength(): int
-  {
-      return $this->length;
-  }
-
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-      $visitor->visitString($this);
-  }
-
-  public function fromBinaryData($data)
-  {
-      return unpack('a', $data);
-  }
-
-  public function toBinaryData($value): string
-  {
-      return pack('a', $value);
-  }
-
-  public function getSignature(): string
-  {
-      $ret = 'STRING';
-    if ($this->length !== null) {
-        $ret .= '*' . $this->length;
+    public function __construct($length = null)
+    {
+        $this->length = $length;
     }
-      return $ret;
-  }
+
+    public function getLength(): int
+    {
+        return $this->length;
+    }
+
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        $visitor->visitString($this);
+    }
+
+    public function fromBinaryData($data)
+    {
+        return unpack('a', $data);
+    }
+
+    public function toBinaryData($value): string
+    {
+        return pack('a', $value);
+    }
+
+    public function getSignature(): string
+    {
+        $ret = 'STRING';
+        if ($this->length !== null) {
+            $ret .= '*' . $this->length;
+        }
+        return $ret;
+    }
 }

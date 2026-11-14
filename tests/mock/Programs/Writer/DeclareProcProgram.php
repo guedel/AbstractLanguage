@@ -40,21 +40,21 @@ use Guedel\AL\Expression\Variable;
 class DeclareProcProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return join(PHP_EOL, [
+    public function expect(): string
+    {
+        return join(PHP_EOL, [
         "PROCEDURE bonjour(IN name: ANY)",
         "\tWRITE name",
         "END PROCEDURE",
-    ]) . PHP_EOL;
-  }
+        ]) . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new ProcedureDecl(
-        "bonjour",
-        new ParametersList(new Parameter("name", "IN")),
-        new ProcedureCall("WRITE", new Variable("name"))
-    );
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new ProcedureDecl(
+            "bonjour",
+            new ParametersList(new Parameter("name", "IN")),
+            new ProcedureCall("WRITE", new Variable("name"))
+        );
+    }
 }

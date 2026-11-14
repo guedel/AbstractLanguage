@@ -40,19 +40,19 @@ class FunctionDecl extends ProcedureDecl
     private $returntype;
 
 
-  public function __construct(string $name, Type $returntype, ParametersList $arguments = null, Statement $body = null)
-  {
-      parent::__construct($name, $arguments, $body);
-      $this->returntype = $returntype;
-  }
+    public function __construct(string $name, Type $returntype, ParametersList $arguments = null, Statement $body = null)
+    {
+        parent::__construct($name, $arguments, $body);
+        $this->returntype = $returntype;
+    }
 
-  public function getReturnType(): Type
-  {
-      return $this->returntype;
-  }
+    public function getReturnType(): Type
+    {
+        return $this->returntype;
+    }
 
-  public function accept(Visitor $visitor)
-  {
-      return $visitor->declareFunction($this);
-  }
+    public function accept(Visitor $visitor)
+    {
+        return $visitor->declareFunction($this);
+    }
 }

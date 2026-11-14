@@ -36,15 +36,15 @@ use Guedel\AL\Expression\Variable;
  */
 class VariableTest extends TestCase
 {
-  public function testConstruct()
-  {
-    $var = new Variable("a");
-    $this->assertEquals("a", $var->getVarname());
-  }
+    public function testConstruct()
+    {
+        $var = new Variable("a");
+        $this->assertEquals("a", $var->getVarname());
+    }
 
-  public function testAccept()
-  {
-    $var = new Variable('num');
-    $this->assertEquals('124', $var->evaluate(new \Guedel\Tests\Mock\AL\TestVisitor()));
-  }
+    public function testAccept()
+    {
+        $var = new Variable('num');
+        $this->assertEquals('124', $var->evaluate(new \Guedel\Tests\Mock\AL\TestVisitor()));
+    }
 }

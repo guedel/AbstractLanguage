@@ -33,11 +33,11 @@ namespace Guedel\AL\Exception;
  */
 class ReturnException extends \Exception
 {
-  private $returnvalue;
+    private $returnvalue;
 
-  public function __construct($returnvalue)
-  {
-    $this->returnvalue = $returnvalue;
-    parent::__construct("return invoked");
-  }
+    public function __construct($returnvalue)
+    {
+        $this->returnvalue = $returnvalue;
+        parent::__construct("return invoked");
+    }
 }

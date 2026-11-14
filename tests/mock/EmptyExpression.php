@@ -36,12 +36,12 @@ use Guedel\AL\Runtime\Visitor;
  */
 class EmptyExpression extends Expression
 {
-  public function __construct()
-  {
-    parent::__construct('$');
-  }
-  public function evaluate(Visitor $visitor)
-  {
-    return 10;
-  }
+    public function __construct()
+    {
+        parent::__construct('$');
+    }
+    public function evaluate(Visitor $visitor)
+    {
+        return 10;
+    }
 }

@@ -35,23 +35,23 @@ class Reference implements Type
 {
     private $type;
 
-  public function __construct($type)
-  {
-      $this->type = $type;
-  }
+    public function __construct($type)
+    {
+        $this->type = $type;
+    }
 
-  public function getType(): Type
-  {
-      return $this->type;
-  }
+    public function getType(): Type
+    {
+        return $this->type;
+    }
 
-  public function accept(\Guedel\AL\Runtime\Visitor $visitor)
-  {
-      $visitor->visitReference($this);
-  }
+    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    {
+        $visitor->visitReference($this);
+    }
 
-  public function getSignature(): string
-  {
-      return '&(' . $this->type->getSignature() . ')';
-  }
+    public function getSignature(): string
+    {
+        return '&(' . $this->type->getSignature() . ')';
+    }
 }

@@ -41,5 +41,5 @@ interface Valuable
    * @param Visitor $visitor
    * @return mixed
    */
-  public function evaluate(Visitor $visitor);
+    public function evaluate(Visitor $visitor);
 }

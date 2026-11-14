@@ -32,6 +32,6 @@
    */
 interface Convertible
 {
-  public function toBinaryData($value): string;
-  public function fromBinaryData($data);
+    public function toBinaryData($value): string;
+    public function fromBinaryData($data);
 }

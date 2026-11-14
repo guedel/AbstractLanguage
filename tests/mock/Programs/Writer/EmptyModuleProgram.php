@@ -36,13 +36,13 @@ use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 class EmptyModuleProgram implements BaseTestProgram
 {
   //put your code here
-  public function expect(): string
-  {
-    return "MODULE Empty" . PHP_EOL . "END MODULE" . PHP_EOL;
-  }
+    public function expect(): string
+    {
+        return "MODULE Empty" . PHP_EOL . "END MODULE" . PHP_EOL;
+    }
 
-  public function code(): \Guedel\AL\Statement\Statement
-  {
-    return new \Guedel\AL\Declaration\Module('Empty');
-  }
+    public function code(): \Guedel\AL\Statement\Statement
+    {
+        return new \Guedel\AL\Declaration\Module('Empty');
+    }
 }
