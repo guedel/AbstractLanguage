@@ -20,15 +20,11 @@ use Guedel\AL\Expression\Valuable;
  */
 class IfThenStmt implements Statement
 {
-    protected $iftest;
-    protected $thenpart;
-    protected $elsepart;
-
-    public function __construct($iftest, Statement $thenpart, Statement $elsepart = null)
-    {
-        $this->iftest = $iftest;
-        $this->thenpart = $thenpart;
-        $this->elsepart = $elsepart;
+    public function __construct(
+        protected readonly Valuable $iftest,
+        protected readonly Statement $thenpart,
+        protected readonly ?Statement $elsepart = null
+    ) {
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)

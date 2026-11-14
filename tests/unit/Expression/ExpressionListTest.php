@@ -11,8 +11,11 @@
 
 namespace Guedel\Tests\Unit\Expression;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Expression\ExpressionList;
+use Guedel\AL\Expression\Expression;
 use Guedel\Tests\Mock\AL\EmptyExpression;
 
 /**
@@ -21,6 +24,8 @@ use Guedel\Tests\Mock\AL\EmptyExpression;
  * @author Guedel <guedel87@live.fr>
  * @covers Guedel\AL\Expression\ExpressionList
  */
+#[CoversClass(ExpressionList::class)]
+#[UsesClass(Expression::class)]
 class ExpressionListTest extends TestCase
 {
     public function testEmpty()

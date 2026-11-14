@@ -14,6 +14,10 @@ namespace Guedel\AL;
 use Guedel\AL\Datatype\Type;
 use Guedel\AL\Expression;
 use Guedel\AL\Statement\StatementList;
+use Guedel\AL\Statement\StatementBuilder;
+use Guedel\AL\Expression\ExpressionBuilder;
+use Guedel\AL\Declaration\DeclarationBuilder;
+use Guedel\AL\Datatype\DatatypeBuilder;
 
 /**
  * Build any class in Abstract Language
@@ -22,14 +26,14 @@ use Guedel\AL\Statement\StatementList;
  */
 class Builder
 {
-    use Guedel\AL\Statement\StatementBuilder;
-    use Guedel\AL\Expression\ExpressionBuilder;
-    use Guedel\AL\Declaration\DeclarationBuilder;
-    use Guedel\AL\Datatype\DataTypeBuilder;
+    use StatementBuilder;
+    use ExpressionBuilder;
+    use DeclarationBuilder;
+    use DatatypeBuilder;
 
     protected StatementList $statements;
 
-    public function __construct(private readonly ?Builder $parent = null)
+    public function __construct(private ?Builder $parent = null)
     {
         $this->statements = new StatementList();
     }
@@ -41,12 +45,10 @@ class Builder
 
     protected function stmtBegin(): Builder
     {
-        $builder = new Builder();
-        $builder->parent = $this;
-        return $builder;
+        return new Builder($this);
     }
 
-    public function stmtEnd(): Builder
+    public function stmtEnd(): ?Builder
     {
         $ret = $this->parent;
         // $this->statements = null;

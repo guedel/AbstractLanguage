@@ -24,11 +24,10 @@ class TypeName implements Type
     public const DT_FLOAT = 'float';
     public const DT_NUMBER = 'number';
     public const DT_STRING = 'string';
+    public const DT_VOID = 'void';
 
-    private $name;
-    public function __construct(string $name)
+    public function __construct(private readonly string $name)
     {
-        $this->name = $name;
     }
 
     public function getName(): string

@@ -11,9 +11,12 @@
 
 namespace Guedel\Tests\Unit\Expression;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\Tests\Mock\AL\TestVisitor;
 use Guedel\AL\Expression\Expression;
+use Guedel\AL\Expression\ExpressionList;
 use Guedel\AL\Expression\Value;
 use Guedel\AL\Expression\BinaryExpression;
 
@@ -23,6 +26,10 @@ use Guedel\AL\Expression\BinaryExpression;
  * @author Guedel <guedel87@live.fr>
  * @covers \Guedel\AL\Expression\BinaryExpression
  */
+#[CoversClass(BinaryExpression::class)]
+#[UsesClass(Expression::class)]
+#[UsesClass(ExpressionList::class)]
+#[UsesClass(Value::class)]
 class BinaryExpressionTest extends TestCase
 {
     public function testBinary()

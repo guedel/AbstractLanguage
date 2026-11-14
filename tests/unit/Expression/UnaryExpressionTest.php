@@ -11,6 +11,8 @@
 
 namespace Guedel\Tests\Unit\Expression;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\UnaryExpression;
@@ -21,8 +23,10 @@ use Guedel\AL\Expression\Value;
  * Description of UnaryExpressionTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Guedel\AL\Expression\UnaryExpression
  */
+#[CoversClass(UnaryExpression::class)]
+#[UsesClass(Expression::class)]
+#[UsesClass(Value::class)]
 class UnaryExpressionTest extends TestCase
 {
     public function testConstruct()

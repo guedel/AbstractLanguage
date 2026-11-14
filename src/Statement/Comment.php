@@ -18,13 +18,10 @@ namespace Guedel\AL\Statement;
  */
 class Comment implements \Guedel\AL\Statement\Statement
 {
-    private $message;
-
-    public function __construct($message)
+    public function __construct(private readonly ?string $message = null)
     {
-        $this->message = $message;
     }
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }

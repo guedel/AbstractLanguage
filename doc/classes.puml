@@ -33,7 +33,7 @@ namespace Datatype {
     + addMethod()
 
   }
-  class Convertible {
+  interface Convertible {
   }
   class Enumeration {
   }

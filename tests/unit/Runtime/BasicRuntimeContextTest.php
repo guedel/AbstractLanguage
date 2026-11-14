@@ -11,10 +11,13 @@
 
 namespace Guedel\Tests\Unit\AL\Runtime;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Runtime\BasicRuntimeContext;
 use Guedel\AL\Declaration\{
     FunctionDecl,
+    NamedDeclaration,
     ProcedureDecl,
     VariableDecl,
     TypeDecl,
@@ -27,12 +30,20 @@ use Guedel\AL\Statement\StatementList;
  * Description of BasicRuntimeContextTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers \Guedel\AL\Runtime\BasicRuntimeContext
  */
+#[CoversClass(BasicRuntimeContext::class)]
+#[UsesClass(Any::class)]
+#[UsesClass(FunctionDecl::class)]
+#[UsesClass(NamedDeclaration::class)]
+#[UsesClass(ParametersList::class)]
+#[UsesClass(ProcedureDecl::class)]
+#[UsesClass(StatementList::class)]
+#[UsesClass(TypeDecl::class)]
+#[UsesClass(VariableDecl::class)]
 class BasicRuntimeContextTest extends TestCase
 {
-    private ?BasicRuntimeContext $context = null;
-    public function setUp(): void
+    private BasicRuntimeContext $context;
+    protected function setUp(): void
     {
         $this->context = new BasicRuntimeContext(null, "sample");
     }

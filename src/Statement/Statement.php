@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Statement;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Interface of Statement
  *
@@ -18,5 +20,5 @@ namespace Guedel\AL\Statement;
  */
 interface Statement
 {
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor);
+    public function accept(Visitor $visitor);
 }

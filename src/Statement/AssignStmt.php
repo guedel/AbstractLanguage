@@ -21,13 +21,10 @@ use Guedel\AL\Runtime\Visitor;
  */
 class AssignStmt implements Statement
 {
-    private string $varname;
-    private Valuable $expression;
-
-    public function __construct(string $varname, Valuable $expression)
-    {
-        $this->varname = $varname;
-        $this->expression = $expression;
+    public function __construct(
+        private readonly string $varname,
+        private readonly Valuable $expression,
+    ) {
     }
 
     public function accept(Visitor $visitor)

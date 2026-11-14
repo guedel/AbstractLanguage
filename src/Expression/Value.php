@@ -20,14 +20,11 @@ use Guedel\AL\Runtime\Visitor;
  */
 class Value implements Valuable
 {
-    private $value;
-
-    public function __construct($value)
+    public function __construct(private readonly mixed $value)
     {
-        $this->value = $value;
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }

@@ -12,12 +12,13 @@
 namespace Guedel\Tests\Mock\AL;
 
 use Guedel\AL\Expression\Expression;
+use Guedel\AL\Runtime\Visitor;
 
 /**
  * Mock for tests AL classes
  * @author Guedel <guedel87@live.fr>
  */
-class TestVisitor implements \Guedel\AL\Runtime\Visitor
+class TestVisitor implements Visitor
 {
     //put your code here
     public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl)
@@ -81,7 +82,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
      * @param \Guedel\AL\Expression\Variable $variable
      * @return string
      */
-    public function evalVariable(\Guedel\AL\Expression\Variable $variable)
+    public function evalVariable(\Guedel\AL\Expression\Variable $variable): string
     {
         switch ($variable->getVarname()) {
             case 'alpha':
@@ -176,7 +177,7 @@ class TestVisitor implements \Guedel\AL\Runtime\Visitor
         return 'WHILE ' . $stmt->getTest()->evaluate($this) . ' DO ' . $stmt->getStatement()->accept($this);
     }
 
-    public function visitComment(\Guedel\AL\Statement\Comment $stmt)
+    public function visitComment(\Guedel\AL\Statement\Comment $stmt): string
     {
         return "// " . $stmt->getMessage();
     }

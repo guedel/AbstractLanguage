@@ -11,8 +11,12 @@
 
 namespace Guedel\Tests\Unit\AL\Declaration;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\NamedDeclaration;
+use Guedel\AL\Statement\StatementList;
 use Guedel\Tests\Mock\AL\EmptyStatement;
 use Guedel\Tests\Mock\AL\TestVisitor;
 
@@ -20,8 +24,10 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  * Description of ModuleTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers \Guedel\AL\Declaration\Module
  */
+#[CoversClass(Module::class)]
+#[UsesClass(NamedDeclaration::class)]
+#[UsesClass(StatementList::class)]
 class ModuleTest extends TestCase
 {
     public function testCreateEmpty()

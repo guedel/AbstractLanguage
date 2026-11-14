@@ -11,6 +11,8 @@
 
 namespace Guedel\Tests\Unit\AL\Statement;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Statement\StatementList;
 use Guedel\Tests\Mock\AL\EmptyStatement;
@@ -20,8 +22,8 @@ use Guedel\Tests\Mock\AL\TestVisitor;
  * Description of StatementListTest
  *
  * @author Guedel <guedel87@live.fr>
- * @covers Guedel\AL\Statement\StatementList
  */
+#[CoversClass(StatementList::class)]
 class StatementListTest extends TestCase
 {
     /**
@@ -31,14 +33,17 @@ class StatementListTest extends TestCase
     {
         $list = new StatementList();
         $this->assertCount(0, $list);
+        $this->assertNull($list->last());
     }
 
     public function testCountElementList()
     {
         $list = new StatementList(new EmptyStatement());
         $this->assertCount(1, $list);
-        $list->add(new EmptyStatement());
+        $second = new EmptyStatement();
+        $list->add($second);
         $this->assertCount(2, $list);
+        $this->assertSame($second, $list->last());
     }
 
     public function testEnumElementList()
