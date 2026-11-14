@@ -1,7 +1,7 @@
 {
   "name": "guedel/al",
   "description": "Library of Php Abstract Language",
-  "version": "0.4",
+  "version": "0.5",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "stable",
