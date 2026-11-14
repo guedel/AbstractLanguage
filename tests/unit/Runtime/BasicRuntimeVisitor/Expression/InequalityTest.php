@@ -1,28 +1,14 @@
 <?php
 
 /*
- * The MIT License
+ * This file is part of AbstractLanguage library.
  *
- * Copyright 2021 Guedel <guedel87@live.fr>.
+ * (c) Guedel <guedel87@live.fr>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
+
 namespace Guedel\Tests\Unit\AL\Runtime\BasicRuntimeVisitor\Expression;
 
 use PHPUnit\Framework\TestCase;
@@ -50,42 +36,42 @@ class InequalityTest extends TestCase
         $this->visitor = new BasicRuntimeVisitor();
     }
 
-  /**
-   * @dataProvider lessThanExpressions
-   */
+    /**
+     * @dataProvider lessThanExpressions
+     */
     public function testIsLessThan($expect, BinaryExpression $exp)
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
     }
 
-  /**
-   * @dataProvider lessThanOrEqualExpressions
-   * @param type $expect
-   * @param BinaryExpression $exp
-   */
+    /**
+     * @dataProvider lessThanOrEqualExpressions
+     * @param type $expect
+     * @param BinaryExpression $exp
+     */
     public function testIsLessThanOrEqual($expect, BinaryExpression $exp)
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
     }
 
-  /**
-   * @dataProvider greatThanExpression
-   * @param type $expect
-   * @param BinaryExpression $exp
-   */
+    /**
+     * @dataProvider greatThanExpression
+     * @param type $expect
+     * @param BinaryExpression $exp
+     */
     public function testIsGreatThan($expect, BinaryExpression $exp)
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
     }
 
-  /**
-   * @dataProvider greatThanOrEqualExpression
-   * @param type $expect
-   * @param BinaryExpression $exp
-   */
+    /**
+     * @dataProvider greatThanOrEqualExpression
+     * @param type $expect
+     * @param BinaryExpression $exp
+     */
     public function testIsGreatThanOrEqual($expect, BinaryExpression $exp)
     {
         $res = $exp->evaluate($this->visitor);

@@ -1,27 +1,12 @@
 <?php
 
 /*
- * The MIT License
+ * This file is part of AbstractLanguage library.
  *
- * Copyright 2021 Guedel <guedel87@live.fr>.
+ * (c) Guedel <guedel87@live.fr>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Guedel\AL\Runtime;
@@ -69,7 +54,7 @@ class BasicRuntimeVisitor implements Visitor
         $this->context = $context->getParent();
     }
 
-  //put your code here
+    //put your code here
     public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl)
     {
         $this->context->addFunction($decl);
@@ -131,7 +116,7 @@ class BasicRuntimeVisitor implements Visitor
                         $acc /= $op;
                         break;
                     case Expression::OP_EQUAL:
-                      // a = b = c <=> a = b AND b = c
+                        // a = b = c <=> a = b AND b = c
                         if ($second) {
                             $acc = $prev == $op;
                         } else {
@@ -139,7 +124,7 @@ class BasicRuntimeVisitor implements Visitor
                         }
                         break;
                     case Expression::OP_DIFF:
-                      // a != b != c <=> a != b AND b != c
+                        // a != b != c <=> a != b AND b != c
                         if ($second) {
                             $acc = $prev != $op;
                         } else {
@@ -147,7 +132,7 @@ class BasicRuntimeVisitor implements Visitor
                         }
                         break;
                     case Expression::OP_LT:
-                      // a < b < c <=> a < b AND b < c
+                        // a < b < c <=> a < b AND b < c
                         if ($second) {
                             $acc = $prev < $op;
                         } else {
@@ -208,7 +193,7 @@ class BasicRuntimeVisitor implements Visitor
         }
 
         $this->pushContext($name);
-      // Les arguments
+        // Les arguments
         $itParams = $func->getParameters()->getIterator();
         foreach ($fn->getParameters() as $param) {
             if ($itParams->valid()) {
@@ -219,15 +204,15 @@ class BasicRuntimeVisitor implements Visitor
             $itParams->next();
         }
 
-      // Appel des instructions de la fonction
+        // Appel des instructions de la fonction
         $func->getBody()->accept($this);
         $return = [];
         if ($this->context->isReturnRequest()) {
             $return = $this->context->getReturnValues();
         }
         $this->popContext();
-      // $this->debug(print_r($return, true));
-      // At this time only one return value is supported
+        // $this->debug(print_r($return, true));
+        // At this time only one return value is supported
         if (isset($return[0])) {
             return $return[0];
         }
@@ -284,12 +269,12 @@ class BasicRuntimeVisitor implements Visitor
 
     public function visitClass(\Guedel\AL\Datatype\ClassType $type)
     {
-      // TODO
+        // TODO
     }
 
     public function visitComment(\Guedel\AL\Statement\Comment $stmt)
     {
-      // do nothing
+        // do nothing
     }
 
     public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
@@ -305,7 +290,7 @@ class BasicRuntimeVisitor implements Visitor
         $name = $stmt->getVariableName();
         $var = $this->context->findVariable($name);
         if ($var === null) {
-          // variable must be declared
+            // variable must be declared
             throw new NotFoundException("variable $name not found in this scope");
         }
 
@@ -367,11 +352,11 @@ class BasicRuntimeVisitor implements Visitor
         }
 
         $this->pushContext($name);
-      // Les arguments
+        // Les arguments
         $itParams = $pf->getParameters()->getIterator();
         foreach ($proc->getParameters() as $param) {
             if ($itParams->valid()) {
-              // $this->debug(print_r($itParams, true));
+                // $this->debug(print_r($itParams, true));
                 $var = new VariableDecl($itParams->current()->getName(), $itParams->current()->getType());
                 $var->setValue($param->getValue());
                 $this->context->addVariable($var);
@@ -379,7 +364,7 @@ class BasicRuntimeVisitor implements Visitor
             $itParams->next();
         }
 
-      // Appel des instructions de la fonction
+        // Appel des instructions de la fonction
         $pf->getBody()->accept($this);
         $this->popContext();
     }
@@ -388,10 +373,10 @@ class BasicRuntimeVisitor implements Visitor
     {
     }
 
-  /**
-   * Return an array of values if multiple expressions
-   * @param \Guedel\AL\Statement\ReturnStmt $stmt
-   */
+    /**
+     * Return an array of values if multiple expressions
+     * @param \Guedel\AL\Statement\ReturnStmt $stmt
+     */
     public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
     {
         $value = [];
@@ -431,14 +416,14 @@ class BasicRuntimeVisitor implements Visitor
         }
     }
 
-  /**
-   *
-   * @param \Guedel\AL\Statement\ProcedureCall $proc
-   * @return bool true if internal procédure found
-   */
+    /**
+     *
+     * @param \Guedel\AL\Statement\ProcedureCall $proc
+     * @return bool true if internal procédure found
+     */
     private function internalCommand(\Guedel\AL\Statement\ProcedureCall $proc): bool
     {
-      // TODO remplacer par un mapping
+        // TODO remplacer par un mapping
         $name = strtolower($proc->getName());
         if ($name === 'write' || $name === 'writeln') {
             foreach ($proc->getParameters() as $p) {

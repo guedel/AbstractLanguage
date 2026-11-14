@@ -1,9 +1,12 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This file is part of AbstractLanguage library.
+ *
+ * (c) Guedel <guedel87@live.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Guedel\Tests\Unit\AL\Statement;
@@ -19,9 +22,9 @@ use Guedel\AL\Statement\ReturnStmt;
  */
 class ReturnStmtTest extends TestCase
 {
-  /**
-  *
-  */
+    /**
+    *
+    */
     public function testReturnSimple()
     {
         $r = new ReturnStmt();
