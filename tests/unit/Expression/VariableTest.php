@@ -22,13 +22,13 @@ use Guedel\AL\Expression\Variable;
  */
 class VariableTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $var = new Variable("a");
         $this->assertEquals("a", $var->getVarname());
     }
 
-    public function testAccept()
+    public function testAccept(): void
     {
         $var = new Variable('num');
         $this->assertEquals('124', $var->evaluate(new \Guedel\Tests\Mock\AL\TestVisitor()));

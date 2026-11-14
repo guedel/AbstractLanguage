@@ -392,20 +392,12 @@ class BasicWriterVisitor implements Visitor
     public function visitTypename(\Guedel\AL\Datatype\TypeName $type)
     {
         $name = $type->getName();
-        switch ($name) {
-            case TypeName::DT_INTEGER:
-                $outputname = $this->t("INTEGER");
-                break;
-            case TypeName::DT_FLOAT:
-                $outputname = $this->t("FLOAT");
-                break;
-            case TypeName::DT_ANY:
-                $outputname = $this->t("ANY");
-                break;
-            default:
-                $outputname = $this->t($name);
-                break;
-        }
+        $outputname = match ($name) {
+            TypeName::DT_INTEGER => $this->t("INTEGER"),
+            TypeName::DT_FLOAT => $this->t("FLOAT"),
+            TypeName::DT_ANY => $this->t("ANY"),
+            default => $this->t($name),
+        };
         $this->writer->out($outputname);
     }
 

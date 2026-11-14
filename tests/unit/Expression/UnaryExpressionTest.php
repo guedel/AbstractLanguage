@@ -29,14 +29,14 @@ use Guedel\AL\Expression\Value;
 #[UsesClass(Value::class)]
 class UnaryExpressionTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $e = new UnaryExpression(Expression::OP_ADD, new Value('0'));
         $this->assertEquals(Expression::OP_ADD, $e->getOperator());
         $this->assertEquals('0', $e->getOperand()->getValue());
     }
 
-    public function testAccept()
+    public function testAccept(): void
     {
         $e = new UnaryExpression(Expression::OP_SUB, new Value('1'));
         $this->assertEquals('-1', $e->evaluate(new TestVisitor()));

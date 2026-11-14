@@ -18,11 +18,11 @@ namespace Guedel\AL\Runtime;
  */
 class Translator
 {
-    public const FRENCH = 'fr';
-    public const ENGLISH = 'en';
+    public const string FRENCH = 'fr';
+    public const string ENGLISH = 'en';
 
-    private static $words = array(
-    'fr' => array(
+    private static $words = [
+    'fr' => [
       'ANY' => 'QUELCONQUE',
       'ARRAY' => 'TABLEAU',
       'BEGIN' => 'DEBUT',
@@ -48,14 +48,11 @@ class Translator
       'TYPE' => 'TYPE',
       'VAR' => 'VAR',
       'WHILE' => 'TANT QUE',
-    ),
-    );
+    ],
+    ];
 
-    private $language;
-
-    public function __construct($language = self::ENGLISH)
+    public function __construct(private $language = self::ENGLISH)
     {
-        $this->language = $language;
     }
 
     public function tr(string $word): string

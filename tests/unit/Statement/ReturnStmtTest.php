@@ -27,7 +27,7 @@ use Guedel\Tests\Mock\AL\TestVisitor;
 #[CoversClass(ExpressionList::class)]
 class ReturnStmtTest extends TestCase
 {
-    public function testReturnSimple()
+    public function testReturnSimple(): void
     {
         $r = new ReturnStmt();
         $this->assertEquals('RETURN', $r->accept(new TestVisitor()));

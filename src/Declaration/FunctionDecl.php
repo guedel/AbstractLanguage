@@ -22,17 +22,13 @@ use Guedel\AL\Runtime\Visitor;
  */
 class FunctionDecl extends ProcedureDecl
 {
-    private $returntype;
-
-
     public function __construct(
         string $name,
-        Type $returntype,
+        private readonly Type $returntype,
         ParametersList $arguments = null,
         Statement $body = null,
     ) {
         parent::__construct($name, $arguments, $body);
-        $this->returntype = $returntype;
     }
 
     public function getReturnType(): Type

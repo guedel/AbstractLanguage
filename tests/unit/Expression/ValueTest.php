@@ -22,13 +22,13 @@ use Guedel\AL\Expression\Value;
  */
 class ValueTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $v = new Value(1234);
         $this->assertEquals(1234, $v->getValue());
     }
 
-    public function testEvaluate()
+    public function testEvaluate(): void
     {
         $v = new Value(123);
         $visit = new \Guedel\Tests\Mock\AL\TestVisitor();

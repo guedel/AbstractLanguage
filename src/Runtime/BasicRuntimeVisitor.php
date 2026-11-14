@@ -211,26 +211,17 @@ class BasicRuntimeVisitor implements Visitor
             $return = $this->context->getReturnValues();
         }
         $this->popContext();
-        // $this->debug(print_r($return, true));
-        // At this time only one return value is supported
-        if (isset($return[0])) {
-            return $return[0];
-        }
-        return null;
+        return $return[0] ?? null;
     }
 
     public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp)
     {
-        switch ($exp->getOperator()) {
-            case Expression::OP_ADD:
-                return $exp->getOperand()->evaluate($this);
-            case Expression::OP_NOT:
-                return $exp->getOperand()->evaluate($this);
-            case Expression::OP_SUB:
-                return - $exp->getOperand()->evaluate($this);
-            default:
-                throw new InvalidOperatorException();
-        }
+        return match ($exp->getOperator()) {
+            Expression::OP_ADD => $exp->getOperand()->evaluate($this),
+            Expression::OP_NOT => $exp->getOperand()->evaluate($this),
+            Expression::OP_SUB => - $exp->getOperand()->evaluate($this),
+            default => throw new InvalidOperatorException(),
+        };
     }
 
     public function evalValue(\Guedel\AL\Expression\Value $value)

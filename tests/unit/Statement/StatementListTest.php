@@ -29,14 +29,14 @@ class StatementListTest extends TestCase
     /**
      *
      */
-    public function testEmptyList()
+    public function testEmptyList(): void
     {
         $list = new StatementList();
         $this->assertCount(0, $list);
         $this->assertNull($list->last());
     }
 
-    public function testCountElementList()
+    public function testCountElementList(): void
     {
         $list = new StatementList(new EmptyStatement());
         $this->assertCount(1, $list);
@@ -46,7 +46,7 @@ class StatementListTest extends TestCase
         $this->assertSame($second, $list->last());
     }
 
-    public function testEnumElementList()
+    public function testEnumElementList(): void
     {
         $visitor = new TestVisitor();
         $list = new StatementList(new EmptyStatement(), new EmptyStatement());

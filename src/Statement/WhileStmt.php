@@ -22,13 +22,8 @@ use Guedel\AL\Runtime\Visitor;
  */
 class WhileStmt implements Statement
 {
-    private $test;
-    private $statement;
-
-    public function __construct(Valuable $test, ?Statement $block = null)
+    public function __construct(private readonly Valuable $test, private readonly ?Statement $statement = null)
     {
-        $this->test = $test;
-        $this->statement = $block;
     }
 
     public function accept(Visitor $visitor)

@@ -18,12 +18,9 @@ namespace Guedel\AL\Expression;
  */
 class UnaryExpression extends Expression
 {
-    private Valuable $operand;
-
-    public function __construct(string $operator, Valuable $operand)
+    public function __construct(string $operator, private readonly Valuable $operand)
     {
         parent::__construct($operator);
-        $this->operand = $operand;
     }
 
     public function getOperand(): Valuable

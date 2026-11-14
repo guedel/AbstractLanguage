@@ -19,12 +19,12 @@ namespace Guedel\AL\Datatype;
 class TypeName implements Type
 {
     // Quelque types de base
-    public const DT_ANY = 'any';
-    public const DT_INTEGER = 'int';
-    public const DT_FLOAT = 'float';
-    public const DT_NUMBER = 'number';
-    public const DT_STRING = 'string';
-    public const DT_VOID = 'void';
+    public const string DT_ANY = 'any';
+    public const string DT_INTEGER = 'int';
+    public const string DT_FLOAT = 'float';
+    public const string DT_NUMBER = 'number';
+    public const string DT_STRING = 'string';
+    public const string DT_VOID = 'void';
 
     public function __construct(private readonly string $name)
     {

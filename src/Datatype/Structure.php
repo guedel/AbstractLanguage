@@ -24,7 +24,7 @@ class Structure implements Type
      *
      * @var VariableDecl[]
      */
-    private array $attributes;
+    private readonly array $attributes;
 
     public function __construct(VariableDecl ...$attributes)
     {

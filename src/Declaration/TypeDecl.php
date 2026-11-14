@@ -20,12 +20,11 @@ use Guedel\AL\Datatype\Type;
  */
 class TypeDecl extends NamedDeclaration
 {
-    private $definition;
-
-    public function __construct(string $name, Type $definition)
-    {
+    public function __construct(
+        string $name,
+        private readonly Type $definition
+    ) {
         parent::__construct($name);
-        $this->definition = $definition;
     }
 
     public function getDefinition(): Type

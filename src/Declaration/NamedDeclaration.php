@@ -20,11 +20,8 @@ use Guedel\AL\Statement\Statement;
  */
 abstract class NamedDeclaration implements Statement
 {
-    private $name;
-
-    public function __construct(string $name)
+    public function __construct(private string $name)
     {
-        $this->name = $name;
     }
 
     public function getName(): string

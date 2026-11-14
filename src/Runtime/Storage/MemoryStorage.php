@@ -19,7 +19,6 @@ namespace Guedel\AL\Runtime\Storage;
 class MemoryStorage implements BasicStorage
 {
     private $memory = "";
-    private $size;
 
     /**
      *
@@ -27,10 +26,9 @@ class MemoryStorage implements BasicStorage
      */
     private const string UNDEF = "\024";
 
-    public function __construct($size)
+    public function __construct(private $size)
     {
-        $this->size = $size;
-        $this->memory = str_repeat(self::UNDEF, $size); // ctrl-U
+        $this->memory = str_repeat(self::UNDEF, $this->size); // ctrl-U
     }
 
     /**

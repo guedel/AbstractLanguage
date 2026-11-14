@@ -22,24 +22,13 @@ use Guedel\AL\Runtime\Visitor;
  */
 class ForStmt implements Statement
 {
-    private string $varname;
-    private Valuable $initial;
-    private Valuable $final;
-    private Valuable $increment;
-    private ?Statement $statement;
-
     public function __construct(
-        string $varnmame,
-        Valuable $initial,
-        Valuable $final,
-        Valuable $increment,
-        Statement $statement = null
+        private readonly string $varname,
+        private readonly Valuable $initial,
+        private readonly Valuable $final,
+        private readonly Valuable $increment,
+        private readonly ?Statement $statement = null,
     ) {
-        $this->varname = $varnmame;
-        $this->initial = $initial;
-        $this->final = $final;
-        $this->increment = $increment;
-        $this->statement = $statement;
     }
 
     public function accept(Visitor $visitor)

@@ -19,12 +19,10 @@ namespace Guedel\AL\Expression;
  */
 class FunctionCall implements Valuable
 {
-    private $name;
     private $parameters;
 
-    public function __construct($name, ...$parameters)
+    public function __construct(private $name, ...$parameters)
     {
-        $this->name = $name;
         $this->parameters = new ExpressionList(... $parameters);
     }
 

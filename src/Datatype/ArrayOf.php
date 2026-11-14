@@ -18,15 +18,11 @@ namespace Guedel\AL\Datatype;
  */
 class ArrayOf implements Type
 {
-    private Type $type;
-    private ?int $lowerbound;
-    private ?int $upperbound;
-
-    public function __construct(Type $type, ?int $lowerbound = null, ?int $upperbound = null)
-    {
-        $this->type = $type;
-        $this->lowerbound = $lowerbound;
-        $this->upperbound = $upperbound;
+    public function __construct(
+        private readonly Type $type,
+        private readonly ?int $lowerbound = null,
+        private readonly ?int $upperbound = null
+    ) {
     }
 
     public function getType(): Type

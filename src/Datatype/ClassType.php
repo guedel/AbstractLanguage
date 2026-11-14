@@ -22,7 +22,7 @@ class ClassType extends Structure
 
     public function __construct()
     {
-        $this->methods = array();
+        $this->methods = [];
     }
 
     public function &getMethods()

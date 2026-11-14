@@ -18,11 +18,8 @@ namespace Guedel\AL\Datatype;
  */
 class Reference implements Type
 {
-    private $type;
-
-    public function __construct($type)
+    public function __construct(private $type)
     {
-        $this->type = $type;
     }
 
     public function getType(): Type

@@ -39,7 +39,7 @@ class InequalityTest extends TestCase
     /**
      * @dataProvider lessThanExpressions
      */
-    public function testIsLessThan($expect, BinaryExpression $exp)
+    public function testIsLessThan($expect, BinaryExpression $exp): void
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
@@ -50,7 +50,7 @@ class InequalityTest extends TestCase
      * @param type $expect
      * @param BinaryExpression $exp
      */
-    public function testIsLessThanOrEqual($expect, BinaryExpression $exp)
+    public function testIsLessThanOrEqual($expect, BinaryExpression $exp): void
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
@@ -61,7 +61,7 @@ class InequalityTest extends TestCase
      * @param type $expect
      * @param BinaryExpression $exp
      */
-    public function testIsGreatThan($expect, BinaryExpression $exp)
+    public function testIsGreatThan($expect, BinaryExpression $exp): void
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
@@ -72,7 +72,7 @@ class InequalityTest extends TestCase
      * @param type $expect
      * @param BinaryExpression $exp
      */
-    public function testIsGreatThanOrEqual($expect, BinaryExpression $exp)
+    public function testIsGreatThanOrEqual($expect, BinaryExpression $exp): void
     {
         $res = $exp->evaluate($this->visitor);
         $this->assertEquals($expect, $res);
@@ -86,7 +86,7 @@ class InequalityTest extends TestCase
         3 => [0 , new BinaryExpression(Expression::OP_LT, new Value(2), new Value(2))],
         4 => [1 , new BinaryExpression(Expression::OP_LT, new Value(-4), new Value(-3))],
         5 => [1 , new BinaryExpression(Expression::OP_LT, new Value(2), new Value(3), new Value(4))],
-        5 => [0 , new BinaryExpression(Expression::OP_LT, new Value(2), new Value(3), new Value(2))],
+        6 => [0 , new BinaryExpression(Expression::OP_LT, new Value(2), new Value(3), new Value(2))],
         ];
     }
 
@@ -98,8 +98,8 @@ class InequalityTest extends TestCase
         3 => [1 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(2))],
         4 => [1 , new BinaryExpression(Expression::OP_LTE, new Value(-4), new Value(-3))],
         5 => [1 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(4))],
-        5 => [0 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(2))],
-        6 => [1 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(3))],
+        6 => [0 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(2))],
+        7 => [1 , new BinaryExpression(Expression::OP_LTE, new Value(2), new Value(3), new Value(3))],
         ];
     }
 
@@ -111,7 +111,7 @@ class InequalityTest extends TestCase
         3 => [0 , new BinaryExpression(Expression::OP_GT, new Value(2), new Value(2))],
         4 => [1 , new BinaryExpression(Expression::OP_GT, new Value(-3), new Value(-4))],
         5 => [1 , new BinaryExpression(Expression::OP_GT, new Value(4), new Value(3), new Value(2))],
-        5 => [0 , new BinaryExpression(Expression::OP_GT, new Value(3), new Value(2), new Value(2))],
+        6 => [0 , new BinaryExpression(Expression::OP_GT, new Value(3), new Value(2), new Value(2))],
         ];
     }
 
@@ -123,7 +123,7 @@ class InequalityTest extends TestCase
          3 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(2), new Value(2))],
          4 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(-3), new Value(-4))],
          5 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(4), new Value(3), new Value(2))],
-         5 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(3), new Value(2), new Value(2))],
+         6 => [1 , new BinaryExpression(Expression::OP_GTE, new Value(3), new Value(2), new Value(2))],
         ];
     }
 }

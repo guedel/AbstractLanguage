@@ -34,7 +34,7 @@ class BasicRuntimeVisitorTest extends TestCase
      * @dataProvider programs
      * @coversNothing
      */
-    public function testProgram(BaseTestProgram $p)
+    public function testProgram(BaseTestProgram $p): void
     {
         $this->expectOutputString($p->expect());
         $this->visitor->run($p->code());

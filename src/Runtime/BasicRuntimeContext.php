@@ -25,8 +25,6 @@ use Guedel\AL\Expression\Value;
  */
 final class BasicRuntimeContext
 {
-    private $name;
-    private ?BasicRuntimeContext $parent = null;
     private $types = [];
     private $returnValues = [];
     private bool $returnRequest = false;
@@ -39,10 +37,10 @@ final class BasicRuntimeContext
     private $functions = [];
     private $procedures = [];
 
-    public function __construct(?BasicRuntimeContext $parent = null, string $name = null)
-    {
-        $this->name = $name;
-        $this->parent = $parent;
+    public function __construct(
+        private readonly ?BasicRuntimeContext $parent = null,
+        private readonly ?string $name = null
+    ) {
     }
 
     public function getParent(): ?BasicRuntimeContext

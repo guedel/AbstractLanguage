@@ -84,13 +84,11 @@ class TestVisitor implements Visitor
      */
     public function evalVariable(\Guedel\AL\Expression\Variable $variable): string
     {
-        switch ($variable->getVarname()) {
-            case 'alpha':
-                return 'abdef';
-            case 'num':
-                return '124';
-        }
-        return null;
+        return match ($variable->getVarname()) {
+            'alpha' => 'abdef',
+            'num' => '124',
+            default => null,
+        };
     }
 
     public function visitAny(\Guedel\AL\Datatype\Any $type)

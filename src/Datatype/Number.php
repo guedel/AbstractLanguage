@@ -18,13 +18,10 @@ namespace Guedel\AL\Datatype;
  */
 class Number implements Type
 {
-    private ?int $length;
-    private ?int $precision;
-
-    public function __construct(?int $length = null, ?int $precision = null)
-    {
-        $this->length = $length;
-        $this->precision = $precision;
+    public function __construct(
+        private readonly ?int $length = null,
+        private readonly ?int $precision = null
+    ) {
     }
 
     public function accept(\Guedel\AL\Runtime\Visitor $visitor)
