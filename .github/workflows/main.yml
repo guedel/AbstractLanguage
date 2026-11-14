@@ -35,7 +35,7 @@ jobs:
       - name: PHPMD
         uses: docker://jakzal/phpqa:php8.3-alpine
         with:
-          args: phpmd analyze --ruleset=cleancode src
+          args: phpmd analyze --ruleset=phpmd.xml src
       # - name: Deptrac
       #   uses: docker://jakzal/phpqa:php7.4-alpine
       #   with:
