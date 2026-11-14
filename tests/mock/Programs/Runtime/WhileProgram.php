@@ -39,7 +39,7 @@ class WhileProgram implements BaseTestProgram
             new AssignStmt('w', new Value(0)),
             new WhileStmt(
                 new BinaryExpression(Expression::OP_LTE, new Variable('w'), new Value(3)),
-                new \Guedel\AL\Statement\StatementList(
+                new StatementList(
                     new ProcedureCall('writeln', new Variable('w')),
                     new AssignStmt('w', new BinaryExpression(Expression::OP_ADD, new Variable('w'), new Value(1)))
                 )

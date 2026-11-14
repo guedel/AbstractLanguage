@@ -11,6 +11,7 @@
 
 namespace Guedel\AL\Declaration;
 
+use Guedel\AL\Runtime\Visitor;
 use Guedel\AL\Datatype\Type;
 
 /**
@@ -32,7 +33,7 @@ class TypeDecl extends NamedDeclaration
         return $this->definition;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->declareType($this);
     }

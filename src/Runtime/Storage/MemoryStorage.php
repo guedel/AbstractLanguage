@@ -11,6 +11,9 @@
 
 namespace Guedel\AL\Runtime\Storage;
 
+use OverflowException;
+use stdClass;
+
 /**
  * Description of newPHPClass
  *
@@ -36,12 +39,12 @@ class MemoryStorage implements BasicStorage
      * @param int $address
      * @param int $count
      * @return string
-     * @throws \OverflowException
+     * @throws OverflowException
      */
     public function getBytes(int $address, int $count): string
     {
         if ($address < 0 || $address > $this->size - $count) {
-            throw new \OverflowException();
+            throw new OverflowException();
         }
         return substr($this->memory, $address, $count);
     }
@@ -50,13 +53,13 @@ class MemoryStorage implements BasicStorage
      * Emission de données sous forme d'octets
      * @param int $address
      * @param string $bytes
-     * @throws \OverflowException
+     * @throws OverflowException
      */
     public function putBytes(int $address, string $bytes): int
     {
         $len = strlen($bytes);
         if ($address < 0 || $address > $this->size - $len) {
-            throw new \OverflowException();
+            throw new OverflowException();
         }
         for ($index = 0; $index < $len; ++$index, ++$address) {
             $this->memory[$address] = $bytes[$index];
@@ -90,7 +93,7 @@ class MemoryStorage implements BasicStorage
      * Récupère l'adresse du prochain octet libre
      * @param int $start adresse de départ
      * @return int adresse trouvée
-     * @throws \OverflowException
+     * @throws OverflowException
      */
     private function getNextFreeByte(int $start): int
     {
@@ -99,16 +102,16 @@ class MemoryStorage implements BasicStorage
                 return $index;
             }
         }
-        throw new \OverflowException();
+        throw new OverflowException();
     }
 
-    public function retrieveObject(int $address): \stdClass
+    public function retrieveObject(int $address): stdClass
     {
         // TODO
-        return new \stdClass();
+        return new stdClass();
     }
 
-    public function storeObject(\stdClass $value, int $address)
+    public function storeObject(stdClass $value, int $address)
     {
         // TODO
     }

@@ -11,7 +11,35 @@
 
 namespace Guedel\AL\Runtime;
 
-use Guedel\AL\Expression\Valuable;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Declaration\FunctionDecl;
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Declaration\TypeDecl;
+use Guedel\AL\Declaration\Parameter;
+use Guedel\AL\Statement\AssignStmt;
+use Guedel\AL\Statement\ReturnStmt;
+use Guedel\AL\Statement\ForStmt;
+use Guedel\AL\Statement\ForEachStmt;
+use Guedel\AL\Statement\IfThenStmt;
+use Guedel\AL\Statement\WhileStmt;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\StatementList;
+use Guedel\AL\Statement\Comment;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\AL\Expression\BinaryExpression;
+use Guedel\AL\Expression\UnaryExpression;
+use Guedel\AL\Datatype\StringOfChars;
+use Guedel\AL\Datatype\Any;
+use Guedel\AL\Datatype\TypeName;
+use Guedel\AL\Datatype\ArrayOf;
+use Guedel\AL\Datatype\Structure;
+use Guedel\AL\Datatype\ClassType;
+use Guedel\AL\Datatype\Reference;
+use Guedel\AL\Datatype\Enumeration;
+use Guedel\AL\Datatype\Number;
 
 /**
  * Description of Visitor
@@ -21,39 +49,39 @@ use Guedel\AL\Expression\Valuable;
 interface Visitor
 {
     // Declarations
-    public function declareModule(\Guedel\AL\Declaration\Module $decl);
-    public function declareVariable(\Guedel\AL\Declaration\VariableDecl $decl);
-    public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl);
-    public function declareProcedure(\Guedel\AL\Declaration\ProcedureDecl $decl);
-    public function declareType(\Guedel\AL\Declaration\TypeDecl $decl);
-    public function declareParameter(\Guedel\AL\Declaration\Parameter $decl);
+    public function declareModule(Module $decl);
+    public function declareVariable(VariableDecl $decl);
+    public function declareFunction(FunctionDecl $decl);
+    public function declareProcedure(ProcedureDecl $decl);
+    public function declareType(TypeDecl $decl);
+    public function declareParameter(Parameter $decl);
 
     // Statements
-    public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt);
-    public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt);
-    public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt);
-    public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt);
-    public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt);
-    public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt);
-    public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc);
-    public function visitStatementList(\Guedel\AL\Statement\StatementList $stmt);
-    public function visitComment(\Guedel\AL\Statement\Comment $stmt);
+    public function visitAssignStmt(AssignStmt $stmt);
+    public function visitReturnStmt(ReturnStmt $stmt);
+    public function visitForStmt(ForStmt $stmt);
+    public function visitForEachStmt(ForEachStmt $stmt);
+    public function visitIfThenStmt(IfThenStmt $stmt);
+    public function visitWhileStmt(WhileStmt $stmt);
+    public function visitProcedureCall(ProcedureCall $proc);
+    public function visitStatementList(StatementList $stmt);
+    public function visitComment(Comment $stmt);
 
     // Expressions
-    public function evalValue(\Guedel\AL\Expression\Value $value);
-    public function evalVariable(\Guedel\AL\Expression\Variable $variable);
-    public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn);
-    public function evalBinaryExpression(\Guedel\AL\Expression\BinaryExpression $exp);
-    public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp);
+    public function evalValue(Value $value);
+    public function evalVariable(Variable $variable);
+    public function evalFunctionCall(FunctionCall $fn);
+    public function evalBinaryExpression(BinaryExpression $exp);
+    public function evalUnaryExpression(UnaryExpression $exp);
 
     // Type definition
-    public function visitString(\Guedel\AL\Datatype\StringOfChars $type);
-    public function visitAny(\Guedel\AL\Datatype\Any $type);
-    public function visitTypename(\Guedel\AL\Datatype\TypeName $type);
-    public function visitArrayof(\Guedel\AL\Datatype\ArrayOf $type);
-    public function visitStructure(\Guedel\AL\Datatype\Structure $type);
-    public function visitClass(\Guedel\AL\Datatype\ClassType $type);
-    public function visitReference(\Guedel\AL\Datatype\Reference $type);
-    public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type);
-    public function visitNumber(\Guedel\AL\Datatype\Number $type);
+    public function visitString(StringOfChars $type);
+    public function visitAny(Any $type);
+    public function visitTypename(TypeName $type);
+    public function visitArrayof(ArrayOf $type);
+    public function visitStructure(Structure $type);
+    public function visitClass(ClassType $type);
+    public function visitReference(Reference $type);
+    public function visitEnumeration(Enumeration $type);
+    public function visitNumber(Number $type);
 }

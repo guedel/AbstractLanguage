@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\{StatementList, ReturnStmt};
 use Guedel\AL\Expression\{
@@ -36,7 +37,7 @@ class ExpressionsProgram implements BaseTestProgram
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new StatementList(
             new ReturnStmt(

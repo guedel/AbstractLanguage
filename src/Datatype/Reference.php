@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of Reference
  *
@@ -27,7 +29,7 @@ class Reference implements Type
         return $this->type;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitReference($this);
     }

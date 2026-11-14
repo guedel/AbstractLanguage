@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Unit\Expression;
 
+use Guedel\Tests\Mock\AL\TestVisitor;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Expression\Variable;
 
@@ -31,6 +32,6 @@ class VariableTest extends TestCase
     public function testAccept(): void
     {
         $var = new Variable('num');
-        $this->assertEquals('124', $var->evaluate(new \Guedel\Tests\Mock\AL\TestVisitor()));
+        $this->assertEquals('124', $var->evaluate(new TestVisitor()));
     }
 }

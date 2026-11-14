@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Expression;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * call of a function
  * $name($parameters)
@@ -38,10 +40,10 @@ class FunctionCall implements Valuable
 
     /**
      *
-     * @param \Guedel\AL\Runtime\Visitor $visitor
+     * @param Visitor $visitor
      * @return mixed
      */
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(Visitor $visitor)
     {
         return $visitor->evalFunctionCall($this);
     }

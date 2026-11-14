@@ -11,6 +11,7 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Runtime\Visitor;
 use Guedel\AL\Declaration\VariableDecl;
 
 /**
@@ -39,7 +40,7 @@ class Structure implements Type
         return $this->attributes;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitStructure($this);
     }

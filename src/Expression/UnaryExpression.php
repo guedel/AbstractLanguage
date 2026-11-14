@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Expression;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Unary expression
  *
@@ -30,10 +32,10 @@ class UnaryExpression extends Expression
 
     /**
      *
-     * @param \Guedel\AL\Runtime\Visitor $visitor
+     * @param Visitor $visitor
      * @return mixed
      */
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(Visitor $visitor)
     {
         return $visitor->evalUnaryExpression($this);
     }

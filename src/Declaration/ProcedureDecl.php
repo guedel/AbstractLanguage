@@ -11,6 +11,7 @@
 
 namespace Guedel\AL\Declaration;
 
+use Guedel\AL\Runtime\Visitor;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Statement\Statement;
 
@@ -39,7 +40,7 @@ class ProcedureDecl extends NamedDeclaration
         }
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->declareProcedure($this);
     }

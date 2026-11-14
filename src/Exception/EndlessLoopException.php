@@ -11,12 +11,14 @@
 
 namespace Guedel\AL\Exception;
 
+use Exception;
+
 /**
  * Raised when increment is zero
  *
  * @author Guedel <guedel87@live.fr>
  */
-class EndlessLoopException extends \Exception
+class EndlessLoopException extends Exception
 {
     //put your code here
 }

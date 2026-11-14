@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Unit\AL\Expression;
 
+use Guedel\Tests\Mock\AL\TestVisitor;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Expression\Value;
 
@@ -31,7 +32,7 @@ class ValueTest extends TestCase
     public function testEvaluate(): void
     {
         $v = new Value(123);
-        $visit = new \Guedel\Tests\Mock\AL\TestVisitor();
+        $visit = new TestVisitor();
         $this->assertEquals(123, $v->evaluate($visit));
     }
 }

@@ -17,7 +17,6 @@ use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Statement\IfThenStmt;
 use Guedel\AL\Expression\Value;
-use Guedel\AL\Expression\Expression;
 
 /**
  * Test of "if then" structure

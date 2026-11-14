@@ -11,6 +11,7 @@
 
 namespace Guedel\AL\Statement;
 
+use Guedel\AL\Runtime\Visitor;
 use Guedel\AL\Expression\Valuable;
 
 /**
@@ -27,7 +28,7 @@ class IfThenStmt implements Statement
     ) {
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitIfThenStmt($this);
     }

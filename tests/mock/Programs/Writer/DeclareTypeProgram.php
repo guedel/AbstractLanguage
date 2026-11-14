@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\TypeDecl;
@@ -37,9 +38,9 @@ class DeclareTypeProgram implements BaseTestProgram
     }
 
     /**
-     * @return \Guedel\AL\Statement\Statement
+     * @return Statement
      */
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new StatementList(
             new TypeDecl("sample1", new StringOfChars(50)),

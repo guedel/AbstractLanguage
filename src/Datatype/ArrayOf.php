@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of ArrayOf
  *
@@ -40,7 +42,7 @@ class ArrayOf implements Type
         return $this->upperbound;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitArrayof($this);
     }

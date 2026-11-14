@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Declaration\ProcedureDecl;
 use Guedel\AL\Declaration\{Parameter, ParametersList};
@@ -34,7 +35,7 @@ class DeclareProcProgram implements BaseTestProgram
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new ProcedureDecl(
             "bonjour",

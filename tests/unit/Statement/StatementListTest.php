@@ -12,7 +12,6 @@
 namespace Guedel\Tests\Unit\AL\Statement;
 
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Guedel\AL\Statement\StatementList;
 use Guedel\Tests\Mock\AL\EmptyStatement;

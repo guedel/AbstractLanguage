@@ -22,7 +22,6 @@ use Guedel\AL\Expression\Value;
 use Guedel\AL\Statement\AssignStmt;
 use Guedel\AL\Statement\StatementBuilder;
 use Guedel\AL\Statement\StatementList;
-use Guedel\Tests\Mock\AL\TestVisitor;
 
 /**
  * Description of ReturnStmtTest

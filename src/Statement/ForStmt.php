@@ -11,7 +11,6 @@
 
 namespace Guedel\AL\Statement;
 
-use Guedel\AL\Expression\Expression;
 use Guedel\AL\Expression\Valuable;
 use Guedel\AL\Runtime\Visitor;
 

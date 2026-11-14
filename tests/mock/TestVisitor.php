@@ -11,7 +11,35 @@
 
 namespace Guedel\Tests\Mock\AL;
 
-use Guedel\AL\Expression\Expression;
+use Guedel\AL\Declaration\FunctionDecl;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\Parameter;
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Declaration\TypeDecl;
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\BinaryExpression;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\AL\Expression\UnaryExpression;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
+use Guedel\AL\Datatype\Any;
+use Guedel\AL\Datatype\ArrayOf;
+use Guedel\AL\Statement\AssignStmt;
+use Guedel\AL\Datatype\ClassType;
+use Guedel\AL\Datatype\Enumeration;
+use Guedel\AL\Statement\ForEachStmt;
+use Guedel\AL\Statement\ForStmt;
+use Guedel\AL\Statement\IfThenStmt;
+use Guedel\AL\Datatype\Number;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Datatype\Reference;
+use Guedel\AL\Statement\ReturnStmt;
+use Guedel\AL\Statement\StatementList;
+use Guedel\AL\Datatype\StringOfChars;
+use Guedel\AL\Datatype\Structure;
+use Guedel\AL\Datatype\TypeName;
+use Guedel\AL\Statement\WhileStmt;
+use Guedel\AL\Statement\Comment;
 use Guedel\AL\Runtime\Visitor;
 
 /**
@@ -21,32 +49,32 @@ use Guedel\AL\Runtime\Visitor;
 class TestVisitor implements Visitor
 {
     //put your code here
-    public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl)
+    public function declareFunction(FunctionDecl $decl)
     {
     }
 
-    public function declareModule(\Guedel\AL\Declaration\Module $decl)
+    public function declareModule(Module $decl)
     {
         return "MODULE " . $decl->getName();
     }
 
-    public function declareParameter(\Guedel\AL\Declaration\Parameter $decl)
+    public function declareParameter(Parameter $decl)
     {
     }
 
-    public function declareProcedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
+    public function declareProcedure(ProcedureDecl $decl)
     {
     }
 
-    public function declareType(\Guedel\AL\Declaration\TypeDecl $decl)
+    public function declareType(TypeDecl $decl)
     {
     }
 
-    public function declareVariable(\Guedel\AL\Declaration\VariableDecl $decl)
+    public function declareVariable(VariableDecl $decl)
     {
     }
 
-    public function evalBinaryExpression(\Guedel\AL\Expression\BinaryExpression $exp)
+    public function evalBinaryExpression(BinaryExpression $exp)
     {
         $operands = [];
         foreach ($exp->getOperands() as $op) {
@@ -55,7 +83,7 @@ class TestVisitor implements Visitor
         return implode($exp->getOperator(), $operands);
     }
 
-    public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)
+    public function evalFunctionCall(FunctionCall $fn)
     {
         switch ($fn->getName()) {
             case 'sin':
@@ -67,22 +95,22 @@ class TestVisitor implements Visitor
         }
     }
 
-    public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp)
+    public function evalUnaryExpression(UnaryExpression $exp)
     {
         return $exp->getOperator() . $exp->getOperand()->evaluate($this);
     }
 
-    public function evalValue(\Guedel\AL\Expression\Value $value)
+    public function evalValue(Value $value)
     {
         return $value->getValue();
     }
 
     /**
      * Retourne une valeur différence selon la variable utilisée
-     * @param \Guedel\AL\Expression\Variable $variable
+     * @param Variable $variable
      * @return string
      */
-    public function evalVariable(\Guedel\AL\Expression\Variable $variable): string
+    public function evalVariable(Variable $variable): string
     {
         return match ($variable->getVarname()) {
             'alpha' => 'abdef',
@@ -91,56 +119,56 @@ class TestVisitor implements Visitor
         };
     }
 
-    public function visitAny(\Guedel\AL\Datatype\Any $type)
+    public function visitAny(Any $type)
     {
         return $type->getSignature();
     }
 
-    public function visitArrayof(\Guedel\AL\Datatype\ArrayOf $type)
+    public function visitArrayof(ArrayOf $type)
     {
         return $type->getSignature();
     }
 
-    public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
+    public function visitAssignStmt(AssignStmt $stmt)
     {
     }
 
-    public function visitClass(\Guedel\AL\Datatype\ClassType $type)
+    public function visitClass(ClassType $type)
     {
     }
 
-    public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
-    {
-        return $type->getSignature();
-    }
-
-    public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt)
-    {
-    }
-
-    public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
-    {
-    }
-
-    public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)
-    {
-    }
-
-    public function visitNumber(\Guedel\AL\Datatype\Number $type)
+    public function visitEnumeration(Enumeration $type)
     {
         return $type->getSignature();
     }
 
-    public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
+    public function visitForEachStmt(ForEachStmt $stmt)
     {
     }
 
-    public function visitReference(\Guedel\AL\Datatype\Reference $type)
+    public function visitForStmt(ForStmt $stmt)
+    {
+    }
+
+    public function visitIfThenStmt(IfThenStmt $stmt)
+    {
+    }
+
+    public function visitNumber(Number $type)
     {
         return $type->getSignature();
     }
 
-    public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
+    public function visitProcedureCall(ProcedureCall $proc)
+    {
+    }
+
+    public function visitReference(Reference $type)
+    {
+        return $type->getSignature();
+    }
+
+    public function visitReturnStmt(ReturnStmt $stmt)
     {
         $ct = count($stmt->getExpressions());
         if ($ct == 0) {
@@ -150,32 +178,32 @@ class TestVisitor implements Visitor
         }
     }
 
-    public function visitStatementList(\Guedel\AL\Statement\StatementList $stmt)
+    public function visitStatementList(StatementList $stmt)
     {
         return '// ' . $stmt->count() . ' statement(s)';
     }
 
-    public function visitString(\Guedel\AL\Datatype\StringOfChars $type)
+    public function visitString(StringOfChars $type)
     {
         return $type->getSignature();
     }
 
-    public function visitStructure(\Guedel\AL\Datatype\Structure $type)
+    public function visitStructure(Structure $type)
     {
         return $type->getSignature();
     }
 
-    public function visitTypename(\Guedel\AL\Datatype\TypeName $type)
+    public function visitTypename(TypeName $type)
     {
         return $type->getSignature();
     }
 
-    public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
+    public function visitWhileStmt(WhileStmt $stmt)
     {
         return 'WHILE ' . $stmt->getTest()->evaluate($this) . ' DO ' . $stmt->getStatement()->accept($this);
     }
 
-    public function visitComment(\Guedel\AL\Statement\Comment $stmt): string
+    public function visitComment(Comment $stmt): string
     {
         return "// " . $stmt->getMessage();
     }

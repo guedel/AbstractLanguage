@@ -25,4 +25,6 @@ return RectorConfig::configure()
     ->withDeadCodeLevel(3)
     ->withCodeQualityLevel(3)
     ->withTreatClassesAsFinal()
-    ;
+    # ->withAttributesSets()
+    ->withImportNames()
+;

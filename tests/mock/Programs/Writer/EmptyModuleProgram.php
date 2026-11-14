@@ -11,6 +11,8 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\Module;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 
 /**
@@ -26,8 +28,8 @@ class EmptyModuleProgram implements BaseTestProgram
         return "MODULE Empty" . PHP_EOL . "END MODULE" . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
-        return new \Guedel\AL\Declaration\Module('Empty');
+        return new Module('Empty');
     }
 }

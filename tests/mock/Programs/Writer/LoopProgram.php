@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Statement\{WhileStmt, ForStmt, ForEachStmt, StatementList, ProcedureCall};
@@ -42,7 +43,7 @@ class LoopProgram implements BaseTestProgram
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new StatementList(
             new WhileStmt(

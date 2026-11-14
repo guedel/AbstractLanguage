@@ -11,6 +11,9 @@
 
 namespace Guedel\AL\Declaration;
 
+use Guedel\AL\Datatype\Type;
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Definition of a function or procedure parameter
  *
@@ -26,7 +29,7 @@ class Parameter extends VariableDecl
     public function __construct(
         string $name,
         private readonly string $direction,
-        \Guedel\AL\Datatype\Type $type = null
+        Type $type = null
     ) {
         parent::__construct($name, $type);
     }
@@ -36,7 +39,7 @@ class Parameter extends VariableDecl
         return $this->direction;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         return $visitor->declareParameter($this);
     }

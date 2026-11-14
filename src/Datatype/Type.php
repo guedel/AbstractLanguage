@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of BaseType
  *
@@ -18,6 +20,6 @@ namespace Guedel\AL\Datatype;
  */
 interface Type
 {
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor);
+    public function accept(Visitor $visitor);
     public function getSignature(): string;
 }
