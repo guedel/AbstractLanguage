@@ -92,7 +92,7 @@ class InequalityTest extends TestCase
     $this->assertEquals($expect, $res);
   }
 
-  public function lessThanExpressions()
+  public static function lessThanExpressions()
   {
     return [
         1 => [1, new BinaryExpression(Expression::OP_LT, new Value(1), new Value(2))],
@@ -104,7 +104,7 @@ class InequalityTest extends TestCase
     ];
   }
 
-  public function lessThanOrEqualExpressions()
+  public static function lessThanOrEqualExpressions()
   {
     return [
         1 => [1, new BinaryExpression(Expression::OP_LTE, new Value(1), new Value(2))],
@@ -117,7 +117,7 @@ class InequalityTest extends TestCase
     ];
   }
 
-  public function greatThanExpression()
+  public static function greatThanExpression()
   {
     return [
         1 => [0, new BinaryExpression(Expression::OP_GT, new Value(1), new Value(2))],
@@ -129,7 +129,7 @@ class InequalityTest extends TestCase
     ];
   }
 
-  public function greatThanOrEqualExpression()
+  public static function greatThanOrEqualExpression()
   {
     return [
        1 => [0, new BinaryExpression(Expression::OP_GTE, new Value(1), new Value(2))],

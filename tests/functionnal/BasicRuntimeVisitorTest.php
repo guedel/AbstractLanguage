@@ -55,7 +55,7 @@ class BasicRuntimeVisitorTest extends TestCase
     $this->visitor->run($p->code());
   }
 
-  public function programs()
+  public static function programs()
   {
     return [
         'hello world' => [new Prog\HelloWorldProgram()],

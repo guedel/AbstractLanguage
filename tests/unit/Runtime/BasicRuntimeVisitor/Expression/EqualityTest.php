@@ -68,7 +68,7 @@ class EqualityTest extends TestCase
     $this->assertEquals($expect, $res);
   }
 
-  public function equalityExpressions()
+  public static function equalityExpressions()
   {
     return [
       1 => [1, new BinaryExpression(Expression::OP_EQUAL, new Value(2), new Value(2))],
@@ -80,7 +80,7 @@ class EqualityTest extends TestCase
     ];
   }
 
-  public function differentExpressions()
+  public static function differentExpressions()
   {
     return [
         1 => [0, new BinaryExpression(Expression::OP_DIFF, new Value(2), new Value(2))],

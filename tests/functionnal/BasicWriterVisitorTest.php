@@ -62,7 +62,7 @@ class BasicWriterVisitorTest extends TestCase
   }
 
 
-  public function programs()
+  public static function programs()
   {
     return [
         'empty module' => [new Prog\EmptyModuleProgram()],
