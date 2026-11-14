@@ -47,16 +47,10 @@ class Structure implements Type
 
     public function getSignature(): string
     {
-        $ret = '{';
-        $first = true;
+        $ret = [];
         foreach ($this->attributes as $attr) {
-            if ($first) {
-                $first = false;
-            } else {
-                $ret .= ';';
-            }
-            $ret .= $attr->getType()->getSignature();
+            $ret[] = $attr->getType()->getSignature();
         }
-        return $ret . '}';
+        return '{' . implode(';', $ret) . '}';
     }
 }

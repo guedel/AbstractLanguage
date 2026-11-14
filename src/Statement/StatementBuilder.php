@@ -92,9 +92,9 @@ trait StatementBuilder
         foreach ($args as $arg) {
             if ($arg instanceof Valuable) {
                 $a[] = $arg;
-            } else {
-                $a[] = new Value($arg);
+                continue;
             }
+            $a[] = new Value($arg);
         }
         $this->statements->add(new ProcedureCall($name, ...$a));
         return $this;

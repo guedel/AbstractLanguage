@@ -49,11 +49,10 @@ class ClassType extends Structure
         $ret = '{' . parent::getSignature();
         $first = true;
         foreach ($this->methods as $attr) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $ret .= ';';
             }
+            $first = false;
             $ret .= $attr->getSignature();
         }
 

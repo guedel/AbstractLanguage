@@ -22,22 +22,14 @@ use Guedel\AL\Statement\Statement;
 */
 class ProcedureDecl extends NamedDeclaration
 {
-    private ?ParametersList $parameters;
-    private ?Statement $body;
+    private readonly ?ParametersList $parameters;
+    private readonly ?Statement $body;
 
     public function __construct(string $name, ?ParametersList $parameters = null, ?Statement $body = null)
     {
         parent::__construct($name);
-        if ($parameters === null) {
-            $this->parameters = new ParametersList();
-        } else {
-            $this->parameters = $parameters;
-        }
-        if ($body instanceof StatementList) {
-            $this->body = $body;
-        } else {
-            $this->body = new StatementList($body);
-        }
+        $this->parameters = $parameters ?? new ParametersList();
+        $this->body = ($body instanceof StatementList) ? $body : new StatementList($body);
     }
 
     public function accept(Visitor $visitor)

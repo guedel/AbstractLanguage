@@ -24,17 +24,13 @@ use Guedel\AL\Expression\Value;
  */
 class VariableDecl extends NamedDeclaration
 {
-    private Type $type;
+    private readonly Type $type;
     private mixed $value;
 
     public function __construct($name, Type $type = null)
     {
         parent::__construct($name);
-        if ($type == null) {
-            $this->type = Any::getType();
-        } else {
-            $this->type = $type;
-        }
+        $this->type = $type ?? (new Any())->getType();
     }
 
     public function getType(): Type
@@ -44,11 +40,7 @@ class VariableDecl extends NamedDeclaration
 
     public function setValue(mixed $value): void
     {
-        if ($value instanceof Value) {
-            $this->value = $value;
-        } else {
-            $this->value = new Value($value);
-        }
+        $this->value = ($value instanceof Value) ? $value : new Value($value);
     }
 
     public function getValue(): Value

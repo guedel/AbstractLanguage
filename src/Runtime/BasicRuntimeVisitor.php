@@ -129,79 +129,56 @@ class BasicRuntimeVisitor implements Visitor
                 $acc = $op;
                 $first = false;
                 $second = true;
-            } else {
-                switch ($exp->getOperator()) {
-                    case Expression::OP_ADD:
-                        $acc += $op;
-                        break;
-                    case Expression::OP_SUB:
-                        $acc -= $op;
-                        break;
-                    case Expression::OP_MULT:
-                        $acc *= $op;
-                        break;
-                    case Expression::OP_DIV:
-                        $acc /= $op;
-                        break;
-                    case Expression::OP_EQUAL:
-                        // a = b = c <=> a = b AND b = c
-                        if ($second) {
-                            $acc = $prev == $op;
-                        } else {
-                            $acc = $acc && $prev == $op;
-                        }
-                        break;
-                    case Expression::OP_DIFF:
-                        // a != b != c <=> a != b AND b != c
-                        if ($second) {
-                            $acc = $prev != $op;
-                        } else {
-                            $acc = $acc && $prev != $op;
-                        }
-                        break;
-                    case Expression::OP_LT:
-                        // a < b < c <=> a < b AND b < c
-                        if ($second) {
-                            $acc = $prev < $op;
-                        } else {
-                            $acc = $acc && $prev < $op;
-                        }
-                        break;
-                    case Expression::OP_GT:
-                        if ($second) {
-                            $acc = $prev > $op;
-                        } else {
-                            $acc = $acc && $prev > $op;
-                        }
-                        break;
-                    case Expression::OP_LTE:
-                        if ($second) {
-                            $acc = $prev <= $op;
-                        } else {
-                            $acc = $acc && $prev <= $op;
-                        }
-                        break;
-                    case Expression::OP_GTE:
-                        if ($second) {
-                            $acc = $prev >= $op;
-                        } else {
-                            $acc = $acc && $prev >= $op;
-                        }
-                        break;
-                    case Expression::OP_OR:
-                        $acc |= $op;
-                        break;
-                    case Expression::OP_AND:
-                        $acc &= $op;
-                        break;
-                    case Expression::OP_XOR:
-                        $acc ^= $op;
-                        break;
-                    default:
-                        throw new InvalidOperatorException();
-                }
-                $second = false;
+                $prev = $op;
+                continue;
             }
+            switch ($exp->getOperator()) {
+                case Expression::OP_ADD:
+                    $acc += $op;
+                    break;
+                case Expression::OP_SUB:
+                    $acc -= $op;
+                    break;
+                case Expression::OP_MULT:
+                    $acc *= $op;
+                    break;
+                case Expression::OP_DIV:
+                    $acc /= $op;
+                    break;
+                case Expression::OP_EQUAL:
+                    // a = b = c <=> a = b AND b = c
+                    $acc = $second ? ($prev == $op) : ($acc && $prev == $op);
+                    break;
+                case Expression::OP_DIFF:
+                    // a != b != c <=> a != b AND b != c
+                    $acc = $second ? ($prev != $op) : ($acc && $prev != $op);
+                    break;
+                case Expression::OP_LT:
+                    // a < b < c <=> a < b AND b < c
+                    $acc = $second ? ($prev < $op) : ($acc && $prev < $op);
+                    break;
+                case Expression::OP_GT:
+                    $acc = $second ? ($prev > $op) : ($acc && $prev > $op);
+                    break;
+                case Expression::OP_LTE:
+                    $acc = ($second) ? ($prev <= $op) : ($acc && $prev <= $op);
+                    break;
+                case Expression::OP_GTE:
+                    $acc = ($second) ? ($prev >= $op) : ($acc && $prev >= $op);
+                    break;
+                case Expression::OP_OR:
+                    $acc |= $op;
+                    break;
+                case Expression::OP_AND:
+                    $acc &= $op;
+                    break;
+                case Expression::OP_XOR:
+                    $acc ^= $op;
+                    break;
+                default:
+                    throw new InvalidOperatorException();
+            }
+            $second = false;
             $prev = $op;
         }
         return $acc;
@@ -332,9 +309,8 @@ class BasicRuntimeVisitor implements Visitor
             ) {
                 $stmt->getStatement()->accept($this);
             }
-        } else {
-            throw new EndlessLoopException();
         }
+        throw new EndlessLoopException();
     }
 
     public function visitIfThenStmt(IfThenStmt $stmt)
@@ -342,12 +318,11 @@ class BasicRuntimeVisitor implements Visitor
         $test = $stmt->getIfTest()->evaluate($this);
         if ($test) {
             return $stmt->getThenPart()->accept($this);
-        } else {
-            $elsePart = $stmt->getElsePart();
-            if ($elsePart) {
-                return $elsePart->accept($this);
-            }
-            return;
+        }
+
+        $elsePart = $stmt->getElsePart();
+        if ($elsePart) {
+            return $elsePart->accept($this);
         }
     }
 
@@ -402,7 +377,7 @@ class BasicRuntimeVisitor implements Visitor
         foreach ($stmt->getExpressions() as $expr) {
             $value[] = $expr->evaluate($this);
         }
-        $this->context->setReturnRequest(true, ...$value);
+        $this->context->setEnableReturnRequest(...$value);
     }
 
     public function visitStatementList(StatementList $stmt)
