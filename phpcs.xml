@@ -6,11 +6,11 @@
   <file>tests</file>
   <exclude-pattern>src/Datatype/obsolete/*</exclude-pattern>
   <rule ref="PSR12"  />
-  
+
   <rule ref="Generic.WhiteSpace.ScopeIndent">
     <properties>
-      <property name="indent" value="2"/>
+      <property name="indent" value="4"/>
     </properties>
   </rule>
-    
+
 </ruleset>

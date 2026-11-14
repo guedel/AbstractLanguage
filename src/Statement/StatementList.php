@@ -1,73 +1,58 @@
 <?php
 
-  /*
-   * The MIT License
-   *
-   * Copyright 2018 Guedel <guedel87@live.fr>.
-   *
-   * Permission is hereby granted, free of charge, to any person obtaining a copy
-   * of this software and associated documentation files (the "Software"), to deal
-   * in the Software without restriction, including without limitation the rights
-   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   * copies of the Software, and to permit persons to whom the Software is
-   * furnished to do so, subject to the following conditions:
-   *
-   * The above copyright notice and this permission notice shall be included in
-   * all copies or substantial portions of the Software.
-   *
-   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-   * THE SOFTWARE.
-   */
+/*
+ * This file is part of AbstractLanguage library.
+ *
+ * (c) Guedel <guedel87@live.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-  namespace Guedel\AL\Statement;
+namespace Guedel\AL\Statement;
 
-  use Guedel\AL\Runtime\Visitor;
+use Guedel\AL\Runtime\Visitor;
 
-  /**
-   * Collection of statements
-   *
-   * @author Guedel <guedel87@live.fr>
-   */
+/**
+ * Collection of statements
+ *
+ * @author Guedel <guedel87@live.fr>
+ */
 class StatementList implements Statement, \IteratorAggregate, \Countable
 {
     private $statements;
 
-  public function __construct(Statement ...$statements)
-  {
-      $this->statements = $statements;
-  }
-
-  public function add(Statement $statement)
-  {
-      $this->statements[] = $statement;
-      return $this;
-  }
-
-  public function last(): ?Statement
-  {
-    if (0 < $this->count()) {
-        return $this->statements[array_key_last($this->statements)];
+    public function __construct(Statement ...$statements)
+    {
+        $this->statements = $statements;
     }
-      return null;
-  }
 
-  public function getIterator(): \Traversable
-  {
-      return new \ArrayIterator($this->statements);
-  }
+    public function add(Statement $statement)
+    {
+        $this->statements[] = $statement;
+        return $this;
+    }
 
-  public function accept(Visitor $visitor)
-  {
-      $visitor->visitStatementList($this);
-  }
+    public function last(): ?Statement
+    {
+        if (0 < $this->count()) {
+            return $this->statements[array_key_last($this->statements)];
+        }
+        return null;
+    }
 
-  public function count(): int
-  {
-      return count($this->statements);
-  }
+    public function getIterator(): \Traversable
+    {
+        return new \ArrayIterator($this->statements);
+    }
+
+    public function accept(Visitor $visitor)
+    {
+        $visitor->visitStatementList($this);
+    }
+
+    public function count(): int
+    {
+        return count($this->statements);
+    }
 }

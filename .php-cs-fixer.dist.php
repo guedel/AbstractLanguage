@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * The MIT License
  *
  * Copyright 2021 Guedel <guedel87@live.fr>.
@@ -24,12 +24,32 @@
  * THE SOFTWARE.
  */
 
+$fileHeaderParts = [
+    <<<'EOF'
+        This file is part of AbstractLanguage library.
+
+        (c) Guedel <guedel87@live.fr>
+
+        EOF,
+    <<<'EOF'
+
+        This source file is subject to the MIT license that is bundled
+        with this source code in the file LICENSE.
+        EOF,
+];
+
 $finder = PhpCsFixer\Finder::create()
-    ->in('src')
-    ;
-$config = new PhpCsFixer\Config();
-return $config->setRules([
-    '@PSR12' => true,
-])
-    ->setFinder($finder)
-    ;
+  ->in("src")
+  ->in("tests")
+  // ->append(__DIR__ . '/php-cs-fixer')
+  ;
+
+return (new PhpCsFixer\Config())
+  // ->setIndent(str_pad(' ', 2))
+  ->setRules([
+    "@PSR12" => true,
+    'header_comment' => [
+      'header' => implode('', $fileHeaderParts),
+    ]
+  ])
+  ->setFinder($finder);

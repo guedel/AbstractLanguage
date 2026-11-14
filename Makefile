@@ -1,7 +1,8 @@
 .PHONY: help bump clean check test shell style fix-style package
 
-PHPVER = php8.3
-PHPQA = podman run --init -it --rm -v "`pwd`:/project" -v "`pwd`/var/tmp-phpqa:/tmp" -v "$(REGISTRY_PATH)/composer:/registry" -w /project docker.io/jakzal/phpqa:$(PHPVER)-alpine
+PHPVER = 8.3
+PHPQA = podman run --init -it --rm -v "`pwd`:/project" -v "`pwd`/var/tmp-phpqa:/tmp" -v "$(REGISTRY_PATH)/composer:/registry" -w /project docker.io/jakzal/phpqa:php$(PHPVER)-alpine
+PHPCOV = podman run --init -it --hostname php-dev --rm -e XDEBUG_MODE=coverage -v "`pwd`:/app" -w /app docker.io/webdevops/php-dev:$(PHPVER)-alpine
 PHPSTAN_LEVEL = 3
 
 help:
@@ -15,8 +16,11 @@ fix-style:
 	@echo "Correction du style"
 	$(PHPQA) phpcbf
 
-shell:
+shellqa:
 	$(PHPQA) sh
+
+shell:
+	$(PHPCOV) bash
 
 style:
 	@echo "Vérification du style"
@@ -33,7 +37,7 @@ analyze: phpstan
 
 test:
 	@echo "Tests"
-	$(PHPQA) composer exec -- phpunit
+	$(PHPCOV) composer exec -- phpunit --coverage-html var/phpunit
 	# XDEBUG_MODE=coverage composer exec -- phpunit --coverage-html var/phpunit
 
 check: style analyze test
