@@ -33,7 +33,7 @@ phpmd:
 phpstan:
 	$(PHPQA) phpstan analyze src/ -l $(PHPSTAN_LEVEL)
 
-analyze: phpstan
+analyze: phpstan phpmd
 
 test:
 	@echo "Tests"
