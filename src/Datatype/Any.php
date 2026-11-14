@@ -20,7 +20,9 @@ use Guedel\AL\Runtime\Visitor;
  */
 final class Any implements Type
 {
-    protected function __construct()
+    private static ?Any $instance = null;
+
+    private function __construct()
     {
     }
     public function accept(Visitor $visitor)
@@ -33,8 +35,14 @@ final class Any implements Type
         return 'any';
     }
 
-    public static function getType()
+    /**
+     * @SuppressWarnings
+     */
+    public static function getType(): Any
     {
-        return new Any();
+        if (null === self::$instance) {
+            self::$instance = new Any();
+        }
+        return self::$instance;
     }
 }

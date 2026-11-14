@@ -28,7 +28,7 @@ style:
 	$(PHPQA) phpcs
 
 phpmd:
-	$(PHPQA) phpmd analyze --ruleset=cleancode --ignore-errors-on-exit --reportfile-html var/phpmd src
+	$(PHPQA) phpmd analyze --ruleset=phpmd.xml --ignore-errors-on-exit --reportfile-html var/phpmd.html src
 
 phpstan:
 	$(PHPQA) phpstan analyze src/ -l $(PHPSTAN_LEVEL)

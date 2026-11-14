@@ -56,16 +56,8 @@ class BasicWriterVisitor implements Visitor
 
     public function __construct(?CodeWriter $writer = null, ?Translator $translator = null)
     {
-        if ($writer === null) {
-            $this->writer = new CodeWriter();
-        } else {
-            $this->writer = $writer;
-        }
-        if ($translator === null) {
-            $this->translator = new Translator();
-        } else {
-            $this->translator = $translator;
-        }
+        $this->writer = $writer ?? new CodeWriter();
+        $this->translator = $translator ?? new Translator();
     }
 
     public function walk(Statement $grammar)
@@ -78,11 +70,10 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out($this->t('FUNCTION') . ' ' . $decl->getName() . '(');
         $first = true;
         foreach ($decl->getParameters() as $parameter) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $this->writer->out(', ');
             }
+            $first = false;
             $parameter->accept($this);
         }
         $this->writer->out('): ');
@@ -120,11 +111,10 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out($this->t('PROCEDURE') . ' ' . $decl->getName() . '(');
         $first = true;
         foreach ($decl->getParameters() as $parameter) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $this->writer->out(', ');
             }
+            $first = false;
             $parameter->accept($this);
         }
         $this->writer->outln(")");
@@ -155,11 +145,10 @@ class BasicWriterVisitor implements Visitor
     {
         $first = true;
         foreach ($exp->getOperands() as $op) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $this->writer->out(' ' . $exp->getOperator() . ' ');
             }
+            $first = false;
             $parenthesis = false;
             if ($op instanceof BinaryExpression) {
                 if ($op->getPriority() < $exp->getPriority()) {
@@ -179,11 +168,10 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out($fn->getName() . '(');
         $first = true;
         foreach ($fn->getParameters() as $parameter) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $this->writer->out(', ');
             }
+            $first = false;
             $parameter->evaluate($this);
         }
         $this->writer->out(')');
@@ -211,11 +199,13 @@ class BasicWriterVisitor implements Visitor
         $v = $value->getValue();
         if (is_bool($v)) {
             $this->writer->out($v ? $this->t('TRUE') : $this->t('FALSE'));
-        } elseif (is_string($v)) {
-            $this->writer->out('"' . $v . '"');
-        } else {
-            $this->writer->out($v);
+            return;
         }
+        if (is_string($v)) {
+            $this->writer->out('"' . $v . '"');
+            return;
+        }
+        $this->writer->out($v);
     }
 
     public function evalVariable(Variable $variable)
@@ -285,11 +275,10 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out($proc->getName() . ' ');
         $first = true;
         foreach ($proc->getParameters() as $parameter) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $this->writer->out(', ');
             }
+            $first = false;
             $parameter->evaluate($this);
         }
         $this->writer->nl();
@@ -301,13 +290,12 @@ class BasicWriterVisitor implements Visitor
         $list = $stmt->getExpressions();
         if (count($list) > 0) {
             $first = true;
+            $this->writer->out(' ');
             foreach ($list as $expr) {
-                if ($first) {
-                    $first = false;
-                    $this->writer->out(' ');
-                } else {
+                if (! $first) {
                     $this->writer->out(', ');
                 }
+                $first = false;
                 $expr->evaluate($this);
             }
         }
@@ -335,17 +323,17 @@ class BasicWriterVisitor implements Visitor
     public function visitComment(Comment $stmt)
     {
         $lines = $stmt->getMessage();
-        if (is_array($lines)) {
-            $this->writer->out("/* ");
-            foreach ($lines as $line) {
-                $this->writer->out(" * ");
-                $this->writer->outln($line);
-            }
-            $this->writer->outln(" */");
-        } else {
+        if (! is_array($lines)) {
             $this->writer->out("// ");
             $this->writer->outln($lines);
+            return;
         }
+        $this->writer->out("/* ");
+        foreach ($lines as $line) {
+            $this->writer->out(" * ");
+            $this->writer->outln($line);
+        }
+        $this->writer->outln(" */");
     }
 
     public function visitAny(Any $type)
@@ -382,11 +370,10 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out('{');
         $first = true;
         foreach ($type->getSymbols() as $symbol) {
-            if ($first) {
-                $first = false;
-            } else {
+            if (! $first) {
                 $this->writer->out(', ');
             }
+            $first = false;
             $this->writer->out($symbol);
         }
         $this->writer->out("}");

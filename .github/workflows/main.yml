@@ -19,18 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: PHPStan
-        uses: docker://jakzal/phpqa:php8.3-alpine
-        with:
-          args: phpstan analyze src/ -l 3
       - name: PHPCS
         uses: docker://jakzal/phpqa:php8.3-alpine
         with:
           args: phpcs
-#      - name: PHP-CS-Fixer
-#        uses: docker://jakzal/phpqa:php8.0-alpine
-#        with:
-#          args: php-cs-fixer --dry-run --allow-risky=yes --no-interaction --ansi fix
+      - name: PHP-CS-Fixer
+        uses: docker://jakzal/phpqa:php8.3-alpine
+        with:
+          args: php-cs-fixer check
+        #    args: php-cs-fixer --dry-run --allow-risky=yes --no-interaction --ansi fix
+      - name: PHPStan
+        uses: docker://jakzal/phpqa:php8.3-alpine
+        with:
+          args: phpstan analyze src/ -l 3
+      - name: PHPMD
+        uses: docker://jakzal/phpqa:php8.3-alpine
+        with:
+          args: phpmd analyze --ruleset=phpmd.xml src
       # - name: Deptrac
       #   uses: docker://jakzal/phpqa:php7.4-alpine
       #   with:
