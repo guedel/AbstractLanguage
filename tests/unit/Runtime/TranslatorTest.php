@@ -19,35 +19,35 @@ use Guedel\AL\Runtime\Translator;
  */
 class TranslatorTest extends TestCase
 {
-    public function testEnglishWord()
+    public function testEnglishWord(): void
     {
         $translator = new Translator(Translator::ENGLISH);
         $word = 'THEN';
         $this->assertEquals($word, $translator->tr($word));
     }
 
-    public function testEnglishWordDoesntExist()
+    public function testEnglishWordDoesntExist(): void
     {
         $translator = new Translator(Translator::ENGLISH);
         $word = 'HELLO_WORLD';
         $this->assertEquals($word, $translator->tr($word));
     }
 
-    public function testFrenchWord()
+    public function testFrenchWord(): void
     {
         $translator = new Translator(Translator::FRENCH);
         $word = 'THEN';
         $this->assertEquals('ALORS', $translator->tr($word));
     }
 
-    public function testFrenchWordDoesntExist()
+    public function testFrenchWordDoesntExist(): void
     {
         $translator = new Translator(Translator::FRENCH);
         $word = 'HELLO_WORLD';
         $this->assertEquals($word, $translator->tr($word));
     }
 
-    public function testLanguageDoesntExist()
+    public function testLanguageDoesntExist(): void
     {
         $translator = new Translator('DOESNT EXIST');
         $word = 'HELLO_WORLD';

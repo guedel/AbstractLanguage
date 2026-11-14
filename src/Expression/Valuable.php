@@ -12,7 +12,6 @@
 namespace Guedel\AL\Expression;
 
 use Guedel\AL\Runtime\Visitor;
-use Guedel\AL\Datatype\Type;
 
 /**
  * Interface for all values

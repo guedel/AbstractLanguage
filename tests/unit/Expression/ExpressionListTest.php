@@ -28,21 +28,21 @@ use Guedel\Tests\Mock\AL\EmptyExpression;
 #[UsesClass(Expression::class)]
 class ExpressionListTest extends TestCase
 {
-    public function testEmpty()
+    public function testEmpty(): void
     {
         $list = new ExpressionList();
         $this->assertNotNull($list);
         $this->assertCount(0, $list);
     }
 
-    public function testCount()
+    public function testCount(): void
     {
         $list = new ExpressionList(new EmptyExpression());
         $this->assertNotNull($list);
         $this->assertCount(1, $list);
     }
 
-    public function testIterate()
+    public function testIterate(): void
     {
         $list = new ExpressionList(new EmptyExpression(), new EmptyExpression(), new EmptyExpression());
         $this->assertCount(3, $list);

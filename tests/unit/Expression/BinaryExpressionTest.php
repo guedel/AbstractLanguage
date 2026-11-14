@@ -32,7 +32,7 @@ use Guedel\AL\Expression\BinaryExpression;
 #[UsesClass(Value::class)]
 class BinaryExpressionTest extends TestCase
 {
-    public function testBinary()
+    public function testBinary(): void
     {
         $e = new BinaryExpression(Expression::OP_ADD, new Value(1), new Value(2));
         $this->assertEquals("1+2", $e->evaluate(new TestVisitor()));

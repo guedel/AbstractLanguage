@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Statement\ProcedureCall;
@@ -26,14 +27,14 @@ class HelloWorldProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "MODULE Hello",
         "\tWRITE \"Hello World !\"",
         "END MODULE",
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new Module(
             "Hello",

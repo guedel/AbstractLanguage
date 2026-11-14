@@ -11,6 +11,8 @@
 
 namespace Guedel\Tests\Mock\AL\Programs;
 
+use Guedel\AL\Statement\Statement;
+
 /**
  * Description of BaseTestProgram
  *
@@ -25,7 +27,7 @@ interface BaseTestProgram
     public function expect(): string;
     /**
      * Get program structure
-     * @return \Guedel\AL\Statement\Statement
+     * @return Statement
      */
-    public function code(): \Guedel\AL\Statement\Statement;
+    public function code(): Statement;
 }

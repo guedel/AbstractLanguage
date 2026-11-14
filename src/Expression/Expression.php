@@ -33,11 +33,8 @@ abstract class Expression implements Valuable
     public const OP_AND = '&';
     public const OP_XOR = '^';
 
-    private string $operator;
-
-    protected function __construct(string $operator)
+    protected function __construct(private readonly string $operator)
     {
-        $this->operator = $operator;
     }
 
     public function getOperator(): string

@@ -48,13 +48,13 @@ class BasicRuntimeContextTest extends TestCase
         $this->context = new BasicRuntimeContext(null, "sample");
     }
 
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertEquals("sample", $this->context->getName());
         $this->assertNull($this->context->getParent());
     }
 
-    public function testAddFunction()
+    public function testAddFunction(): void
     {
         $decl = new FunctionDecl("fun", Any::getType(), new ParametersList(), new StatementList());
         $this->context->addFunction($decl);
@@ -62,7 +62,7 @@ class BasicRuntimeContextTest extends TestCase
         $this->assertNotNull($found);
     }
 
-    public function testAddProcedure()
+    public function testAddProcedure(): void
     {
         $decl = new ProcedureDecl("proc", new ParametersList(), new StatementList());
         $this->context->addProcedure($decl);
@@ -70,7 +70,7 @@ class BasicRuntimeContextTest extends TestCase
         $this->assertNotNull($found);
     }
 
-    public function testAddType()
+    public function testAddType(): void
     {
         $decl = new TypeDecl("t", Any::getType());
         $this->context->addType($decl);
@@ -78,7 +78,7 @@ class BasicRuntimeContextTest extends TestCase
         $this->assertNotNull($found);
     }
 
-    public function testAddVariable()
+    public function testAddVariable(): void
     {
         $decl = new VariableDecl("v");
         $this->context->addVariable($decl);
@@ -86,7 +86,7 @@ class BasicRuntimeContextTest extends TestCase
         $this->assertNotNull($found);
     }
 
-    public function testPushParent()
+    public function testPushParent(): void
     {
         $ctx = new BasicRuntimeContext($this->context, "sp");
         $this->assertSame($this->context, $ctx->getParent());

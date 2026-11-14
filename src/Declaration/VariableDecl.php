@@ -11,6 +11,7 @@
 
 namespace Guedel\AL\Declaration;
 
+use Guedel\AL\Runtime\Visitor;
 use Guedel\AL\Datatype\Type;
 use Guedel\AL\Datatype\Any;
 use Guedel\AL\Expression\Value;
@@ -36,7 +37,7 @@ class VariableDecl extends NamedDeclaration
         }
     }
 
-    public function getType(): \Guedel\AL\Datatype\Type
+    public function getType(): Type
     {
         return $this->type;
     }
@@ -55,7 +56,7 @@ class VariableDecl extends NamedDeclaration
         return $this->value;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         return $visitor->declareVariable($this);
     }

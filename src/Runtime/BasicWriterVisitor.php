@@ -11,6 +11,35 @@
 
 namespace Guedel\AL\Runtime;
 
+use Guedel\AL\Statement\Statement;
+use Guedel\AL\Declaration\FunctionDecl;
+use Guedel\AL\Declaration\Module;
+use Guedel\AL\Declaration\Parameter;
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Declaration\TypeDecl;
+use Guedel\AL\Declaration\VariableDecl;
+use Guedel\AL\Expression\BinaryExpression;
+use Guedel\AL\Expression\FunctionCall;
+use Guedel\AL\Expression\UnaryExpression;
+use Guedel\AL\Expression\Value;
+use Guedel\AL\Expression\Variable;
+use Guedel\AL\Statement\AssignStmt;
+use Guedel\AL\Statement\ForEachStmt;
+use Guedel\AL\Statement\ForStmt;
+use Guedel\AL\Statement\IfThenStmt;
+use Guedel\AL\Statement\ProcedureCall;
+use Guedel\AL\Statement\ReturnStmt;
+use Guedel\AL\Statement\StatementList;
+use Guedel\AL\Statement\WhileStmt;
+use Guedel\AL\Statement\Comment;
+use Guedel\AL\Datatype\Any;
+use Guedel\AL\Datatype\ArrayOf;
+use Guedel\AL\Datatype\Enumeration;
+use Guedel\AL\Datatype\Reference;
+use Guedel\AL\Datatype\StringOfChars;
+use Guedel\AL\Datatype\Structure;
+use Guedel\AL\Datatype\Number;
+use Guedel\AL\Datatype\ClassType;
 use Guedel\Stream\CodeWriter;
 use Guedel\AL\Runtime\Translator;
 use Guedel\AL\Datatype\TypeName;
@@ -39,12 +68,12 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function walk(\Guedel\AL\Statement\Statement $grammar)
+    public function walk(Statement $grammar)
     {
         $grammar->accept($this);
     }
 
-    public function declareFunction(\Guedel\AL\Declaration\FunctionDecl $decl)
+    public function declareFunction(FunctionDecl $decl)
     {
         $this->writer->out($this->t('FUNCTION') . ' ' . $decl->getName() . '(');
         $first = true;
@@ -67,7 +96,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->t('END') . ' ' . $this->t('FUNCTION'));
     }
 
-    public function declareModule(\Guedel\AL\Declaration\Module $decl)
+    public function declareModule(Module $decl)
     {
         $this->writer->outln($this->t('MODULE') . ' ' . $decl->getName());
         $this->writer->indent();
@@ -78,7 +107,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->ft('%s %s', 'END', 'MODULE'));
     }
 
-    public function declareParameter(\Guedel\AL\Declaration\Parameter $decl)
+    public function declareParameter(Parameter $decl)
     {
         $this->writer->out($decl->getDirection() . ' ');
         $this->writer->out($decl->getName());
@@ -86,7 +115,7 @@ class BasicWriterVisitor implements Visitor
         $decl->getType()->accept($this);
     }
 
-    public function declareProcedure(\Guedel\AL\Declaration\ProcedureDecl $decl)
+    public function declareProcedure(ProcedureDecl $decl)
     {
         $this->writer->out($this->t('PROCEDURE') . ' ' . $decl->getName() . '(');
         $first = true;
@@ -106,7 +135,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->ft('%s %s', 'END', 'PROCEDURE'));
     }
 
-    public function declareType(\Guedel\AL\Declaration\TypeDecl $decl)
+    public function declareType(TypeDecl $decl)
     {
         $this->writer->out($this->t('TYPE') . ' ' . $decl->getName());
         $this->writer->out(': ');
@@ -114,7 +143,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->nl();
     }
 
-    public function declareVariable(\Guedel\AL\Declaration\VariableDecl $decl)
+    public function declareVariable(VariableDecl $decl)
     {
         $this->writer->out($this->t('VAR') . ' ' . $decl->getName());
         $this->writer->out(': ');
@@ -122,7 +151,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->nl();
     }
 
-    public function evalBinaryExpression(\Guedel\AL\Expression\BinaryExpression $exp)
+    public function evalBinaryExpression(BinaryExpression $exp)
     {
         $first = true;
         foreach ($exp->getOperands() as $op) {
@@ -132,7 +161,7 @@ class BasicWriterVisitor implements Visitor
                 $this->writer->out(' ' . $exp->getOperator() . ' ');
             }
             $parenthesis = false;
-            if ($op instanceof \Guedel\AL\Expression\BinaryExpression) {
+            if ($op instanceof BinaryExpression) {
                 if ($op->getPriority() < $exp->getPriority()) {
                     $parenthesis = true;
                     $this->writer->out("(");
@@ -145,7 +174,7 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function evalFunctionCall(\Guedel\AL\Expression\FunctionCall $fn)
+    public function evalFunctionCall(FunctionCall $fn)
     {
         $this->writer->out($fn->getName() . '(');
         $first = true;
@@ -160,24 +189,24 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out(')');
     }
 
-    public function evalUnaryExpression(\Guedel\AL\Expression\UnaryExpression $exp)
+    public function evalUnaryExpression(UnaryExpression $exp)
     {
         $op = '';
         switch ($exp->getOperator()) {
-            case \Guedel\AL\Expression\UnaryExpression::OP_ADD:
+            case UnaryExpression::OP_ADD:
                 $op = '';
                 break;
-            case \Guedel\AL\Expression\UnaryExpression::OP_SUB:
+            case UnaryExpression::OP_SUB:
                 $op = '-';
                 break;
-            case \Guedel\AL\Expression\UnaryExpression::OP_NOT:
+            case UnaryExpression::OP_NOT:
                 $op = $this->t('NOT') . ' ';
         }
         $this->writer->out($op);
         $exp->getOperand()->evaluate($this);
     }
 
-    public function evalValue(\Guedel\AL\Expression\Value $value)
+    public function evalValue(Value $value)
     {
         $v = $value->getValue();
         if (is_bool($v)) {
@@ -189,19 +218,19 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function evalVariable(\Guedel\AL\Expression\Variable $variable)
+    public function evalVariable(Variable $variable)
     {
         $this->writer->out($variable->getVarname());
     }
 
-    public function visitAssignStmt(\Guedel\AL\Statement\AssignStmt $stmt)
+    public function visitAssignStmt(AssignStmt $stmt)
     {
         $this->writer->out($stmt->getVariableName() . ' <- ');
         $stmt->getExpression()->evaluate($this);
         $this->writer->nl();
     }
 
-    public function visitForEachStmt(\Guedel\AL\Statement\ForEachStmt $stmt)
+    public function visitForEachStmt(ForEachStmt $stmt)
     {
         $this->writer->out(sprintf(
             '%s %s %s %s ',
@@ -219,7 +248,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->ft('%s %s', 'END', 'FOR'));
     }
 
-    public function visitForStmt(\Guedel\AL\Statement\ForStmt $stmt)
+    public function visitForStmt(ForStmt $stmt)
     {
         $this->writer->out(sprintf('%s %s %s ', $this->t('FOR'), $stmt->getVariableName(), $this->t('FROM')));
         $stmt->getInitial()->evaluate($this);
@@ -234,7 +263,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->ft('%s %s', 'END', 'FOR'));
     }
 
-    public function visitIfThenStmt(\Guedel\AL\Statement\IfThenStmt $stmt)
+    public function visitIfThenStmt(IfThenStmt $stmt)
     {
         $this->writer->out($this->t('IF') . ' ');
         $stmt->getIfTest()->evaluate($this);
@@ -251,7 +280,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->ft('%s %s', 'END', 'IF'));
     }
 
-    public function visitProcedureCall(\Guedel\AL\Statement\ProcedureCall $proc)
+    public function visitProcedureCall(ProcedureCall $proc)
     {
         $this->writer->out($proc->getName() . ' ');
         $first = true;
@@ -266,7 +295,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->nl();
     }
 
-    public function visitReturnStmt(\Guedel\AL\Statement\ReturnStmt $stmt)
+    public function visitReturnStmt(ReturnStmt $stmt)
     {
         $this->writer->out($this->t('RETURN'));
         $list = $stmt->getExpressions();
@@ -285,14 +314,14 @@ class BasicWriterVisitor implements Visitor
         $this->writer->nl();
     }
 
-    public function visitStatementList(\Guedel\AL\Statement\StatementList $stmt)
+    public function visitStatementList(StatementList $stmt)
     {
         foreach ($stmt->getIterator() as $stmt) {
             $stmt->accept($this);
         }
     }
 
-    public function visitWhileStmt(\Guedel\AL\Statement\WhileStmt $stmt)
+    public function visitWhileStmt(WhileStmt $stmt)
     {
         $this->writer->out($this->t('WHILE') . ' ');
         $stmt->getTest()->evaluate($this);
@@ -303,7 +332,7 @@ class BasicWriterVisitor implements Visitor
         $this->writer->outln($this->ft('%s %s', 'END', 'WHILE'));
     }
 
-    public function visitComment(\Guedel\AL\Statement\Comment $stmt)
+    public function visitComment(Comment $stmt)
     {
         $lines = $stmt->getMessage();
         if (is_array($lines)) {
@@ -319,12 +348,12 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function visitAny(\Guedel\AL\Datatype\Any $type)
+    public function visitAny(Any $type)
     {
         $this->writer->out($this->t('ANY'));
     }
 
-    public function visitArrayof(\Guedel\AL\Datatype\ArrayOf $type)
+    public function visitArrayof(ArrayOf $type)
     {
         $this->writer->out($this->t('ARRAY'));
         $lowerbound = $type->getLowerbound();
@@ -348,7 +377,7 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function visitEnumeration(\Guedel\AL\Datatype\Enumeration $type)
+    public function visitEnumeration(Enumeration $type)
     {
         $this->writer->out('{');
         $first = true;
@@ -363,13 +392,13 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out("}");
     }
 
-    public function visitReference(\Guedel\AL\Datatype\Reference $type)
+    public function visitReference(Reference $type)
     {
         $this->writer->out($this->ft('%s %s ', 'REF', 'OF'));
         $type->getType()->accept($this);
     }
 
-    public function visitString(\Guedel\AL\Datatype\StringOfChars $type)
+    public function visitString(StringOfChars $type)
     {
         $len = $type->getLength();
         $this->writer->out($this->t('STRING'));
@@ -378,7 +407,7 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function visitStructure(\Guedel\AL\Datatype\Structure $type)
+    public function visitStructure(Structure $type)
     {
         $this->writer->outln($this->t('STRUCT'));
         $this->writer->indent();
@@ -389,27 +418,19 @@ class BasicWriterVisitor implements Visitor
         $this->writer->out($this->ft('%s %s', 'END', 'STRUCT'));
     }
 
-    public function visitTypename(\Guedel\AL\Datatype\TypeName $type)
+    public function visitTypename(TypeName $type)
     {
         $name = $type->getName();
-        switch ($name) {
-            case TypeName::DT_INTEGER:
-                $outputname = $this->t("INTEGER");
-                break;
-            case TypeName::DT_FLOAT:
-                $outputname = $this->t("FLOAT");
-                break;
-            case TypeName::DT_ANY:
-                $outputname = $this->t("ANY");
-                break;
-            default:
-                $outputname = $this->t($name);
-                break;
-        }
+        $outputname = match ($name) {
+            TypeName::DT_INTEGER => $this->t("INTEGER"),
+            TypeName::DT_FLOAT => $this->t("FLOAT"),
+            TypeName::DT_ANY => $this->t("ANY"),
+            default => $this->t($name),
+        };
         $this->writer->out($outputname);
     }
 
-    public function visitNumber(\Guedel\AL\Datatype\Number $type)
+    public function visitNumber(Number $type)
     {
         $size = '';
         if ($type->getLength() !== null) {
@@ -424,7 +445,7 @@ class BasicWriterVisitor implements Visitor
         }
     }
 
-    public function visitClass(\Guedel\AL\Datatype\ClassType $type)
+    public function visitClass(ClassType $type)
     {
         $this->writer->outln($this->t('CLASS'));
         $this->writer->indent();

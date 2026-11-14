@@ -30,20 +30,20 @@ use Guedel\Tests\Mock\AL\TestVisitor;
 #[UsesClass(StatementList::class)]
 class ModuleTest extends TestCase
 {
-    public function testCreateEmpty()
+    public function testCreateEmpty(): void
     {
         $m = new Module("Test");
         $this->assertEquals("Test", $m->getName());
         $this->assertCount(0, $m->getStatements());
     }
 
-    public function testCreateOne()
+    public function testCreateOne(): void
     {
         $m = new Module("Test", new EmptyStatement());
         $this->assertCount(1, $m->getStatements());
     }
 
-    public function testAccept()
+    public function testAccept(): void
     {
         $m = new Module("Test");
         $ret = $m->accept(new TestVisitor());

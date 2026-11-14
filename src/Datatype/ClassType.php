@@ -11,6 +11,9 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Declaration\ProcedureDecl;
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of ClassType
  *
@@ -22,7 +25,7 @@ class ClassType extends Structure
 
     public function __construct()
     {
-        $this->methods = array();
+        $this->methods = [];
     }
 
     public function &getMethods()
@@ -30,13 +33,13 @@ class ClassType extends Structure
         return $this->methods;
     }
 
-    public function addMethod(\Guedel\AL\Declaration\ProcedureDecl $method): ClassType
+    public function addMethod(ProcedureDecl $method): ClassType
     {
         $this->methods[$method->getName()] = $method;
         return $this;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitClass($this);
     }

@@ -11,12 +11,12 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Statement\AssignStmt;
 use Guedel\AL\Declaration\VariableDecl;
 use Guedel\AL\Expression\Value;
-use Guedel\AL\Datatype\Any;
 
 /**
  * Description of VariableUseProgram
@@ -30,13 +30,13 @@ class VariableUseProgram implements BaseTestProgram
      */
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "VAR i: ANY",
         "i <- 10",
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new StatementList(
             new VariableDecl("i"),

@@ -11,12 +11,12 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Runtime;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Declaration\Module;
 use Guedel\AL\Declaration\ProcedureDecl;
 use Guedel\AL\Declaration\{Parameter, ParametersList};
 use Guedel\AL\Statement\ProcedureCall;
-use Guedel\AL\Expression\Variable;
 use Guedel\AL\Expression\Value;
 
 /**
@@ -32,7 +32,7 @@ class ProcProgram implements BaseTestProgram
         return "Hello World !";
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new Module(
             "simpleHelloProcedure",

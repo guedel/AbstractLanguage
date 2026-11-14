@@ -11,11 +11,13 @@
 
 namespace Guedel\AL\Exception;
 
+use Exception;
+
 /**
  * Description of NotFoundException
  *
  * @author Guedel <guedel87@live.fr>
  */
-class NotFoundException extends \Exception
+class NotFoundException extends Exception
 {
 }

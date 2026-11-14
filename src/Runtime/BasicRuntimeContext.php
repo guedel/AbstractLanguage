@@ -11,12 +11,11 @@
 
 namespace Guedel\AL\Runtime;
 
+use Exception;
 use Guedel\AL\Declaration\FunctionDecl;
 use Guedel\AL\Declaration\ProcedureDecl;
 use Guedel\AL\Declaration\TypeDecl;
 use Guedel\AL\Declaration\VariableDecl;
-use Guedel\AL\Expression\ExpressionList;
-use Guedel\AL\Expression\Value;
 
 /**
  * Store context for basic runtime visitor
@@ -25,8 +24,6 @@ use Guedel\AL\Expression\Value;
  */
 final class BasicRuntimeContext
 {
-    private $name;
-    private ?BasicRuntimeContext $parent = null;
     private $types = [];
     private $returnValues = [];
     private bool $returnRequest = false;
@@ -39,10 +36,10 @@ final class BasicRuntimeContext
     private $functions = [];
     private $procedures = [];
 
-    public function __construct(?BasicRuntimeContext $parent = null, string $name = null)
-    {
-        $this->name = $name;
-        $this->parent = $parent;
+    public function __construct(
+        private readonly ?BasicRuntimeContext $parent = null,
+        private readonly ?string $name = null
+    ) {
     }
 
     public function getParent(): ?BasicRuntimeContext
@@ -69,7 +66,7 @@ final class BasicRuntimeContext
     {
         $name = $decl->getName();
         if (isset($this->variables[$name])) {
-            throw new \Exception("Variable $name already defined in this scope");
+            throw new Exception("Variable $name already defined in this scope");
         }
         $this->variables[$name] = $decl;
         return $this;
@@ -84,7 +81,7 @@ final class BasicRuntimeContext
     {
         $name = $decl->getName();
         if (isset($this->functions[$name])) {
-            throw new \Exception("Function $name already defined in this scope");
+            throw new Exception("Function $name already defined in this scope");
         }
         $this->functions[$name] = $decl;
         return $this;
@@ -99,7 +96,7 @@ final class BasicRuntimeContext
     {
         $name = $decl->getName();
         if (isset($this->procedures[$name])) {
-            throw new \Exception("Procedure $name already defined in this scope");
+            throw new Exception("Procedure $name already defined in this scope");
         }
         $this->procedures[$name] = $decl;
         return $this;
@@ -114,7 +111,7 @@ final class BasicRuntimeContext
     {
         $name = $decl->getName();
         if (isset($this->types[$name])) {
-            throw new \Exception("Type $name already defined in this scope");
+            throw new Exception("Type $name already defined in this scope");
         }
         $this->types[$name] = $decl;
         return $this;

@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Declaration\FunctionDecl;
@@ -34,7 +35,7 @@ class FunctionDeclProgram implements BaseTestProgram
 {
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "FUNCTION fact(IN n: INTEGER): INTEGER",
         "\tIF n <= 1 THEN",
         "\t\tRETURN 1",
@@ -44,7 +45,7 @@ class FunctionDeclProgram implements BaseTestProgram
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         $int = new TypeName("int");
         return new StatementList(

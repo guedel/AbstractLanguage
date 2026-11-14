@@ -11,6 +11,10 @@
 
 namespace Guedel\AL\Statement;
 
+use IteratorAggregate;
+use Countable;
+use Traversable;
+use ArrayIterator;
 use Guedel\AL\Runtime\Visitor;
 
 /**
@@ -18,7 +22,7 @@ use Guedel\AL\Runtime\Visitor;
  *
  * @author Guedel <guedel87@live.fr>
  */
-class StatementList implements Statement, \IteratorAggregate, \Countable
+class StatementList implements Statement, IteratorAggregate, Countable
 {
     private $statements;
 
@@ -41,9 +45,9 @@ class StatementList implements Statement, \IteratorAggregate, \Countable
         return null;
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
-        return new \ArrayIterator($this->statements);
+        return new ArrayIterator($this->statements);
     }
 
     public function accept(Visitor $visitor)

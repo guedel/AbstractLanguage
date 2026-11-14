@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Statement\ProcedureCall;
 use Guedel\AL\Statement\IfThenStmt;
@@ -26,14 +27,14 @@ class SimpleIfProgram implements BaseTestProgram
     //put your code here
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "IF TRUE THEN",
         "\tWRITE \"OK\"",
         "END IF",
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new IfThenStmt(new Value(true), new ProcedureCall("WRITE", new Value("OK")));
     }

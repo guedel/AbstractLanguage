@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * When type is undefined.
  *
@@ -21,7 +23,7 @@ final class Any implements Type
     protected function __construct()
     {
     }
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitAny($this);
     }

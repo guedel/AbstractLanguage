@@ -11,7 +11,7 @@
 
 namespace Guedel\AL\Statement;
 
-use Guedel\AL\Expression\Expression;
+use Guedel\AL\Runtime\Visitor;
 use Guedel\AL\Statement\Statement;
 use Guedel\AL\Expression\Valuable;
 
@@ -22,15 +22,11 @@ use Guedel\AL\Expression\Valuable;
  */
 class ForEachStmt implements Statement
 {
-    private string $varname;
-    private Valuable $collection;
-    private ?Statement $statement;
-
-    public function __construct(string $varname, Valuable $collection, ?Statement $stmt = null)
-    {
-        $this->varname = $varname;
-        $this->collection = $collection;
-        $this->statement = $stmt;
+    public function __construct(
+        private readonly string $varname,
+        private readonly Valuable $collection,
+        private readonly ?Statement $statement = null
+    ) {
     }
 
     public function getVarname(): string
@@ -48,7 +44,7 @@ class ForEachStmt implements Statement
         return $this->statement;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitForEachStmt($this);
     }

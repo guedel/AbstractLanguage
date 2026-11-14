@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Expression;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Unary expression
  *
@@ -18,12 +20,9 @@ namespace Guedel\AL\Expression;
  */
 class UnaryExpression extends Expression
 {
-    private Valuable $operand;
-
-    public function __construct(string $operator, Valuable $operand)
+    public function __construct(string $operator, private readonly Valuable $operand)
     {
         parent::__construct($operator);
-        $this->operand = $operand;
     }
 
     public function getOperand(): Valuable
@@ -33,10 +32,10 @@ class UnaryExpression extends Expression
 
     /**
      *
-     * @param \Guedel\AL\Runtime\Visitor $visitor
+     * @param Visitor $visitor
      * @return mixed
      */
-    public function evaluate(\Guedel\AL\Runtime\Visitor $visitor)
+    public function evaluate(Visitor $visitor)
     {
         return $visitor->evalUnaryExpression($this);
     }

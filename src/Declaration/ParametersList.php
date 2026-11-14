@@ -11,12 +11,18 @@
 
 namespace Guedel\AL\Declaration;
 
+use IteratorAggregate;
+use Countable;
+use ArrayAccess;
+use Iterator;
+use ArrayIterator;
+
 /**
  * Description of ParemetersList
  *
  * @author Guedel <guedel87@live.fr>
  */
-class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
+class ParametersList implements IteratorAggregate, Countable, ArrayAccess
 {
     private $parameters;
 
@@ -32,11 +38,11 @@ class ParametersList implements \IteratorAggregate, \Countable, \ArrayAccess
     }
 
     /**
-     * @return \Iterator<Parameter>
+     * @return Iterator<Parameter>
      */
-    public function getIterator(): \Iterator
+    public function getIterator(): Iterator
     {
-        return new \ArrayIterator($this->parameters);
+        return new ArrayIterator($this->parameters);
     }
 
     public function count(): int

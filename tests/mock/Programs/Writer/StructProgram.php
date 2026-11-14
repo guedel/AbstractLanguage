@@ -11,6 +11,7 @@
 
 namespace Guedel\Tests\Mock\AL\Programs\Writer;
 
+use Guedel\AL\Statement\Statement;
 use Guedel\Tests\Mock\AL\Programs\BaseTestProgram;
 use Guedel\AL\Datatype\{Structure, TypeName, Any};
 use Guedel\AL\Declaration\VariableDecl;
@@ -25,7 +26,7 @@ class StructProgram implements BaseTestProgram
 {
     public function expect(): string
     {
-        return join(PHP_EOL, [
+        return implode(PHP_EOL, [
         "TYPE mystruct: STRUCT",
         "\tVAR one: ANY",
         "\tVAR two: INTEGER",
@@ -33,7 +34,7 @@ class StructProgram implements BaseTestProgram
         ]) . PHP_EOL;
     }
 
-    public function code(): \Guedel\AL\Statement\Statement
+    public function code(): Statement
     {
         return new TypeDecl(
             "mystruct",

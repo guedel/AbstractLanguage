@@ -36,12 +36,12 @@ class FunctionCallTest extends TestCase
         $this->visitor = new TestVisitor();
     }
 
-    public function testConstruction()
+    public function testConstruction(): void
     {
         $this->assertEquals('cos', $this->function->getName());
     }
 
-    public function testEvaluate()
+    public function testEvaluate(): void
     {
         $this->assertEquals(0.66, $this->function->evaluate($this->visitor));
     }

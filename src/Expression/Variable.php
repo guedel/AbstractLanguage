@@ -20,11 +20,8 @@ use Guedel\AL\Runtime\Visitor;
  */
 class Variable implements Valuable
 {
-    private $varname;
-
-    public function __construct(string $varname)
+    public function __construct(private readonly string $varname)
     {
-        $this->varname = $varname;
     }
 
     public function getVarname(): string

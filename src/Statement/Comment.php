@@ -11,12 +11,14 @@
 
 namespace Guedel\AL\Statement;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of Comment
  *
  * @author Guedel <guedel87@live.fr>
  */
-class Comment implements \Guedel\AL\Statement\Statement
+class Comment implements Statement
 {
     public function __construct(private readonly ?string $message = null)
     {
@@ -26,7 +28,7 @@ class Comment implements \Guedel\AL\Statement\Statement
         return $this->message;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         return $visitor->visitComment($this);
     }

@@ -11,6 +11,8 @@
 
 namespace Guedel\AL\Datatype;
 
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Description of ArrayOf
  *
@@ -18,15 +20,11 @@ namespace Guedel\AL\Datatype;
  */
 class ArrayOf implements Type
 {
-    private Type $type;
-    private ?int $lowerbound;
-    private ?int $upperbound;
-
-    public function __construct(Type $type, ?int $lowerbound = null, ?int $upperbound = null)
-    {
-        $this->type = $type;
-        $this->lowerbound = $lowerbound;
-        $this->upperbound = $upperbound;
+    public function __construct(
+        private readonly Type $type,
+        private readonly ?int $lowerbound = null,
+        private readonly ?int $upperbound = null
+    ) {
     }
 
     public function getType(): Type
@@ -44,7 +42,7 @@ class ArrayOf implements Type
         return $this->upperbound;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         $visitor->visitArrayof($this);
     }

@@ -11,6 +11,9 @@
 
 namespace Guedel\AL\Declaration;
 
+use Guedel\AL\Datatype\Type;
+use Guedel\AL\Runtime\Visitor;
+
 /**
  * Definition of a function or procedure parameter
  *
@@ -18,17 +21,17 @@ namespace Guedel\AL\Declaration;
  */
 class Parameter extends VariableDecl
 {
-    public const INPUT = 'IN';
-    public const OUTPUT = 'OUT';
-    public const INOUT = 'INOUT';
-    public const RET = 'RETURN';
+    public const string INPUT = 'IN';
+    public const string OUTPUT = 'OUT';
+    public const string INOUT = 'INOUT';
+    public const string RET = 'RETURN';
 
-    private $direction;
-
-    public function __construct(string $name, string $direction, \Guedel\AL\Datatype\Type $type = null)
-    {
+    public function __construct(
+        string $name,
+        private readonly string $direction,
+        Type $type = null
+    ) {
         parent::__construct($name, $type);
-        $this->direction = $direction;
     }
 
     public function getDirection(): string
@@ -36,7 +39,7 @@ class Parameter extends VariableDecl
         return $this->direction;
     }
 
-    public function accept(\Guedel\AL\Runtime\Visitor $visitor)
+    public function accept(Visitor $visitor)
     {
         return $visitor->declareParameter($this);
     }

@@ -40,7 +40,7 @@ class BasicWriterVisitorTest extends TestCase
      * @dataProvider programs
      * @coversNothing
      */
-    public function testProgram(BaseTestProgram $p)
+    public function testProgram(BaseTestProgram $p): void
     {
         $p->code()->accept($this->visitor);
         $r = $this->writer->render();

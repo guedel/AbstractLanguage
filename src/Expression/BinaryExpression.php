@@ -21,7 +21,7 @@ use Guedel\AL\Runtime\Visitor;
  */
 class BinaryExpression extends Expression
 {
-    private ExpressionList $operands;
+    private readonly ExpressionList $operands;
 
     public function __construct(string $operator, Valuable $op1, Valuable $op2, Valuable ...$operands)
     {
@@ -48,27 +48,13 @@ class BinaryExpression extends Expression
 
     public function getPriority(): int
     {
-        switch ($this->getOperator()) {
-            case self::OP_MULT:
-            case self::OP_DIV:
-                return 5;
-            case self::OP_ADD:
-            case self::OP_SUB:
-                return 4;
-            case self::OP_EQUAL:
-            case self::OP_DIFF:
-            case self::OP_LT:
-            case self::OP_GT:
-            case self::OP_LTE:
-            case self::OP_GTE:
-                return 3;
-            case self::OP_AND:
-                return 2;
-            case self::OP_OR:
-            case self::OP_XOR:
-                return 1;
-            default:
-                return 0;
-        }
+        return match ($this->getOperator()) {
+            self::OP_MULT, self::OP_DIV => 5,
+            self::OP_ADD, self::OP_SUB => 4,
+            self::OP_EQUAL, self::OP_DIFF, self::OP_LT, self::OP_GT, self::OP_LTE, self::OP_GTE => 3,
+            self::OP_AND => 2,
+            self::OP_OR, self::OP_XOR => 1,
+            default => 0,
+        };
     }
 }

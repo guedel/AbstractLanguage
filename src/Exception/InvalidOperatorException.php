@@ -11,12 +11,14 @@
 
 namespace Guedel\AL\Exception;
 
+use Exception;
+
 /**
  * Description of InvalidOperatorException
  *
  * @author Guedel <guedel87@live.fr>
  */
-class InvalidOperatorException extends \Exception
+class InvalidOperatorException extends Exception
 {
     //put your code here
 }

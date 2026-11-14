@@ -22,12 +22,10 @@ use Guedel\AL\Runtime\Visitor;
  */
 class ProcedureCall implements Statement
 {
-    private $name;
     private $parameters;
 
-    public function __construct(string $name, Valuable ...$parameters)
+    public function __construct(private readonly string $name, Valuable ...$parameters)
     {
-        $this->name = $name;
         $this->parameters = new ExpressionList(... $parameters);
     }
     //put your code here

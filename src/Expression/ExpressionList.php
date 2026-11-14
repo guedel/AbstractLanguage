@@ -11,12 +11,17 @@
 
 namespace Guedel\AL\Expression;
 
+use IteratorAggregate;
+use Countable;
+use Traversable;
+use ArrayIterator;
+
 /**
  * List of Expression
  *
  * @author Guedel <guedel87@live.fr>
  */
-class ExpressionList implements \IteratorAggregate, \Countable
+class ExpressionList implements IteratorAggregate, Countable
 {
     private $expressions;
 
@@ -25,9 +30,9 @@ class ExpressionList implements \IteratorAggregate, \Countable
         $this->expressions = $expressions;
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
-        return new \ArrayIterator($this->expressions);
+        return new ArrayIterator($this->expressions);
     }
 
     public function count(): int

@@ -11,8 +11,6 @@
 
 namespace Guedel\AL;
 
-use Guedel\AL\Datatype\Type;
-use Guedel\AL\Expression;
 use Guedel\AL\Statement\StatementList;
 use Guedel\AL\Statement\StatementBuilder;
 use Guedel\AL\Expression\ExpressionBuilder;

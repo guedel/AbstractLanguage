@@ -11,18 +11,17 @@
 
 namespace Guedel\AL\Exception;
 
+use Exception;
+
 /**
  * Description of ReturnException
  *
  * @author Guedel <guedel87@live.fr>
  */
-class ReturnException extends \Exception
+class ReturnException extends Exception
 {
-    private $returnvalue;
-
-    public function __construct($returnvalue)
+    public function __construct(private $returnvalue)
     {
-        $this->returnvalue = $returnvalue;
         parent::__construct("return invoked");
     }
 }
