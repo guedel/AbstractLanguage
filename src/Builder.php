@@ -37,102 +37,21 @@ use Guedel\AL\Statement\StatementList;
  */
 class Builder
 {
-  private StatementList $statements;
+  use Guedel\AL\Statement\StatementBuilder;
+  use Guedel\AL\Expression\ExpressionBuilder;
+  use Guedel\AL\Declaration\DeclarationBuilder;
+  use Guedel\AL\Datatype\DataTypeBuilder;
 
-  private ?Builder $parent;
+  protected StatementList $statements;
 
-  public function __construct()
+  public function __construct(private readonly ?Builder $parent = null)
   {
     $this->statements = new StatementList();
-    $this->parent = null;
   }
 
-  public function getStatements(): ?StatementList
+  public function getStatements(): StatementList
   {
     return $this->statements;
-  }
-
-  public function stmtType(string $name, Datatype\Type $definition): Builder
-  {
-    $this->statements->add(new Declaration\TypeDecl($name, $definition));
-    return $this;
-  }
-
-  public function stmtVariable(string $name, Datatype\Type $type): Builder
-  {
-    $this->statements->add(new Declaration\VariableDecl($name, $type));
-    return $this;
-  }
-
-  public function let(string $varname, Expression\Valuable $value): Builder
-  {
-    $this->statements->add(new Statement\AssignStmt($varname, $value));
-    return $this;
-  }
-
-  public function stmtProcedure(string $name, Declaration\ParametersList $parameters = null): Builder
-  {
-    $ret = $this->stmtBegin();
-    $this->statements->add(new Declaration\ProcedureDecl($name, $parameters, $ret->statements));
-    return $ret;
-  }
-
-  public function stmtFunction(
-      string $name,
-      Type $return_type,
-      Declaration\ParametersList $parameters = null
-  ): Builder {
-    $ret = $this->stmtBegin();
-    $this->statements->add(new Declaration\FunctionDecl($name, $return_type, $parameters, $ret->statements));
-    return $ret;
-  }
-
-  public function stmtModule(string $name): Builder
-  {
-    $ret = $this->stmtBegin();
-    $this->statements->add(new Declaration\Module($name, $ret->statements));
-    return $ret;
-  }
-
-  public function stmtFor($varname, $init, $final, $step): Builder
-  {
-    $ret = $this->stmtBegin();
-    $this->statements->add(new Statement\ForStmt($varname, $init, $final, $step, $ret->statements));
-    return $ret;
-  }
-
-  public function stmtForEach($varname, $collection): Builder
-  {
-    $ret = $this->stmtBegin();
-    $this->statements->add(new Statement\ForEachStmt($varname, $collection, $ret->statements));
-    return $ret;
-  }
-
-  public function stmtIf($test): Builder
-  {
-    $then = $this->stmtBegin();
-    $else = new Statement\StatementList();
-
-    $this->statements->add(new Statement\IfThenStmt($test, $then->statements, $else));
-    return $then;
-  }
-
-  public function stmtElse(): Builder
-  {
-    $me = $this->stmtEnd();
-    $ret = $me->stmtBegin();
-    $last = $me->statements->last();
-    if ($last instanceof Statement\IfThenStmt) {
-      $ret->statements->add($last->getElsePart());
-    }
-    return $ret;
-  }
-
-  public function stmtWhile(Expression\Valuable $test): Builder
-  {
-    $ret = $this->stmtBegin();
-    $this->statements->add(new Statement\WhileStmt($test, $ret->statements));
-    return $ret;
   }
 
   protected function stmtBegin(): Builder
@@ -149,100 +68,4 @@ class Builder
     $this->parent = null;
     return $ret;
   }
-
-  public function stmtCall($name, ...$args): Builder
-  {
-    $a = array();
-    foreach ($args as $arg) {
-      if ($arg instanceof Expression\Valuable) {
-        $a[] = $arg;
-      } else {
-        $a[] = new Expression\Value($arg);
-      }
-    }
-    $this->statements->add(new Statement\ProcedureCall($name, ... $a));
-    return $this;
-  }
-}
-
-// ========================
-// expressions
-// ========================
-function fnExp(string $name, Expression\Valuable ...$args): Expression\FunctionCall
-{
-  return new Expression\FunctionCall($name, ... $args);
-}
-
-function addExp(Expression\Valuable ...$exp): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_ADD, ... $exp);
-}
-
-function subsExp(Expression\Valuable ...$exp): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_SUB, ... $exp);
-}
-
-function multExp(Expression\Valuable ...$exp): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_MULT, ... $exp);
-}
-
-function divExp(Expression\Valuable ...$exp): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_DIV, ... $exp);
-}
-
-function eqExp(Expression\Valuable $left, Expression\Valuable $right): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_EQUAL, $left, $right);
-}
-
-function ltExp(Expression\Valuable $left, Expression\Valuable $right): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_LT, $left, $right);
-}
-
-function lteExp(Expression\Valuable $left, Expression\Valuable $right): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_LTE, $left, $right);
-}
-
-function gtExp(Expression\Valuable $left, Expression\Valuable $right): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_GT, $left, $right);
-}
-
-function gteExp(Expression\Valuable $left, Expression\Valuable $right): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_GTE, $left, $right);
-}
-
-function diffExp(Expression\Valuable $left, Expression\Valuable $right): Expression\BinaryExpression
-{
-  return new Expression\BinaryExpression(Expression\Expression::OP_DIFF, $left, $right);
-}
-
-function v($val): Expression\Valuable
-{
-  return new Expression\Value($val);
-}
-
-// ========================
-// data types
-// ========================
-
-function enumType(string ...$symbols): Datatype\Enumeration
-{
-  return new Datatype\Enumeration(...$symbols);
-}
-
-function arrayType($min, $max, Datatype\Type $type)
-{
-  return new Datatype\ArrayOf($type, $min, $max);
-}
-
-function stringType($len = null)
-{
-  return new Datatype\StringOfChars($len);
 }
