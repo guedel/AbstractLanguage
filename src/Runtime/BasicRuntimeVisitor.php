@@ -301,6 +301,7 @@ class BasicRuntimeVisitor implements Visitor
             ) {
                 $stmt->getStatement()->accept($this);
             }
+            return;
         } elseif ($increment < 0) {
             for (
                 $var->setValue($start);
@@ -309,6 +310,7 @@ class BasicRuntimeVisitor implements Visitor
             ) {
                 $stmt->getStatement()->accept($this);
             }
+            return;
         }
         throw new EndlessLoopException();
     }

@@ -30,7 +30,7 @@ class VariableDecl extends NamedDeclaration
     public function __construct($name, Type $type = null)
     {
         parent::__construct($name);
-        $this->type = $type ?? (new Any())->getType();
+        $this->type = $type ?? Any::getType();
     }
 
     public function getType(): Type
